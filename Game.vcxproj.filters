@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{0230516f-b196-4dbd-8338-22f7ed48ea45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{211a9596-3821-4457-adde-350c0ed1c527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\include">
+      <UniqueIdentifier>{1030072a-84a5-40ce-9dc0-5afe459f305c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\src">
+      <UniqueIdentifier>{52cd91d9-6ee6-4f79-bce8-d1aec083d93f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\include">
+      <UniqueIdentifier>{f8485f49-bc2a-4e90-95ce-806a30a6b297}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\src">
+      <UniqueIdentifier>{0c2822ee-5022-4478-b5f4-4656420d897c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="game\src\Main.cpp">
+      <Filter>Game\src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\Tile.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\Map.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\MapGenerator.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="engine\include\Tile.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\Map.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\MapGenerator.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
