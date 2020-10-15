@@ -44,5 +44,6 @@
     <ClInclude Include="engine\include\MapGenerator.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
+    <ClInclude Include="game\src\Main.h" />
   </ItemGroup>
 </Project>
