@@ -3,7 +3,7 @@
 #include "../../engine/include/Map.hpp"
 #include "Main.h"
 
-enum type {  red,  green,  blue };
+
 
 int main()
 {

@@ -6,7 +6,7 @@ namespace engine
 	public:
 		Tile();
 		int value;
-		
+	//	sf::Texture texture;
 	private:
 	};
 }
