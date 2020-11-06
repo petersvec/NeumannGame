@@ -3,8 +3,9 @@
 namespace engine
 {
 	class Map {
+	private:
+
 	public:
 		Map();
-	private:
 	};
 }

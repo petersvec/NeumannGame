@@ -3,8 +3,9 @@
 namespace engine
 {
 	class MapGenerator {
+	private:
+
 	public:
 		MapGenerator();
-	private:
 	};
 }
