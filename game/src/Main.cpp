@@ -4,37 +4,16 @@
 int main(void)
 {
 	//Init game engine
-	Game game;
-	//Window of the application
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "Neumann Game", sf::Style::Titlebar | sf::Style::Close);
+	engine::Game game;
 
 	//Game loop
 	while (game.isRunning())
 	{
-		sf::Event event;
-
-		//Event polling
-		while (window.pollEvent(event))
-		{
-			switch (event.type)
-			{
-			case sf::Event::Closed:
-				window.close();
-				break;
-			default:
-				break;
-			}
-		}
-
 		//----------UPDATE----------//
+		game.update();
 
 		//----------RENDER----------//
-		window.clear(sf::Color::Black);								//Clear old frame
-
-		//Draw the game HERE
-
-
-		window.display();											//Tell app that window is done drawing
+		game.render();
 	}
 	//End of appliecation
 	return 0;

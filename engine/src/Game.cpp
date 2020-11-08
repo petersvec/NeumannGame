@@ -1,12 +1,7 @@
-#include "Game.hpp"
+#include "../include/Game.hpp"
 
 namespace engine
 {
-
-
-
-
-
 	void Game::initVariables()
 	{
 		this->window = nullptr;
@@ -35,9 +30,25 @@ namespace engine
 		return this->window->isOpen();
 	}
 
+	void Game::pollEvents()
+	{
+		//Event polling
+		while (window.pollEvent(event))
+		{
+			switch (event.type)
+			{
+			case sf::Event::Closed:
+				window.close();
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
 	void Game::update()
 	{
-
+		this->pollEvents();
 	}
 
 	void Game::render()

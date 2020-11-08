@@ -24,6 +24,7 @@ namespace engine
 		const bool isRunning() const;
 
 		//Public functions
+		void pollEvents();
 		void update();
 		void render();
 	};

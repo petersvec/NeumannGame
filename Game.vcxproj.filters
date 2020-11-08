@@ -36,6 +36,9 @@
     <ClCompile Include="engine\src\Planet.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\Tile.hpp">
@@ -48,6 +51,9 @@
       <Filter>Engine\include</Filter>
     </ClInclude>
     <ClInclude Include="engine\include\Planet.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
   </ItemGroup>
