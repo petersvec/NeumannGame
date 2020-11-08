@@ -4,6 +4,6 @@ namespace engine
 {
 	Tile::Tile()
 	{
-
+		this->type = (unsigned char)0;
 	}
 }

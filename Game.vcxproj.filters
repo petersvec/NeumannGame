@@ -33,7 +33,7 @@
     <ClCompile Include="engine\src\MapGenerator.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
-    <ClCompile Include="Planet.cpp">
+    <ClCompile Include="engine\src\Planet.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,7 +47,7 @@
     <ClInclude Include="engine\include\MapGenerator.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="Planet.hpp">
+    <ClInclude Include="engine\include\Planet.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
   </ItemGroup>

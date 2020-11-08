@@ -3,9 +3,10 @@
 
 namespace engine
 {
-	class Planet : public Tile {
+	class Planet : public Tile
+	{
 	private:
-		int ownership;									// kto vlastni tile: 0-nikto, 1-prvy hrac, 2-druhy hrac
+		unsigned char ownership;									//Who owns the tile: 0-nobody, 1-first player, 2-second player
 	public:
 		Planet();
 	};
