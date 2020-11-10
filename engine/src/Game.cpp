@@ -10,7 +10,6 @@ namespace engine
 	void Game::initWindow()
 	{
 		this->videoMode = *new sf::VideoMode(1280, 720);
-
 		this->window = new sf::RenderWindow(this->videoMode, "Neumann Game", sf::Style::Titlebar | sf::Style::Close);
 	}
 
@@ -33,12 +32,12 @@ namespace engine
 	void Game::pollEvents()
 	{
 		//Event polling
-		while (window.pollEvent(event))
+		while (this->window->pollEvent(this->event))
 		{
-			switch (event.type)
+			switch (this->event.type)
 			{
 			case sf::Event::Closed:
-				window.close();
+				this->window->close();
 				break;
 			default:
 				break;
@@ -53,6 +52,17 @@ namespace engine
 
 	void Game::render()
 	{
-
+		/*
+			Renders the game objects.
+				- clear old frame
+				- render objects
+				- display frame in window
+		*/
+		this->window->clear();
+		
+		//Draw the game
+		//TODOOOOOOOOOOOOOOOOOO
+		
+		this->window->display();
 	}
 }

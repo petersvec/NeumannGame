@@ -6,7 +6,7 @@ namespace engine
 	class Game
 	{
 	private:
-		//Variables
+		//Private variables
 		//Window
 		sf::RenderWindow* window;
 		sf::VideoMode videoMode;
@@ -15,6 +15,7 @@ namespace engine
 		//Private functions
 		void initVariables();
 		void initWindow();
+
 	public:
 		//Constructors & destructor
 		Game();

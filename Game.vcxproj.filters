@@ -36,7 +36,7 @@
     <ClCompile Include="engine\src\Planet.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="engine\src\Game.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,7 +53,7 @@
     <ClInclude Include="engine\include\Planet.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="Game.hpp">
+    <ClInclude Include="engine\include\Game.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
   </ItemGroup>
