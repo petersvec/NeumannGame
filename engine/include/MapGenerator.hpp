@@ -6,9 +6,15 @@ namespace engine
 	class MapGenerator
 	{
 	private:
-		Map* map;
+		//Private variables
+		Map map;
+
 	public:
+		//Constructors & destructor
 		MapGenerator();
 		~MapGenerator();
+
+		//Public functions
+		Map generateMap();
 	};
 }

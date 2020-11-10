@@ -1,14 +1,19 @@
 #include "../include/MapGenerator.hpp"
 
 namespace engine
-{
+{	
 	MapGenerator::MapGenerator()
 	{
-		this->map = new Map();
+		this->generateMap();
 	}
 	
 	MapGenerator::~MapGenerator()
 	{
-		this->map->~Map();
+		delete &this->map;
+	}
+	
+	Map MapGenerator::generateMap()
+	{
+		this->map = Map();
 	}
 }

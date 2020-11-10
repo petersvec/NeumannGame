@@ -8,12 +8,19 @@ namespace engine
 	class Map
 	{
 	private:
+		//Private variables
 		std::vector<std::vector<Tile> > map;
+
+		//Private functions
+		void updateMap();
+		void destroyMap();
+
 	public:
+		//Constructors & destructor
 		Map();
-		//Map(const size_t size);
 		~Map();
 
+		//Public functions
 		size_t getMapSize();
 	};
 }
