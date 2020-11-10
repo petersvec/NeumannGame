@@ -1,4 +1,6 @@
 /x64
 /.vs
-Game.vcxproj.userGame.vcxproj.user
+Game.vcxproj.user
 /Debug
+/Release
+1.png
