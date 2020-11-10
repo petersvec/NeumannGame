@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "../include/MapGenerator.hpp"
 
 namespace engine
 {
@@ -11,10 +12,15 @@ namespace engine
 		sf::RenderWindow* window;
 		sf::VideoMode videoMode;
 		sf::Event event;
+		MapGenerator mapGen;
+
+		sf::RectangleShape tile;
 
 		//Private functions
 		void initVariables();
 		void initWindow();
+		void initTiles();
+		void initTile(size_t i, size_t j);
 
 	public:
 		//Constructors & destructor

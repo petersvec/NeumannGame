@@ -10,6 +10,16 @@ namespace engine
 		this->type = rand() % 2;
 	}
 
+	Tile::Tile(unsigned char type)
+	{
+		this->type = type;
+	}
+
+	Tile Tile::operator=(const unsigned char type)
+	{
+		return Tile(type);
+	}
+
 	bool Tile::operator==(const unsigned char type)
 	{
 		if (this->type == type)

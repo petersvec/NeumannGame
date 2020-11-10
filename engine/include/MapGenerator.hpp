@@ -7,7 +7,7 @@ namespace engine
 	{
 	private:
 		//Private variables
-		Map map;
+		Map* map;
 
 	public:
 		//Constructors & destructor
@@ -16,5 +16,6 @@ namespace engine
 
 		//Public functions
 		Map generateMap();
+		Map getMap();
 	};
 }

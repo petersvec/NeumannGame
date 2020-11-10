@@ -11,6 +11,10 @@ namespace engine
 	public:
 		//Constructors & destructor
 		Tile();
+		Tile(unsigned char type);
+
+		//Operators
+		Tile operator = (const unsigned char type);
 		bool operator == (const unsigned char type);
 
 		//Public functions

@@ -11,6 +11,11 @@ namespace engine
 	{
 		delete &this->map;
 	}
+
+	Map MapGenerator::getMap()
+	{
+		return this->map;
+	}
 	
 	Map MapGenerator::generateMap()
 	{

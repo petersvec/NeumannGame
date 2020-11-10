@@ -11,6 +11,31 @@ namespace engine
 	{
 		this->videoMode = *new sf::VideoMode(1280, 720);
 		this->window = new sf::RenderWindow(this->videoMode, "Neumann Game", sf::Style::Titlebar | sf::Style::Close);
+		this->window->setFramerateLimit(144);
+	}
+
+	void Game::initTiles()
+	{
+		for (size_t i = 0; i < this->mapGen.getMap().getMapSize(); ++i)
+		{
+			for (size_t j = 0; j < this->mapGen.getMap().getMapSize(); ++j)
+			{
+				//TODOO
+			}
+		}
+	}
+
+	void Game::initTile(size_t i, size_t j)
+	{
+		this->tile.setSize(sf::Vector2f(100.f, 100.f));
+		if (this->mapGen.getMap().getMap()[i][j] == 1)
+		{
+			this->tile.setFillColor(sf::Color::Green);
+		}
+		else
+		{
+			this->tile.setFillColor(sf::Color::Blue);
+		}
 	}
 
 	Game::Game()
