@@ -53,7 +53,7 @@ int main()
 			{
 				
 				view1.zoom(1 + 0.1*event.mouseWheel.delta);
-				ZoomLevel += 1 + 0.1 * event.mouseWheel.delta);
+				ZoomLevel += 1 + 0.1 * event.mouseWheel.delta;
 				
 			}
 		}
