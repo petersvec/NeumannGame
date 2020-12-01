@@ -1,32 +1,24 @@
 #pragma once
 #include <vector> 
 #include "../include/Tile.hpp";
-#define MAX_MAP_SIZE 10000
+const short int G_MAX_MAP_SIZE = 10000;
+using TilePtr = std::shared_ptr<engine::Tile>;
+using MapPtr = std::vector<std::vector<TilePtr>>;
 
 namespace engine
 {
 	class Map
 	{
 	private:
-		//Private variables
-		std::vector<std::vector<Tile*>> map;
+		MapPtr m_map;
 
-		//Private functions
-		void updateMap();
-		void destroyMap();
-		bool isLinked(size_t i, size_t j, unsigned char type);
 
 	public:
-		//Constructors & destructor
 		Map();
-		Map(const Map& m);
+		Map(unsigned short mapSize);
+		Map(unsigned short mapWidth, unsigned short mapHeight);
 		~Map();
 
-		//Operators
-		Map& operator=(const Map& m) {};
-
-		//Public functions
-		size_t getMapSize();
-		std::vector<std::vector<Tile>> getMap();
+		TilePtr getTile(unsigned short mapWidth, unsigned short mapHeight);
 	};
 }

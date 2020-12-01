@@ -4,6 +4,11 @@ namespace engine
 {
 	Planet::Planet()
 	{
-		this->ownership = (unsigned char)0;
+		m_owner = (unsigned char)0;
+	}
+
+	unsigned char Planet::getOwner()
+	{
+		return m_owner;
 	}
 }

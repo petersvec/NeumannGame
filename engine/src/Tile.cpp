@@ -1,18 +1,18 @@
 #include "../include/Tile.hpp"
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
+#include <stdlib.h>
+#include <time.h>
 
 namespace engine
 {
 	Tile::Tile()
 	{
 		srand(time(NULL));
-		this->type = rand() % 2;
+		m_type = rand() % 2;
 	}
 
 	Tile::Tile(unsigned char type)
 	{
-		this->type = type;
+		m_type = type;
 	}
 
 	Tile Tile::operator=(const unsigned char type)
@@ -22,10 +22,15 @@ namespace engine
 
 	bool Tile::operator==(const unsigned char type)
 	{
-		if (this->type == type)
+		if (m_type == type)
 		{
 			return true;
 		}
 		return false;
+	}
+
+	unsigned char Tile::getType()
+	{
+		return m_type;
 	}
 }

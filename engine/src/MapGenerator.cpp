@@ -2,23 +2,11 @@
 
 namespace engine
 {	
-	MapGenerator::MapGenerator()
-	{
-		this->generateMap();
-	}
-	
-	MapGenerator::~MapGenerator()
-	{
-		delete &this->map;
-	}
+	MapGenerator::MapGenerator(){}
+	MapGenerator::~MapGenerator(){}
 
-	Map MapGenerator::getMap()
+	void MapGenerator::generateMap(Map map)
 	{
-		return this->map;
-	}
-	
-	Map MapGenerator::generateMap()
-	{
-		this->map = Map();
+		//TODO
 	}
 }

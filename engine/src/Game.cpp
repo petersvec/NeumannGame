@@ -1,68 +1,48 @@
 #include "../include/Game.hpp"
+#include <iostream>
 
 namespace engine
 {
 	void Game::initVariables()
 	{
-		this->window = nullptr;
+		m_window = nullptr;
+		Map m_gameMap(5000, 5000);
+		MapGenerator m_mapGenerator;
 	}
 
 	void Game::initWindow()
 	{
-		this->videoMode = *new sf::VideoMode(1280, 720);
-		this->window = new sf::RenderWindow(this->videoMode, "Neumann Game", sf::Style::Titlebar | sf::Style::Close);
-		this->window->setFramerateLimit(144);
-	}
-
-	void Game::initTiles()
-	{
-		for (size_t i = 0; i < this->mapGen.getMap().getMapSize(); ++i)
-		{
-			for (size_t j = 0; j < this->mapGen.getMap().getMapSize(); ++j)
-			{
-				//TODOO
-			}
-		}
-	}
-
-	void Game::initTile(size_t i, size_t j)
-	{
-		this->tile.setSize(sf::Vector2f(100.f, 100.f));
-		if (this->mapGen.getMap().getMap()[i][j] == 1)
-		{
-			this->tile.setFillColor(sf::Color::Green);
-		}
-		else
-		{
-			this->tile.setFillColor(sf::Color::Blue);
-		}
+		m_window = new sf::RenderWindow(sf::VideoMode(1280, 720), "Neumann Game", sf::Style::Titlebar | sf::Style::Close);
+		m_window->setFramerateLimit(144);
 	}
 
 	Game::Game()
 	{
-		this->initVariables();
-		this->initWindow();
+		initVariables();
+		initWindow();
+
+		m_mapGenerator.generateMap(m_gameMap);
+		std::cout << m_gameMap.getTile(10, 10).get()->getType();
 	}
 
 	Game::~Game()
 	{
-		delete this->window;
+		delete m_window;
 	}
 
 	const bool Game::isRunning() const
 	{
-		return this->window->isOpen();
+		return m_window->isOpen();
 	}
 
 	void Game::pollEvents()
 	{
-		//Event polling
-		while (this->window->pollEvent(this->event))
+		while (m_window->pollEvent(m_event))
 		{
-			switch (this->event.type)
+			switch (m_event.type)
 			{
 			case sf::Event::Closed:
-				this->window->close();
+				m_window->close();
 				break;
 			default:
 				break;
@@ -72,22 +52,16 @@ namespace engine
 
 	void Game::update()
 	{
-		this->pollEvents();
+		pollEvents();
 	}
 
 	void Game::render()
 	{
-		/*
-			Renders the game objects.
-				- clear old frame
-				- render objects
-				- display frame in window
-		*/
-		this->window->clear();
+		m_window->clear();
 		
 		//Draw the game
 		//TODOOOOOOOOOOOOOOOOOO
 		
-		this->window->display();
+		m_window->display();
 	}
 }
