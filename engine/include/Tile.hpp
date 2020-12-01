@@ -10,6 +10,7 @@ namespace engine
 		int value;
 		sf::Texture texture;
 		sf::RectangleShape shape;
+		sf::Color color;
 	private:
 	};
 }
