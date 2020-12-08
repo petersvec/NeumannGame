@@ -8,9 +8,6 @@ namespace engine
 	private:
 
 	public:
-		MapGenerator();
-		~MapGenerator();
-
 		void generateMap(Map map);
 	};
 }
