@@ -9,8 +9,8 @@ namespace engine
 	Tile::Tile()
 	{
 		srand(time(NULL));
-	//	shape.setSize(sf::Vector2f(10, 10));
-	//	shape.setFillColor(sf::Color::Green);
+		shape.setSize(sf::Vector2f(10, 10));
+    	shape.setFillColor(sf::Color::Green);
 		color = sf::Color::Green;
 		
 	}

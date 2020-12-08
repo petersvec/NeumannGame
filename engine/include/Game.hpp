@@ -16,7 +16,8 @@ namespace engine
 		MapGenerator mapGen;
 		Map map;
 		sf::View view1;
-		sf::VertexArray rectangles;
+		sf::RenderTexture rTex;
+		sf::Sprite sprite;
 		int tileSize = 10;
 
 		sf::RectangleShape tile;

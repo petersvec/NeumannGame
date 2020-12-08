@@ -13,9 +13,12 @@ namespace engine
 	{
 		this->videoMode = *new sf::VideoMode(1280, 720);
 		this->window = new sf::RenderWindow(this->videoMode, "Neumann Game");
-		rectangles.setPrimitiveType(sf::Quads);
+		
+
 		view1.setSize(sf::Vector2f(1280.f, 720.f));
 		view1.setCenter(sf::Vector2f(100.f, 100.f));
+		rTex.create(1280, 720);
+		
 		
 		
 		
@@ -109,22 +112,23 @@ namespace engine
 		
 		for (int i = 0; i < map.mapsize; i++) {
 			for (int j = 0; j < map.mapsize; j++) {
-
-				rectangles.append(sf::Vertex(sf::Vector2f(i * TileSize, j * TileSize), map.tile[i][j].color));
-				rectangles.append(sf::Vertex(sf::Vector2f(i * TileSize + TileSize, j * TileSize), map.tile[i][j].color));
-				rectangles.append(sf::Vertex(sf::Vector2f(i * TileSize + TileSize, j * TileSize + TileSize), map.tile[i][j].color));
-				rectangles.append(sf::Vertex(sf::Vector2f(i * TileSize, j * TileSize + TileSize), map.tile[i][j].color));
+				if ((i + j) % 3 == 0) map.tile[i][j].shape.setFillColor(sf::Color::Red);
+				map.tile[i][j].shape.setPosition(i * 10, j * 10);
+				rTex.draw(map.tile[i][j].shape);
 				
 			}
 		}
-		
 
+		rTex.display();
+		const sf::Texture& texture = rTex.getTexture();
+		sprite.setTexture(texture);
 		
-		this->window->draw(rectangles);
+		this->window->draw(sprite);
 		this->window->setView(view1);
 		this->window->display();
 		this->window->clear();
-		rectangles.clear();
+		rTex.clear();
+		
 		
 	}
 }
