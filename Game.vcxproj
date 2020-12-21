@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="engine\src\Game.cpp" />
     <ClCompile Include="engine\src\Map.cpp" />
     <ClCompile Include="engine\src\MapGenerator.cpp" />
     <ClCompile Include="engine\src\Tile.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="game\src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,8 @@ namespace engine
 		sf::View view1;
 		sf::RenderTexture rTex;
 		sf::Sprite sprite;
-		int tileSize = 10;
+		int ZoomLevel = 1;
+		int tileSize = 100;
 
 		sf::RectangleShape tile;
 

@@ -33,7 +33,7 @@
     <ClCompile Include="engine\src\MapGenerator.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="engine\src\Game.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
   </ItemGroup>
