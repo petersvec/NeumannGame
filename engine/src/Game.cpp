@@ -46,13 +46,24 @@ namespace engine
 
 			for (int j = 0; j < map.mapsize; j++) {
 				map.tile[i][j].shape.setPosition(i * tileSize, j * tileSize);
+				
 
 				/*if (!map.tile[i][j].texture.loadFromFile("3.jpg"))
 				{
 					std::cout << "error loading texture\n";
 				}*/
-				if((i+j)%3) map.tile[i][j].shape.setTexture(&text1);
-				else map.tile[i][j].shape.setTexture(text3);
+				if ((i + j) % 3)
+				{
+					map.tile[i][j].shape.setTexture(&text1); 
+					map.tile[i][j].texture = &text1;
+
+				}
+				else
+				{
+					map.tile[i][j].shape.setTexture(text3); 
+					map.tile[i][j].texture = text3;
+
+				}
 
 				
 			}
