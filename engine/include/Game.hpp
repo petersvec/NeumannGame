@@ -20,6 +20,9 @@ namespace engine
 		sf::Sprite sprite;
 		int ZoomLevel = 1;
 		int tileSize = 100;
+		sf::Texture text1;
+		sf::Texture text2;
+		sf::Texture* text3;
 
 		sf::RectangleShape tile;
 

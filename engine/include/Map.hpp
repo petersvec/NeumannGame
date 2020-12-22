@@ -6,7 +6,7 @@ namespace engine
 	class Map {
 	public:
 		Map();
-		Tile tile[10][10];
+		Tile **tile;
 		int mapsize;
 		void updateMap();
 	private:

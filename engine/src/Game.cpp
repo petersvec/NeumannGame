@@ -14,6 +14,7 @@ namespace engine
 	{
 		this->videoMode = *new sf::VideoMode(1280, 720);
 		this->window = new sf::RenderWindow(this->videoMode, "Neumann Game");
+		this->window->setFramerateLimit(60);
 		
 
 		view1.setSize(sf::Vector2f(1280.f, 720.f));
@@ -27,19 +28,33 @@ namespace engine
 
 	void Game::initTiles()
 	{	
-		
-		
+
+		text1.loadFromFile("3.jpg");
+		text2.loadFromFile("4.jpg");
+		text3 = new sf::Texture();
+		text3->loadFromFile("4.jpg");
+		map.tile = new Tile*[map.mapsize];
 		for (int i = 0; i < map.mapsize; i++) {
+			map.tile[i] = new Tile[map.mapsize];
+		}
+		
+
+		for (int i = 0; i < map.mapsize; i++) {
+
 			for (int j = 0; j < map.mapsize; j++) {
 				
-				if (!map.tile[i][j].texture.loadFromFile("3.jpg"))
+
+				/*if (!map.tile[i][j].texture.loadFromFile("3.jpg"))
 				{
 					std::cout << "error loading texture\n";
-				}
+				}*/
+				if((i+j)%3) map.tile[i][j].shape.setTexture(&text1);
+				else map.tile[i][j].shape.setTexture(text3);
 
 				
 			}
 		}
+		std::cout << "init done\n";
 	}
 
 	void Game::initTile(size_t i, size_t j)
@@ -90,22 +105,22 @@ namespace engine
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
 	//		std::cout << ZoomLevel;
-			view1.move(-1.f * ZoomLevel, 0.f);
+			view1.move(-5.f * ZoomLevel, 0.f);
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			view1.move(1.f * ZoomLevel, 0.f);
+			view1.move(5.f * ZoomLevel, 0.f);
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			view1.move(0.f, -1.f * ZoomLevel);
+			view1.move(0.f, -5.f * ZoomLevel);
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			view1.move(0.f, 1.f * ZoomLevel);
+			view1.move(0.f, 5.f * ZoomLevel);
 		}
 
 		this->pollEvents();
@@ -115,17 +130,17 @@ namespace engine
 	{
 		sf::Sprite spr;
 		float ZoomLevel = 1;
-		int TileSize = 100;
+		// tileSize = 100;
 		
 		
 		for (int i = 0; i < map.mapsize; i++) {
 			for (int j = 0; j < map.mapsize; j++) {
 			//	if ((i + j) % 3 == 0) map.tile[i][j].shape.setFillColor(sf::Color::Red);
-				map.tile[i][j].shape.setPosition(i * TileSize, j * TileSize);
-				spr.setTexture(map.tile[i][j].texture);
+				map.tile[i][j].shape.setPosition(i * tileSize, j * tileSize);
+			//	spr.setTexture(map.tile[i][j].texture);
 				spr.setPosition(map.tile[i][j].shape.getPosition());
 			//	spr.setColor(sf::Color(0, 255, 0));
-				map.tile[i][j].shape.setTexture(&map.tile[i][j].texture);
+				
 			//	rTex.draw(spr);
 				rTex.draw(map.tile[i][j].shape);
 
@@ -142,6 +157,8 @@ namespace engine
 		this->window->display();
 		this->window->clear();
 		rTex.clear();
+		
+
 		
 		
 	}
