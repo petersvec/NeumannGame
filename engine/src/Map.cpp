@@ -5,7 +5,7 @@ namespace engine
 {
 	Map::Map()
 	{
-		mapsize = 100;
+		mapsize = 150;
 		
 		
 		

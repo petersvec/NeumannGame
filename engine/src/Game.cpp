@@ -33,6 +33,9 @@ namespace engine
 		text2.loadFromFile("4.jpg");
 		text3 = new sf::Texture();
 		text3->loadFromFile("4.jpg");
+		
+		
+		
 		map.tile = new Tile*[map.mapsize];
 		for (int i = 0; i < map.mapsize; i++) {
 			map.tile[i] = new Tile[map.mapsize];
@@ -42,7 +45,7 @@ namespace engine
 		for (int i = 0; i < map.mapsize; i++) {
 
 			for (int j = 0; j < map.mapsize; j++) {
-				
+				map.tile[i][j].shape.setPosition(i * tileSize, j * tileSize);
 
 				/*if (!map.tile[i][j].texture.loadFromFile("3.jpg"))
 				{
@@ -135,13 +138,10 @@ namespace engine
 		
 		for (int i = 0; i < map.mapsize; i++) {
 			for (int j = 0; j < map.mapsize; j++) {
-			//	if ((i + j) % 3 == 0) map.tile[i][j].shape.setFillColor(sf::Color::Red);
-				map.tile[i][j].shape.setPosition(i * tileSize, j * tileSize);
-			//	spr.setTexture(map.tile[i][j].texture);
-				spr.setPosition(map.tile[i][j].shape.getPosition());
-			//	spr.setColor(sf::Color(0, 255, 0));
+			
 				
-			//	rTex.draw(spr);
+				
+	
 				rTex.draw(map.tile[i][j].shape);
 
 				
