@@ -7,7 +7,7 @@ namespace engine
 	Tile::Tile()
 	{
 		srand(time(NULL));
-		m_type = rand() % 2;
+		m_type = rand() % 7;
 	}
 
 	Tile::Tile(unsigned char type)

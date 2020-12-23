@@ -1,4 +1,4 @@
-#include "../include/Planet.hpp/"
+#include "../include/Planet.hpp"
 
 namespace engine
 {

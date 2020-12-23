@@ -11,13 +11,18 @@ namespace engine
 	{
 	private:
 		MapPtr m_map;
+		unsigned short m_mapHeight, m_mapWidth;
 
 
 	public:
 		Map();
 		Map(unsigned short mapSize);
-		Map(unsigned short mapWidth, unsigned short mapHeight);
+		Map(unsigned short mapHeight, unsigned short mapWidth);
 
-		TilePtr getTile(unsigned short mapWidth, unsigned short mapHeight);
+		MapPtr getMap();
+		unsigned short getHeight();
+		unsigned short getWidth();
+		TilePtr getTile(unsigned short mapHeight, unsigned short mapWidth);
+		void setTile(unsigned short mapHeight, unsigned short mapWidth, unsigned char type);
 	};
 }

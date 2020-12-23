@@ -7,7 +7,8 @@ namespace engine
 	{
 		m_window = nullptr;
 		Map m_gameMap(5000, 5000);
-		MapGenerator m_mapGenerator;
+		MapGenerator* m_mapGenerator = new MapGenerator();
+		m_mapGenerator->generateMap(m_gameMap);
 	}
 
 	void Game::initWindow()
@@ -17,7 +18,7 @@ namespace engine
 	}
 
 	Game::Game()
-	{
+		{
 		initVariables();
 		initWindow();
 

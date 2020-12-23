@@ -3,12 +3,12 @@
 
 int main(void)
 {
-	engine::Game game;
+	engine::Game* game = new engine::Game();
 
-	while (game.isRunning())
+	while (game->isRunning())
 	{
-		game.update();
-		game.render();
+		game->update();
+		game->render();
 	}
 
 	return 0;

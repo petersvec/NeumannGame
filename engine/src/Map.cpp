@@ -1,28 +1,53 @@
-#include <iostream>
 #include "../include/Map.hpp"
 
 namespace engine
 {
 	Map::Map()
 	{
-		m_map.resize(10000, std::vector<TilePtr>(10000, std::shared_ptr<engine::Tile>(new Tile(0))));
+		m_mapHeight = 1000;
+		m_mapWidth = 1000;
+		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, TilePtr(new Tile(0))));
 		
 	}
 
 	Map::Map(unsigned short mapSize)
 	{
-		m_map.resize(mapSize, std::vector<TilePtr>(mapSize, std::shared_ptr<engine::Tile>(new Tile(0))));
+		m_mapHeight = mapSize;
+		m_mapWidth = mapSize;
+		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, std::shared_ptr<Tile>(new Tile(0))));
 
 	}
 
-	Map::Map(unsigned short mapWidth, unsigned short mapHeight)
+	Map::Map(unsigned short mapHeight, unsigned short mapWidth)
 	{
-		m_map.resize(mapHeight, std::vector<TilePtr>(mapWidth, std::shared_ptr<engine::Tile>(new Tile(0))));
+		m_mapHeight = mapHeight;
+		m_mapWidth = mapWidth;
+		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, std::shared_ptr<Tile>(new Tile(0))));
 
 	}
 
-	TilePtr Map::getTile(unsigned short xCoordinate, unsigned short yCoordinate)
+	MapPtr Map::getMap()
 	{
-		return m_map[xCoordinate][yCoordinate];
+		return m_map;
+	}
+
+	unsigned short Map::getHeight()
+	{
+		return m_mapHeight;
+	}
+
+	unsigned short Map::getWidth()
+	{
+		return m_mapWidth;
+	}
+
+	TilePtr Map::getTile(unsigned short mapHeight, unsigned short mapWidth)
+	{
+		return m_map[mapHeight][mapWidth];
+	}
+
+	void Map::setTile(unsigned short mapHeight, unsigned short mapWidth, unsigned char type)
+	{
+		m_map[mapHeight][mapWidth] = TilePtr(new Tile(type));
 	}
 }
