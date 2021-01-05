@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../include/MapGenerator.hpp"
-#include <Map.hpp>
+#include "../include/Map.hpp"
 
 namespace engine
 {
@@ -20,10 +20,8 @@ namespace engine
 		sf::Sprite sprite;
 		int ZoomLevel = 1;
 		int tileSize = 100;
-		sf::Texture text1;
-		sf::Texture text2;
 		sf::Texture* text3;
-
+		const sf::Texture texture;
 		sf::RectangleShape tile;
 
 		//Private functions

@@ -1,6 +1,8 @@
 #include "../include/Game.hpp"
-#include <Map.hpp>
+#include "../include/Map.hpp"
 #include <iostream>
+#include "../include/TextureHandler.hpp"
+
 
 namespace engine
 {
@@ -19,7 +21,9 @@ namespace engine
 
 		view1.setSize(sf::Vector2f(1280.f, 720.f));
 		view1.setCenter(sf::Vector2f(100.f, 100.f));
-		rTex.create(1280, 800);
+		rTex.create(2000, 2000);
+	
+		
 		
 		
 		
@@ -28,13 +32,10 @@ namespace engine
 
 	void Game::initTiles()
 	{	
-
-		text1.loadFromFile("3.jpg");
-		text2.loadFromFile("4.jpg");
 		text3 = new sf::Texture();
-		text3->loadFromFile("4.jpg");
-		
-		
+		TextureHandler handler;
+		handler.LoadTextures();
+	
 		
 		map.tile = new Tile*[map.mapsize];
 		for (int i = 0; i < map.mapsize; i++) {
@@ -48,23 +49,22 @@ namespace engine
 				map.tile[i][j].shape.setPosition(i * tileSize, j * tileSize);
 				
 
-				/*if (!map.tile[i][j].texture.loadFromFile("3.jpg"))
-				{
-					std::cout << "error loading texture\n";
-				}*/
+				
 				if ((i + j) % 3)
 				{
-					map.tile[i][j].shape.setTexture(&text1); 
-					map.tile[i][j].texture = &text1;
-
-				}
-				else
-				{
+					text3 = handler.getTexture("3.jpg");
 					map.tile[i][j].shape.setTexture(text3); 
 					map.tile[i][j].texture = text3;
 
 				}
-
+				else
+				{
+					text3 = handler.getTexture("4.jpg");
+					map.tile[i][j].shape.setTexture(text3); 
+					map.tile[i][j].texture = text3;
+					
+				}
+				
 				
 			}
 		}
@@ -105,7 +105,7 @@ namespace engine
 				break;
 			case sf::Event::MouseWheelMoved:
 				view1.zoom(1 + 0.1 * event.mouseWheel.delta);
-				ZoomLevel = 1;
+			//	ZoomLevel = 1;
 				break;
 
 			default:
@@ -142,9 +142,9 @@ namespace engine
 
 	void Game::render()
 	{
-		sf::Sprite spr;
-		float ZoomLevel = 1;
-		// tileSize = 100;
+		
+		
+		
 		
 		
 		for (int i = 0; i < map.mapsize; i++) {

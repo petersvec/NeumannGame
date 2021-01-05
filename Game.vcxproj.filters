@@ -36,6 +36,9 @@
     <ClCompile Include="engine\src\Game.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\TextureHandler.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\Tile.hpp">
@@ -49,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="game\src\Main.h" />
     <ClInclude Include="engine\include\Game.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\TextureHandler.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
   </ItemGroup>
