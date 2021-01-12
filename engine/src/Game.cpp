@@ -6,9 +6,9 @@ namespace engine
 	void Game::initVariables()
 	{
 		m_window = nullptr;
-		Map m_gameMap(5000, 5000);
+		Map m_gameMap(50, 50);
 		MapGenerator* m_mapGenerator = new MapGenerator();
-		m_mapGenerator->generateMap(m_gameMap);
+		m_mapGenerator->generateMap(m_gameMap, 50, 5);
 	}
 
 	void Game::initWindow()
@@ -21,9 +21,6 @@ namespace engine
 		{
 		initVariables();
 		initWindow();
-
-		m_mapGenerator.generateMap(m_gameMap);
-		std::cout << m_gameMap.getTile(10, 10).get()->getType();
 	}
 
 	Game::~Game()

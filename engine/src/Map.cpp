@@ -22,7 +22,7 @@ namespace engine
 	{
 		m_mapHeight = mapHeight;
 		m_mapWidth = mapWidth;
-		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, std::shared_ptr<Tile>(new Tile(0))));
+		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, std::make_shared<Tile>(0)));
 
 	}
 
