@@ -1,9 +1,10 @@
 #pragma once
 #include <memory>
 #include <vector> 
-#include "../include/Tile.hpp";
+#include "../include/Tile.hpp"
 using TilePtr = std::shared_ptr<engine::Tile>;
 using MapPtr = std::vector<std::vector<TilePtr>>;
+//using MapPtr = std::shared_ptr<std::vector<std::vector<TilePtr>>>;
 
 namespace engine
 {
