@@ -9,7 +9,7 @@ namespace engine
 		Tile();
 		Tile(int tilesize);
 		//int value;
-		sf::Texture* texture;
+		//sf::Texture* texture;
 		sf::Sprite sprite;
 		
 	private:

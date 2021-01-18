@@ -14,6 +14,8 @@ namespace engine
 	private:
 		std::map<std::string, sf::Texture*> texturemap;
 		sf::Texture** text;
+		sf::Texture* retText;
+
 		
 		
 		

@@ -15,13 +15,14 @@ namespace engine {
         std::ifstream file("textureslist.txt");
         std::string line;
         int i = 0, numberofLines = 0;
-
+        
         while (std::getline(file, line)) {
             numberofLines++;
         }
         file.clear();
         file.seekg(0);
-
+        
+        retText = new sf::Texture();
         text = new sf::Texture * [numberofLines];
 
         for (i = 0; i < numberofLines; i++) {
@@ -38,9 +39,8 @@ namespace engine {
 
     sf::Texture* TextureHandler::getTexture(std::string str) {
 
-        sf::Texture* text2 = new sf::Texture();
-        text2 = texturemap.at(str);
-        return text2;
+        retText = texturemap.at(str);
+        return retText;
     }
 
 }
