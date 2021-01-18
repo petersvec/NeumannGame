@@ -18,7 +18,7 @@ namespace engine
 		sf::View view1;
 		sf::RenderTexture rTex;
 		sf::Sprite sprite;
-		int ZoomLevel = 1;
+		float ZoomLevel = 1;
 		int tileSize = 100;
 		sf::Texture* text3;
 		const sf::Texture texture;

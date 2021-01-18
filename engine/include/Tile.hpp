@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML\Graphics\Texture.hpp>
-#include <SFML\Graphics\RectangleShape.hpp>
+#include <SFML\Graphics\Sprite.hpp>
 
 namespace engine
 {
@@ -10,8 +10,8 @@ namespace engine
 		Tile(int tilesize);
 		//int value;
 		sf::Texture* texture;
-		sf::RectangleShape shape;
-		//sf::Color color;
+		sf::Sprite sprite;
+		
 	private:
 	};
 }

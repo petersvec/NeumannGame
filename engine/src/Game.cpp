@@ -22,12 +22,6 @@ namespace engine
 		view1.setSize(sf::Vector2f(1280.f, 720.f));
 		view1.setCenter(sf::Vector2f(100.f, 100.f));
 		rTex.create(2000, 2000);
-	
-		
-		
-		
-		
-		
 	}
 
 	void Game::initTiles()
@@ -38,31 +32,32 @@ namespace engine
 	
 		
 		map.tile = new Tile*[map.mapsize];
-		for (int i = 0; i < map.mapsize; i++) {
+		for (int i = 0; i < map.mapsize; i++) 
+		{
 			map.tile[i] = new Tile[map.mapsize];
 		}
 		
 
-		for (int i = 0; i < map.mapsize; i++) {
+		for (int i = 0; i < map.mapsize; i++) 
+		{
 
-			for (int j = 0; j < map.mapsize; j++) {
-				map.tile[i][j].shape.setPosition(i * tileSize, j * tileSize);
-				
-
+			for (int j = 0; j < map.mapsize; j++) 
+			{
+				map.tile[i][j].sprite.setPosition(i * tileSize, j * tileSize);
 				
 				if ((i + j) % 3)
 				{
 					text3 = handler.getTexture("3.jpg");
-					map.tile[i][j].shape.setTexture(text3); 
+					map.tile[i][j].sprite.setTexture(*text3); 
+					map.tile[i][j].sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));
 					map.tile[i][j].texture = text3;
-
 				}
 				else
 				{
 					text3 = handler.getTexture("4.jpg");
-					map.tile[i][j].shape.setTexture(text3); 
+					map.tile[i][j].sprite.setTexture(*text3);
+					map.tile[i][j].sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));
 					map.tile[i][j].texture = text3;
-					
 				}
 				
 				
@@ -104,8 +99,11 @@ namespace engine
 				this->window->close();
 				break;
 			case sf::Event::MouseWheelMoved:
-				view1.zoom(1 + 0.1 * event.mouseWheel.delta);
-			//	ZoomLevel = 1;
+				//if (ZoomLevel <= 3 && event.mouseWheel.delta==-1 || ZoomLevel > 0 && event.mouseWheel.delta ==1 )
+				//{
+					view1.zoom(1 + 0.1 * -(event.mouseWheel.delta));
+					ZoomLevel +=  ( 0.1 * -(event.mouseWheel.delta));
+				//}
 				break;
 
 			default:
@@ -116,25 +114,25 @@ namespace engine
 
 	void Game::update()
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 	//		std::cout << ZoomLevel;
-			view1.move(-5.f * ZoomLevel, 0.f);
+			view1.move(-10.f * ZoomLevel, 0.f);
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			view1.move(5.f * ZoomLevel, 0.f);
+			view1.move(10.f * ZoomLevel, 0.f);
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			view1.move(0.f, -5.f * ZoomLevel);
+			view1.move(0.f, -10.f * ZoomLevel);
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			view1.move(0.f, 5.f * ZoomLevel);
+			view1.move(0.f, 10.f * ZoomLevel);
 		}
 
 		this->pollEvents();
@@ -147,15 +145,11 @@ namespace engine
 		
 		
 		
-		for (int i = 0; i < map.mapsize; i++) {
-			for (int j = 0; j < map.mapsize; j++) {
-			
-				
-				
-	
-				rTex.draw(map.tile[i][j].shape);
-
-				
+		for (int i = 0; i < map.mapsize; i++) 
+		{
+			for (int j = 0; j < map.mapsize; j++) 
+			{
+				rTex.draw(map.tile[i][j].sprite);
 			}
 		}
 
