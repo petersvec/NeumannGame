@@ -13,13 +13,12 @@ namespace engine
 	{
 		sf::Texture *texture = new sf::Texture();
 		TextureHandler handler;
-
 		handler.LoadTextures();
+
 		for (int i = 0; i < map.mapsize; i++)
 		{
 			for (int j = 0; j < map.mapsize; j++)
 			{
-				
 				if ((i + j) % 3)
 				{
 					texture = handler.getTexture("maptexture3");

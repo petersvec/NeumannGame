@@ -15,7 +15,7 @@ int main(void)
 
 		//----------RENDER----------//
 		game.render();
-		//std::cout << "here\n";
+
 	}
 	//End of appliecation
 	return 0;

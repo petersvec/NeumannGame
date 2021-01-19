@@ -19,7 +19,6 @@ namespace engine
 		this->window->setFramerateLimit(60);
 		view1.setSize(sf::Vector2f(1280.f, 720.f));
 		view1.setCenter(sf::Vector2f(100.f, 100.f));
-		
 	}
 
 	void Game::initTiles()
@@ -74,7 +73,7 @@ namespace engine
 				this->window->close();
 				break;
 			case sf::Event::MouseWheelMoved:
-				if (ZoomLevel <= 2 && event.mouseWheel.delta==-1 || ZoomLevel > 0.2 && event.mouseWheel.delta ==1 )
+				if (ZoomLevel <= 2.8 && event.mouseWheel.delta==-1 || ZoomLevel > 0.2 && event.mouseWheel.delta ==1 )
 				{
 					view1.zoom(1 + 0.1 * -(event.mouseWheel.delta));
 					ZoomLevel +=  ( 0.1 * -(event.mouseWheel.delta));
