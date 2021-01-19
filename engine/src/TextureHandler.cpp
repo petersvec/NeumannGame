@@ -14,7 +14,10 @@ namespace engine {
         texturemap.begin();
         std::ifstream file("textureslist.txt");
         std::string line;
-        int i = 0, numberofLines = 0;
+        int i=0, numberofLines=0;
+        std::string delimiter = "::";
+        std::string texturepath;
+        int pos = 0;
         
         while (std::getline(file, line)) {
             numberofLines++;
@@ -29,9 +32,12 @@ namespace engine {
             text[i] = new sf::Texture();
         }
         i = 0;
-        while (std::getline(file, line)) {
 
-            text[i]->loadFromFile(line);
+        while (std::getline(file, line)) {
+            pos = line.find(delimiter);
+            texturepath = line.substr(0, pos);
+            line = line.erase(0, pos + 2);
+            text[i]->loadFromFile(texturepath);
             texturemap.insert(std::pair < std::string, sf::Texture* >(line, text[i]));
             i++;
         }

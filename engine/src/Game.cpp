@@ -24,8 +24,6 @@ namespace engine
 
 	void Game::initTiles()
 	{	
-		
-	
 		map.tile = new Tile*[map.mapsize];
 		for (int i = 0; i < map.mapsize; i++) 
 		{
@@ -39,7 +37,6 @@ namespace engine
 			}
 		}
 		RenderMap.InitMapTextures(map);
-		
 		std::cout << "init done\n";
 	}
 
@@ -76,11 +73,11 @@ namespace engine
 				this->window->close();
 				break;
 			case sf::Event::MouseWheelMoved:
-				//if (ZoomLevel <= 3 && event.mouseWheel.delta==-1 || ZoomLevel > 0 && event.mouseWheel.delta ==1 )
-				//{
+				if (ZoomLevel <= 3 && event.mouseWheel.delta==-1 || ZoomLevel > 0 && event.mouseWheel.delta ==1 )
+				{
 					view1.zoom(1 + 0.1 * -(event.mouseWheel.delta));
-				//	ZoomLevel +=  ( 0.1 * -(event.mouseWheel.delta));
-				//}
+					ZoomLevel +=  ( 0.1 * -(event.mouseWheel.delta));
+				}
 				break;
 
 			default:
@@ -93,23 +90,22 @@ namespace engine
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-
-			view1.move(-10.f * ZoomLevel, 0.f);
+			view1.move(-10.f , 0.f);
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			view1.move(10.f * ZoomLevel, 0.f);
+			view1.move(10.f , 0.f);
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			view1.move(0.f, -10.f * ZoomLevel);
+			view1.move(0.f, -10.f );
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			view1.move(0.f, 10.f * ZoomLevel);
+			view1.move(0.f, 10.f );
 		}
 
 		this->pollEvents();

@@ -8,8 +8,6 @@ namespace engine
 	public:
 		Tile();
 		Tile(int tilesize);
-		//int value;
-		//sf::Texture* texture;
 		sf::Sprite sprite;
 		
 	private:

@@ -13,7 +13,7 @@ namespace engine
 	{
 		sf::Texture *texture = new sf::Texture();
 		TextureHandler handler;
-		int tileSize = 100;
+
 		handler.LoadTextures();
 		for (int i = 0; i < map.mapsize; i++)
 		{
@@ -22,17 +22,15 @@ namespace engine
 				
 				if ((i + j) % 3)
 				{
-					texture = handler.getTexture("3.jpg");
+					texture = handler.getTexture("maptexture3");
 					map.tile[i][j].sprite.setTexture(*texture);
 					map.tile[i][j].sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));
-					
 				}
 				else
 				{
-					texture = handler.getTexture("4.jpg");
+					texture = handler.getTexture("maptexture4");
 					map.tile[i][j].sprite.setTexture(*texture);
-					map.tile[i][j].sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));
-					
+					map.tile[i][j].sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));	
 				}
 			}
 		}

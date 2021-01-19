@@ -1,2 +1,2 @@
-3.jpg
-4.jpg
+3.jpg::maptexture3
+4.jpg::maptexture4
