@@ -19,7 +19,7 @@ namespace engine
 		this->window->setFramerateLimit(60);
 		view1.setSize(sf::Vector2f(1280.f, 720.f));
 		view1.setCenter(sf::Vector2f(100.f, 100.f));
-		rTex.create(2000, 2000);
+		
 	}
 
 	void Game::initTiles()
@@ -36,6 +36,7 @@ namespace engine
 				map.tile[i][j].sprite.setPosition(i * tileSize, j * tileSize);
 			}
 		}
+		rTex.create(map.mapsize*tileSize, map.mapsize*tileSize);
 		RenderMap.InitMapTextures(map);
 		std::cout << "init done\n";
 	}
@@ -73,7 +74,7 @@ namespace engine
 				this->window->close();
 				break;
 			case sf::Event::MouseWheelMoved:
-				if (ZoomLevel <= 3 && event.mouseWheel.delta==-1 || ZoomLevel > 0 && event.mouseWheel.delta ==1 )
+				if (ZoomLevel <= 2 && event.mouseWheel.delta==-1 || ZoomLevel > 0.2 && event.mouseWheel.delta ==1 )
 				{
 					view1.zoom(1 + 0.1 * -(event.mouseWheel.delta));
 					ZoomLevel +=  ( 0.1 * -(event.mouseWheel.delta));
@@ -88,24 +89,33 @@ namespace engine
 
 	void Game::update()
 	{
+		
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			view1.move(-10.f , 0.f);
+			if (view1.getCenter().x > -40){
+				view1.move(-20.f, 0.f);
+			}	
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			view1.move(10.f , 0.f);
+			if (view1.getCenter().x < map.mapsize*tileSize + 40) {
+				view1.move(20.f, 0.f);
+			}	
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			view1.move(0.f, -10.f );
+			if (view1.getCenter().y > -40) {
+				view1.move(0.f, -20.f);
+			}	
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			view1.move(0.f, 10.f );
+			if (view1.getCenter().y < map.mapsize*tileSize + 40) {
+				view1.move(0.f, 20.f);
+			}	
 		}
 
 		this->pollEvents();
