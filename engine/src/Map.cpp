@@ -4,7 +4,7 @@
 
 namespace engine {
     Map::Map() {
-        mapsize = 40;
+        mapsize = 100;
     }
 
     void Map::updateMap() {

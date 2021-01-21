@@ -18,7 +18,8 @@ namespace engine
 		this->window = new sf::RenderWindow(this->videoMode, "Neumann Game");
 		this->window->setFramerateLimit(60);
 		view1.setSize(sf::Vector2f(1280.f, 720.f));
-		view1.setCenter(sf::Vector2f(100.f, 100.f));
+		//view1.setCenter(sf::Vector2f(100.f, 100.f));
+
 	}
 
 	void Game::initTiles()
@@ -35,7 +36,8 @@ namespace engine
 				map.tile[i][j].sprite.setPosition(i * tileSize, j * tileSize);
 			}
 		}
-		rTex.create(map.mapsize*tileSize, map.mapsize*tileSize);
+		//rTex.create(map.mapsize*tileSize, map.mapsize*tileSize);
+		rTex.create(2000, 2000);
 		RenderMap.InitMapTextures(map);
 		std::cout << "init done\n";
 	}
@@ -78,6 +80,17 @@ namespace engine
 					view1.zoom(1 + 0.1 * -(event.mouseWheel.delta));
 					ZoomLevel +=  ( 0.1 * -(event.mouseWheel.delta));
 				}
+				break;
+			case sf::Event::MouseButtonPressed:
+				pixelPos = sf::Mouse::getPosition(*window);
+
+
+				worldPos = window->mapPixelToCoords(pixelPos);
+
+				std::cout << worldPos.x;
+				std::cout << " ";
+				std::cout << worldPos.y;
+				std::cout << '\n';
 				break;
 
 			default:
@@ -123,7 +136,6 @@ namespace engine
 	void Game::render()
 	{
 		RenderMap.RenderM(map, rTex);
-
 		rTex.display();
 		const sf::Texture& texture = rTex.getTexture();
 		sprite.setTexture(texture);

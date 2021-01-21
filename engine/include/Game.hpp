@@ -11,7 +11,7 @@ namespace engine
 	private:
 		//Private variables
 		//Window
-		sf::RenderWindow* window;
+		
 		sf::VideoMode videoMode;
 		sf::Event event;
 		MapGenerator mapGen;
@@ -20,7 +20,12 @@ namespace engine
 		sf::RenderTexture rTex;
 		sf::Sprite sprite;
 		float ZoomLevel = 1;
-		int tileSize = 100;
+		int tileSize = 50;
+		sf::Vector2i pixelPos;
+
+
+		sf::Vector2f worldPos;
+
 		sf::Texture* text3;
 		const sf::Texture texture;
 		sf::RectangleShape tile;
@@ -33,6 +38,7 @@ namespace engine
 		void initTile(size_t i, size_t j);
 
 	public:
+		sf::RenderWindow* window;
 		//Constructors & destructor
 		Game();
 		virtual ~Game();
