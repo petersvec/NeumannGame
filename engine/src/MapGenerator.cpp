@@ -1,21 +1,22 @@
-#include "../include/MapGenerator.hpp"
 #include <stdlib.h>
 #include <time.h>
 #include <iostream>
+#include "../include/MapGenerator.hpp"
 
 namespace engine
 {
-	void MapGenerator::generateMap(Map/*&*/ map, unsigned short numberOfPlanets, unsigned char maxRadiusOfPlanet)
+	void MapGenerator::generateMap(Map map, unsigned short numberOfPlanets, unsigned char maxRadiusOfPlanet)
 	{
 		unsigned short height = map.getHeight();
 		unsigned short width = map.getWidth();
 		srand(static_cast<unsigned int>(time(nullptr)));
+		
 		for (unsigned short i = 0; i < numberOfPlanets; ++i)
 		{
 			unsigned short x = rand() % height;
 			unsigned short y = rand() % width;
 			unsigned char type = rand() % 3 + 1;
-			unsigned char radius = rand() % maxRadiusOfPlanet;
+			unsigned char radius = rand() % maxRadiusOfPlanet + 3;
 			map.setTile(x, y, type);
 
 
@@ -41,10 +42,7 @@ namespace engine
 						continue;
 					}
 
-					if (map.getTile(i, j) != 0)
-					{
-						map.setTile(i, j, type);
-					}
+					map.setTile(i, j, type);
 				}
 
 				if (cislo < radius && flag)
@@ -101,7 +99,7 @@ namespace engine
 					continue;
 				}
 
-				if (map.getTile(i, j) != 0)
+				if (map.getTile(i, j) == 0)
 				{
 					map.setTile(i, j, type);
 				}

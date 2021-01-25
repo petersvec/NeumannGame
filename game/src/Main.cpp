@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "/Users/andre/Documents/Programovanie/Git/NeumannGame/engine/include/Game.hpp"
+#include "../../engine/include/Game.hpp/"
 
 int main(void)
 {

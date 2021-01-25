@@ -1,6 +1,6 @@
-#include "../include/Tile.hpp"
 #include <stdlib.h>
 #include <time.h>
+#include "../include/Tile.hpp"
 
 namespace engine
 {

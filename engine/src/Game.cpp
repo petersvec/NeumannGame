@@ -1,5 +1,5 @@
-#include "../include/Game.hpp"
 #include <iostream>
+#include "../include/Game.hpp"
 
 namespace engine
 {
