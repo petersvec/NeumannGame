@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../include/MapGenerator.hpp"
+#include "MapGenerator.hpp"
 
 namespace engine
 {
