@@ -36,6 +36,8 @@ namespace engine
 		void initWindow();
 		void initTiles();
 		void initTile(size_t i, size_t j);
+		Tile getTile(int x, int y);
+
 
 	public:
 		sf::RenderWindow* window;

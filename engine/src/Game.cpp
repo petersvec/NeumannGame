@@ -47,6 +47,18 @@ namespace engine
 		
 	}
 
+	Tile Game::getTile(int x, int y)
+	{
+		if (x >= 0 && y >= 0 && x <= tileSize * map.mapsize && y <= tileSize * map.mapsize)
+		{
+			return map.tile[x / tileSize][y / tileSize];
+		}
+		else 
+		{
+			return NULL;
+		}
+	}
+
 	Game::Game()
 	{
 		this->initVariables();
@@ -74,17 +86,16 @@ namespace engine
 			case sf::Event::Closed:
 				this->window->close();
 				break;
-			case sf::Event::MouseWheelMoved:
+			case sf::Event::MouseWheelMoved:  //Zoom
 				if (ZoomLevel <= 2.8 && event.mouseWheel.delta==-1 || ZoomLevel > 0.2 && event.mouseWheel.delta ==1 )
 				{
 					view1.zoom(1 + 0.1 * -(event.mouseWheel.delta));
 					ZoomLevel +=  ( 0.1 * -(event.mouseWheel.delta));
 				}
 				break;
-			case sf::Event::MouseButtonPressed:
+			case sf::Event::MouseButtonPressed:  //Click coordinates
+				
 				pixelPos = sf::Mouse::getPosition(*window);
-
-
 				worldPos = window->mapPixelToCoords(pixelPos);
 
 				std::cout << worldPos.x;
@@ -102,7 +113,7 @@ namespace engine
 	void Game::update()
 	{
 		
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))  //Move view - map
 		{
 			if (view1.getCenter().x > -40){
 				view1.move(-20.f, 0.f);
