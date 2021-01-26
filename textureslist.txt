@@ -1,4 +1,4 @@
-Void.jpg = Void
-Jupiter.jpg = Jupiter
-Mars.jpg = Mars
-Mercury.jpg = Mercury
+Void.jpg::Void
+Jupiter.jpg::Jupiter
+Mars.jpg::Mars
+Mercury.jpg::Mercury

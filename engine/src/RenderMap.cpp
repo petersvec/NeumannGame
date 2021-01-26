@@ -9,7 +9,7 @@ namespace engine
 
 	}
 
-	void RenderMap::initMapTextures(Map map)
+	void RenderMap::initMapTextures(Map& map)
 	{
 		TextureHandler handler;
 		handler.LoadTextures();
@@ -17,31 +17,32 @@ namespace engine
 		{
 			for (int j = 0; j < map.getWidth(); j++)
 			{
-				if (map.getTile(i, j).get()->getType() == 0)
+				Tile tile = *map.getTile(i, j).get();
+				if (tile.getType() == 0)
 				{					
-					map.getTile(i, j).get()->getSprite().setTexture(*handler.getTexture("Void"));
-					map.getTile(i, j).get()->getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
+					tile.getSprite().setTexture(*handler.getTexture("Void"));
+					tile.getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
 				}
-				else if (map.getTile(i, j).get()->getType() == 1)
+				else if (tile.getType() == 1)
 				{
-					map.getTile(i, j).get()->getSprite().setTexture(*handler.getTexture("Jupiter"));
-					map.getTile(i, j).get()->getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
+					tile.getSprite().setTexture(*handler.getTexture("Jupiter"));
+					tile.getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
 				}
-				else if (map.getTile(i, j).get()->getType() == 2)
+				else if (tile.getType() == 2)
 				{
-					map.getTile(i, j).get()->getSprite().setTexture(*handler.getTexture("Mercury"));
-					map.getTile(i, j).get()->getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
+					tile.getSprite().setTexture(*handler.getTexture("Mercury"));
+					tile.getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
 				}
 				else
 				{
-					map.getTile(i, j).get()->getSprite().setTexture(*handler.getTexture("Mars"));
-					map.getTile(i, j).get()->getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
+					tile.getSprite().setTexture(*handler.getTexture("Mars"));
+					tile.getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
 				}
 			}
 		}
 	}
 
-	void RenderMap::renderMap(Map map, sf::RenderTexture& renderTexture) 
+	void RenderMap::renderMap(Map& map, sf::RenderTexture& renderTexture) 
 	{
 		for (int i = 0; i < map.getHeight(); i++)
 		{

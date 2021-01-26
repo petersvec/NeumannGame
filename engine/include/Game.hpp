@@ -12,7 +12,7 @@ namespace engine
 		sf::Event m_event;
 		Map m_gameMap;
 		MapGenerator m_mapGenerator;
-		sf::Sprite sprite;//celkovy obrazok pred vykreslenim
+		sf::Sprite sprite;
 		sf::VideoMode m_videoMode;
 		sf::View m_view;
 		sf::RenderTexture m_renderTexture;
