@@ -1,4 +1,6 @@
 #pragma once
+#include <SFML\Graphics\Texture.hpp>
+#include <SFML\Graphics\Sprite.hpp>
 
 namespace engine
 {
@@ -6,7 +8,7 @@ namespace engine
 	{
 	private:
 		unsigned char m_type;	//type of the Tile: 0-void, 1-planet of player one, 2-planet of player 2, 3-resources on the planet, 4-resources on the planet of the player 1, 5-resources on the planet of the player 2
-		
+		sf::Sprite sprite;
 
 	public:
 		Tile();
