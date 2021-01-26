@@ -8,7 +8,7 @@ namespace engine
 	{
 	private:
 		unsigned char m_type;	//type of the Tile: 0-void, 1-planet of player one, 2-planet of player 2, 3-resources on the planet, 4-resources on the planet of the player 1, 5-resources on the planet of the player 2
-		sf::Sprite sprite;
+		sf::Sprite m_sprite;
 
 	public:
 		Tile();
@@ -18,5 +18,6 @@ namespace engine
 		bool operator == (const unsigned char type);
 
 		unsigned char getType();
+		sf::Sprite getSprite();
 	};
 }

@@ -14,6 +14,7 @@ namespace engine
 		MapPtr m_map;
 		unsigned short m_mapHeight, m_mapWidth;
 
+		void setSprites();
 
 	public:
 		Map();

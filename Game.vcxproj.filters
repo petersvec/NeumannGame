@@ -39,6 +39,12 @@
     <ClCompile Include="engine\src\Game.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\RenderMap.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\TextureHandler.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\Tile.hpp">
@@ -54,6 +60,12 @@
       <Filter>Engine\include</Filter>
     </ClInclude>
     <ClInclude Include="engine\include\Game.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\RenderMap.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\TextureHandler.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
-
+//Andrej
 namespace engine
 {
 	class Game
@@ -12,20 +12,15 @@ namespace engine
 		sf::Event m_event;
 		Map m_gameMap;
 		MapGenerator m_mapGenerator;
-
-		sf::VideoMode videoMode;
-		sf::View view1;
-		sf::RenderTexture rTex;
-		sf::Sprite sprite;
+		sf::Sprite sprite;//celkovy obrazok pred vykreslenim
+		sf::VideoMode m_videoMode;
+		sf::View m_view;
+		sf::RenderTexture m_renderTexture;
 		float ZoomLevel = 1;
 		int tileSize = 50;
 		sf::Vector2i pixelPos;
-
 		sf::Vector2f worldPos;
-
-		sf::Texture* text3;
 		const sf::Texture texture;
-		sf::RectangleShape tile;
 		RenderMap RenderMap;
 
 		void initVariables();

@@ -23,6 +23,8 @@
     <ClCompile Include="engine\src\Map.cpp" />
     <ClCompile Include="engine\src\MapGenerator.cpp" />
     <ClCompile Include="engine\src\Planet.cpp" />
+    <ClCompile Include="engine\src\RenderMap.cpp" />
+    <ClCompile Include="engine\src\TextureHandler.cpp" />
     <ClCompile Include="engine\src\Tile.cpp" />
     <ClCompile Include="game\src\Main.cpp" />
   </ItemGroup>
@@ -31,6 +33,8 @@
     <ClInclude Include="engine\include\Map.hpp" />
     <ClInclude Include="engine\include\MapGenerator.hpp" />
     <ClInclude Include="engine\include\Planet.hpp" />
+    <ClInclude Include="engine\include\RenderMap.hpp" />
+    <ClInclude Include="engine\include\TextureHandler.hpp" />
     <ClInclude Include="engine\include\Tile.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

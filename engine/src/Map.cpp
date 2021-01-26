@@ -7,7 +7,7 @@ namespace engine
 		m_mapHeight = 1000;
 		m_mapWidth = 1000;
 		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, TilePtr(new Tile(0))));
-		
+		setSprites();
 	}
 
 	Map::Map(unsigned short mapSize)
@@ -15,7 +15,7 @@ namespace engine
 		m_mapHeight = mapSize;
 		m_mapWidth = mapSize;
 		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, std::shared_ptr<Tile>(new Tile(0))));
-
+		setSprites();
 	}
 
 	Map::Map(unsigned short mapHeight, unsigned short mapWidth)
@@ -23,7 +23,18 @@ namespace engine
 		m_mapHeight = mapHeight;
 		m_mapWidth = mapWidth;
 		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, std::make_shared<Tile>(0)));
+		setSprites();
+	}
 
+	void Map::setSprites()
+	{
+		for (int i = 0; i < m_mapHeight; i++)
+		{
+			for (int j = 0; j < m_mapWidth; j++)
+			{
+				m_map[i][j].get()->getSprite().setPosition(i * 50, j * 50);
+			}
+		}
 	}
 
 	MapPtr Map::getMap()
