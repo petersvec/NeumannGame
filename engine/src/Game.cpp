@@ -116,8 +116,8 @@ namespace engine
 		m_renderMap.renderMap(m_gameMap, m_renderTexture);
 		m_renderTexture.display();
 		const sf::Texture& texture = m_renderTexture.getTexture();
-		sprite.setTexture(texture);
-		m_window->draw(sprite);
+		m_frame.setTexture(texture);
+		m_window->draw(m_frame);
 		m_window->setView(m_view);
 
 		m_window->display();

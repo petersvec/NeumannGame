@@ -12,7 +12,7 @@ namespace engine
 		sf::Event m_event;
 		Map m_gameMap;
 		MapGenerator m_mapGenerator;
-		sf::Sprite sprite;
+		sf::Sprite m_frame;
 		sf::VideoMode m_videoMode;
 		sf::View m_view;
 		sf::RenderTexture m_renderTexture;
@@ -25,9 +25,6 @@ namespace engine
 
 		void initVariables();
 		void initWindow();
-		void initTiles();
-		void initTile(size_t i, size_t j);
-		Tile getTile(int x, int y);
 
 	public:
 		Game();
