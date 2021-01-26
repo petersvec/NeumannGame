@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "../include/MapGenerator.hpp"
 #include "../include/Map.hpp"
-#include <RenderMap.hpp>
+#include "..\include\RenderMap.hpp"
 
 namespace engine
 {
@@ -28,7 +28,6 @@ namespace engine
 
 		sf::Texture* text3;
 		const sf::Texture texture;
-		sf::RectangleShape tile;
 		RenderMap RenderMap;
 
 		//Private functions

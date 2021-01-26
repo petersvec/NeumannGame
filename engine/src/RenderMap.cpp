@@ -1,6 +1,6 @@
-#include "RenderMap.hpp"
-#include <TextureHandler.hpp>
-#include <Map.hpp>
+#include "..\include\RenderMap.hpp"
+#include "..\include\TextureHandler.hpp"
+#include "..\include\Map.hpp"
 
 namespace engine
 {

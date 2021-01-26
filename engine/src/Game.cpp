@@ -146,6 +146,8 @@ namespace engine
 
 	void Game::render()
 	{
+		this->window->clear();
+		rTex.clear();
 		RenderMap.RenderM(map, rTex);
 		rTex.display();
 		const sf::Texture& texture = rTex.getTexture();
@@ -154,7 +156,6 @@ namespace engine
 		this->window->draw(sprite);
 		this->window->setView(view1);
 		this->window->display();
-		this->window->clear();
-		rTex.clear();	
+		
 	}
 }
