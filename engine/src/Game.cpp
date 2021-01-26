@@ -9,7 +9,7 @@ namespace engine
 		Map m_gameMap(50, 50);
 		MapGenerator* m_mapGenerator = new MapGenerator();
 		m_mapGenerator->generateMap(m_gameMap, 50, 3);
-		m_renderTexture.create(2000, 2000);
+		m_renderTexture.create(2500, 2500);
 		m_renderMap.initMapTextures(m_gameMap);
 	}
 
