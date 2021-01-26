@@ -56,12 +56,11 @@ namespace engine
 				}
 			}
 
-			/*
 			if (map.getTile(x, y) == 0)
 			{
 				map.setTile(x, y, type);
 				setPlanet(map, x, y, type, radius);
-			}*/
+			}
 		}
 
 		for (unsigned short i = 0; i < height; ++i)
@@ -107,25 +106,3 @@ namespace engine
 		}
 	}
 }
-
-/*
-radius = 3
-x = 4
-y = 4
-
-x-r = 1
-y-r = 1
-
-x+r = 7
-y+r = 7
-
-  0 1 2 3 4 5 6 7
-0
-1         *      
-2       * * *    
-3     * * * * *  
-4   * * * * * * *
-5     * * * * *  
-6       * * *    
-7         *      
-*/

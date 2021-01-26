@@ -44,15 +44,16 @@ namespace engine
 			case sf::Event::Closed:
 				m_window->close();
 				break;
-			case sf::Event::MouseWheelMoved:  //Zoom
+
+			case sf::Event::MouseWheelMoved:
 				if (ZoomLevel <= 2.8 && m_event.mouseWheel.delta == -1 || ZoomLevel > 0.2 && m_event.mouseWheel.delta == 1)
 				{
 					m_view.zoom(1 + 0.1 * -(m_event.mouseWheel.delta));
 					ZoomLevel += (0.1 * -(m_event.mouseWheel.delta));
 				}
 				break;
-			case sf::Event::MouseButtonPressed:  //Click coordinates
 
+			case sf::Event::MouseButtonPressed:
 				pixelPos = sf::Mouse::getPosition(*m_window);
 				worldPos = m_window->mapPixelToCoords(pixelPos);
 
@@ -70,30 +71,34 @@ namespace engine
 
 	void Game::update()
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))  //Move view - map
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			if (m_view.getCenter().x > -40) {
+			if (m_view.getCenter().x > -40)
+			{
 				m_view.move(-20.f, 0.f);
 			}
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			if (m_view.getCenter().x < m_gameMap.getWidth() * tileSize + 40) {
+			if (m_view.getCenter().x < m_gameMap.getWidth() * tileSize + 40)
+			{
 				m_view.move(20.f, 0.f);
 			}
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			if (m_view.getCenter().y > -40) {
+			if (m_view.getCenter().y > -40)
+			{
 				m_view.move(0.f, -20.f);
 			}
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			if (m_view.getCenter().y < m_gameMap.getWidth() * tileSize + 40) {
+			if (m_view.getCenter().y < m_gameMap.getWidth() * tileSize + 40)
+			{
 				m_view.move(0.f, 20.f);
 			}
 		}
@@ -106,7 +111,7 @@ namespace engine
 		m_renderTexture.clear();
 		m_window->clear();
 		
-		RenderMap.RenderM(m_gameMap, m_renderTexture);
+		m_renderMap.renderMap(m_gameMap, m_renderTexture);
 		m_renderTexture.display();
 		const sf::Texture& texture = m_renderTexture.getTexture();
 		sprite.setTexture(texture);

@@ -1,10 +1,9 @@
 #include "../include/TextureHandler.hpp"
-
 #include <fstream>
-
 #include <iostream>
 
-namespace engine {
+namespace engine
+{
     TextureHandler::TextureHandler()
     {
 
@@ -21,7 +20,8 @@ namespace engine {
         std::string texturepath;
         int pos = 0;
         
-        while (std::getline(file, line)) {
+        while (std::getline(file, line))
+        {
             numberofLines++;
         }
         file.clear();
@@ -30,12 +30,14 @@ namespace engine {
         retText = new sf::Texture();
         text = new sf::Texture * [numberofLines];
 
-        for (i = 0; i < numberofLines; i++) {
+        for (i = 0; i < numberofLines; i++)
+        {
             text[i] = new sf::Texture();
         }
         i = 0;
 
-        while (std::getline(file, line)) {
+        while (std::getline(file, line))
+        {
             pos = line.find(delimiter);
             texturepath = line.substr(0, pos);
             line = line.erase(0, pos + 2);
@@ -45,7 +47,8 @@ namespace engine {
         }
     }
 
-    sf::Texture* TextureHandler::getTexture(std::string str) {
+    sf::Texture* TextureHandler::getTexture(std::string str)
+    {
 
         retText = texturemap.at(str);
         return retText;

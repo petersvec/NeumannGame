@@ -5,11 +5,13 @@
 
 namespace engine
 {
-	class RenderMap {
+	class RenderMap
+	{
+	private:
+
 	public:
 		RenderMap();
-		void InitMapTextures(Map map);
-		void RenderM(Map map, sf::RenderTexture& rTex);
-	private:
+		void initMapTextures(Map map);
+		void renderMap(Map map, sf::RenderTexture& renderTexture);
 	};
 }

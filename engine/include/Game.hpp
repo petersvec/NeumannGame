@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
-//Andrej
+
 namespace engine
 {
 	class Game
@@ -21,7 +21,7 @@ namespace engine
 		sf::Vector2i pixelPos;
 		sf::Vector2f worldPos;
 		const sf::Texture texture;
-		RenderMap RenderMap;
+		RenderMap m_renderMap;
 
 		void initVariables();
 		void initWindow();

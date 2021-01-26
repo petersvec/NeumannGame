@@ -9,37 +9,45 @@ namespace engine
 
 	}
 
-	void RenderMap::InitMapTextures(Map map)
+	void RenderMap::initMapTextures(Map map)
 	{
 		TextureHandler handler;
 		handler.LoadTextures();
-		//tu by mala ist vygenerovana mapa
 		for (int i = 0; i < map.getHeight(); i++)
 		{
 			for (int j = 0; j < map.getWidth(); j++)
 			{
-				if ((i + j) % 3)
+				if (map.getTile(i, j).get()->getType() == 0)
 				{					
-					map.getTile(i, j).get()->getSprite().setTexture(*handler.getTexture("maptexture3"));
+					map.getTile(i, j).get()->getSprite().setTexture(*handler.getTexture("Void"));
+					map.getTile(i, j).get()->getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
+				}
+				else if (map.getTile(i, j).get()->getType() == 1)
+				{
+					map.getTile(i, j).get()->getSprite().setTexture(*handler.getTexture("Jupiter"));
+					map.getTile(i, j).get()->getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
+				}
+				else if (map.getTile(i, j).get()->getType() == 2)
+				{
+					map.getTile(i, j).get()->getSprite().setTexture(*handler.getTexture("Mercury"));
 					map.getTile(i, j).get()->getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
 				}
 				else
 				{
-					
-					map.getTile(i, j).get()->getSprite().setTexture(*handler.getTexture("maptexture4"));
+					map.getTile(i, j).get()->getSprite().setTexture(*handler.getTexture("Mars"));
 					map.getTile(i, j).get()->getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
 				}
 			}
 		}
 	}
 
-	void RenderMap::RenderM(Map map, sf::RenderTexture& rTex) 
+	void RenderMap::renderMap(Map map, sf::RenderTexture& renderTexture) 
 	{
 		for (int i = 0; i < map.getHeight(); i++)
 		{
 			for (int j = 0; j < map.getWidth(); j++)
 			{
-				rTex.draw(map.getTile(i, j).get()->getSprite());
+				renderTexture.draw(map.getTile(i, j).get()->getSprite());
 			}
 		}
 	}
