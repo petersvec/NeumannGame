@@ -6,7 +6,16 @@ namespace engine
 	{
 		m_mapHeight = 0;
 		m_mapWidth = 0;
-		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, TilePtr(new Tile(0))));
+		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, nullptr));
+
+		for (int i = 0; i < m_mapHeight; i++)
+		{
+			for (int j = 0; j < m_mapWidth; j++)
+			{
+				m_map[i][j] = std::make_shared<Tile>(0);
+			}
+		}
+
 		setSpritesPosition();
 	}
 
@@ -14,7 +23,16 @@ namespace engine
 	{
 		m_mapHeight = mapSize;
 		m_mapWidth = mapSize;
-		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, std::shared_ptr<Tile>(new Tile(0))));
+		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, nullptr));
+
+		for (int i = 0; i < m_mapHeight; i++)
+		{
+			for (int j = 0; j < m_mapWidth; j++)
+			{
+				m_map[i][j] = std::make_shared<Tile>(0);
+			}
+		}
+
 		setSpritesPosition();
 	}
 
@@ -22,7 +40,16 @@ namespace engine
 	{
 		m_mapHeight = mapHeight;
 		m_mapWidth = mapWidth;
-		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, std::make_shared<Tile>(0)));
+		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, nullptr));
+
+		for (int i = 0; i < m_mapHeight; i++)
+		{
+			for (int j = 0; j < m_mapWidth; j++)
+			{
+				m_map[i][j] = std::make_shared<Tile>(0);
+			}
+		}
+
 		setSpritesPosition();
 	}
 
@@ -59,6 +86,6 @@ namespace engine
 
 	void Map::setTile(unsigned short mapHeight, unsigned short mapWidth, unsigned char type)
 	{
-		m_map[mapHeight][mapWidth] = TilePtr(new Tile(type));
+		m_map[mapHeight][mapWidth]->setType(type);
 	}
 }

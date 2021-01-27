@@ -6,11 +6,11 @@ namespace engine
 	void Game::initVariables()
 	{
 		m_window = nullptr;
-		Map m_gameMap(50, 50);
+		m_gameMap = new Map(50, 50);
 		MapGenerator* m_mapGenerator = new MapGenerator();
-		m_mapGenerator->generateMap(&m_gameMap, 50, 3);
+		m_mapGenerator->generateMap(m_gameMap, 50, 3);
 		m_renderTexture.create(2500, 2500);
-		m_renderMap.initMapTextures(m_gameMap);
+		m_renderMap.initMapTextures(*m_gameMap);
 	}
 
 	void Game::initWindow()
@@ -83,7 +83,7 @@ namespace engine
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			if (m_view.getCenter().x < m_gameMap.getWidth() * tileSize + 40)
+			if (m_view.getCenter().x < m_gameMap->getWidth() * tileSize + 40)
 			{
 				m_view.move(20.f, 0.f);
 			}
@@ -99,7 +99,7 @@ namespace engine
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			if (m_view.getCenter().y < m_gameMap.getWidth() * tileSize + 40)
+			if (m_view.getCenter().y < m_gameMap->getWidth() * tileSize + 40)
 			{
 				m_view.move(0.f, 20.f);
 			}
@@ -113,7 +113,7 @@ namespace engine
 		m_renderTexture.clear();
 		m_window->clear();
 		
-		m_renderMap.renderMap(m_gameMap, m_renderTexture);
+		m_renderMap.renderMap(*m_gameMap, m_renderTexture);
 		m_renderTexture.display();
 		const sf::Texture& texture = m_renderTexture.getTexture();
 		m_frame.setTexture(texture);

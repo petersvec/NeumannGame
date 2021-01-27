@@ -41,6 +41,11 @@ namespace engine
 		return m_sprite;
 	}
 
+	void Tile::setType(unsigned char type)
+	{
+		m_type = type;
+	}
+
 	void Tile::setPosition(float x, float y)
 	{
 		m_sprite.setPosition(x, y);

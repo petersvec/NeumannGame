@@ -10,7 +10,7 @@ namespace engine
 	private:
 		sf::RenderWindow* m_window;
 		sf::Event m_event;
-		Map m_gameMap;
+		Map* m_gameMap;
 		MapGenerator m_mapGenerator;
 		sf::Sprite m_frame;
 		sf::VideoMode m_videoMode;

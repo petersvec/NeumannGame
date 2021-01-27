@@ -18,6 +18,7 @@ namespace engine
 
 		unsigned char getType();
 		sf::Sprite getSprite();
+		void setType(unsigned char type);
 		void setPosition(float x, float y);
 		void setSprite(const sf::Texture& texture);
 	};
