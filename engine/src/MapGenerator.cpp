@@ -5,10 +5,10 @@
 
 namespace engine
 {
-	void MapGenerator::generateMap(Map map, unsigned short numberOfPlanets, unsigned char maxRadiusOfPlanet)
+	void MapGenerator::generateMap(Map* map, unsigned short numberOfPlanets, unsigned char maxRadiusOfPlanet)
 	{
-		unsigned short height = map.getHeight();
-		unsigned short width = map.getWidth();
+		unsigned short height = map->getHeight();
+		unsigned short width = map->getWidth();
 		srand(static_cast<unsigned int>(time(nullptr)));
 		
 		for (unsigned short i = 0; i < numberOfPlanets; ++i)
@@ -17,7 +17,7 @@ namespace engine
 			unsigned short y = rand() % width;
 			unsigned char type = rand() % 3 + 1;
 			unsigned char radius = rand() % maxRadiusOfPlanet + 3;
-			map.setTile(x, y, type);
+			map->setTile(x, y, type);
 
 
 			if (radius == 0)
@@ -30,19 +30,19 @@ namespace engine
 
 			for (unsigned char i = x - radius; i <= x + radius; ++i)
 			{
-				if (i < 0 || i >= map.getHeight())
+				if (i < 0 || i >= height)
 				{
 					continue;
 				}
 
 				for (unsigned char j = y - cislo; j <= y + cislo; ++j)
 				{
-					if (j < 0 || j >= map.getWidth())
+					if (j < 0 || j >= width)
 					{
 						continue;
 					}
 
-					map.setTile(i, j, type);
+					map->setTile(i, j, type);
 				}
 
 				if (cislo < radius && flag)
@@ -56,10 +56,10 @@ namespace engine
 				}
 			}
 
-			if (map.getTile(x, y) == 0)
+			if (map->getTile(x, y) == 0)
 			{
-				map.setTile(x, y, type);
-				setPlanet(map, x, y, type, radius);
+				map->setTile(x, y, type);
+				setPlanet(*map, x, y, type, radius);
 			}
 		}
 
@@ -67,7 +67,7 @@ namespace engine
 		{
 			for (unsigned short j = 0; j < width; ++j)
 			{
-				TilePtr a = map.getTile(i, j);
+				TilePtr a = map->getTile(i, j);
 				if (a.get()->getType() == 0)
 					std::cout << " ";
 				else
