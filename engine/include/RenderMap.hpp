@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML\Graphics\Texture.hpp>
-#include <SFML\Graphics\Sprite.hpp>
 #include "Map.hpp"
 
 namespace engine

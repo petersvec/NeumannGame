@@ -1,4 +1,3 @@
-#include "../include/Map.hpp"
 #include "../include/RenderMap.hpp"
 #include "../include/TextureHandler.hpp"
 
@@ -18,25 +17,24 @@ namespace engine
 			for (int j = 0; j < map.getWidth(); j++)
 			{
 				Tile tile = *map.getTile(i, j).get();
-				if (tile.getType() == 0)
-				{					
-					tile.getSprite().setTexture(*handler.getTexture("Void"));
-					tile.getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
-				}
-				else if (tile.getType() == 1)
+
+				switch (tile.getType())
 				{
-					tile.getSprite().setTexture(*handler.getTexture("Jupiter"));
-					tile.getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
-				}
-				else if (tile.getType() == 2)
-				{
-					tile.getSprite().setTexture(*handler.getTexture("Mercury"));
-					tile.getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
-				}
-				else
-				{
-					tile.getSprite().setTexture(*handler.getTexture("Mars"));
-					tile.getSprite().setTextureRect(sf::IntRect(0, 0, 100, 100));
+				case 0:
+					tile.setSprite(*handler.getTexture("Void"));
+					break;
+				case 1:
+					tile.setSprite(*handler.getTexture("Jupiter"));
+					break;
+				case 2:
+					tile.setSprite(*handler.getTexture("Mercury"));
+					break;
+				case 3:
+					tile.setSprite(*handler.getTexture("Mars"));
+					break;
+				default:
+					tile.setSprite(*handler.getTexture("Void"));
+					break;
 				}
 			}
 		}

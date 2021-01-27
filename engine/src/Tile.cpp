@@ -40,4 +40,10 @@ namespace engine
 	{
 		return m_sprite;
 	}
+
+	void Tile::setSprite(const sf::Texture& texture)
+	{
+		m_sprite.setTexture(texture);
+		m_sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));
+	}
 }
