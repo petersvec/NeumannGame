@@ -41,6 +41,11 @@ namespace engine
 		return m_sprite;
 	}
 
+	void Tile::setPosition(float x, float y)
+	{
+		m_sprite.setPosition(x, y);
+	}
+
 	void Tile::setSprite(const sf::Texture& texture)
 	{
 		m_sprite.setTexture(texture);

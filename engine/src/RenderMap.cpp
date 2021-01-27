@@ -16,24 +16,24 @@ namespace engine
 		{
 			for (int j = 0; j < map.getWidth(); j++)
 			{
-				Tile tile = *map.getTile(i, j).get();
+				Tile* tile = map.getTile(i, j).get();
 
-				switch (tile.getType())
+				switch (tile->getType())
 				{
 				case 0:
-					tile.setSprite(*handler.getTexture("Void"));
+					tile->setSprite(*handler.getTexture("Void"));
 					break;
 				case 1:
-					tile.setSprite(*handler.getTexture("Jupiter"));
+					tile->setSprite(*handler.getTexture("Jupiter"));
 					break;
 				case 2:
-					tile.setSprite(*handler.getTexture("Mercury"));
+					tile->setSprite(*handler.getTexture("Mercury"));
 					break;
 				case 3:
-					tile.setSprite(*handler.getTexture("Mars"));
+					tile->setSprite(*handler.getTexture("Mars"));
 					break;
 				default:
-					tile.setSprite(*handler.getTexture("Void"));
+					tile->setSprite(*handler.getTexture("Void"));
 					break;
 				}
 			}

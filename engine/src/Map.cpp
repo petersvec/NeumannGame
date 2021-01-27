@@ -32,7 +32,8 @@ namespace engine
 		{
 			for (int j = 0; j < m_mapWidth; j++)
 			{
-				m_map[i][j].get()->getSprite().setPosition(i * 50, j * 50);
+				Tile* tile = m_map[i][j].get();
+				tile->setPosition(i * 50, j * 50);
 			}
 		}
 	}
