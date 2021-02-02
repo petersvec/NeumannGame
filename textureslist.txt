@@ -1,2 +1,4 @@
-Jupiter.jpg::maptexture3
-4.jpg::maptexture4
+Void.jpg::Void
+Jupiter.jpg::Jupiter
+Mars.jpg::Mars
+Mercury.jpg::Mercury

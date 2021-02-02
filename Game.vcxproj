@@ -26,11 +26,13 @@
     <ClCompile Include="engine\src\TextureHandler.cpp" />
     <ClCompile Include="engine\src\Tile.cpp" />
     <ClCompile Include="game\src\Main.cpp" />
+    <ClCompile Include="Planet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\Game.hpp" />
     <ClInclude Include="engine\include\Map.hpp" />
     <ClInclude Include="engine\include\MapGenerator.hpp" />
+    <ClInclude Include="engine\include\Planet.hpp" />
     <ClInclude Include="engine\include\RenderMap.hpp" />
     <ClInclude Include="engine\include\TextureHandler.hpp" />
     <ClInclude Include="engine\include\Tile.hpp" />
@@ -142,7 +144,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\SFML-2.5.1\include; D:\github\NeumannGame\engine\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -1,6 +1,5 @@
-#include "..\include\RenderMap.hpp"
-#include "..\include\TextureHandler.hpp"
-#include "..\include\Map.hpp"
+#include "../include/RenderMap.hpp"
+#include "../include/TextureHandler.hpp"
 
 namespace engine
 {
@@ -9,37 +8,43 @@ namespace engine
 
 	}
 
-	void RenderMap::InitMapTextures(Map& map)
+	void RenderMap::initMapTextures(Map& map)
 	{
-		TextureHandler handler;
-		handler.LoadTextures();
-
-		for (int i = 0; i < map.mapsize; i++)
+		TextureHandler* handler = new TextureHandler();
+		handler->LoadTextures();
+		for (int i = 0; i < map.getHeight(); i++)
 		{
-			for (int j = 0; j < map.mapsize; j++)
+			for (int j = 0; j < map.getWidth(); j++)
 			{
-				if ((i + j) % 3)
-				{					
-					map.tile[i][j].sprite.setTexture(*handler.getTexture("maptexture3"));
-					map.tile[i][j].sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));
-				}
-				else
+				switch (map.getTile(i, j)->getType())
 				{
-					
-					map.tile[i][j].sprite.setTexture(*handler.getTexture("maptexture4"));
-					map.tile[i][j].sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));	
+				case 0:
+					map.getTile(i, j)->setSprite(*(handler)->getTexture("Void"));
+					break;
+				case 1:
+					map.getTile(i, j)->setSprite(*(handler)->getTexture("Jupiter"));
+					break;
+				case 2:
+					map.getTile(i, j)->setSprite(*(handler)->getTexture("Mercury"));
+					break;
+				case 3:
+					map.getTile(i, j)->setSprite(*(handler)->getTexture("Mars"));
+					break;
+				default:
+					map.getTile(i, j)->setSprite(*(handler)->getTexture("Void"));
+					break;
 				}
 			}
 		}
 	}
 
-	void RenderMap::RenderM(Map& map, sf::RenderTexture& rTex) 
+	void RenderMap::renderMap(Map& map, sf::RenderTexture& renderTexture)
 	{
-		for (int i = 0; i < map.mapsize; i++)
+		for (int i = 0; i < map.getHeight(); i++)
 		{
-			for (int j = 0; j < map.mapsize; j++)
+			for (int j = 0; j < map.getWidth(); j++)
 			{
-				rTex.draw(map.tile[i][j].sprite);
+				renderTexture.draw(map.getTile(i, j).get()->getSprite());
 			}
 		}
 	}

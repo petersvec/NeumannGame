@@ -1,19 +1,59 @@
+#include <stdlib.h>
+#include <time.h>
 #include "../include/Tile.hpp"
 
-#include <stdlib.h>
+namespace engine
+{
+	Tile::Tile()
+	{
+		srand(time(NULL));
+		m_type = rand() % 7;
+		m_sprite.setScale(sf::Vector2f(1, 1));
+	}
 
-#include <SFML/Graphics.hpp>
+	Tile::Tile(unsigned char type)
+	{
+		m_type = type;
+		m_sprite.setScale(sf::Vector2f(1, 1));
+	}
 
-#include <iostream>
+	Tile Tile::operator=(const unsigned char type)
+	{
+		return Tile(type);
+	}
 
+	bool Tile::operator==(const unsigned char type)
+	{
+		if (m_type == type)
+		{
+			return true;
+		}
+		return false;
+	}
 
-namespace engine {
-    Tile::Tile() {
-        srand(time(NULL));
-        sprite.setScale(sf::Vector2f(1, 1));
-    }
-    Tile::Tile(int tilesize) {
-        srand(time(NULL));
-        //sprite.setScale(sf::Vector2f(tilesize, tilesize));
-    }
+	unsigned char Tile::getType()
+	{
+		return m_type;
+	}
+
+	sf::Sprite Tile::getSprite()
+	{
+		return m_sprite;
+	}
+
+	void Tile::setType(unsigned char type)
+	{
+		m_type = type;
+	}
+
+	void Tile::setPosition(float x, float y)
+	{
+		m_sprite.setPosition(x, y);
+	}
+
+	void Tile::setSprite(const sf::Texture& texture)
+	{
+		m_sprite.setTexture(texture);
+		m_sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));
+	}
 }

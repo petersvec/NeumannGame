@@ -1,13 +1,91 @@
 #include "../include/Map.hpp"
 
-#include "../include/Tile.hpp"
+namespace engine
+{
+	Map::Map()
+	{
+		m_mapHeight = 0;
+		m_mapWidth = 0;
+		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, nullptr));
 
-namespace engine {
-    Map::Map() {
-        mapsize = 50;
-    }
+		for (int i = 0; i < m_mapHeight; i++)
+		{
+			for (int j = 0; j < m_mapWidth; j++)
+			{
+				m_map[i][j] = std::make_shared<Tile>(0);
+			}
+		}
 
-    void Map::updateMap() {
+		setSpritesPosition();
+	}
 
-    }
+	Map::Map(unsigned short mapSize)
+	{
+		m_mapHeight = mapSize;
+		m_mapWidth = mapSize;
+		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, nullptr));
+
+		for (int i = 0; i < m_mapHeight; i++)
+		{
+			for (int j = 0; j < m_mapWidth; j++)
+			{
+				m_map[i][j] = std::make_shared<Tile>(0);
+			}
+		}
+
+		setSpritesPosition();
+	}
+
+	Map::Map(unsigned short mapHeight, unsigned short mapWidth)
+	{
+		m_mapHeight = mapHeight;
+		m_mapWidth = mapWidth;
+		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, nullptr));
+
+		for (int i = 0; i < m_mapHeight; i++)
+		{
+			for (int j = 0; j < m_mapWidth; j++)
+			{
+				m_map[i][j] = std::make_shared<Tile>(0);
+			}
+		}
+
+		setSpritesPosition();
+	}
+
+	void Map::setSpritesPosition()
+	{
+		for (int i = 0; i < m_mapHeight; i++)
+		{
+			for (int j = 0; j < m_mapWidth; j++)
+			{
+				(m_map[i][j])->setPosition(i * 50, j * 50);
+			}
+		}
+	}
+
+	MapPtr Map::getMap()
+	{
+		return m_map;
+	}
+
+	unsigned short Map::getHeight()
+	{
+		return m_mapHeight;
+	}
+
+	unsigned short Map::getWidth()
+	{
+		return m_mapWidth;
+	}
+
+	TilePtr Map::getTile(unsigned short mapHeight, unsigned short mapWidth)
+	{
+		return m_map[mapHeight][mapWidth];
+	}
+
+	void Map::setTile(unsigned short mapHeight, unsigned short mapWidth, unsigned char type)
+	{
+		m_map[mapHeight][mapWidth]->setType(type);
+	}
 }
