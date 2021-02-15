@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/Game.hpp"
+#include <Shader.hpp>
 
 namespace engine
 {
@@ -19,6 +20,8 @@ namespace engine
 		m_window = new sf::RenderWindow(m_videoMode, "Neumann Game", sf::Style::Titlebar | sf::Style::Close);
 		m_window->setFramerateLimit(60);
 		m_view.setSize(sf::Vector2f(1280.f, 720.f));
+		Shader shader;
+		shader.doStuff();
 	}
 
 	Game::Game()
@@ -31,6 +34,18 @@ namespace engine
 	{
 		delete m_window;
 	}
+
+	void Game::clickMap(int x, int y)
+	{
+		if (x >= 0 && y >= 0 && x <= tileSize * (m_gameMap->mapsize) && y <= tileSize * m_gameMap->mapsize)
+		{
+			// m_gameMap->getTile(x, y);
+		}
+		
+	}
+	
+	
+	
 
 	const bool Game::isRunning() const
 	{

@@ -10,6 +10,13 @@ namespace engine
 
 	void RenderMap::initMapTextures(Map& map)
 	{
+		
+
+		if (!shader.loadFromFile("storm.vert", sf::Shader::Vertex))
+		{
+			// error...
+		}
+
 		TextureHandler* handler = new TextureHandler();
 		handler->LoadTextures();
 		for (int i = 0; i < map.getHeight(); i++)
@@ -44,7 +51,7 @@ namespace engine
 		{
 			for (int j = 0; j < map.getWidth(); j++)
 			{
-				renderTexture.draw(map.getTile(i, j).get()->getSprite());
+				renderTexture.draw(map.getTile(i, j).get()->getSprite(), &shader);
 			}
 		}
 	}

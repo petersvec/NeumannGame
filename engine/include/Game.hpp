@@ -30,6 +30,7 @@ namespace engine
 		Game();
 		virtual ~Game();
 
+		void clickMap(int x, int y);
 		const bool isRunning() const;
 		void pollEvents();
 		void update();
