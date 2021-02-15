@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
+#include <TextureHandler.hpp>
 
 namespace engine
 {
@@ -31,6 +32,7 @@ namespace engine
 		virtual ~Game();
 
 		void clickMap(int x, int y);
+		void displayText(sf::String str);
 		const bool isRunning() const;
 		void pollEvents();
 		void update();

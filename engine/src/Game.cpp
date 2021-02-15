@@ -43,6 +43,35 @@ namespace engine
 		}
 		
 	}
+
+	void Game::displayText(sf::String str) {
+
+		sf::Text text;
+
+		// select the font
+		sf::Font font;
+		font.loadFromFile("OpenSans-Bold.ttf");
+		
+	    text.setFont(font); // font is a sf::Font
+
+		// set the string to display
+		text.setString("Hello");
+
+		// set the character size
+		text.setCharacterSize(80); // in pixels, not points!
+
+		// set the color
+		text.setFillColor(sf::Color::Red);
+
+		// set the text style
+		text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+		text.setPosition(0, 0);
+
+		
+
+	    // inside the main loop, between window.clear() and window.display()
+		m_window->draw(text);
+	}
 	
 	
 	
@@ -78,6 +107,7 @@ namespace engine
 				std::cout << " ";
 				std::cout << worldPos.y;
 				std::cout << '\n';
+				
 				break;
 
 			default:
@@ -127,14 +157,18 @@ namespace engine
 	{
 		m_renderTexture.clear();
 		m_window->clear();
-
+		
 		m_renderMap.renderMap(*m_gameMap, m_renderTexture);
 		m_renderTexture.display();
+		
 		const sf::Texture& texture = m_renderTexture.getTexture();
 		m_frame.setTexture(texture);
 		m_window->draw(m_frame);
+		displayText("Hello\n");
 		m_window->setView(m_view);
-
+		
 		m_window->display();
+
+		
 	}
 }
