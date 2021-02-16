@@ -12,6 +12,11 @@ namespace engine
 		m_mapGenerator->generateMap(m_gameMap, 50, 3);
 		m_renderTexture.create(2500, 2500);
 		m_renderMap.initMapTextures(*m_gameMap);
+		
+		
+		
+
+		 // font is a sf::Font
 	}
 
 	void Game::initWindow()
@@ -40,37 +45,36 @@ namespace engine
 		if (x >= 0 && y >= 0 && x <= tileSize * (m_gameMap->mapsize) && y <= tileSize * m_gameMap->mapsize)
 		{
 			// m_gameMap->getTile(x, y);
+			//str = x + " " + y + '\n';
+			str = "Hello";
+			setDisplayText(&tileText, str);
 		}
 		
 	}
 
-	void Game::displayText(sf::String str) {
+	void Game::setDisplayText(sf::Text *text, sf::String str) {
 
-		sf::Text text;
 
 		// select the font
-		sf::Font font;
-		font.loadFromFile("OpenSans-Bold.ttf");
 		
-	    text.setFont(font); // font is a sf::Font
 
 		// set the string to display
-		text.setString("Hello");
+		text->setString(str);
 
 		// set the character size
-		text.setCharacterSize(80); // in pixels, not points!
+		text->setCharacterSize(80); // in pixels, not points!
 
 		// set the color
-		text.setFillColor(sf::Color::Red);
+		text->setFillColor(sf::Color::Red);
 
 		// set the text style
-		text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-		text.setPosition(0, 0);
+		text->setStyle(sf::Text::Bold | sf::Text::Underlined);
+		text->setPosition(0, 0);
 
 		
 
-	    // inside the main loop, between window.clear() and window.display()
-		m_window->draw(text);
+	    
+		
 	}
 	
 	
@@ -107,6 +111,7 @@ namespace engine
 				std::cout << " ";
 				std::cout << worldPos.y;
 				std::cout << '\n';
+				clickMap(worldPos.x, worldPos.y);
 				
 				break;
 
@@ -155,6 +160,12 @@ namespace engine
 
 	void Game::render()
 	{
+		sf::Font font;
+		font.loadFromFile("OpenSans-Bold.ttf");
+		tileText.setFont(font);
+		tileText.setString("0");
+		
+		
 		m_renderTexture.clear();
 		m_window->clear();
 		
@@ -164,7 +175,8 @@ namespace engine
 		const sf::Texture& texture = m_renderTexture.getTexture();
 		m_frame.setTexture(texture);
 		m_window->draw(m_frame);
-		displayText("Hello\n");
+		
+		m_window->draw(tileText);
 		m_window->setView(m_view);
 		
 		m_window->display();

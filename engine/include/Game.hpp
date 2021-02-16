@@ -23,6 +23,8 @@ namespace engine
 		sf::Vector2f worldPos;
 		const sf::Texture texture;
 		RenderMap m_renderMap;
+		sf::Text tileText;
+		sf::String str;
 
 		void initVariables();
 		void initWindow();
@@ -32,7 +34,8 @@ namespace engine
 		virtual ~Game();
 
 		void clickMap(int x, int y);
-		void displayText(sf::String str);
+		void setDisplayText(sf::Text* text, sf::String str);
+		
 		const bool isRunning() const;
 		void pollEvents();
 		void update();
