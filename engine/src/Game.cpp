@@ -12,6 +12,7 @@ namespace engine
 		m_mapGenerator->generateMap(m_gameMap, 50, 3);
 		m_renderTexture.create(2500, 2500);
 		m_renderMap.initMapTextures(*m_gameMap);
+		tileText.setString("0");
 		
 		
 		
@@ -25,8 +26,9 @@ namespace engine
 		m_window = new sf::RenderWindow(m_videoMode, "Neumann Game", sf::Style::Titlebar | sf::Style::Close);
 		m_window->setFramerateLimit(60);
 		m_view.setSize(sf::Vector2f(1280.f, 720.f));
-		Shader shader;
-		shader.doStuff();
+		//Shader shader;
+		//shader.doStuff();
+		
 	}
 
 	Game::Game()
@@ -42,13 +44,20 @@ namespace engine
 
 	void Game::clickMap(int x, int y)
 	{
-		if (x >= 0 && y >= 0 && x <= tileSize * (m_gameMap->mapsize) && y <= tileSize * m_gameMap->mapsize)
-		{
+		//if (x >= 0 && y >= 0 && x <= tileSize * (m_gameMap->mapsize) && y <= tileSize * m_gameMap->mapsize)
+		//{
+			
+			
+			
+			char c = (unsigned char)m_gameMap->getTile(x/tileSize, y/tileSize)->getType();
+			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c);
+			std::cout << m_gameMap->getTile(x / tileSize, y / tileSize)->getType();
+
 			// m_gameMap->getTile(x, y);
-			//str = x + " " + y + '\n';
-			str = "Hello";
+
+
 			setDisplayText(&tileText, str);
-		}
+	//	}
 		
 	}
 
@@ -62,7 +71,7 @@ namespace engine
 		text->setString(str);
 
 		// set the character size
-		text->setCharacterSize(80); // in pixels, not points!
+		text->setCharacterSize(50); // in pixels, not points!
 
 		// set the color
 		text->setFillColor(sf::Color::Red);
@@ -163,8 +172,8 @@ namespace engine
 		sf::Font font;
 		font.loadFromFile("OpenSans-Bold.ttf");
 		tileText.setFont(font);
-		tileText.setString("0");
 		
+		tileText.getGlobalBounds();
 		
 		m_renderTexture.clear();
 		m_window->clear();
