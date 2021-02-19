@@ -14,10 +14,6 @@ namespace engine
 		m_renderMap.initMapTextures(*m_gameMap);
 		tileText.setString("0");
 		
-		
-		
-
-		 // font is a sf::Font
 	}
 
 	void Game::initWindow()
@@ -26,6 +22,8 @@ namespace engine
 		m_window = new sf::RenderWindow(m_videoMode, "Neumann Game", sf::Style::Titlebar | sf::Style::Close);
 		m_window->setFramerateLimit(60);
 		m_view.setSize(sf::Vector2f(1280.f, 720.f));
+		//defaultView.setSize(sf::Vector2f(1280.f, 720.f));
+		
 		//Shader shader;
 		//shader.doStuff();
 		
@@ -173,7 +171,7 @@ namespace engine
 		font.loadFromFile("OpenSans-Bold.ttf");
 		tileText.setFont(font);
 		
-		tileText.getGlobalBounds();
+		//tileText.getGlobalBounds();
 		
 		m_renderTexture.clear();
 		m_window->clear();
@@ -183,12 +181,14 @@ namespace engine
 		
 		const sf::Texture& texture = m_renderTexture.getTexture();
 		m_frame.setTexture(texture);
+		m_window->setView(m_view);
 		m_window->draw(m_frame);
 		
-		m_window->draw(tileText);
-		m_window->setView(m_view);
 		
+		m_window->setView(defaultView);
+		m_window->draw(tileText);
 		m_window->display();
+		m_window->setView(m_view);
 
 		
 	}

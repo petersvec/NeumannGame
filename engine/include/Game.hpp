@@ -25,6 +25,7 @@ namespace engine
 		RenderMap m_renderMap;
 		sf::Text tileText;
 		sf::String str;
+		sf::View defaultView;
 
 		void initVariables();
 		void initWindow();

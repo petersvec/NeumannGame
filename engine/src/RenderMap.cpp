@@ -16,6 +16,10 @@ namespace engine
 		{
 			// error...
 		}
+		//if (!shader.loadFromFile("blink.frag", sf::Shader::Fragment))
+		//{
+
+		//}
 
 		TextureHandler* handler = new TextureHandler();
 		handler->LoadTextures();
