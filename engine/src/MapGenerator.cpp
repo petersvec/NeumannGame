@@ -1,4 +1,4 @@
-#include <stdlib.h>
+﻿#include <stdlib.h>
 #include <time.h>
 #include <iostream>
 #include "../include/MapGenerator.hpp"
@@ -16,7 +16,7 @@ namespace engine
 			unsigned short x = rand() % height;
 			unsigned short y = rand() % width;
 			unsigned char type = rand() % 3 + 1;
-			unsigned char radius = rand() % maxRadiusOfPlanet + 3;
+			unsigned char radius = rand() % maxRadiusOfPlanet + 1;
 			map->setTile(x, y, type);
 
 
@@ -25,7 +25,7 @@ namespace engine
 				continue;
 			}
 
-			unsigned short cislo = 0;
+			unsigned short polovica = 0;
 			bool flag = true;
 
 			for (unsigned char i = x - radius; i <= x + radius; ++i)
@@ -35,7 +35,7 @@ namespace engine
 					continue;
 				}
 
-				for (unsigned char j = y - cislo; j <= y + cislo; ++j)
+				for (unsigned char j = y - polovica; j <= y + polovica; ++j)
 				{
 					if (j < 0 || j >= width)
 					{
@@ -45,14 +45,14 @@ namespace engine
 					map->setTile(i, j, type);
 				}
 
-				if (cislo < radius && flag)
+				if (polovica < radius && flag)
 				{
-					++cislo;
+					++polovica;
 				}
 				else
 				{
 					flag = false;
-					--cislo;
+					--polovica;
 				}
 			}
 
@@ -71,7 +71,8 @@ namespace engine
 				if (a.get()->getType() == 0)
 					std::cout << " ";
 				else
-					std::cout << a.get()->getType();
+					//std::cout << a.get()->getType();
+					std::cout << "O";
 			}
 			std::cout << '\n';
 		}

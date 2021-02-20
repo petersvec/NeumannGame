@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
+#include "JsonToString.h"
 
 namespace engine
 {
@@ -22,6 +23,7 @@ namespace engine
 		sf::Vector2f worldPos;
 		const sf::Texture texture;
 		RenderMap m_renderMap;
+		JsonToString m_config;
 
 		void initVariables();
 		void initWindow();

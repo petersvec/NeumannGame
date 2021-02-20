@@ -1,0 +1,10 @@
+{
+"Settings":
+    {
+    "MaxMapSize": 255,
+    "MapHeight": 50,
+    "MapWidth": 50,
+    "NumberOfPlanets": 50,
+    "MaxRadiusOfPlanet": 2
+    }
+}

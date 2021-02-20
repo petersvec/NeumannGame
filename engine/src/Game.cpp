@@ -6,9 +6,9 @@ namespace engine
 	void Game::initVariables()
 	{
 		m_window = nullptr;
-		m_gameMap = new Map(50, 50);
+		m_gameMap = new Map(50, 50);		// 255 je max z nejakeho dovodu :o toto potom opravim
 		MapGenerator* m_mapGenerator = new MapGenerator();
-		m_mapGenerator->generateMap(m_gameMap, 50, 3);
+		m_mapGenerator->generateMap(m_gameMap, 50, 2);
 		m_renderTexture.create(2500, 2500);
 		m_renderMap.initMapTextures(*m_gameMap);
 	}
@@ -50,8 +50,8 @@ namespace engine
 			case sf::Event::MouseWheelMoved:
 				if (ZoomLevel <= 2.8 && m_event.mouseWheel.delta == -1 || ZoomLevel > 0.2 && m_event.mouseWheel.delta == 1)
 				{
-					m_view.zoom(1 + 0.1 * -(m_event.mouseWheel.delta));
-					ZoomLevel += (0.1 * -(m_event.mouseWheel.delta));
+					m_view.zoom(1 + (float)0.1 * -(m_event.mouseWheel.delta));
+					ZoomLevel += ((float)0.1 * -(m_event.mouseWheel.delta));
 				}
 				break;
 

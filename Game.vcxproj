@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\Game.cpp" />
+    <ClCompile Include="engine\src\JsonToString.cpp" />
     <ClCompile Include="engine\src\Map.cpp" />
     <ClCompile Include="engine\src\MapGenerator.cpp" />
     <ClCompile Include="engine\src\Planet.cpp" />
@@ -30,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\Game.hpp" />
+    <ClInclude Include="engine\include\JsonToString.h" />
     <ClInclude Include="engine\include\Map.hpp" />
     <ClInclude Include="engine\include\MapGenerator.hpp" />
     <ClInclude Include="engine\include\Planet.hpp" />
