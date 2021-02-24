@@ -7,10 +7,10 @@ namespace engine
 	void Game::initVariables()
 	{
 		m_window = nullptr;
-		m_gameMap = new Map(50, 50);
+		m_gameMap = new Map(100, 100);
 		MapGenerator* m_mapGenerator = new MapGenerator();
 		m_mapGenerator->generateMap(m_gameMap, 50, 3);
-		m_renderTexture.create(2500, 2500);
+		m_renderTexture.create(3000, 3000);
 		m_renderMap.initMapTextures(*m_gameMap);
 		tileText.setString("0");
 		
@@ -42,8 +42,8 @@ namespace engine
 
 	void Game::clickMap(int x, int y)
 	{
-		//if (x >= 0 && y >= 0 && x <= tileSize * (m_gameMap->mapsize) && y <= tileSize * m_gameMap->mapsize)
-		//{
+		if (x >= 0 && y >= 0 && x <= tileSize * (m_gameMap->mapsize) && y <= tileSize * m_gameMap->mapsize)
+		{
 			
 			
 			
@@ -55,7 +55,7 @@ namespace engine
 
 
 			setDisplayText(&tileText, str);
-	//	}
+		}
 		
 	}
 
