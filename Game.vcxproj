@@ -19,22 +19,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="engine\src\Game.cpp" />
     <ClCompile Include="engine\src\Map.cpp" />
     <ClCompile Include="engine\src\MapGenerator.cpp" />
+    <ClCompile Include="engine\src\Planet.cpp" />
+    <ClCompile Include="engine\src\RenderMap.cpp" />
+    <ClCompile Include="engine\src\Shader.cpp" />
+    <ClCompile Include="engine\src\TextureHandler.cpp" />
     <ClCompile Include="engine\src\Tile.cpp" />
     <ClCompile Include="game\src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\include\Game.hpp" />
     <ClInclude Include="engine\include\Map.hpp" />
     <ClInclude Include="engine\include\MapGenerator.hpp" />
+    <ClInclude Include="engine\include\Planet.hpp" />
+    <ClInclude Include="engine\include\RenderMap.hpp" />
+    <ClInclude Include="engine\include\Shader.hpp" />
+    <ClInclude Include="engine\include\TextureHandler.hpp" />
     <ClInclude Include="engine\include\Tile.hpp" />
+    <ClInclude Include="game\src\Main.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{95024bc9-988d-4a6f-a605-fa966343ba35}</ProjectGuid>
     <RootNamespace>Game</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -89,8 +100,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\SFML-2.5.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\SFML-2.5.1\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\SFML-2.5.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\SFML-2.5.1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -103,10 +114,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\SFML-2.5.1\include;D:\github\NeumannGame\engine\include</AdditionalIncludeDirectories>
+      <LanguageStandard>Default</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>"D:\SFML-2.5.1\lib"</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,11 +146,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\SFML-2.5.1\include; D:\github\NeumannGame\engine\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>"C:\SFML-2.5.1\lib"</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -1,24 +1,23 @@
 #include <SFML/Graphics.hpp>
+//#include "../include/Game.hpp"
+#include <iostream>
+#include "../../engine/include/Game.hpp"
 
-int main()
+int main(void)
 {
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "Neumann Game");
+	//Init game engine
+	engine::Game game;
 
-	while (window.isOpen())
+	//Game loop
+	while (game.isRunning())
 	{
-		sf::Event event;
+		//----------UPDATE----------//
+		game.update();
 
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-			{
-				window.close();
-			}
-		}
+		//----------RENDER----------//
+		game.render();
 
-		window.clear(sf::Color::Black);
-		window.display();
 	}
-
+	//End of appliecation
 	return 0;
 }
