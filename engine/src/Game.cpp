@@ -7,10 +7,10 @@ namespace engine
 	void Game::initVariables()
 	{
 		m_window = nullptr;
-		m_gameMap = new Map(100, 100);
+		m_gameMap = new Map(200, 200);
 		MapGenerator* m_mapGenerator = new MapGenerator();
 		m_mapGenerator->generateMap(m_gameMap, 50, 3);
-		m_renderTexture.create(3000, 3000);
+		m_renderTexture.create(m_gameMap->getWidth()*tileSize, m_gameMap->getHeight() * tileSize);
 		m_renderMap.initMapTextures(*m_gameMap);
 		tileText.setString("0");
 		
@@ -42,7 +42,7 @@ namespace engine
 
 	void Game::clickMap(int x, int y)
 	{
-		if (x >= 0 && y >= 0 && x <= tileSize * (m_gameMap->mapsize) && y <= tileSize * m_gameMap->mapsize)
+		if (x >= 0 && y >= 0 && x <= tileSize * (m_gameMap->getWidth()) && y <= tileSize * m_gameMap->getHeight())
 		{
 			
 			
@@ -170,13 +170,15 @@ namespace engine
 		sf::Font font;
 		font.loadFromFile("OpenSans-Bold.ttf");
 		tileText.setFont(font);
-		
-		//tileText.getGlobalBounds();
-		
-		m_renderTexture.clear();
 		m_window->clear();
+
+
+		if (changed == 1) {
+			m_renderTexture.clear();
+			m_renderMap.renderMap(*m_gameMap, m_renderTexture);
+			changed=0;
+		}
 		
-		m_renderMap.renderMap(*m_gameMap, m_renderTexture);
 		m_renderTexture.display();
 		
 		const sf::Texture& texture = m_renderTexture.getTexture();
@@ -189,6 +191,7 @@ namespace engine
 		m_window->draw(tileText);
 		m_window->display();
 		m_window->setView(m_view);
+		
 
 		
 	}

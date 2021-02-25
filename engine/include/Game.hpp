@@ -26,6 +26,7 @@ namespace engine
 		sf::Text tileText;
 		sf::String str;
 		sf::View defaultView;
+		int changed = 1;
 
 		void initVariables();
 		void initWindow();
