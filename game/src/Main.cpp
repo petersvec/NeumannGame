@@ -2,13 +2,19 @@
 
 int main(void)
 {
-	engine::Game* game = new engine::Game();
+	//Init game engine
+	engine::Game game;
 
-	while (game->isRunning())
+	//Game loop
+	while (game.isRunning())
 	{
-		game->update();
-		game->render();
-	}
+		//----------UPDATE----------//
+		game.update();
 
+		//----------RENDER----------//
+		game.render();
+
+	}
+	//End of appliecation
 	return 0;
 }

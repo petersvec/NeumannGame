@@ -1,16 +1,19 @@
 #include <iostream>
 #include "../include/Game.hpp"
+#include "../include/Shader.hpp"
 
 namespace engine
 {
 	void Game::initVariables()
 	{
 		m_window = nullptr;
-		m_gameMap = new Map(50, 50);		// 255 je max z nejakeho dovodu :o toto potom opravim
+		m_gameMap = new Map(200, 200);
 		MapGenerator* m_mapGenerator = new MapGenerator();
-		m_mapGenerator->generateMap(m_gameMap, 50, 2);
-		m_renderTexture.create(2500, 2500);
+		m_mapGenerator->generateMap(m_gameMap, 50, 3);
+		m_renderTexture.create(m_gameMap->getWidth()*tileSize, m_gameMap->getHeight() * tileSize);
 		m_renderMap.initMapTextures(*m_gameMap);
+		tileText.setString("0");
+		
 	}
 
 	void Game::initWindow()
@@ -19,6 +22,11 @@ namespace engine
 		m_window = new sf::RenderWindow(m_videoMode, "Neumann Game", sf::Style::Titlebar | sf::Style::Close);
 		m_window->setFramerateLimit(60);
 		m_view.setSize(sf::Vector2f(1280.f, 720.f));
+		//defaultView.setSize(sf::Vector2f(1280.f, 720.f));
+		
+		//Shader shader;
+		//shader.doStuff();
+		
 	}
 
 	Game::Game()
@@ -31,6 +39,53 @@ namespace engine
 	{
 		delete m_window;
 	}
+
+	void Game::clickMap(int x, int y)
+	{
+		if (x >= 0 && y >= 0 && x <= tileSize * (m_gameMap->getWidth()) && y <= tileSize * m_gameMap->getHeight())
+		{
+			
+			
+			
+			char c = (unsigned char)m_gameMap->getTile(x/tileSize, y/tileSize)->getType();
+			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c);
+			std::cout << m_gameMap->getTile(x / tileSize, y / tileSize)->getType();
+
+			// m_gameMap->getTile(x, y);
+
+
+			setDisplayText(&tileText, str);
+		}
+		
+	}
+
+	void Game::setDisplayText(sf::Text *text, sf::String str) {
+
+
+		// select the font
+		
+
+		// set the string to display
+		text->setString(str);
+
+		// set the character size
+		text->setCharacterSize(50); // in pixels, not points!
+
+		// set the color
+		text->setFillColor(sf::Color::Red);
+
+		// set the text style
+		text->setStyle(sf::Text::Bold | sf::Text::Underlined);
+		text->setPosition(0, 0);
+
+		
+
+	    
+		
+	}
+	
+	
+	
 
 	const bool Game::isRunning() const
 	{
@@ -50,8 +105,8 @@ namespace engine
 			case sf::Event::MouseWheelMoved:
 				if (ZoomLevel <= 2.8 && m_event.mouseWheel.delta == -1 || ZoomLevel > 0.2 && m_event.mouseWheel.delta == 1)
 				{
-					m_view.zoom(1 + (float)0.1 * -(m_event.mouseWheel.delta));
-					ZoomLevel += ((float)0.1 * -(m_event.mouseWheel.delta));
+					m_view.zoom(1 + 0.1 * -(m_event.mouseWheel.delta));
+					ZoomLevel += (0.1 * -(m_event.mouseWheel.delta));
 				}
 				break;
 
@@ -63,6 +118,8 @@ namespace engine
 				std::cout << " ";
 				std::cout << worldPos.y;
 				std::cout << '\n';
+				clickMap(worldPos.x, worldPos.y);
+				
 				break;
 
 			default:
@@ -110,16 +167,32 @@ namespace engine
 
 	void Game::render()
 	{
-		m_renderTexture.clear();
+		sf::Font font;
+		font.loadFromFile("data/fonts/OpenSans-Bold.ttf");
+		tileText.setFont(font);
 		m_window->clear();
+
+
+		if (changed == 1) {
+			m_renderTexture.clear();
+			m_renderMap.renderMap(*m_gameMap, m_renderTexture);
+			changed=0;
+		}
 		
-		m_renderMap.renderMap(*m_gameMap, m_renderTexture);
 		m_renderTexture.display();
+		
 		const sf::Texture& texture = m_renderTexture.getTexture();
 		m_frame.setTexture(texture);
-		m_window->draw(m_frame);
 		m_window->setView(m_view);
-
+		m_window->draw(m_frame);
+		
+		
+		m_window->setView(defaultView);
+		m_window->draw(tileText);
 		m_window->display();
+		m_window->setView(m_view);
+		
+
+		
 	}
 }

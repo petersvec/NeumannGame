@@ -1,4 +1,4 @@
-﻿#include <stdlib.h>
+#include <stdlib.h>
 #include <time.h>
 #include <iostream>
 #include "../include/MapGenerator.hpp"
@@ -61,20 +61,6 @@ namespace engine
 				map->setTile(x, y, type);
 				setPlanet(*map, x, y, type, radius);
 			}
-		}
-
-		for (unsigned short i = 0; i < height; ++i)
-		{
-			for (unsigned short j = 0; j < width; ++j)
-			{
-				TilePtr a = map->getTile(i, j);
-				if (a.get()->getType() == 0)
-					std::cout << " ";
-				else
-					//std::cout << a.get()->getType();
-					std::cout << "O";
-			}
-			std::cout << '\n';
 		}
 	}
 

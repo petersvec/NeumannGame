@@ -17,6 +17,8 @@ namespace engine
 		void setSpritesPosition();
 
 	public:
+		int mapsize = 50;
+		
 		Map();
 		Map(unsigned short mapSize);
 		Map(unsigned short mapHeight, unsigned short mapWidth);

@@ -33,16 +33,19 @@
     <ClCompile Include="engine\src\MapGenerator.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\Planet.cpp">
-      <Filter>Engine\src</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\Game.cpp">
+    <ClCompile Include="engine\src\TextureHandler.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\RenderMap.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\TextureHandler.cpp">
+    <ClCompile Include="engine\src\Planet.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\Shader.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\Game.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\JsonToString.cpp">
@@ -50,29 +53,35 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine\include\Tile.hpp">
-      <Filter>Engine\include</Filter>
-    </ClInclude>
     <ClInclude Include="engine\include\Map.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
     <ClInclude Include="engine\include\MapGenerator.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="engine\include\Planet.hpp">
-      <Filter>Engine\include</Filter>
-    </ClInclude>
     <ClInclude Include="engine\include\Game.hpp">
-      <Filter>Engine\include</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\include\RenderMap.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
     <ClInclude Include="engine\include\TextureHandler.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
+    <ClInclude Include="engine\include\RenderMap.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\Planet.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\Shader.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\Tile.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
     <ClInclude Include="engine\include\JsonToString.h">
       <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\src\Main.h">
+      <Filter>Game\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
