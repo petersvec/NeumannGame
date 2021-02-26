@@ -8,9 +8,9 @@ namespace engine
 		m_mapWidth = 0;
 		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, nullptr));
 
-		for (int i = 0; i < m_mapHeight; i++)
+		for (unsigned short i = 0; i < m_mapHeight; ++i)
 		{
-			for (int j = 0; j < m_mapWidth; j++)
+			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
 				m_map[i][j] = std::make_shared<Tile>(0);
 			}
@@ -25,9 +25,9 @@ namespace engine
 		m_mapWidth = mapSize;
 		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, nullptr));
 
-		for (int i = 0; i < m_mapHeight; i++)
+		for (unsigned short i = 0; i < m_mapHeight; ++i)
 		{
-			for (int j = 0; j < m_mapWidth; j++)
+			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
 				m_map[i][j] = std::make_shared<Tile>(0);
 			}
@@ -42,9 +42,9 @@ namespace engine
 		m_mapWidth = mapWidth;
 		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, nullptr));
 
-		for (int i = 0; i < m_mapHeight; i++)
+		for (unsigned short i = 0; i < m_mapHeight; ++i)
 		{
-			for (int j = 0; j < m_mapWidth; j++)
+			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
 				m_map[i][j] = std::make_shared<Tile>(0);
 			}
@@ -55,16 +55,14 @@ namespace engine
 
 	void Map::setSpritesPosition()
 	{
-		for (int i = 0; i < m_mapHeight; i++)
+		for (unsigned short i = 0; i < m_mapHeight; ++i)
 		{
-			for (int j = 0; j < m_mapWidth; j++)
+			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
-				(m_map[i][j])->setPosition(i * 50, j * 50);
+				(m_map[i][j])->setPosition(i * 50.F, j * 50.0F);
 			}
 		}
 	}
-
-	
 
 	MapPtr Map::getMap()
 	{

@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
-#include <TextureHandler.hpp>
+#include "JsonToString.h"
 
 namespace engine
 {
@@ -27,6 +27,7 @@ namespace engine
 		sf::String str;
 		sf::View defaultView;
 		int changed = 1;
+		JsonToString m_config;
 
 		void initVariables();
 		void initWindow();

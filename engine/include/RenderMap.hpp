@@ -11,6 +11,8 @@ namespace engine
 		
 	public:
 		sf::Shader shader;
+
+	public:
 		RenderMap();
 		void initMapTextures(Map& map);
 		void renderMap(Map& map, sf::RenderTexture& renderTexture);

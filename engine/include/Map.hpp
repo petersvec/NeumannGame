@@ -13,7 +13,6 @@ namespace engine
 	private:
 		MapPtr m_map;
 		unsigned short m_mapHeight, m_mapWidth;
-		
 
 		void setSpritesPosition();
 
@@ -23,8 +22,7 @@ namespace engine
 		Map();
 		Map(unsigned short mapSize);
 		Map(unsigned short mapHeight, unsigned short mapWidth);
-		
-		
+
 		MapPtr getMap();
 		unsigned short getHeight();
 		unsigned short getWidth();
