@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
-#include "JsonToString.h"
+#include "JsonToString.hpp"
 
 namespace engine
 {

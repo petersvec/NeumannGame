@@ -13,13 +13,13 @@ namespace engine
 	{
 		sf::Shader shader;
 
-		if (!shader.loadFromFile("storm.vert", sf::Shader::Vertex))
+		if (!shader.loadFromFile("data/shaders/storm.vert", sf::Shader::Vertex))
 		{
 			// error...
 		}
 
 		// load only the fragment shader
-		if (!shader.loadFromFile("blink.frag", sf::Shader::Fragment))
+		if (!shader.loadFromFile("data/shaders/blink.frag", sf::Shader::Fragment))
 		{
 
 		}

@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../include/Game.hpp"
-#include <Shader.hpp>
+#include "../include/Shader.hpp"
 
 namespace engine
 {
@@ -168,7 +168,7 @@ namespace engine
 	void Game::render()
 	{
 		sf::Font font;
-		font.loadFromFile("OpenSans-Bold.ttf");
+		font.loadFromFile("data/fonts/OpenSans-Bold.ttf");
 		tileText.setFont(font);
 		m_window->clear();
 
