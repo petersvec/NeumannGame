@@ -48,7 +48,7 @@
     <ClCompile Include="engine\src\Game.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\JsonToString.cpp">
+    <ClCompile Include="engine\src\JsonParser.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,7 +77,7 @@
     <ClInclude Include="engine\include\Tile.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="engine\include\JsonToString.h">
+    <ClInclude Include="engine\include\JsonParser.h">
       <Filter>Engine\include</Filter>
     </ClInclude>
     <ClInclude Include="game\src\Main.h">

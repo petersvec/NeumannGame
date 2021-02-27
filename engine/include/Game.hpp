@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
-#include "JsonToString.hpp"
+#include "JsonParser.h"
 
 namespace engine
 {
@@ -23,11 +23,11 @@ namespace engine
 		sf::Vector2f worldPos;
 		const sf::Texture texture;
 		RenderMap m_renderMap;
+		JsonParser m_gameConfig;
 		sf::Text tileText;
 		sf::String str;
 		sf::View defaultView;
 		int changed = 1;
-		JsonToString m_config;
 
 		void initVariables();
 		void initWindow();

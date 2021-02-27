@@ -7,7 +7,8 @@ namespace engine
 	void Game::initVariables()
 	{
 		m_window = nullptr;
-		m_gameMap = new Map(200, 200);
+		m_gameConfig.setGameConfig("config.json");
+		m_gameMap = new Map(50, 50);
 		MapGenerator* m_mapGenerator = new MapGenerator();
 		m_mapGenerator->generateMap(m_gameMap, 50, 3);
 		m_renderTexture.create(m_gameMap->getWidth()*tileSize, m_gameMap->getHeight() * tileSize);
