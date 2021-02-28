@@ -77,10 +77,10 @@
     <ClInclude Include="engine\include\Tile.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="engine\include\JsonParser.h">
+    <ClInclude Include="engine\include\JsonParser.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="game\src\Main.h">
+    <ClInclude Include="game\include\Main.hpp">
       <Filter>Game\include</Filter>
     </ClInclude>
   </ItemGroup>

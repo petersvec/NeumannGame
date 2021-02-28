@@ -14,5 +14,7 @@ namespace engine
 		unsigned short getMaxMapSize();
 		unsigned short getMapHeight();
 		unsigned short getMapWidth();
+		unsigned short getNumberOfPlanets();
+		unsigned char getMaxRadiusOfPlanet();
 	};
 }

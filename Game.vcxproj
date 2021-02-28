@@ -32,7 +32,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\Game.hpp" />
-    <ClInclude Include="engine\include\JsonParser.h" />
+    <ClInclude Include="engine\include\JsonParser.hpp" />
     <ClInclude Include="engine\include\Map.hpp" />
     <ClInclude Include="engine\include\MapGenerator.hpp" />
     <ClInclude Include="engine\include\Planet.hpp" />
@@ -40,7 +40,7 @@
     <ClInclude Include="engine\include\Shader.hpp" />
     <ClInclude Include="engine\include\TextureHandler.hpp" />
     <ClInclude Include="engine\include\Tile.hpp" />
-    <ClInclude Include="game\src\Main.h" />
+    <ClInclude Include="game\include\Main.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

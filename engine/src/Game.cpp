@@ -62,7 +62,6 @@ namespace engine
 
 	void Game::setDisplayText(sf::Text *text, sf::String str) {
 
-
 		// select the font
 		
 
@@ -78,11 +77,6 @@ namespace engine
 		// set the text style
 		text->setStyle(sf::Text::Bold | sf::Text::Underlined);
 		text->setPosition(0, 0);
-
-		
-
-	    
-		
 	}
 	
 	
