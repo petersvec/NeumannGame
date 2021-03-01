@@ -13,6 +13,9 @@ namespace engine
 		m_renderTexture.create(m_gameMap->getWidth()*tileSize, m_gameMap->getHeight() * tileSize);
 		m_renderMap.initMapTextures(*m_gameMap);
 		tileText.setString("0");
+		m_guiRectangle.setPosition(0, 620);
+		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
+		m_guiRectangle.setFillColor(sf::Color::Blue);
 		
 	}
 
@@ -22,7 +25,8 @@ namespace engine
 		m_window = new sf::RenderWindow(m_videoMode, "Neumann Game", sf::Style::Titlebar | sf::Style::Close);
 		m_window->setFramerateLimit(60);
 		m_view.setSize(sf::Vector2f(1280.f, 720.f));
-		//defaultView.setSize(sf::Vector2f(1280.f, 720.f));
+		defaultView.setSize(sf::Vector2f(1280.f, 720.f));
+		defaultView.setCenter(1280/2, 720/2);
 		
 		//Shader shader;
 		//shader.doStuff();
@@ -114,9 +118,19 @@ namespace engine
 				pixelPos = sf::Mouse::getPosition(*m_window);
 				worldPos = m_window->mapPixelToCoords(pixelPos);
 
+
+				std::cout << pixelPos.x;
+				std::cout << " ";
+				std::cout << pixelPos.y;
+				std::cout << " ";
+				std::cout << "window";
+				std::cout << '\n';
+
 				std::cout << worldPos.x;
 				std::cout << " ";
 				std::cout << worldPos.y;
+				std::cout << " ";
+				std::cout << "map";
 				std::cout << '\n';
 				clickMap(worldPos.x, worldPos.y);
 				
@@ -189,6 +203,7 @@ namespace engine
 		
 		m_window->setView(defaultView);
 		m_window->draw(tileText);
+		m_window->draw(m_guiRectangle);
 		m_window->display();
 		m_window->setView(m_view);
 		

@@ -28,6 +28,7 @@ namespace engine
 		sf::View defaultView;
 		int changed = 1;
 		JsonToString m_config;
+		sf::RectangleShape m_guiRectangle;
 
 		void initVariables();
 		void initWindow();
