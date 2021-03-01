@@ -59,7 +59,7 @@ namespace engine
 		{
 			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
-				(m_map[i][j])->setPosition(i * 50.F, j * 50.0F);
+				(m_map[i][j])->setPosition(i * 50.F, j * 50.F);
 			}
 		}
 	}

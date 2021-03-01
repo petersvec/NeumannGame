@@ -5,6 +5,8 @@
 using TilePtr = std::shared_ptr<engine::Tile>;
 using MapPtr = std::vector<std::vector<TilePtr>>;
 //using MapPtr = std::shared_ptr<std::vector<std::vector<TilePtr>>>;
+const short int G_MIN_MAP_SIZE = ((short)50);
+const short int G_MAX_MAP_SIZE = ((short)10000);
 
 namespace engine
 {
@@ -17,16 +19,14 @@ namespace engine
 		void setSpritesPosition();
 
 	public:
-		int mapsize = 50;
-		
 		Map();
-		Map(unsigned short mapSize);
-		Map(unsigned short mapHeight, unsigned short mapWidth);
+		Map(unsigned short);
+		Map(unsigned short, unsigned short);
 
 		MapPtr getMap();
 		unsigned short getHeight();
 		unsigned short getWidth();
-		TilePtr getTile(unsigned short mapHeight, unsigned short mapWidth);
-		void setTile(unsigned short mapHeight, unsigned short mapWidth, unsigned char type);
+		TilePtr getTile(unsigned short, unsigned short);
+		void setTile(unsigned short, unsigned short, unsigned char);
 	};
 }

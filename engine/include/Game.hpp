@@ -36,8 +36,8 @@ namespace engine
 		Game();
 		virtual ~Game();
 
-		void clickMap(int x, int y);
-		void setDisplayText(sf::Text* text, sf::String str);
+		void clickMap(int, int);
+		void setDisplayText(sf::Text*, sf::String);
 		
 		const bool isRunning() const;
 		void pollEvents();

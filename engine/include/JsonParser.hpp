@@ -1,17 +1,18 @@
 #pragma once
+#include <fstream>
 #include "../../rapidjson/document.h"
+#include "../../rapidjson/istreamwrapper.h"
 
 namespace engine
 {
 	class JsonParser
 	{
 	private:
-		rapidjson::Document m_gameConfigFile;
+		rapidjson::Document* m_gameConfigFile;
 
 	public:
 
-		void setGameConfig(const char* jsonFile);
-		unsigned short getMaxMapSize();
+		bool setGameConfig(const char*, const char*);
 		unsigned short getMapHeight();
 		unsigned short getMapWidth();
 		unsigned short getNumberOfPlanets();

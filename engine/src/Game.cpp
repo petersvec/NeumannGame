@@ -7,14 +7,19 @@ namespace engine
 	void Game::initVariables()
 	{
 		m_window = nullptr;
-		m_gameConfig.setGameConfig("config.json");
-		m_gameMap = new Map(50, 50);
-		MapGenerator* m_mapGenerator = new MapGenerator();
-		m_mapGenerator->generateMap(m_gameMap, 50, 3);
-		m_renderTexture.create(m_gameMap->getWidth()*tileSize, m_gameMap->getHeight() * tileSize);
-		m_renderMap.initMapTextures(*m_gameMap);
-		tileText.setString("0");
-		
+		if (!m_gameConfig.setGameConfig("config.json"))
+		{
+			exit(-555);
+		}
+		else
+		{
+			m_gameMap = new Map(m_gameConfig.getMapHeight(), m_gameConfig.getMapWidth());
+			MapGenerator* m_mapGenerator = new MapGenerator();
+			m_mapGenerator->generateMap(m_gameMap, m_gameConfig.getNumberOfPlanets(), m_gameConfig.getMaxRadiusOfPlanet());
+			m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
+			m_renderMap.initMapTextures(*m_gameMap);
+			tileText.setString("0");
+		}
 	}
 
 	void Game::initWindow()

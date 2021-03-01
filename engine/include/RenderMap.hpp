@@ -14,7 +14,7 @@ namespace engine
 
 	public:
 		RenderMap();
-		void initMapTextures(Map& map);
-		void renderMap(Map& map, sf::RenderTexture& renderTexture);
+		void initMapTextures(Map&);
+		void renderMap(Map&, sf::RenderTexture&);
 	};
 }

@@ -13,13 +13,13 @@ namespace engine
 		Tile();
 		Tile(unsigned char type);
 
-		Tile operator = (const unsigned char type);
-		bool operator == (const unsigned char type);
+		Tile operator = (const unsigned char);
+		bool operator == (const unsigned char);
 
 		unsigned char getType();
 		sf::Sprite getSprite();
-		void setType(unsigned char type);
-		void setPosition(float x, float y);
-		void setSprite(const sf::Texture& texture);
+		void setType(unsigned char);
+		void setPosition(float, float);
+		void setSprite(const sf::Texture&);
 	};
 }
