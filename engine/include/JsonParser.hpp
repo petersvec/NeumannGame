@@ -1,14 +1,14 @@
 #pragma once
-#include <fstream>
+#include <cstdio>
 #include "../../rapidjson/document.h"
-#include "../../rapidjson/istreamwrapper.h"
+#include "../../rapidjson/filereadstream.h"
 
 namespace engine
 {
 	class JsonParser
 	{
 	private:
-		rapidjson::Document* m_gameConfigFile;
+		rapidjson::Document m_gameConfigFile;
 
 	public:
 

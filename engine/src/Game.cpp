@@ -7,7 +7,7 @@ namespace engine
 	void Game::initVariables()
 	{
 		m_window = nullptr;
-		if (!m_gameConfig.setGameConfig("config.json"))
+		if (!m_gameConfig.setGameConfig("config.json", "Settings"))
 		{
 			exit(-555);
 		}
@@ -105,8 +105,8 @@ namespace engine
 			case sf::Event::MouseWheelMoved:
 				if (ZoomLevel <= 2.8 && m_event.mouseWheel.delta == -1 || ZoomLevel > 0.2 && m_event.mouseWheel.delta == 1)
 				{
-					m_view.zoom(1 + 0.1 * -(m_event.mouseWheel.delta));
-					ZoomLevel += (0.1 * -(m_event.mouseWheel.delta));
+					m_view.zoom(1 + 0.1f * -(m_event.mouseWheel.delta));
+					ZoomLevel += (0.1f * -(m_event.mouseWheel.delta));
 				}
 				break;
 

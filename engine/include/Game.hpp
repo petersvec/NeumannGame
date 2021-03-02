@@ -17,8 +17,8 @@ namespace engine
 		sf::VideoMode m_videoMode;
 		sf::View m_view;
 		sf::RenderTexture m_renderTexture;
-		float ZoomLevel = 1;
-		int tileSize = 50;
+		float ZoomLevel = 1.f;
+		unsigned const char tileSize = 50;
 		sf::Vector2i pixelPos;
 		sf::Vector2f worldPos;
 		const sf::Texture texture;
