@@ -3,6 +3,7 @@
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
 #include "JsonToString.hpp"
+#include "PlayerObject.hpp"
 
 namespace engine
 {
@@ -29,6 +30,7 @@ namespace engine
 		int changed = 1;
 		JsonToString m_config;
 		sf::RectangleShape m_guiRectangle;
+		PlayerObject testPO;
 
 		void initVariables();
 		void initWindow();

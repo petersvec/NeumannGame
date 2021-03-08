@@ -16,6 +16,8 @@ namespace engine
 		m_guiRectangle.setPosition(0, 620);
 		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
 		m_guiRectangle.setFillColor(sf::Color::Blue);
+		testPO.setPos(10, 10, 1);
+		
 		
 	}
 
@@ -73,14 +75,13 @@ namespace engine
 		text->setString(str);
 
 		// set the character size
-		text->setCharacterSize(50); // in pixels, not points!
+		text->setCharacterSize(40); // in pixels, not points!
 
 		// set the color
 		text->setFillColor(sf::Color::Red);
 
 		// set the text style
-		text->setStyle(sf::Text::Bold | sf::Text::Underlined);
-		text->setPosition(0, 0);
+		text->setPosition(0, 640);
 
 		
 
@@ -107,7 +108,7 @@ namespace engine
 				break;
 
 			case sf::Event::MouseWheelMoved:
-				if (ZoomLevel <= 2.8 && m_event.mouseWheel.delta == -1 || ZoomLevel > 0.2 && m_event.mouseWheel.delta == 1)
+				if (ZoomLevel <= 3.0 && m_event.mouseWheel.delta == -1 || ZoomLevel > 0.2 && m_event.mouseWheel.delta == 1)
 				{
 					m_view.zoom(1 + 0.1 * -(m_event.mouseWheel.delta));
 					ZoomLevel += (0.1 * -(m_event.mouseWheel.delta));
@@ -118,21 +119,30 @@ namespace engine
 				pixelPos = sf::Mouse::getPosition(*m_window);
 				worldPos = m_window->mapPixelToCoords(pixelPos);
 
-
+/*
 				std::cout << pixelPos.x;
 				std::cout << " ";
 				std::cout << pixelPos.y;
 				std::cout << " ";
 				std::cout << "window";
 				std::cout << '\n';
-
+*/
 				std::cout << worldPos.x;
 				std::cout << " ";
 				std::cout << worldPos.y;
 				std::cout << " ";
 				std::cout << "map";
 				std::cout << '\n';
+
+				//if(pixelPos.y < GuiHeight)
 				clickMap(worldPos.x, worldPos.y);
+
+				/*
+				else
+				{
+				clickGui(pixelPos.x, pixelPos.y);
+				}
+				*/
 				
 				break;
 
@@ -202,11 +212,12 @@ namespace engine
 		
 		
 		m_window->setView(defaultView);
-		m_window->draw(tileText);
 		m_window->draw(m_guiRectangle);
-		m_window->display();
-		m_window->setView(m_view);
+		m_window->draw(tileText);
 		
+		m_window->setView(m_view);
+		testPO.drawObj(m_window);
+		m_window->display();
 
 		
 	}
