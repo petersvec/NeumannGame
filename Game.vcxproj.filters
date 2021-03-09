@@ -19,6 +19,15 @@
     <Filter Include="Engine\src">
       <UniqueIdentifier>{0c2822ee-5022-4478-b5f4-4656420d897c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{0d33b6d2-3d36-4e35-a48f-972f22610b42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\include">
+      <UniqueIdentifier>{598a6d75-5058-45a2-beeb-cd0858f852f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\src">
+      <UniqueIdentifier>{3e9ed01f-dd76-42e1-aa7e-b0b5350bc9a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\Map.cpp">
@@ -48,11 +57,8 @@
     <ClCompile Include="game\src\Tile.cpp">
       <Filter>Game\src</Filter>
     </ClCompile>
-    <ClCompile Include="game\src\IObject.cpp">
-      <Filter>Game\src</Filter>
-    </ClCompile>
     <ClCompile Include="main\src\Main.cpp">
-      <Filter>Game\src</Filter>
+      <Filter>Main\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,5 +113,11 @@
     <ClInclude Include="game\include\TileType.hpp">
       <Filter>Game\include</Filter>
     </ClInclude>
+    <ClInclude Include="main\include\Main.hpp">
+      <Filter>Main\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.json" />
   </ItemGroup>
 </Project>

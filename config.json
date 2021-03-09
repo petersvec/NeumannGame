@@ -1,7 +1,6 @@
 {
-	"MapHeight": 100,
-	"MapWidth": 100,
-	"NumberOfPlanets": 100,
+	"MapHeight": 251,
+	"MapWidth": 251,
+	"NumberOfPlanets": 1000,
 	"MaxRadiusOfPlanet": 5
-
 }

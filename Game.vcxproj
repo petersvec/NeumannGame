@@ -26,10 +26,9 @@
     <ClCompile Include="engine\src\RenderMap.cpp" />
     <ClCompile Include="engine\src\Shader.cpp" />
     <ClCompile Include="engine\src\TextureHandler.cpp" />
-    <ClCompile Include="game\src\IObject.cpp" />
     <ClCompile Include="game\src\Planet.cpp" />
     <ClCompile Include="game\src\Tile.cpp" />
-    <ClInclude Include="main\src\Main.cpp" />
+    <ClCompile Include="main\src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\Game.hpp" />
@@ -50,6 +49,9 @@
     <ClInclude Include="game\include\TileType.hpp" />
     <ClInclude Include="game\include\Worker.hpp" />
     <ClInclude Include="main\include\Main.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.json" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
