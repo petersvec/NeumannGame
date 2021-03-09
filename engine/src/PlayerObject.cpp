@@ -11,7 +11,7 @@ namespace engine
 		
 	}
 
-	void PlayerObject::setPos(int xPos, int yPos, int Utype)
+	void PlayerObject::setPos(int xPos, int yPos)
 	{
 		this->circle.setPosition(xPos * tileSize, yPos * tileSize);
 	}
@@ -24,5 +24,6 @@ namespace engine
 	}
 	void PlayerObject::updateObj()
 	{
+
 	}
 }

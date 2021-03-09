@@ -4,6 +4,7 @@
 #include "RenderMap.hpp"
 #include "JsonToString.hpp"
 #include "PlayerObject.hpp"
+#include "ObjectManager.hpp"
 
 namespace engine
 {
@@ -31,6 +32,8 @@ namespace engine
 		JsonToString m_config;
 		sf::RectangleShape m_guiRectangle;
 		PlayerObject testPO;
+		ObjectManager testOM;
+
 
 		void initVariables();
 		void initWindow();

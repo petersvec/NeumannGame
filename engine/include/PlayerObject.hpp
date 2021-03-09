@@ -12,7 +12,7 @@ namespace engine
 		sf::CircleShape circle;
 
 		PlayerObject();
-		void setPos(int xPos, int yPos, int UType);
+		void setPos(int xPos, int yPos);
 		void drawObj(sf::RenderWindow *RWindow);
 		void updateObj();
 

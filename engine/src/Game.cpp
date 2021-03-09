@@ -16,7 +16,9 @@ namespace engine
 		m_guiRectangle.setPosition(0, 620);
 		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
 		m_guiRectangle.setFillColor(sf::Color::Blue);
-		testPO.setPos(10, 10, 1);
+		testPO.setPos(5, 5, 1);
+		testOM.playerObjectVector.push_back(testPO);
+	
 		
 		
 	}
@@ -67,26 +69,10 @@ namespace engine
 
 	void Game::setDisplayText(sf::Text *text, sf::String str) {
 
-
-		// select the font
-		
-
-		// set the string to display
 		text->setString(str);
-
-		// set the character size
 		text->setCharacterSize(40); // in pixels, not points!
-
-		// set the color
 		text->setFillColor(sf::Color::Red);
-
-		// set the text style
 		text->setPosition(0, 640);
-
-		
-
-	    
-		
 	}
 	
 	
@@ -197,7 +183,8 @@ namespace engine
 		m_window->clear();
 
 
-		if (changed == 1) {
+		if (changed == 1) 
+		{
 			m_renderTexture.clear();
 			m_renderMap.renderMap(*m_gameMap, m_renderTexture);
 			changed=0;
@@ -214,8 +201,12 @@ namespace engine
 		m_window->setView(defaultView);
 		m_window->draw(m_guiRectangle);
 		m_window->draw(tileText);
-		
 		m_window->setView(m_view);
+
+		for (int it = 0; it < testOM.playerObjectVector.size(); it++) 
+		{
+			testOM.playerObjectVector[it].drawObj(m_window);
+		}
 		testPO.drawObj(m_window);
 		m_window->display();
 
