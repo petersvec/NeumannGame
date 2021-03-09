@@ -2,18 +2,18 @@
 #include <time.h>
 #include "../include/Tile.hpp"
 
-namespace engine
+namespace game
 {
 	Tile::Tile()
 	{
-		srand(time(NULL));
-		m_type = rand() % 7;
+		srand(static_cast<unsigned int>(time(nullptr)));
+		m_type = TileType(rand() % 4);
 		m_sprite.setScale(sf::Vector2f(1, 1));
 	}
 
 	Tile::Tile(unsigned char type)
 	{
-		m_type = type;
+		m_type = TileType(type);
 		m_sprite.setScale(sf::Vector2f(1, 1));
 	}
 
@@ -24,7 +24,7 @@ namespace engine
 
 	bool Tile::operator==(const unsigned char type)
 	{
-		if (m_type == type)
+		if (unsigned char(m_type) == type)
 		{
 			return true;
 		}
@@ -33,27 +33,16 @@ namespace engine
 
 	unsigned char Tile::getType()
 	{
-		return m_type;
-	}
-
-	sf::Sprite Tile::getSprite()
-	{
-		return m_sprite;
+		return (unsigned char)m_type;
 	}
 
 	void Tile::setType(unsigned char type)
 	{
-		m_type = type;
+		m_type = (TileType)type;
 	}
 
 	void Tile::setPosition(float x, float y)
 	{
 		m_sprite.setPosition(x, y);
-	}
-
-	void Tile::setSprite(const sf::Texture& texture)
-	{
-		m_sprite.setTexture(texture);
-		m_sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));
 	}
 }

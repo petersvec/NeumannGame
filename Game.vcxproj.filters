@@ -21,12 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game\src\Main.cpp">
-      <Filter>Game\src</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\Tile.cpp">
-      <Filter>Engine\src</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\Map.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
@@ -39,9 +33,6 @@
     <ClCompile Include="engine\src\RenderMap.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\Planet.cpp">
-      <Filter>Engine\src</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\Shader.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
@@ -50,6 +41,18 @@
     </ClCompile>
     <ClCompile Include="engine\src\JsonParser.cpp">
       <Filter>Engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\Planet.cpp">
+      <Filter>Game\src</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\Tile.cpp">
+      <Filter>Game\src</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\IObject.cpp">
+      <Filter>Game\src</Filter>
+    </ClCompile>
+    <ClCompile Include="main\src\Main.cpp">
+      <Filter>Game\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -68,19 +71,40 @@
     <ClInclude Include="engine\include\RenderMap.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="engine\include\Planet.hpp">
-      <Filter>Engine\include</Filter>
-    </ClInclude>
     <ClInclude Include="engine\include\Shader.hpp">
-      <Filter>Engine\include</Filter>
-    </ClInclude>
-    <ClInclude Include="engine\include\Tile.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
     <ClInclude Include="engine\include\JsonParser.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="game\include\Main.hpp">
+    <ClInclude Include="game\include\Tile.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\Planet.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\IObject.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\IUnit.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\Meele.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\Probe.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\Ranged.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\Worker.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\Ownership.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\TileType.hpp">
       <Filter>Game\include</Filter>
     </ClInclude>
   </ItemGroup>

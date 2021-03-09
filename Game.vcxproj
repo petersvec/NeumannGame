@@ -23,24 +23,33 @@
     <ClCompile Include="engine\src\JsonParser.cpp" />
     <ClCompile Include="engine\src\Map.cpp" />
     <ClCompile Include="engine\src\MapGenerator.cpp" />
-    <ClCompile Include="engine\src\Planet.cpp" />
     <ClCompile Include="engine\src\RenderMap.cpp" />
     <ClCompile Include="engine\src\Shader.cpp" />
     <ClCompile Include="engine\src\TextureHandler.cpp" />
-    <ClCompile Include="engine\src\Tile.cpp" />
-    <ClCompile Include="game\src\Main.cpp" />
+    <ClCompile Include="game\src\IObject.cpp" />
+    <ClCompile Include="game\src\Planet.cpp" />
+    <ClCompile Include="game\src\Tile.cpp" />
+    <ClInclude Include="main\src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\Game.hpp" />
     <ClInclude Include="engine\include\JsonParser.hpp" />
     <ClInclude Include="engine\include\Map.hpp" />
     <ClInclude Include="engine\include\MapGenerator.hpp" />
-    <ClInclude Include="engine\include\Planet.hpp" />
     <ClInclude Include="engine\include\RenderMap.hpp" />
     <ClInclude Include="engine\include\Shader.hpp" />
     <ClInclude Include="engine\include\TextureHandler.hpp" />
-    <ClInclude Include="engine\include\Tile.hpp" />
-    <ClInclude Include="game\include\Main.hpp" />
+    <ClInclude Include="game\include\IObject.hpp" />
+    <ClInclude Include="game\include\Meele.hpp" />
+    <ClInclude Include="game\include\Ownership.hpp" />
+    <ClInclude Include="game\include\Planet.hpp" />
+    <ClInclude Include="game\include\Probe.hpp" />
+    <ClInclude Include="game\include\Ranged.hpp" />
+    <ClInclude Include="game\include\Tile.hpp" />
+    <ClInclude Include="game\include\IUnit.hpp" />
+    <ClInclude Include="game\include\TileType.hpp" />
+    <ClInclude Include="game\include\Worker.hpp" />
+    <ClInclude Include="main\include\Main.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

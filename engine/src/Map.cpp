@@ -12,7 +12,7 @@ namespace engine
 		{
 			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
-				m_map[i][j] = std::make_shared<Tile>(0);
+				m_map[i][j] = std::make_shared<game::Tile>(0);
 			}
 		}
 
@@ -29,7 +29,7 @@ namespace engine
 		{
 			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
-				m_map[i][j] = std::make_shared<Tile>(0);
+				m_map[i][j] = std::make_shared<game::Tile>(0);
 			}
 		}
 
@@ -46,7 +46,7 @@ namespace engine
 		{
 			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
-				m_map[i][j] = std::make_shared<Tile>(0);
+				m_map[i][j] = std::make_shared<game::Tile>(0);
 			}
 		}
 

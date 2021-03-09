@@ -1,8 +1,8 @@
 #pragma once
 #include <memory>
 #include <vector> 
-#include "Tile.hpp"
-using TilePtr = std::shared_ptr<engine::Tile>;
+#include "../../game/include/Tile.hpp"
+using TilePtr = std::shared_ptr<game::Tile>;
 using MapPtr = std::vector<std::vector<TilePtr>>;
 //using MapPtr = std::shared_ptr<std::vector<std::vector<TilePtr>>>;
 const unsigned short G_MIN_MAP_SIZE = 50;
