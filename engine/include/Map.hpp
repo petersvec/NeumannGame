@@ -5,10 +5,10 @@
 using TilePtr = std::shared_ptr<engine::Tile>;
 using MapPtr = std::vector<std::vector<TilePtr>>;
 //using MapPtr = std::shared_ptr<std::vector<std::vector<TilePtr>>>;
-const unsigned short G_MIN_MAP_SIZE = ((short)50);
-const unsigned short G_MAX_MAP_SIZE = ((short)10000);
-const unsigned short G_MIN_NUMBER_OF_PLANETS = ((short)50);
-const unsigned short G_MIN_RADIUS_OF_PLANET = ((short)2);
+const unsigned short G_MIN_MAP_SIZE = 50;
+const unsigned short G_MAX_MAP_SIZE = 10000;
+const unsigned short G_MIN_NUMBER_OF_PLANETS = 50;
+const unsigned short G_MIN_RADIUS_OF_PLANET = 2;
 
 namespace engine
 {

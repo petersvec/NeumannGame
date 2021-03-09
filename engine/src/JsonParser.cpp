@@ -6,6 +6,7 @@ namespace engine
     bool JsonParser::setGameConfig(const char* jsonFile, const char* jsonType)
     {
         using namespace rapidjson;
+        setConfigType(jsonType);
 
         FILE* fp = nullptr;
         fopen_s(&fp, jsonFile, "rb");
@@ -24,8 +25,7 @@ namespace engine
         fclose(fp);
 
         if (m_gameConfigFile.HasParseError() ||
-            !m_gameConfigFile.IsObject() ||
-            !m_gameConfigFile.HasMember(jsonType))
+            !m_gameConfigFile.IsObject())
         {
             m_gameConfigFile = nullptr;
             return false;
@@ -34,71 +34,58 @@ namespace engine
         return true;
     }
 
+    void JsonParser::setConfigType(const char* jsonType)
+    {
+        m_configType = std::string(jsonType);
+    }
+
     unsigned short JsonParser::getMapHeight()
     {
-        unsigned short mapHeight;
-        if (m_gameConfigFile.HasMember("MapHeight"))
-        {
-            mapHeight = m_gameConfigFile["MapHeight"].GetInt();
-        }
-        else
-        {
-            mapHeight = G_MIN_MAP_SIZE;
-        }
-
-        if (mapHeight > G_MAX_MAP_SIZE)
+        int mapHeight = G_MIN_MAP_SIZE;
+        if (!m_gameConfigFile.HasMember("MapHeight") ||
+            !m_gameConfigFile["MapHeight"].IsNumber() ||
+            !m_gameConfigFile["MapHeight"].IsInt() ||
+            ((mapHeight = m_gameConfigFile["MapHeight"].GetInt()) >= G_MAX_MAP_SIZE))
         {
             return G_MAX_MAP_SIZE;
         }
-        else if (mapHeight < G_MIN_MAP_SIZE)
+        else if (mapHeight > G_MIN_MAP_SIZE)
         {
-            return G_MIN_MAP_SIZE;
+            return mapHeight;
         }
         else
         {
-            return mapHeight;
+            return G_MIN_MAP_SIZE;
         }
     }
 
     unsigned short JsonParser::getMapWidth()
     {
-        unsigned short mapWidth;
-        if (m_gameConfigFile.HasMember("MapWidth"))
-        {
-            mapWidth = m_gameConfigFile["MapWidth"].GetInt();
-        } 
-        else
-        {
-            mapWidth = G_MIN_MAP_SIZE;
-        }
-
-        if (mapWidth > G_MAX_MAP_SIZE)
+        int mapWidth = G_MIN_MAP_SIZE;
+        if (!m_gameConfigFile.HasMember("MapWidth") ||
+            !m_gameConfigFile["MapWidth"].IsNumber() ||
+            !m_gameConfigFile["MapWidth"].IsInt() ||
+            ((mapWidth = m_gameConfigFile["MapWidth"].GetInt()) >= G_MAX_MAP_SIZE))
         {
             return G_MAX_MAP_SIZE;
         }
-        else if (mapWidth < G_MIN_MAP_SIZE)
+        else if (mapWidth > G_MIN_MAP_SIZE)
         {
-            return G_MIN_MAP_SIZE;
+            return mapWidth;
         }
         else
         {
-            return mapWidth;
+            return G_MIN_MAP_SIZE;
         }
     }
 
     unsigned short JsonParser::getNumberOfPlanets()
     {
-        unsigned short numberOfPlanets;
-        if (m_gameConfigFile.HasMember("NumberOfPlanets"))
-        {
-            numberOfPlanets = m_gameConfigFile["NumberOfPlanets"].GetInt();
-        }
-        else
-        {
-            numberOfPlanets = G_MIN_NUMBER_OF_PLANETS;
-        }
-
-        if (numberOfPlanets < G_MIN_NUMBER_OF_PLANETS)
+        int numberOfPlanets = G_MIN_NUMBER_OF_PLANETS;
+        if (!m_gameConfigFile.HasMember("NumberOfPlanets") ||
+            !m_gameConfigFile["NumberOfPlanets"].IsNumber() ||
+            !m_gameConfigFile["NumberOfPlanets"].IsInt() ||
+            ((numberOfPlanets = m_gameConfigFile["NumberOfPlanets"].GetInt()) < G_MIN_NUMBER_OF_PLANETS))
         {
             return G_MIN_NUMBER_OF_PLANETS;
         }
@@ -110,17 +97,11 @@ namespace engine
 
     unsigned char JsonParser::getMaxRadiusOfPlanet()
     {
-        unsigned char maxRadiusOfPlanet;
-        if (m_gameConfigFile.HasMember("MaxRadiusOfPlanet"))
-        {
-            maxRadiusOfPlanet = m_gameConfigFile["MaxRadiusOfPlanet"].GetInt();
-        }
-        else
-        {
-            maxRadiusOfPlanet = G_MIN_RADIUS_OF_PLANET;
-        }
-
-        if (maxRadiusOfPlanet < G_MIN_RADIUS_OF_PLANET)
+        int maxRadiusOfPlanet = G_MIN_RADIUS_OF_PLANET;
+        if (!m_gameConfigFile.HasMember("MaxRadiusOfPlanet") ||
+            !m_gameConfigFile["MaxRadiusOfPlanet"].IsNumber() ||
+            !m_gameConfigFile["MaxRadiusOfPlanet"].IsInt() ||
+            ((maxRadiusOfPlanet = m_gameConfigFile["MaxRadiusOfPlanet"].GetInt()) < G_MIN_RADIUS_OF_PLANET))
         {
             return G_MIN_RADIUS_OF_PLANET;
         }

@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdio>
+#include <string>
 #include "../../rapidjson/document.h"
 #include "../../rapidjson/filereadstream.h"
 
@@ -9,6 +10,9 @@ namespace engine
 	{
 	private:
 		rapidjson::Document m_gameConfigFile;
+		std::string m_configType;
+
+		void setConfigType(const char*);
 
 	public:
 
