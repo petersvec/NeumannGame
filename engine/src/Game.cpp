@@ -16,7 +16,7 @@ namespace engine
 		m_guiRectangle.setPosition(0, 620);
 		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
 		m_guiRectangle.setFillColor(sf::Color::Blue);
-		testPO.setPos(5, 5, 1);
+		testPO.setPos(5, 5);
 		testOM.playerObjectVector.push_back(testPO);
 	
 		
@@ -50,7 +50,7 @@ namespace engine
 
 	void Game::clickMap(int x, int y)
 	{
-		if (x >= 0 && y >= 0 && x <= tileSize * (m_gameMap->getWidth()) && y <= tileSize * m_gameMap->getHeight())
+		if (x >= 0 && y >= 0 && x < tileSize * (m_gameMap->getWidth()) && y < tileSize * m_gameMap->getHeight())
 		{
 			
 			

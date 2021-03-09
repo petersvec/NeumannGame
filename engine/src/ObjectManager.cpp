@@ -11,7 +11,6 @@ namespace engine
 	{
 		PlayerObject po;
 		po.setPos(x, y);
-
 		return po;
 	}
 
