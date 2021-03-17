@@ -17,7 +17,9 @@ namespace engine
 		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
 		m_guiRectangle.setFillColor(sf::Color::Blue);
 		testOM.createPO(10, 10, 1, 1);
-		testOM.createPO(15, 15, 1, 1);
+		testOM.createPO(15, 15, 2, 1);
+
+		testPO=testOM.findUnit(15 * 50, 15 * 50);
 	
 		
 		
@@ -70,7 +72,7 @@ namespace engine
 	void Game::setDisplayText(sf::Text *text, sf::String str) {
 
 		text->setString(str);
-		text->setCharacterSize(40); // in pixels, not points!
+		text->setCharacterSize(40); // in pixels
 		text->setFillColor(sf::Color::Red);
 		text->setPosition(0, 640);
 	}
@@ -119,6 +121,8 @@ namespace engine
 				std::cout << " ";
 				std::cout << "map";
 				std::cout << '\n';
+				std::cout << playerActive;
+				std::cout << " player turn\n";
 
 				//if(pixelPos.y < GuiHeight)
 				clickMap(worldPos.x, worldPos.y);
@@ -134,9 +138,17 @@ namespace engine
 
 				case sf::Event::KeyPressed:
 					if (m_event.key.code == sf::Keyboard::Space)
+					{
+						if (playerActive == 1)
 						{
-							std::cout << "the space key was pressed" << std::endl;
+							playerActive = 2;
 						}
+						else
+						{
+							playerActive = 1;
+						}
+						std::cout << "Player switched\n";
+					}
 					
 			default:
 				break;

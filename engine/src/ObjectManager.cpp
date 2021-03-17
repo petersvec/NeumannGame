@@ -1,4 +1,5 @@
 #include "../include/ObjectManager.hpp"
+#include <iostream>
 
 namespace engine
 {
@@ -21,6 +22,20 @@ namespace engine
 		po.setPos(x, y);
 		this->playerObjectVector.push_back(po);
 	}
+
+	PlayerObject ObjectManager::findUnit(int x, int y)
+	{
+		for (int it = 0; it < this->playerObjectVector.size(); it++)
+		{
+			if (this->playerObjectVector[it].circle.getPosition().x == x && this->playerObjectVector[it].circle.getPosition().y == y)
+				std::cout << "found ";
+				std::cout << this->playerObjectVector[it].value;
+				std::cout << '\n';
+				return this->playerObjectVector[it];
+		}	
+	}
+
+
 
 	
 

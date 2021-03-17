@@ -31,8 +31,11 @@ namespace engine
 		int changed = 1;
 		JsonToString m_config;
 		sf::RectangleShape m_guiRectangle;
-		PlayerObject testPO;
 		ObjectManager testOM;
+		PlayerObject testPO;
+		int playerActive = 1;
+
+		
 
 
 		void initVariables();

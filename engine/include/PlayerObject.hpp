@@ -16,5 +16,6 @@ namespace engine
 		void drawObj(sf::RenderWindow *RWindow);
 		void updateObj();
 
+
 	};
 }

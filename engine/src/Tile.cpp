@@ -56,4 +56,12 @@ namespace engine
 		m_sprite.setTexture(texture);
 		m_sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));
 	}
+	bool Tile::getOccupied()
+	{
+		return occupied;
+	}
+	void Tile::setOccupied(bool value)
+	{
+		occupied = value;
+	}
 }
