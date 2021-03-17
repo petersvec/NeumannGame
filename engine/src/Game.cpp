@@ -19,7 +19,7 @@ namespace engine
 		testOM.createPO(10, 10, 1, 1);
 		testOM.createPO(15, 15, 2, 1);
 
-		testPO=testOM.findUnit(15 * 50, 15 * 50);	
+		testPO=testOM.findUnit(15 * tileSize, 15 * tileSize);	
 	}
 
 	void Game::initWindow()
@@ -146,6 +146,7 @@ namespace engine
 						}
 						std::cout << "Player switched\n";
 					}
+					break;
 					
 			default:
 				break;
