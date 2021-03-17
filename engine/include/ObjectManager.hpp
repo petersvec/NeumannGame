@@ -9,9 +9,11 @@ namespace engine
 		
 	public:
 		ObjectManager();
-		std::vector<PlayerObject> playerObjectVector;
+		
 		void drawAll(sf::RenderWindow* window);
-		PlayerObject createPO(int x, int y, int type, int value);
+		void createPO(int x, int y, int type, int value);
+	private:
+		std::vector<PlayerObject> playerObjectVector;
 		
 
 	};

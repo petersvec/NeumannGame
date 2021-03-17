@@ -16,8 +16,8 @@ namespace engine
 		m_guiRectangle.setPosition(0, 620);
 		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
 		m_guiRectangle.setFillColor(sf::Color::Blue);
-		testPO.setPos(5, 5);
-		testOM.playerObjectVector.push_back(testPO);
+		testOM.createPO(10, 10, 1, 1);
+		testOM.createPO(15, 15, 1, 1);
 	
 		
 		
@@ -132,6 +132,12 @@ namespace engine
 				
 				break;
 
+				case sf::Event::KeyPressed:
+					if (m_event.key.code == sf::Keyboard::Space)
+						{
+							std::cout << "the space key was pressed" << std::endl;
+						}
+					
 			default:
 				break;
 			}
@@ -196,18 +202,13 @@ namespace engine
 		m_frame.setTexture(texture);
 		m_window->setView(m_view);
 		m_window->draw(m_frame);
-		
+		testOM.drawAll(m_window);
 		
 		m_window->setView(defaultView);
 		m_window->draw(m_guiRectangle);
 		m_window->draw(tileText);
 		m_window->setView(m_view);
 
-		for (int it = 0; it < testOM.playerObjectVector.size(); it++) 
-		{
-			testOM.playerObjectVector[it].drawObj(m_window);
-		}
-		testPO.drawObj(m_window);
 		m_window->display();
 
 		
