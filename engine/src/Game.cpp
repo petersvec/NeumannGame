@@ -19,10 +19,7 @@ namespace engine
 		testOM.createPO(10, 10, 1, 1);
 		testOM.createPO(15, 15, 2, 1);
 
-		testPO=testOM.findUnit(15 * 50, 15 * 50);
-	
-		
-		
+		testPO=testOM.findUnit(15 * 50, 15 * 50);	
 	}
 
 	void Game::initWindow()
@@ -58,7 +55,7 @@ namespace engine
 			
 			
 			char c = (unsigned char)m_gameMap->getTile(x/tileSize, y/tileSize)->getType();
-			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c);
+			str = std::to_string(x/tileSize) + " " + std::to_string(y/tileSize) + " " + std::to_string(c);
 			std::cout << m_gameMap->getTile(x / tileSize, y / tileSize)->getType();
 
 			// m_gameMap->getTile(x, y);

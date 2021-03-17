@@ -5,7 +5,7 @@ namespace engine
 	PlayerObject::PlayerObject()
 	{
 		this->circle.setFillColor(sf::Color::Green);
-		this->circle.setRadius(40);
+		this->circle.setRadius(25);
 		this->owner = 1;
 		this->value = 1;
 		
