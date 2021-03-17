@@ -1,9 +1,9 @@
 #pragma once
-#include "IUnit.hpp"
+#include "IBuilding.hpp"
 
 namespace game
 {
-	class Meele : public IUnit
+	class MilitaryBase : public IBuilding
 	{
 	private:
 

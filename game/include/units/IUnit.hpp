@@ -1,9 +1,9 @@
 #pragma once
-#include "IObject.hpp"
+#include "../../../engine/include/IObject.hpp"
 
 namespace game
 {
-	class IUnit : public IObject
+	class IUnit : public engine::IObject
 	{
 	private:
 
@@ -11,6 +11,15 @@ namespace game
 		unsigned char m_moveSpeed;
 		unsigned char m_attackDamage;
 		unsigned char m_armour;
+
+		IUnit(game::ObjectType type, const sf::Texture& texture, unsigned char moveSpeed, unsigned char attackDamage, unsigned char armour)
+			:
+			IObject{type, texture},
+			m_moveSpeed{ moveSpeed },
+			m_attackDamage{ attackDamage },
+			m_armour{ armour }
+		{
+		}
 
 	public:
 		unsigned char getMoveSpeed()
@@ -42,8 +51,5 @@ namespace game
 		{
 			m_armour = armour;
 		}
-
-		virtual void attack() = 0;
-		virtual void move(unsigned short, unsigned short) = 0;
 	};
 }

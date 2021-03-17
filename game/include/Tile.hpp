@@ -1,16 +1,15 @@
 #pragma once
-#include "IUnit.hpp"
+#include "../../engine/include/IObject.hpp"
 #include "TileType.hpp"
 
 namespace game
 {
-	class Tile : public IObject
+	class Tile : public engine::IObject
 	{
 	private:
 
 	protected:
 		TileType m_type;
-		//IUnit array[] = vsetky jednotky ktore sa nachadzaju na Tile
 
 	public:
 		Tile();
