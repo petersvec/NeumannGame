@@ -19,7 +19,7 @@ namespace engine
 		testOM.createPO(10, 10, 1, 1);
 		testOM.createPO(15, 15, 2, 1);
 
-		testPO=testOM.findUnit(15 * tileSize, 15 * tileSize);	
+		testOM.findUnit(15 * tileSize, 15 * tileSize);	
 	}
 
 	void Game::initWindow()
@@ -51,16 +51,11 @@ namespace engine
 	{
 		if (x >= 0 && y >= 0 && x < tileSize * (m_gameMap->getWidth()) && y < tileSize * m_gameMap->getHeight())
 		{
-			
-			
-			
 			char c = (unsigned char)m_gameMap->getTile(x/tileSize, y/tileSize)->getType();
 			str = std::to_string(x/tileSize) + " " + std::to_string(y/tileSize) + " " + std::to_string(c);
 			std::cout << m_gameMap->getTile(x / tileSize, y / tileSize)->getType();
 
 			// m_gameMap->getTile(x, y);
-
-
 			setDisplayText(&tileText, str);
 		}
 		
@@ -75,8 +70,6 @@ namespace engine
 	}
 	
 	
-	
-
 	const bool Game::isRunning() const
 	{
 		return m_window->isOpen();
@@ -92,7 +85,7 @@ namespace engine
 				m_window->close();
 				break;
 
-			case sf::Event::MouseWheelMoved:
+			case sf::Event::MouseWheelMoved:					//zoom
 				if (ZoomLevel <= 3.0 && m_event.mouseWheel.delta == -1 || ZoomLevel > 0.2 && m_event.mouseWheel.delta == 1)
 				{
 					m_view.zoom(1 + 0.1 * -(m_event.mouseWheel.delta));
@@ -100,7 +93,7 @@ namespace engine
 				}
 				break;
 
-			case sf::Event::MouseButtonPressed:
+			case sf::Event::MouseButtonPressed:					//click
 				pixelPos = sf::Mouse::getPosition(*m_window);
 				worldPos = m_window->mapPixelToCoords(pixelPos);
 
@@ -133,8 +126,8 @@ namespace engine
 				
 				break;
 
-				case sf::Event::KeyPressed:
-					if (m_event.key.code == sf::Keyboard::Space)
+				case sf::Event::KeyPressed:							//key pressed
+					if (m_event.key.code == sf::Keyboard::Space)	//space pressed switch player
 					{
 						if (playerActive == 1)
 						{
@@ -155,7 +148,7 @@ namespace engine
 	}
 
 	void Game::update()
-	{
+	{																	//View movement map
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			if (m_view.getCenter().x > -40)
@@ -198,7 +191,6 @@ namespace engine
 		tileText.setFont(font);
 		m_window->clear();
 
-
 		if (changed == 1) 
 		{
 			m_renderTexture.clear();
@@ -220,7 +212,5 @@ namespace engine
 		m_window->setView(m_view);
 
 		m_window->display();
-
-		
 	}
 }

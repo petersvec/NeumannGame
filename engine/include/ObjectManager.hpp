@@ -1,6 +1,7 @@
 #pragma once
 #include "PlayerObject.hpp"
 #include <vector>
+#include <memory>
 
 namespace engine
 {
@@ -12,9 +13,9 @@ namespace engine
 		
 		void drawAll(sf::RenderWindow* window);
 		void createPO(int x, int y, int type, int value);
-		PlayerObject findUnit(int x, int y);
+		std::shared_ptr<PlayerObject> findUnit(int x, int y);
 	private:
-		std::vector<PlayerObject> playerObjectVector;
+		std::vector<std::shared_ptr<PlayerObject>> playerObjectVector;
 		
 
 	};
