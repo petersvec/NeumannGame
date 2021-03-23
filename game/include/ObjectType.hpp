@@ -4,7 +4,7 @@ namespace game
 {
 	enum class ObjectType
 	{
-		Meele = 0,
+		Melee = 0,
 		Probe,
 		Ranged,
 		Worker,
