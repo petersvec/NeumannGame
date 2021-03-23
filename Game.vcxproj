@@ -33,8 +33,9 @@
     <ClCompile Include="game\src\buildings\SpaceStation.cpp" />
     <ClCompile Include="game\src\buildings\Tower.cpp" />
     <ClCompile Include="game\src\Planet.cpp" />
+    <ClCompile Include="game\src\player\PlayerState.cpp" />
     <ClCompile Include="game\src\Tile.cpp" />
-    <ClCompile Include="game\src\units\Meele.cpp" />
+    <ClCompile Include="game\src\units\Melee.cpp" />
     <ClCompile Include="game\src\units\Probe.cpp" />
     <ClCompile Include="game\src\units\Ranged.cpp" />
     <ClCompile Include="game\src\units\Worker.cpp" />
@@ -59,10 +60,11 @@
     <ClInclude Include="game\include\ObjectType.hpp" />
     <ClInclude Include="game\include\Ownership.hpp" />
     <ClInclude Include="game\include\Planet.hpp" />
+    <ClInclude Include="game\include\player\PlayerState.hpp" />
     <ClInclude Include="game\include\Tile.hpp" />
     <ClInclude Include="game\include\TileType.hpp" />
     <ClInclude Include="game\include\units\IUnit.hpp" />
-    <ClInclude Include="game\include\units\Meele.hpp" />
+    <ClInclude Include="game\include\units\Melee.hpp" />
     <ClInclude Include="game\include\units\Probe.hpp" />
     <ClInclude Include="game\include\units\Ranged.hpp" />
     <ClInclude Include="game\include\units\Worker.hpp" />

@@ -40,6 +40,12 @@
     <Filter Include="Game\src\buildings">
       <UniqueIdentifier>{bfcb1e3c-5300-471d-a940-0199a146807d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\include\player">
+      <UniqueIdentifier>{8ad4b171-e665-4d07-84da-5f12dfb76c67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\src\player">
+      <UniqueIdentifier>{deffd1ec-b230-4e95-ac43-265cffcd4e55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine\src\Map.cpp">
@@ -84,7 +90,7 @@
     <ClCompile Include="game\src\buildings\AirBase.cpp">
       <Filter>Game\src\buildings</Filter>
     </ClCompile>
-    <ClCompile Include="game\src\units\Meele.cpp">
+    <ClCompile Include="game\src\units\Melee.cpp">
       <Filter>Game\src\units</Filter>
     </ClCompile>
     <ClCompile Include="game\src\units\Probe.cpp">
@@ -101,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="game\src\buildings\Tower.cpp">
       <Filter>Game\src\buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\player\PlayerState.cpp">
+      <Filter>Game\src\player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,7 +149,7 @@
     <ClInclude Include="main\include\Main.hpp">
       <Filter>Main\include</Filter>
     </ClInclude>
-    <ClInclude Include="game\include\units\Meele.hpp">
+    <ClInclude Include="game\include\units\Melee.hpp">
       <Filter>Game\include\units</Filter>
     </ClInclude>
     <ClInclude Include="game\include\units\Probe.hpp">
@@ -181,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="game\include\buildings\Tower.hpp">
       <Filter>Game\include\buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\player\PlayerState.hpp">
+      <Filter>Game\include\player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
