@@ -8,6 +8,6 @@ namespace game
 		unsigned short copperCost,
 		unsigned short siliconCost)
 		:
-		IBuilding{type, texture, ironCost, copperCost, siliconCost}
+		IBuilding{type, texture, ironCost, copperCost, siliconCost}, IObject{ type, texture }
 	{}
 }

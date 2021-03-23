@@ -11,6 +11,6 @@ namespace game
 		unsigned short copperCost,
 		unsigned short siliconCost)
 		:
-		IBuilding{ type, texture, ironCost, copperCost, siliconCost }, IUnit{ type, texture, moveSpeed, attackDamage, armour }
+		IBuilding{ type, texture, ironCost, copperCost, siliconCost }, IUnit{ type, texture, moveSpeed, attackDamage, armour }, IObject{ type, texture }
 	{}
 }

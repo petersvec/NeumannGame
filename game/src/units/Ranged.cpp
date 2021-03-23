@@ -8,6 +8,6 @@ namespace game
 		unsigned char attackDamage,
 		unsigned char armour)
 		:
-		IUnit{ type, texture, moveSpeed, attackDamage, armour }
+		IUnit{ type, texture, moveSpeed, attackDamage, armour }, IObject{ type, texture }
 	{}
 }
