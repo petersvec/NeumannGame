@@ -6,6 +6,7 @@ namespace game
 	class Mine : public IBuilding
 	{
 	private:
+		unsigned short m_miningCapacity = 500;
 
 	protected:
 
@@ -15,5 +16,15 @@ namespace game
 			unsigned short ironCost,
 			unsigned short copperCost,
 			unsigned short siliconCost);
+
+		unsigned short getMiningCapacity()
+		{
+			return m_miningCapacity;
+		}
+
+		void setMiningCapacity(unsigned short miningCapacity)
+		{
+			m_miningCapacity = miningCapacity;
+		}
 	};
 }
