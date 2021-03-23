@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="engine\src\Factory.cpp" />
     <ClCompile Include="engine\src\Game.cpp" />
     <ClCompile Include="engine\src\JsonParser.cpp" />
     <ClCompile Include="engine\src\Map.cpp" />
@@ -26,28 +27,45 @@
     <ClCompile Include="engine\src\RenderMap.cpp" />
     <ClCompile Include="engine\src\Shader.cpp" />
     <ClCompile Include="engine\src\TextureHandler.cpp" />
+    <ClCompile Include="game\src\buildings\AirBase.cpp" />
+    <ClCompile Include="game\src\buildings\MilitaryBase.cpp" />
+    <ClCompile Include="game\src\buildings\Mine.cpp" />
+    <ClCompile Include="game\src\buildings\SpaceStation.cpp" />
+    <ClCompile Include="game\src\buildings\Tower.cpp" />
     <ClCompile Include="game\src\Planet.cpp" />
     <ClCompile Include="game\src\Tile.cpp" />
+    <ClCompile Include="game\src\units\Meele.cpp" />
+    <ClCompile Include="game\src\units\Probe.cpp" />
+    <ClCompile Include="game\src\units\Ranged.cpp" />
+    <ClCompile Include="game\src\units\Worker.cpp" />
     <ClCompile Include="main\src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="engine\include\Factory.hpp" />
     <ClInclude Include="engine\include\Game.hpp" />
+    <ClInclude Include="engine\include\IObject.hpp" />
     <ClInclude Include="engine\include\JsonParser.hpp" />
     <ClInclude Include="engine\include\Map.hpp" />
     <ClInclude Include="engine\include\MapGenerator.hpp" />
     <ClInclude Include="engine\include\RenderMap.hpp" />
     <ClInclude Include="engine\include\Shader.hpp" />
     <ClInclude Include="engine\include\TextureHandler.hpp" />
-    <ClInclude Include="game\include\IObject.hpp" />
-    <ClInclude Include="game\include\Meele.hpp" />
+    <ClInclude Include="game\include\buildings\AirBase.hpp" />
+    <ClInclude Include="game\include\buildings\IBuilding.hpp" />
+    <ClInclude Include="game\include\buildings\MilitaryBase.hpp" />
+    <ClInclude Include="game\include\buildings\Mine.hpp" />
+    <ClInclude Include="game\include\buildings\SpaceStation.hpp" />
+    <ClInclude Include="game\include\buildings\Tower.hpp" />
+    <ClInclude Include="game\include\ObjectType.hpp" />
     <ClInclude Include="game\include\Ownership.hpp" />
     <ClInclude Include="game\include\Planet.hpp" />
-    <ClInclude Include="game\include\Probe.hpp" />
-    <ClInclude Include="game\include\Ranged.hpp" />
     <ClInclude Include="game\include\Tile.hpp" />
-    <ClInclude Include="game\include\IUnit.hpp" />
     <ClInclude Include="game\include\TileType.hpp" />
-    <ClInclude Include="game\include\Worker.hpp" />
+    <ClInclude Include="game\include\units\IUnit.hpp" />
+    <ClInclude Include="game\include\units\Meele.hpp" />
+    <ClInclude Include="game\include\units\Probe.hpp" />
+    <ClInclude Include="game\include\units\Ranged.hpp" />
+    <ClInclude Include="game\include\units\Worker.hpp" />
     <ClInclude Include="main\include\Main.hpp" />
   </ItemGroup>
   <ItemGroup>
