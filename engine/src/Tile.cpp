@@ -54,7 +54,7 @@ namespace engine
 	void Tile::setSprite(const sf::Texture& texture)
 	{
 		m_sprite.setTexture(texture);
-		m_sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));
+		m_sprite.setTextureRect(sf::IntRect(0, 0, 50, 50));  //a.k.a tileSize
 	}
 	bool Tile::getOccupied()
 	{
