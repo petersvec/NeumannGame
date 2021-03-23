@@ -10,6 +10,10 @@ namespace game
 	protected:
 
 	public:
-		Melee(game::ObjectType type, const sf::Texture& texture, unsigned char moveSpeed, unsigned char attackDamage, unsigned char armour);
+		Melee(game::ObjectType type,
+			const sf::Texture& texture,
+			unsigned char moveSpeed,
+			unsigned char attackDamage,
+			unsigned char armour);
 	};
 }
