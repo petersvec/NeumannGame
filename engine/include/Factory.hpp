@@ -1,7 +1,8 @@
 #pragma once
+#include <memory>
 #include "../include/IObject.hpp"
 #include "../../game/include/ObjectType.hpp"
-#include "../../game/include/units/Meele.hpp"
+#include "../../game/include/units/Melee.hpp"
 #include "../../game/include/units/Probe.hpp"
 #include "../../game/include/units/Ranged.hpp"
 #include "../../game/include/units/Worker.hpp"
@@ -10,6 +11,7 @@
 #include "../../game/include/buildings/Mine.hpp"
 #include "../../game/include/buildings/SpaceStation.hpp"
 #include "../../game/include/buildings/Tower.hpp"
+using IObjectPtr = std::shared_ptr<engine::IObject>;
 
 namespace engine
 {
@@ -20,6 +22,6 @@ namespace engine
 	protected:
 
 	public:
-		IObject getObject(game::ObjectType objType);
+		IObjectPtr getObject(game::ObjectType objType);
 	};
 }

@@ -3,7 +3,7 @@
 
 namespace game
 {
-	class IUnit : public engine::IObject
+	class IUnit : virtual public engine::IObject
 	{
 	private:
 
