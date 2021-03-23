@@ -11,6 +11,7 @@ namespace engine
 	class Game
 	{
 	private:
+		enum Player { Player1, Player2 };
 		sf::RenderWindow* m_window;
 		sf::Event m_event;
 		Map* m_gameMap;
@@ -33,7 +34,8 @@ namespace engine
 		sf::RectangleShape m_guiRectangle;
 		ObjectManager testOM;
 		PlayerObject testPO;
-		int playerActive = 1;
+		Player activePlayer = Player1;
+		sf::RectangleShape selectedMapTile;
 
 		
 
@@ -46,6 +48,7 @@ namespace engine
 		virtual ~Game();
 
 		void clickMap(int x, int y);
+		void setClickedTile(int x, int y, sf::RectangleShape* rs);
 		void setDisplayText(sf::Text* text, sf::String str);
 		
 		const bool isRunning() const;

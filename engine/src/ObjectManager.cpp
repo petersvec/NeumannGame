@@ -30,10 +30,12 @@ namespace engine
 			if (this->playerObjectVector[it]->circle.getPosition().x == x && this->playerObjectVector[it]->circle.getPosition().y == y)
 			{
 				std::cout << "found ";
-				std::cout << this->playerObjectVector[it]->value;
+				std::cout << this->playerObjectVector[it]->owner;
 				std::cout << '\n';
 				return this->playerObjectVector[it];
 			}
-		}	
+			
+		}
+		return nullptr;
 	}
 }

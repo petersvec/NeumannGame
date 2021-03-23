@@ -7,7 +7,7 @@ namespace engine
 	void Game::initVariables()
 	{
 		m_window = nullptr;
-		m_gameMap = new Map(200, 200);
+		m_gameMap = new Map(250, 250);
 		MapGenerator* m_mapGenerator = new MapGenerator();
 		m_mapGenerator->generateMap(m_gameMap, 50, 3);
 		m_renderTexture.create(m_gameMap->getWidth()*tileSize, m_gameMap->getHeight() * tileSize);
@@ -20,6 +20,13 @@ namespace engine
 		testOM.createPO(15, 15, 2, 1);
 
 		testOM.findUnit(15 * tileSize, 15 * tileSize);	
+		
+		selectedMapTile.setFillColor(sf::Color::Blue);
+		selectedMapTile.setPosition(0, 0);
+		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
+		
+		
+		
 	}
 
 	void Game::initWindow()
@@ -51,14 +58,22 @@ namespace engine
 	{
 		if (x >= 0 && y >= 0 && x < tileSize * (m_gameMap->getWidth()) && y < tileSize * m_gameMap->getHeight())
 		{
-			char c = (unsigned char)m_gameMap->getTile(x/tileSize, y/tileSize)->getType();
-			str = std::to_string(x/tileSize) + " " + std::to_string(y/tileSize) + " " + std::to_string(c);
-			std::cout << m_gameMap->getTile(x / tileSize, y / tileSize)->getType();
+			x = x / tileSize;
+			y = y / tileSize;
+			char c = (unsigned char)m_gameMap->getTile(x, y)->getType();
+			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c);
+			//std::cout << m_gameMap->getTile(x, y)->getType();
 
-			// m_gameMap->getTile(x, y);
+			
 			setDisplayText(&tileText, str);
+			setClickedTile(x, y, &selectedMapTile);
+			testOM.findUnit(x * tileSize, y * tileSize);
 		}
 		
+	}
+	void Game::setClickedTile(int x, int y, sf::RectangleShape* rs)
+	{
+		rs->setPosition(x*tileSize, y*tileSize);
 	}
 
 	void Game::setDisplayText(sf::Text *text, sf::String str) {
@@ -97,23 +112,6 @@ namespace engine
 				pixelPos = sf::Mouse::getPosition(*m_window);
 				worldPos = m_window->mapPixelToCoords(pixelPos);
 
-/*
-				std::cout << pixelPos.x;
-				std::cout << " ";
-				std::cout << pixelPos.y;
-				std::cout << " ";
-				std::cout << "window";
-				std::cout << '\n';
-*/
-				std::cout << worldPos.x;
-				std::cout << " ";
-				std::cout << worldPos.y;
-				std::cout << " ";
-				std::cout << "map";
-				std::cout << '\n';
-				std::cout << playerActive;
-				std::cout << " player turn\n";
-
 				//if(pixelPos.y < GuiHeight)
 				clickMap(worldPos.x, worldPos.y);
 
@@ -129,15 +127,15 @@ namespace engine
 				case sf::Event::KeyPressed:							//key pressed
 					if (m_event.key.code == sf::Keyboard::Space)	//space pressed switch player
 					{
-						if (playerActive == 1)
+						if (activePlayer == Player1)
 						{
-							playerActive = 2;
+							activePlayer = Player2;
 						}
 						else
 						{
-							playerActive = 1;
+							activePlayer = Player1;
 						}
-						std::cout << "Player switched\n";
+						std::cout << "Player switched";
 					}
 					break;
 					
@@ -210,6 +208,7 @@ namespace engine
 		m_window->draw(m_guiRectangle);
 		m_window->draw(tileText);
 		m_window->setView(m_view);
+		m_window->draw(selectedMapTile);
 
 		m_window->display();
 	}
