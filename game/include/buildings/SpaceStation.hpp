@@ -10,6 +10,10 @@ namespace game
 	protected:
 
 	public:
-
+		SpaceStation(game::ObjectType type,
+			const sf::Texture& texture,
+			unsigned short ironCost,
+			unsigned short copperCost,
+			unsigned short siliconCost);
 	};
 }

@@ -12,7 +12,20 @@ namespace game
 		unsigned short m_copperCost;
 		unsigned short m_siliconCost;
 
+		IBuilding(game::ObjectType type,
+			const sf::Texture& texture,
+			unsigned short ironCost,
+			unsigned short copperCost,
+			unsigned short siliconCost)
+			:
+			IObject{ type, texture },
+			m_ironCost{ ironCost },
+			m_copperCost{ copperCost },
+			m_siliconCost{ siliconCost }
+		{}
+
 	public:
+
 		unsigned short getIronCost()
 		{
 			return m_ironCost;
