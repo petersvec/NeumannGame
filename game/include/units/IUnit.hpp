@@ -11,20 +11,22 @@ namespace game
 		unsigned char m_moveSpeed;
 		unsigned char m_attackDamage;
 		unsigned char m_armour;
-
+		
 		IUnit(game::ObjectType type,
 			const sf::Texture& texture,
+			TilePtr location,
 			unsigned char moveSpeed,
 			unsigned char attackDamage,
 			unsigned char armour)
 			:
-			IObject{type, texture},
+			IObject{ type, texture, location },
 			m_moveSpeed{ moveSpeed },
 			m_attackDamage{ attackDamage },
 			m_armour{ armour }
 		{}
 
 	public:
+
 		unsigned char getMoveSpeed()
 		{
 			return m_moveSpeed;
