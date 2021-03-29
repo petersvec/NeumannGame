@@ -2,8 +2,6 @@
 
 namespace engine
 {
-    Factory::Factory(){}
-
     IObjectPtr Factory::getObject(game::ObjectType objType, sf::Texture texture, TilePtr location)
     {
         switch (objType)

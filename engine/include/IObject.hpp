@@ -1,8 +1,7 @@
 #pragma once
 #include <SFML\Graphics\Sprite.hpp>
 #include "../../game/include/ObjectType.hpp"
-#include "../../game/include/Tile.hpp"
-using TilePtr = std::shared_ptr<game::Tile>;
+#include "Map.hpp"
 
 namespace engine
 {

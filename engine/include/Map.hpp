@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <vector> 
+#include <vector>
 #include "../../game/include/Tile.hpp"
 using TilePtr = std::shared_ptr<game::Tile>;
 using MapPtr = std::vector<std::vector<TilePtr>>;
