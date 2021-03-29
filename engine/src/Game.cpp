@@ -10,23 +10,19 @@ namespace engine
 		m_gameMap = new Map(250, 250);
 		MapGenerator* m_mapGenerator = new MapGenerator();
 		m_mapGenerator->generateMap(m_gameMap, 50, 3);
-		m_renderTexture.create(m_gameMap->getWidth()*tileSize, m_gameMap->getHeight() * tileSize);
+		m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
 		m_renderMap.initMapTextures(*m_gameMap);
 		tileText.setString("0");
 		m_guiRectangle.setPosition(0, 620);
 		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
 		m_guiRectangle.setFillColor(sf::Color::Blue);
-		testOM.createPO(10, 10, 1, 1);
-		testOM.createPO(15, 15, 2, 1);
 
-		testOM.findUnit(15 * tileSize, 15 * tileSize);	
-		
 		selectedMapTile.setFillColor(sf::Color::Blue);
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
-		
-		
-		
+	
+		testOM.createPO(10, 10, 1, 1);
+		testOM.createPO(20, 20, 1, 1);		
 	}
 
 	void Game::initWindow()
@@ -64,10 +60,15 @@ namespace engine
 			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c);
 			//std::cout << m_gameMap->getTile(x, y)->getType();
 
-			
 			setDisplayText(&tileText, str);
 			setClickedTile(x, y, &selectedMapTile);
-			testOM.findUnit(x * tileSize, y * tileSize);
+			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer);
+			if (testPO != nullptr)
+			{
+				testPO->move(x + 1, y + 1);
+			}
+
+			//return m_gameMap->getTile(x, y);
 		}
 		
 	}
@@ -135,7 +136,7 @@ namespace engine
 						{
 							activePlayer = Player1;
 						}
-						std::cout << "Player switched";
+						std::cout << activePlayer;
 					}
 					break;
 					

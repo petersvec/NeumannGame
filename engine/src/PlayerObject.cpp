@@ -26,4 +26,8 @@ namespace engine
 	{
 
 	}
+	void PlayerObject::move(int x, int y)
+	{
+		this->setPos(x, y);
+	}
 }

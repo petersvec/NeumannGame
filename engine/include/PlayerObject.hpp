@@ -15,7 +15,7 @@ namespace engine
 		void setPos(int xPos, int yPos);
 		void drawObj(sf::RenderWindow *RWindow);
 		void updateObj();
-
+		void move(int x, int y);
 
 	};
 }

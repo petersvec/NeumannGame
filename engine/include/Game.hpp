@@ -11,7 +11,7 @@ namespace engine
 	class Game
 	{
 	private:
-		enum Player { Player1, Player2 };
+		
 		sf::RenderWindow* m_window;
 		sf::Event m_event;
 		Map* m_gameMap;
@@ -33,11 +33,12 @@ namespace engine
 		JsonToString m_config;
 		sf::RectangleShape m_guiRectangle;
 		ObjectManager testOM;
-		PlayerObject testPO;
-		Player activePlayer = Player1;
-		sf::RectangleShape selectedMapTile;
-
+		std::shared_ptr<PlayerObject> testPO;
 		
+		sf::RectangleShape selectedMapTile;
+	public:
+		enum Player { Player1, Player2 };
+		Player activePlayer = Player1;
 
 
 		void initVariables();

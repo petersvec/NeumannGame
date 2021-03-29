@@ -1,5 +1,6 @@
 #include "../include/ObjectManager.hpp"
 #include <iostream>
+#include "../include/Game.hpp"
 
 namespace engine
 {
@@ -23,7 +24,7 @@ namespace engine
 		this->playerObjectVector.push_back(po);
 	}
 
-	std::shared_ptr<PlayerObject> ObjectManager::findUnit(int x, int y)
+	std::shared_ptr<PlayerObject> ObjectManager::findUnit(int x, int y,  int player)
 	{
 		for (int it = 0; it < this->playerObjectVector.size(); it++)
 		{
@@ -32,7 +33,15 @@ namespace engine
 				std::cout << "found ";
 				std::cout << this->playerObjectVector[it]->owner;
 				std::cout << '\n';
-				return this->playerObjectVector[it];
+				if (player == this->playerObjectVector[it]->owner)
+				{
+					std::cout << "Unit selected\n";
+					return this->playerObjectVector[it];
+				}
+				else
+				{
+					std::cout << "Other players unit\n";
+				}
 			}
 			
 		}
