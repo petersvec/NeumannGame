@@ -20,6 +20,13 @@ namespace game
 		setLandConquered(land);
 	}
 
+	void PlayerState::updatePlayerBalances(int iron, int copper, int silicon)
+	{
+		setIronBalance(getIronBalance() + iron);
+		setCopperBalance(getCopperBalance() + copper);
+		setSiliconBalance(getSiliconBalance() + silicon);
+	}
+
 	std::tuple<int, int, int, unsigned char> PlayerState::getPlayerState()
 	{
 		return std::make_tuple(getIronBalance(), getCopperBalance(), getSiliconBalance(), getLandConquered());

@@ -1,5 +1,6 @@
 #pragma once
 #include "../../../engine/include/IObject.hpp"
+#include "../player/PlayerState.hpp"
 
 namespace game
 {
@@ -25,6 +26,11 @@ namespace game
 		{}
 
 	public:
+
+		void update(PlayerState playerState, int iron, int copper, int silicon)
+		{
+			playerState.updatePlayerBalances(iron, copper, silicon);
+		}
 
 		unsigned short getIronCost()
 		{

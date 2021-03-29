@@ -17,6 +17,7 @@ namespace game
 		PlayerState();
 		PlayerState(int, int, int, unsigned char);
 		void initializePlayerState(int, int, int, unsigned char);
+		void updatePlayerBalances(int, int, int);
 		std::tuple<int, int, int, unsigned char> getPlayerState();
 
 		int getIronBalance()
