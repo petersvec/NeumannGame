@@ -13,6 +13,7 @@ namespace game
 	public:
 		Tower(game::ObjectType type,
 			const sf::Texture& texture,
+			TilePtr location,
 			unsigned char moveSpeed,
 			unsigned char attackDamage,
 			unsigned char armour,
