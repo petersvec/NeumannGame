@@ -11,6 +11,7 @@
 #include "../../game/include/buildings/Mine.hpp"
 #include "../../game/include/buildings/SpaceStation.hpp"
 #include "../../game/include/buildings/Tower.hpp"
+#include <SFML\Graphics\Texture.hpp>
 using IObjectPtr = std::shared_ptr<engine::IObject>;
 
 namespace engine
@@ -22,6 +23,6 @@ namespace engine
 	protected:
 
 	public:
-		IObjectPtr getObject(game::ObjectType objType);
+		IObjectPtr getObject(game::ObjectType objType, sf::Texture texture, TilePtr location);
 	};
 }
