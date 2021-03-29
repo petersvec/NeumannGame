@@ -34,7 +34,7 @@ namespace engine
 		sf::RectangleShape m_guiRectangle;
 		ObjectManager testOM;
 		std::shared_ptr<PlayerObject> testPO;
-		
+		bool unitIsSelected;
 		sf::RectangleShape selectedMapTile;
 	public:
 		enum Player { Player1, Player2 };

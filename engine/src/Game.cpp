@@ -56,18 +56,26 @@ namespace engine
 		{
 			x = x / tileSize;
 			y = y / tileSize;
+			
+
+			
+			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer);
+			
+			if (testPO != nullptr)
+			{
+				unitIsSelected = true;
+			}
+			else
+			{
+				unitIsSelected = false;
+			}
+
 			char c = (unsigned char)m_gameMap->getTile(x, y)->getType();
-			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c);
+			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c) + " ";
 			//std::cout << m_gameMap->getTile(x, y)->getType();
 
 			setDisplayText(&tileText, str);
 			setClickedTile(x, y, &selectedMapTile);
-			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer);
-			if (testPO != nullptr)
-			{
-				testPO->move(x + 1, y + 1);
-			}
-
 			//return m_gameMap->getTile(x, y);
 		}
 		
@@ -109,20 +117,31 @@ namespace engine
 				}
 				break;
 
-			case sf::Event::MouseButtonPressed:					//click
-				pixelPos = sf::Mouse::getPosition(*m_window);
-				worldPos = m_window->mapPixelToCoords(pixelPos);
+			case sf::Event::MouseButtonPressed:				//click
+				if (m_event.mouseButton.button == sf::Mouse::Left) {
 
-				//if(pixelPos.y < GuiHeight)
-				clickMap(worldPos.x, worldPos.y);
 
-				/*
-				else
-				{
-				clickGui(pixelPos.x, pixelPos.y);
+					pixelPos = sf::Mouse::getPosition(*m_window);
+					worldPos = m_window->mapPixelToCoords(pixelPos);
+
+					//if(pixelPos.y < GuiHeight)
+					clickMap(worldPos.x, worldPos.y);
+
+					/*
+					else
+					{
+					clickGui(pixelPos.x, pixelPos.y);
+					}
+					*/
 				}
-				*/
-				
+				if (m_event.mouseButton.button == sf::Mouse::Right)
+				{
+					if (unitIsSelected) {
+						pixelPos = sf::Mouse::getPosition(*m_window);
+						worldPos = m_window->mapPixelToCoords(pixelPos);
+						testPO->move(worldPos.x/tileSize, worldPos.y/tileSize);
+					}
+				}
 				break;
 
 				case sf::Event::KeyPressed:							//key pressed
@@ -130,10 +149,14 @@ namespace engine
 					{
 						if (activePlayer == Player1)
 						{
+							unitIsSelected = false;
+							testPO = nullptr;
 							activePlayer = Player2;
 						}
 						else
 						{
+							unitIsSelected = false;
+							testPO = nullptr;
 							activePlayer = Player1;
 						}
 						std::cout << activePlayer;
