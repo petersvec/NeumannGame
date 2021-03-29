@@ -4,6 +4,7 @@ namespace game
 {
 	Tower::Tower(game::ObjectType type,
 		const sf::Texture& texture,
+		TilePtr location,
 		unsigned char moveSpeed,
 		unsigned char attackDamage,
 		unsigned char armour,
@@ -11,6 +12,8 @@ namespace game
 		unsigned short copperCost,
 		unsigned short siliconCost)
 		:
-		IBuilding{ type, texture, ironCost, copperCost, siliconCost }, IUnit{ type, texture, moveSpeed, attackDamage, armour }, IObject{ type, texture }
+		IBuilding{ type, texture, location, ironCost, copperCost, siliconCost },
+		IUnit{ type, texture, location, moveSpeed, attackDamage, armour },
+		IObject{ type, texture, location }
 	{}
 }
