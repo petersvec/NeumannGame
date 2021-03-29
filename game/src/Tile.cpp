@@ -36,9 +36,20 @@ namespace game
 		return (unsigned char)m_type;
 	}
 
+	sf::Sprite Tile::getSprite()
+	{
+		return m_sprite;
+	}
+
 	void Tile::setType(unsigned char type)
 	{
 		m_type = (TileType)type;
+	}
+
+	void Tile::setSprite(const sf::Texture& texture)
+	{
+		m_sprite.setTexture(texture);
+		m_sprite.setTextureRect(sf::IntRect(0, 0, 100, 100));
 	}
 
 	void Tile::setPosition(float x, float y)

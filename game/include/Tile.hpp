@@ -4,12 +4,13 @@
 
 namespace game
 {
-	class Tile : public engine::IObject
+	class Tile
 	{
 	private:
 
 	protected:
 		TileType m_type;
+		sf::Sprite m_sprite;
 
 	public:
 		Tile();
@@ -19,8 +20,10 @@ namespace game
 		bool operator == (const unsigned char);
 
 		unsigned char getType();
+		sf::Sprite getSprite();
 
 		void setType(unsigned char type);
+		void setSprite(const sf::Texture& texture);
 		void setPosition(float, float);
 	};
 }
