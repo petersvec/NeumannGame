@@ -3,12 +3,15 @@
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
 #include "JsonToString.hpp"
+#include "PlayerObject.hpp"
+#include "ObjectManager.hpp"
 
 namespace engine
 {
 	class Game
 	{
 	private:
+		
 		sf::RenderWindow* m_window;
 		sf::Event m_event;
 		Map* m_gameMap;
@@ -28,6 +31,15 @@ namespace engine
 		sf::View defaultView;
 		int changed = 1;
 		JsonToString m_config;
+		sf::RectangleShape m_guiRectangle;
+		ObjectManager testOM;
+		std::shared_ptr<PlayerObject> testPO;
+		bool unitIsSelected;
+		sf::RectangleShape selectedMapTile;
+	public:
+		enum Player { Player1, Player2 };
+		Player activePlayer = Player1;
+
 
 		void initVariables();
 		void initWindow();
@@ -37,6 +49,7 @@ namespace engine
 		virtual ~Game();
 
 		void clickMap(int x, int y);
+		void setClickedTile(int x, int y, sf::RectangleShape* rs);
 		void setDisplayText(sf::Text* text, sf::String str);
 		
 		const bool isRunning() const;

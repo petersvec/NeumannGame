@@ -51,6 +51,12 @@
     <ClCompile Include="engine\src\JsonToString.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\PlayerObject.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\ObjectManager.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\Map.hpp">
@@ -82,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="game\src\Main.h">
       <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\PlayerObject.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\ObjectManager.hpp">
+      <Filter>Engine\include</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

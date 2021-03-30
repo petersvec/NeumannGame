@@ -8,6 +8,7 @@ namespace engine
 	private:
 		unsigned char m_type;	//type of the Tile: 0-void, 1-planet of player one, 2-planet of player 2, 3-resources on the planet, 4-resources on the planet of the player 1, 5-resources on the planet of the player 2
 		sf::Sprite m_sprite;
+		bool occupied = 0;
 
 	public:
 		Tile();
@@ -21,5 +22,7 @@ namespace engine
 		void setType(unsigned char type);
 		void setPosition(float x, float y);
 		void setSprite(const sf::Texture& texture);
+		bool getOccupied();
+		void setOccupied(bool);
 	};
 }
