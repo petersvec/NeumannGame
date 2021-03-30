@@ -10,7 +10,8 @@ namespace game
 	protected:
 
 	public:
-		Probe(game::ObjectType type,
+		Probe(unsigned short hp,
+			game::ObjectType type,
 			const sf::Texture& texture,
 			TilePtr location,
 			unsigned char moveSpeed,

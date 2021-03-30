@@ -10,12 +10,14 @@ namespace engine
 	private:
 
 	protected:
+		unsigned short m_hp;
 		game::ObjectType m_type;
 		sf::Sprite m_sprite;
 		TilePtr m_location;
 
-		IObject(game::ObjectType type, const sf::Texture& texture, TilePtr location)
+		IObject(unsigned short hp, game::ObjectType type, const sf::Texture& texture, TilePtr location)
 			:
+			m_hp{ hp },
 			m_type{ type },
 			m_sprite{},
 			m_location{ location }
@@ -24,6 +26,11 @@ namespace engine
 		}
 
 	public:
+		unsigned short getHp()
+		{
+			return m_hp;
+		}
+
 		game::ObjectType getType()
 		{
 			return m_type;
@@ -37,6 +44,11 @@ namespace engine
 		TilePtr getLocation()
 		{
 			return m_location;
+		}
+
+		void setHp(unsigned short hp)
+		{
+			m_hp = hp;
 		}
 
 		void setType(game::ObjectType type)

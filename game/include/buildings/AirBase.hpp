@@ -10,7 +10,8 @@ namespace game
 	protected:
 
 	public:
-		AirBase(game::ObjectType type,
+		AirBase(unsigned short hp,
+			game::ObjectType type,
 			const sf::Texture& texture,
 			TilePtr location,
 			unsigned short ironCost,

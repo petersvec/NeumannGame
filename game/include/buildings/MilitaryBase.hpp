@@ -10,7 +10,8 @@ namespace game
 	protected:
 
 	public:
-		MilitaryBase(game::ObjectType type,
+		MilitaryBase(unsigned short hp,
+			game::ObjectType type,
 			const sf::Texture& texture,
 			TilePtr location,
 			unsigned short ironCost,

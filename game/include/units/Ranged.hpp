@@ -12,7 +12,8 @@ namespace game
 	protected:
 
 	public:
-		Ranged(game::ObjectType type,
+		Ranged(unsigned short hp,
+			game::ObjectType type,
 			const sf::Texture& texture,
 			TilePtr location,
 			unsigned char moveSpeed,

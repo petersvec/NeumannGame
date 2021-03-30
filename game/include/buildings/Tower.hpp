@@ -11,7 +11,8 @@ namespace game
 	protected:
 
 	public:
-		Tower(game::ObjectType type,
+		Tower(unsigned short hp,
+			game::ObjectType type,
 			const sf::Texture& texture,
 			TilePtr location,
 			unsigned char moveSpeed,

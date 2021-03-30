@@ -10,7 +10,8 @@ namespace game
 	protected:
 
 	public:
-		SpaceStation(game::ObjectType type,
+		SpaceStation(unsigned short hp,
+			game::ObjectType type,
 			const sf::Texture& texture,
 			TilePtr location,
 			unsigned short ironCost,

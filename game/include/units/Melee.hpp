@@ -10,7 +10,8 @@ namespace game
 	protected:
 
 	public:
-		Melee(game::ObjectType type,
+		Melee(unsigned short hp,
+			game::ObjectType type,
 			const sf::Texture& texture,
 			TilePtr location,
 			unsigned char moveSpeed,

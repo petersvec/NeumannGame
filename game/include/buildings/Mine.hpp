@@ -11,7 +11,8 @@ namespace game
 	protected:
 
 	public:
-		Mine(game::ObjectType type,
+		Mine(unsigned short hp,
+			game::ObjectType type,
 			const sf::Texture& texture,
 			TilePtr location,
 			unsigned short ironCost,

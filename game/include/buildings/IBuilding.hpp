@@ -13,14 +13,15 @@ namespace game
 		unsigned short m_copperCost;
 		unsigned short m_siliconCost;
 
-		IBuilding(game::ObjectType type,
+		IBuilding(unsigned short hp,
+			game::ObjectType type,
 			const sf::Texture& texture,
 			TilePtr location,
 			unsigned short ironCost,
 			unsigned short copperCost,
 			unsigned short siliconCost)
 			:
-			IObject{ type, texture, location },
+			IObject{ hp, type, texture, location },
 			m_ironCost{ ironCost },
 			m_copperCost{ copperCost },
 			m_siliconCost{ siliconCost }
