@@ -1,10 +1,14 @@
 #pragma once
 #include <memory>
-#include <vector> 
-#include "Tile.hpp"
-using TilePtr = std::shared_ptr<engine::Tile>;
+#include <vector>
+#include "../../game/include/Tile.hpp"
+using TilePtr = std::shared_ptr<game::Tile>;
 using MapPtr = std::vector<std::vector<TilePtr>>;
 //using MapPtr = std::shared_ptr<std::vector<std::vector<TilePtr>>>;
+const unsigned short G_MIN_MAP_SIZE = 50;
+const unsigned short G_MAX_MAP_SIZE = 10000;
+const unsigned short G_MIN_NUMBER_OF_PLANETS = 50;
+const unsigned short G_MIN_RADIUS_OF_PLANET = 2;
 
 namespace engine
 {
@@ -17,16 +21,15 @@ namespace engine
 		void setSpritesPosition();
 
 	public:
-		int mapsize = 50;
-		
 		Map();
-		Map(unsigned short mapSize);
-		Map(unsigned short mapHeight, unsigned short mapWidth);
+		Map(unsigned short);
+		Map(unsigned short, unsigned short);
 
 		MapPtr getMap();
 		unsigned short getHeight();
 		unsigned short getWidth();
-		TilePtr getTile(unsigned short mapHeight, unsigned short mapWidth);
-		void setTile(unsigned short mapHeight, unsigned short mapWidth, unsigned char type);
+		TilePtr getTile(unsigned short, unsigned short);
+		std::pair<unsigned short, unsigned short> getTileXY(TilePtr tilePtr);
+		void setTile(unsigned short, unsigned short, unsigned char);
 	};
 }

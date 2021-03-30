@@ -19,14 +19,35 @@
     <Filter Include="Engine\src">
       <UniqueIdentifier>{0c2822ee-5022-4478-b5f4-4656420d897c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{0d33b6d2-3d36-4e35-a48f-972f22610b42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\include">
+      <UniqueIdentifier>{598a6d75-5058-45a2-beeb-cd0858f852f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\src">
+      <UniqueIdentifier>{3e9ed01f-dd76-42e1-aa7e-b0b5350bc9a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\include\units">
+      <UniqueIdentifier>{4cb25470-d644-43cc-a1af-9dfbfd2a317b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\include\buildings">
+      <UniqueIdentifier>{66c60ead-6700-43f8-9b75-0e8a51c2d390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\src\units">
+      <UniqueIdentifier>{bca994b9-0366-4244-acf9-ab1b16e1edd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\src\buildings">
+      <UniqueIdentifier>{bfcb1e3c-5300-471d-a940-0199a146807d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\include\player">
+      <UniqueIdentifier>{8ad4b171-e665-4d07-84da-5f12dfb76c67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\src\player">
+      <UniqueIdentifier>{deffd1ec-b230-4e95-ac43-265cffcd4e55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="game\src\Main.cpp">
-      <Filter>Game\src</Filter>
-    </ClCompile>
-    <ClCompile Include="engine\src\Tile.cpp">
-      <Filter>Engine\src</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\Map.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
@@ -39,18 +60,56 @@
     <ClCompile Include="engine\src\RenderMap.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\Planet.cpp">
-      <Filter>Engine\src</Filter>
-    </ClCompile>
     <ClCompile Include="engine\src\Shader.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
     <ClCompile Include="engine\src\Game.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\JsonToString.cpp">
+    <ClCompile Include="engine\src\JsonParser.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
+    <ClCompile Include="game\src\Planet.cpp">
+      <Filter>Game\src</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\Tile.cpp">
+      <Filter>Game\src</Filter>
+    </ClCompile>
+    <ClCompile Include="main\src\Main.cpp">
+      <Filter>Main\src</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\buildings\MilitaryBase.cpp">
+      <Filter>Game\src\buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\buildings\Mine.cpp">
+      <Filter>Game\src\buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\buildings\SpaceStation.cpp">
+      <Filter>Game\src\buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\buildings\AirBase.cpp">
+      <Filter>Game\src\buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\units\Melee.cpp">
+      <Filter>Game\src\units</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\units\Probe.cpp">
+      <Filter>Game\src\units</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\units\Ranged.cpp">
+      <Filter>Game\src\units</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\units\Worker.cpp">
+      <Filter>Game\src\units</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\Factory.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\buildings\Tower.cpp">
+      <Filter>Game\src\buildings</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\player\PlayerState.cpp">
+      <Filter>Game\src\player</Filter>
     <ClCompile Include="engine\src\PlayerObject.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
@@ -74,21 +133,75 @@
     <ClInclude Include="engine\include\RenderMap.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="engine\include\Planet.hpp">
-      <Filter>Engine\include</Filter>
-    </ClInclude>
     <ClInclude Include="engine\include\Shader.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="engine\include\Tile.hpp">
+    <ClInclude Include="engine\include\JsonParser.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="engine\include\JsonToString.h">
-      <Filter>Engine\include</Filter>
-    </ClInclude>
-    <ClInclude Include="game\src\Main.h">
+    <ClInclude Include="game\include\Tile.hpp">
       <Filter>Game\include</Filter>
     </ClInclude>
+    <ClInclude Include="game\include\Planet.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\Ownership.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\TileType.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="main\include\Main.hpp">
+      <Filter>Main\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\units\Melee.hpp">
+      <Filter>Game\include\units</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\units\Probe.hpp">
+      <Filter>Game\include\units</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\units\Ranged.hpp">
+      <Filter>Game\include\units</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\units\Worker.hpp">
+      <Filter>Game\include\units</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\units\IUnit.hpp">
+      <Filter>Game\include\units</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\buildings\IBuilding.hpp">
+      <Filter>Game\include\buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\buildings\Mine.hpp">
+      <Filter>Game\include\buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\buildings\SpaceStation.hpp">
+      <Filter>Game\include\buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\buildings\AirBase.hpp">
+      <Filter>Game\include\buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\buildings\MilitaryBase.hpp">
+      <Filter>Game\include\buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\IObject.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\Factory.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\ObjectType.hpp">
+      <Filter>Game\include</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\buildings\Tower.hpp">
+      <Filter>Game\include\buildings</Filter>
+    </ClInclude>
+    <ClInclude Include="game\include\player\PlayerState.hpp">
+      <Filter>Game\include\player</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config.json" />
     <ClInclude Include="engine\include\PlayerObject.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>

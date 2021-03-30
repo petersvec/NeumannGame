@@ -7,22 +7,29 @@ namespace engine
 	void Game::initVariables()
 	{
 		m_window = nullptr;
-		m_gameMap = new Map(250, 250);
-		MapGenerator* m_mapGenerator = new MapGenerator();
-		m_mapGenerator->generateMap(m_gameMap, 50, 3);
-		m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
-		m_renderMap.initMapTextures(*m_gameMap);
-		tileText.setString("0");
-		m_guiRectangle.setPosition(0, 620);
-		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
-		m_guiRectangle.setFillColor(sf::Color::Blue);
+		if (!m_gameConfig.setGameConfig("config.json", "Settings"))
+		{
+			exit(-555);
+		}
+		else
+		{
+			m_gameMap = new Map(m_gameConfig.getMapHeight(), m_gameConfig.getMapWidth());
+			MapGenerator* m_mapGenerator = new MapGenerator();
+			m_mapGenerator->generateMap(m_gameMap, m_gameConfig.getNumberOfPlanets(), m_gameConfig.getMaxRadiusOfPlanet());
+			m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
+			m_renderMap.initMapTextures(*m_gameMap);
+			tileText.setString("0");
+			m_guiRectangle.setPosition(0, 620);
+			m_guiRectangle.setSize(sf::Vector2f(1280, 100));
+			m_guiRectangle.setFillColor(sf::Color::Blue);
 
-		selectedMapTile.setFillColor(sf::Color::Blue);
-		selectedMapTile.setPosition(0, 0);
-		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
+			selectedMapTile.setFillColor(sf::Color::Blue);
+			selectedMapTile.setPosition(0, 0);
+			selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
 	
-		testOM.createPO(10, 10, 1, 1);
-		testOM.createPO(20, 20, 1, 1);		
+			testOM.createPO(10, 10, 1, 1);
+			testOM.createPO(20, 20, 1, 1);		
+		}
 	}
 
 	void Game::initWindow()
@@ -87,10 +94,17 @@ namespace engine
 
 	void Game::setDisplayText(sf::Text *text, sf::String str) {
 
+		// select the font
+		
+
+		// set the string to display
 		text->setString(str);
 		text->setCharacterSize(40); // in pixels
 		text->setFillColor(sf::Color::Red);
-		text->setPosition(0, 640);
+
+		// set the text style
+		text->setStyle(sf::Text::Bold | sf::Text::Underlined);
+		text->setPosition(0, 0);
 	}
 	
 	
@@ -112,8 +126,8 @@ namespace engine
 			case sf::Event::MouseWheelMoved:					//zoom
 				if (ZoomLevel <= 3.0 && m_event.mouseWheel.delta == -1 || ZoomLevel > 0.2 && m_event.mouseWheel.delta == 1)
 				{
-					m_view.zoom(1 + 0.1 * -(m_event.mouseWheel.delta));
-					ZoomLevel += (0.1 * -(m_event.mouseWheel.delta));
+					m_view.zoom(1 + 0.1f * -(m_event.mouseWheel.delta));
+					ZoomLevel += (0.1f * -(m_event.mouseWheel.delta));
 				}
 				break;
 

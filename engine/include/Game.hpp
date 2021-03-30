@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
+#include "JsonParser.hpp"
 #include "JsonToString.hpp"
 #include "PlayerObject.hpp"
 #include "ObjectManager.hpp"
@@ -20,12 +21,13 @@ namespace engine
 		sf::VideoMode m_videoMode;
 		sf::View m_view;
 		sf::RenderTexture m_renderTexture;
-		float ZoomLevel = 1;
-		int tileSize = 50;
+		float ZoomLevel = 1.f;
+		unsigned const char tileSize = 50;
 		sf::Vector2i pixelPos;
 		sf::Vector2f worldPos;
 		const sf::Texture texture;
 		RenderMap m_renderMap;
+		JsonParser m_gameConfig;
 		sf::Text tileText;
 		sf::String str;
 		sf::View defaultView;
@@ -39,7 +41,6 @@ namespace engine
 	public:
 		enum Player { Player1, Player2 };
 		Player activePlayer = Player1;
-
 
 		void initVariables();
 		void initWindow();

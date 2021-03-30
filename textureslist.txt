@@ -1,4 +1,0 @@
-data/textures/Void.jpg::Void
-data/textures/Jupiter.jpg::Jupiter
-data/textures/Mars.jpg::Mars
-data/textures/Mercury.jpg::Mercury
