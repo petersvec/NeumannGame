@@ -23,5 +23,7 @@ namespace game
 			unsigned short siliconCost);
 
 		virtual void attack(engine::IObject object);
+
+		void update(engine::Map);
 	};
 }

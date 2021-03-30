@@ -1,5 +1,5 @@
 #pragma once
-#include "../../engine/include/IObject.hpp"
+#include <SFML/Graphics/Sprite.hpp>
 #include "TileType.hpp"
 
 namespace game
