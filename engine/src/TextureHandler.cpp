@@ -4,6 +4,8 @@
 
 namespace engine
 {
+    std::unique_ptr<TextureHandler> textures = std::make_unique<TextureHandler>();
+
     TextureHandler::TextureHandler() {}
 
     void TextureHandler::LoadTextures()

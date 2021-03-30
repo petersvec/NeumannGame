@@ -14,7 +14,6 @@
 #include "../../game/include/buildings/Mine.hpp"
 #include "../../game/include/buildings/SpaceStation.hpp"
 #include "../../game/include/buildings/Tower.hpp"
-#include "TextureHandler.hpp"
 #include "Utilities.hpp"
 
 using IObjectPtr = std::shared_ptr<engine::IObject>;
@@ -28,6 +27,6 @@ namespace engine
 	protected:
 
 	public:
-		IObjectPtr getObject(game::ObjectType objType, TilePtr location, TextureHandler textureHandler, game::Player owner);
+		IObjectPtr getObject(game::ObjectType objType, TilePtr location, game::Player owner);
 	};
 }

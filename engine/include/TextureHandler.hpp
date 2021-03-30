@@ -7,6 +7,9 @@
 
 namespace engine
 {
+	class TextureHandler;
+	extern std::unique_ptr<TextureHandler> textures;
+
 	class TextureHandler
 	{
 	private:

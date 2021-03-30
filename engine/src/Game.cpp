@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/Game.hpp"
 #include "../include/Shader.hpp"
+#include "../include/TextureHandler.hpp"
 
 namespace engine
 {
@@ -16,6 +17,7 @@ namespace engine
 		MapGenerator* m_mapGenerator = new MapGenerator();
 		m_mapGenerator->generateMap(m_gameMap, config->getNumberOfPlanets(), config->getMaxRadiusOfPlanet());
 		m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
+		textures->LoadTextures();
 		m_renderMap.initMapTextures(*m_gameMap);
 		tileText.setString("0");
 		m_guiRectangle.setPosition(0, 620);
