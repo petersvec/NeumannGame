@@ -6,30 +6,28 @@ namespace engine
 {
 	void Game::initVariables()
 	{
-		m_window = nullptr;
-		if (!m_gameConfig.setGameConfig("config.json", "Settings"))
+		if (!config->setGameConfig("config.json", "Settings"))
 		{
 			exit(-555);
 		}
-		else
-		{
-			m_gameMap = new Map(m_gameConfig.getMapHeight(), m_gameConfig.getMapWidth());
-			MapGenerator* m_mapGenerator = new MapGenerator();
-			m_mapGenerator->generateMap(m_gameMap, m_gameConfig.getNumberOfPlanets(), m_gameConfig.getMaxRadiusOfPlanet());
-			m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
-			m_renderMap.initMapTextures(*m_gameMap);
-			tileText.setString("0");
-			m_guiRectangle.setPosition(0, 620);
-			m_guiRectangle.setSize(sf::Vector2f(1280, 100));
-			m_guiRectangle.setFillColor(sf::Color::Blue);
 
-			selectedMapTile.setFillColor(sf::Color::Blue);
-			selectedMapTile.setPosition(0, 0);
-			selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
+		m_window = nullptr;
+		m_gameMap = new Map(config->getMapHeight(), config->getMapWidth());
+		MapGenerator* m_mapGenerator = new MapGenerator();
+		m_mapGenerator->generateMap(m_gameMap, config->getNumberOfPlanets(), config->getMaxRadiusOfPlanet());
+		m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
+		m_renderMap.initMapTextures(*m_gameMap);
+		tileText.setString("0");
+		m_guiRectangle.setPosition(0, 620);
+		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
+		m_guiRectangle.setFillColor(sf::Color::Blue);
+
+		selectedMapTile.setFillColor(sf::Color::Blue);
+		selectedMapTile.setPosition(0, 0);
+		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
 	
-			testOM.createPO(10, 10, 1, 1);
-			testOM.createPO(20, 20, 1, 1);		
-		}
+		testOM.createPO(10, 10, 1, 1);
+		testOM.createPO(20, 20, 1, 1);		
 	}
 
 	void Game::initWindow()

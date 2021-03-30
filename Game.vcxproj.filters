@@ -110,6 +110,7 @@
     </ClCompile>
     <ClCompile Include="game\src\player\PlayerState.cpp">
       <Filter>Game\src\player</Filter>
+    </ClCompile>
     <ClCompile Include="engine\src\PlayerObject.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>

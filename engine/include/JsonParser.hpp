@@ -8,17 +8,20 @@
 
 namespace engine
 {
+	class JsonParser;
+	extern std::unique_ptr<JsonParser> config;
+
 	class JsonParser
 	{
 	private:
 		rapidjson::Document m_gameConfigFile;
 		std::string m_configType;
 
-		void setConfigType(const char*);
+		void setConfigType(const std::string &jsonType);
 
 	public:
 
-		bool setGameConfig(const char*, const char*);
+		bool setGameConfig(const std::string &jsonFile, const std::string &jsonType);
 		unsigned short getMapHeight();
 		unsigned short getMapWidth();
 		unsigned short getNumberOfPlanets();

@@ -1,5 +1,6 @@
 #include "../include/RenderMap.hpp"
 #include "../include/TextureHandler.hpp"
+#include <SFML/Graphics/RenderTexture.hpp>
 
 namespace engine
 {
