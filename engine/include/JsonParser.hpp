@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdio>
 #include <string>
+#include <map>
 #include "../../rapidjson/document.h"
 #include "../../rapidjson/filereadstream.h"
 #include "../include/Map.hpp"
@@ -22,6 +23,6 @@ namespace engine
 		unsigned short getMapWidth();
 		unsigned short getNumberOfPlanets();
 		unsigned char getMaxRadiusOfPlanet();
-		std::unique_ptr<std::vector<std::string>> getTextures();
+		std::map<std::string, std::string> getTextures();
 	};
 }

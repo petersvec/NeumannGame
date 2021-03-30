@@ -8,7 +8,7 @@ namespace engine
 	class TextureHandler
 	{
 	private:
-		std::map<std::string, sf::Texture*> texturemap;
+		std::map<std::string, sf::Texture*> textureMap;
 		sf::Texture** text;
 		sf::Texture* retText;
 
