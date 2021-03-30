@@ -1,5 +1,4 @@
 #include "../include/JsonParser.hpp"
-#include "../include/Map.hpp"
 
 namespace engine
 {
@@ -108,6 +107,66 @@ namespace engine
         else
         {
             return maxRadiusOfPlanet;
+        }
+    }
+
+    std::unique_ptr<std::vector<std::string>> JsonParser::getTextures()
+    {
+        std::unique_ptr<std::vector<std::string>> textures = std::make_unique<std::vector<std::string>>();
+        if (!m_gameConfigFile.HasMember("Textures") ||
+            !m_gameConfigFile["Textures"].IsObject() ||
+            !m_gameConfigFile["Textures"].HasMember("Jupiter") ||
+            !m_gameConfigFile["Textures"].HasMember("Mars") ||
+            !m_gameConfigFile["Textures"].HasMember("Mercury") ||
+            !m_gameConfigFile["Textures"].HasMember("Void") ||
+            !m_gameConfigFile["Textures"].HasMember("AirBase") ||
+            !m_gameConfigFile["Textures"].HasMember("Melee") ||
+            !m_gameConfigFile["Textures"].HasMember("MilitaryBase") ||
+            !m_gameConfigFile["Textures"].HasMember("Mine") ||
+            !m_gameConfigFile["Textures"].HasMember("Probe") ||
+            !m_gameConfigFile["Textures"].HasMember("Ranged") ||
+            !m_gameConfigFile["Textures"].HasMember("SpaceStation") ||
+            !m_gameConfigFile["Textures"].HasMember("Tower") ||
+            !m_gameConfigFile["Textures"].HasMember("Worker"))
+        {
+            const rapidjson::Value& texture = m_gameConfigFile["Textures"];
+            
+            if (!texture["Jupiter"].IsArray() ||
+                !texture["Mars"].IsArray() ||
+                !texture["Mercury"].IsArray() ||
+                !texture["Void"].IsArray() ||
+                !texture["AirBase"].IsArray() ||
+                !texture["Melee"].IsArray() ||
+                !texture["MilitaryBase"].IsArray() ||
+                !texture["Mine"].IsArray() ||
+                !texture["Probe"].IsArray() ||
+                !texture["Ranged"].IsArray() ||
+                !texture["SpaceStation"].IsArray() ||
+                !texture["Tower"].IsArray() ||
+                !texture["Worker"].IsArray())
+            {
+                return nullptr;
+            }
+
+            textures.get()->push_back(texture["Jupiter"].GetString());
+            textures.get()->push_back(texture["Mars"].GetString());
+            textures.get()->push_back(texture["Mercury"].GetString());
+            textures.get()->push_back(texture["Void"].GetString());
+            textures.get()->push_back(texture["AirBase"].GetString());
+            textures.get()->push_back(texture["Melee"].GetString());
+            textures.get()->push_back(texture["MilitaryBase"].GetString());
+            textures.get()->push_back(texture["Mine"].GetString());
+            textures.get()->push_back(texture["Probe"].GetString());
+            textures.get()->push_back(texture["Ranged"].GetString());
+            textures.get()->push_back(texture["SpaceStation"].GetString());
+            textures.get()->push_back(texture["Tower"].GetString());
+            textures.get()->push_back(texture["Worker"].GetString());
+
+            return textures;
+        }
+        else
+        {
+            return nullptr;
         }
     }
 }

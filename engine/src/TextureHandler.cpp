@@ -4,14 +4,10 @@
 
 namespace engine
 {
-    TextureHandler::TextureHandler()
-    {
-
-    }
+    TextureHandler::TextureHandler() {}
 
     void TextureHandler::LoadTextures()
     {
-
         texturemap.begin();
         std::ifstream file("textureslist.txt");
         std::string line;
@@ -49,7 +45,6 @@ namespace engine
 
     sf::Texture* TextureHandler::getTexture(std::string str)
     {
-
         retText = texturemap.at(str);
         return retText;
     }

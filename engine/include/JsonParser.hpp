@@ -3,6 +3,7 @@
 #include <string>
 #include "../../rapidjson/document.h"
 #include "../../rapidjson/filereadstream.h"
+#include "../include/Map.hpp"
 
 namespace engine
 {
@@ -21,5 +22,6 @@ namespace engine
 		unsigned short getMapWidth();
 		unsigned short getNumberOfPlanets();
 		unsigned char getMaxRadiusOfPlanet();
+		std::unique_ptr<std::vector<std::string>> getTextures();
 	};
 }
