@@ -72,8 +72,6 @@ namespace engine
 
 			char c = (unsigned char)m_gameMap->getTile(x, y)->getType();
 			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c) + " ";
-			//std::cout << m_gameMap->getTile(x, y)->getType();
-
 			setDisplayText(&tileText, str);
 			setClickedTile(x, y, &selectedMapTile);
 			//return m_gameMap->getTile(x, y);
