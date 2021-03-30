@@ -1,5 +1,8 @@
 #pragma once
+
 #include <memory>
+#include <SFML\Graphics\Texture.hpp>
+
 #include "../include/IObject.hpp"
 #include "../../game/include/ObjectType.hpp"
 #include "../../game/include/units/Melee.hpp"
@@ -11,8 +14,9 @@
 #include "../../game/include/buildings/Mine.hpp"
 #include "../../game/include/buildings/SpaceStation.hpp"
 #include "../../game/include/buildings/Tower.hpp"
-#include <SFML\Graphics\Texture.hpp>
 #include "TextureHandler.hpp"
+#include "Utilities.hpp"
+
 using IObjectPtr = std::shared_ptr<engine::IObject>;
 
 namespace engine
@@ -24,6 +28,6 @@ namespace engine
 	protected:
 
 	public:
-		IObjectPtr getObject(game::ObjectType objType, TilePtr location, TextureHandler textureHandler);
+		IObjectPtr getObject(game::ObjectType objType, TilePtr location, TextureHandler textureHandler, game::Player owner);
 	};
 }

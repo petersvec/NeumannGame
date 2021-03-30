@@ -11,10 +11,11 @@ namespace game
 		unsigned char armour,
 		unsigned short ironCost,
 		unsigned short copperCost,
-		unsigned short siliconCost)
+		unsigned short siliconCost,
+		Player owner)
 		:
-		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost },
-		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour },
+		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner },
+		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
 		IObject{ hp, type, texture, location }
 	{}
 

@@ -25,6 +25,7 @@ namespace engine
 		unsigned short getMapHeight();
 		unsigned short getMapWidth();
 		unsigned short getNumberOfPlanets();
+		unsigned getTileSize() const;
 		unsigned char getMaxRadiusOfPlanet();
 		std::map<std::string, std::string> getTextures();
 	};

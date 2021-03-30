@@ -8,9 +8,10 @@ namespace game
 		TilePtr location,
 		unsigned char moveSpeed,
 		unsigned char attackDamage,
-		unsigned char armour)
+		unsigned char armour,
+		Player owner)
 		:
-		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour },
+		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
 		engine::IObject{ hp, type, texture, location }
 	{}
 

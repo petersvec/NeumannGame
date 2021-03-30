@@ -11,6 +11,7 @@ namespace game
 		unsigned char m_moveSpeed;
 		unsigned char m_attackDamage;
 		unsigned char m_armour;
+		Player m_owner;
 		
 		IUnit(unsigned short hp,
 			game::ObjectType type,
@@ -18,12 +19,14 @@ namespace game
 			TilePtr location,
 			unsigned char moveSpeed,
 			unsigned char attackDamage,
-			unsigned char armour)
+			unsigned char armour,
+			Player owner)
 			:
 			IObject{ hp, type, texture, location },
 			m_moveSpeed{ moveSpeed },
 			m_attackDamage{ attackDamage },
-			m_armour{ armour }
+			m_armour{ armour },
+			m_owner{owner}
 		{}
 
 	public:
@@ -32,6 +35,16 @@ namespace game
 		unsigned char getMoveSpeed()
 		{
 			return m_moveSpeed;
+		}
+
+		void setOwner(Player player)
+		{
+			m_owner = player;
+		}
+
+		Player GetOwner() const
+		{
+			return m_owner;
 		}
 
 		unsigned char getAttackDamage()

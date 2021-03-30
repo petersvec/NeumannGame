@@ -55,6 +55,7 @@
     <ClInclude Include="engine\include\RenderMap.hpp" />
     <ClInclude Include="engine\include\Shader.hpp" />
     <ClInclude Include="engine\include\TextureHandler.hpp" />
+    <ClInclude Include="engine\include\Utilities.hpp" />
     <ClInclude Include="game\include\buildings\AirBase.hpp" />
     <ClInclude Include="game\include\buildings\IBuilding.hpp" />
     <ClInclude Include="game\include\buildings\MilitaryBase.hpp" />

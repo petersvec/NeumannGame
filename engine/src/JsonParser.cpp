@@ -60,6 +60,18 @@ namespace engine
         }
     }
 
+    unsigned JsonParser::getTileSize() const
+    {
+        if (m_gameConfigFile.HasMember("TileSize") && m_gameConfigFile["TileSize"].IsInt())
+        {
+            return m_gameConfigFile["TileSize"].GetInt();
+        }
+        else
+        {
+            return G_MIN_TILE_SIZE;
+        }
+    }
+
     unsigned short JsonParser::getMapWidth()
     {
         int mapWidth = G_MIN_MAP_SIZE;

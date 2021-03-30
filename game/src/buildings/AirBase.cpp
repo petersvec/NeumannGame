@@ -8,9 +8,10 @@ namespace game
 		TilePtr location,
 		unsigned short ironCost,
 		unsigned short copperCost,
-		unsigned short siliconCost)
+		unsigned short siliconCost,
+		Player owner)
 		:
-		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost },
+		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner},
 		IObject{ hp, type, texture, location }
 	{}
 }

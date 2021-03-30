@@ -1,7 +1,11 @@
 #pragma once
+
 #include <SFML\Graphics\Sprite.hpp>
+#include <SFML\Graphics\RenderWindow.hpp>
+
 #include "../../game/include/ObjectType.hpp"
 #include "Map.hpp"
+#include "Utilities.hpp"
 
 namespace engine
 {
@@ -26,6 +30,21 @@ namespace engine
 		}
 
 	public:
+		virtual void draw(sf::RenderWindow* window)
+		{
+			window->draw(m_sprite);
+		}
+
+		virtual void update()
+		{
+
+		}
+
+		void setPosition(const sf::Vector2u& position)
+		{
+			m_sprite.setPosition(TileToScreen(position));
+		}
+
 		unsigned short getHp()
 		{
 			return m_hp;
