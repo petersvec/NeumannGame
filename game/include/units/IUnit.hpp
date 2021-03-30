@@ -3,6 +3,9 @@
 
 namespace game
 {
+	class IUnit;
+	using IUnitPtr = std::shared_ptr<IUnit>;
+
 	class IUnit : virtual public engine::IObject
 	{
 	private:

@@ -9,6 +9,9 @@
 
 namespace engine
 {
+	class IObject;
+	using IObjectPtr = std::shared_ptr<engine::IObject>;
+
 	class IObject
 	{
 	private:
@@ -23,10 +26,10 @@ namespace engine
 			:
 			m_hp{ hp },
 			m_type{ type },
-			m_sprite{},
-			m_location{ location }
+			m_sprite{}
 		{
 			setSprite(texture);
+			setLocation(location);
 		}
 
 	public:
@@ -43,6 +46,11 @@ namespace engine
 		void setPosition(const sf::Vector2u& position)
 		{
 			m_sprite.setPosition(TileToScreen(position));
+		}
+
+		sf::Vector2f getPosition() const
+		{
+			return m_sprite.getPosition();
 		}
 
 		unsigned short getHp()
@@ -84,6 +92,7 @@ namespace engine
 		void setLocation(TilePtr location)
 		{
 			m_location = location;
+			m_sprite.setPosition(location->getPosition());
 		}
 	};
 }

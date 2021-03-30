@@ -3,8 +3,8 @@
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
 #include "JsonParser.hpp"
-#include "PlayerObject.hpp"
 #include "ObjectManager.hpp"
+#include "Utilities.hpp"
 
 namespace engine
 {
@@ -33,12 +33,11 @@ namespace engine
 		int changed = 1;
 		sf::RectangleShape m_guiRectangle;
 		ObjectManager testOM;
-		std::shared_ptr<PlayerObject> testPO;
+		game::IUnitPtr testPO;
 		bool unitIsSelected;
 		sf::RectangleShape selectedMapTile;
 	public:
-		enum Player { Player1, Player2 };
-		Player activePlayer = Player1;
+		game::Player activePlayer = game::Player::Player1;
 
 		void initVariables();
 		void initWindow();

@@ -3,7 +3,7 @@
 #include <memory>
 #include <SFML\Graphics\Texture.hpp>
 
-#include "../include/IObject.hpp"
+#include "../../game/include/units/IUnit.hpp"
 #include "../../game/include/ObjectType.hpp"
 #include "../../game/include/units/Melee.hpp"
 #include "../../game/include/units/Probe.hpp"
@@ -16,17 +16,19 @@
 #include "../../game/include/buildings/Tower.hpp"
 #include "Utilities.hpp"
 
-using IObjectPtr = std::shared_ptr<engine::IObject>;
-
 namespace engine
 {
-	class Factory
+	class UnitFactory;
+	using UnitFactoryPtr = std::unique_ptr<UnitFactory>;
+	extern UnitFactoryPtr unitFactory;
+
+	class UnitFactory
 	{
 	private:
 
 	protected:
 
 	public:
-		IObjectPtr getObject(game::ObjectType objType, TilePtr location, game::Player owner);
+		game::IUnitPtr create(game::ObjectType objType, TilePtr location, game::Player owner);
 	};
 }

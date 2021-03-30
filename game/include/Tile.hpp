@@ -22,6 +22,7 @@ namespace game
 
 		unsigned char getType();
 		sf::Sprite getSprite();
+		sf::Vector2f getPosition() const;
 
 		void setType(unsigned char type);
 		void setSprite(const sf::Texture& texture);

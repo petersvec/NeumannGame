@@ -2,6 +2,7 @@
 #include "../include/Game.hpp"
 #include "../include/Shader.hpp"
 #include "../include/TextureHandler.hpp"
+#include "../include/Factory.hpp"
 
 namespace engine
 {
@@ -28,8 +29,11 @@ namespace engine
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
 	
-		testOM.createPO(10, 10, 1, 1);
-		testOM.createPO(20, 20, 1, 1);		
+		auto unit_1 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 10), game::Player::Player1);
+		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Player::Player1);
+
+		testOM.addUnit(unit_1);
+		testOM.addUnit(unit_2);
 	}
 
 	void Game::initWindow()
@@ -153,7 +157,7 @@ namespace engine
 					if (unitIsSelected) {
 						pixelPos = sf::Mouse::getPosition(*m_window);
 						worldPos = m_window->mapPixelToCoords(pixelPos);
-						testPO->move(worldPos.x/tileSize, worldPos.y/tileSize);
+						testPO->setPosition(sf::Vector2u(worldPos.x/tileSize, worldPos.y/tileSize));
 					}
 				}
 				break;
@@ -161,19 +165,19 @@ namespace engine
 				case sf::Event::KeyPressed:							//key pressed
 					if (m_event.key.code == sf::Keyboard::Space)	//space pressed switch player
 					{
-						if (activePlayer == Player1)
+						if (activePlayer == game::Player::Player1)
 						{
 							unitIsSelected = false;
 							testPO = nullptr;
-							activePlayer = Player2;
+							activePlayer = game::Player::Player2;
 						}
 						else
 						{
 							unitIsSelected = false;
 							testPO = nullptr;
-							activePlayer = Player1;
+							activePlayer = game::Player::Player1;
 						}
-						std::cout << activePlayer;
+						std::cout << (int)activePlayer;
 					}
 					break;
 					
