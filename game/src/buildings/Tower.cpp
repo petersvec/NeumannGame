@@ -17,4 +17,9 @@ namespace game
 		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour },
 		IObject{ hp, type, texture, location }
 	{}
+
+	void Tower::attack(engine::IObject object)
+	{
+		object.setHp(object.getHp() - getAttackDamage());
+	}
 }

@@ -13,4 +13,16 @@ namespace game
 		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour },
 		IObject{ hp, type, texture, location }
 	{}
+
+	void Melee::attack(engine::IObject object)
+	{
+		if (object.getType() == game::ObjectType::Ranged)
+		{
+			object.setHp(object.getHp() - (getAttackDamage() * 2));
+		}
+		else
+		{
+			object.setHp(object.getHp() - getAttackDamage());
+		}
+	}
 }

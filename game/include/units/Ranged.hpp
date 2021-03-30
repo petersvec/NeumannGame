@@ -19,5 +19,7 @@ namespace game
 			unsigned char moveSpeed,
 			unsigned char attackDamage,
 			unsigned char armour);
+
+		virtual void attack(engine::IObject object);
 	};
 }

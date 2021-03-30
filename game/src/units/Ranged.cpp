@@ -13,4 +13,9 @@ namespace game
 		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour },
 		IObject{ hp, type, texture, location }
 	{}
+
+	void Ranged::attack(engine::IObject object)
+	{
+		object.setHp(object.getHp() - getAttackDamage() / 2);
+	}
 }

@@ -21,5 +21,7 @@ namespace game
 			unsigned short ironCost,
 			unsigned short copperCost, 
 			unsigned short siliconCost);
+
+		virtual void attack(engine::IObject object);
 	};
 }
