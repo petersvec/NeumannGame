@@ -110,6 +110,11 @@
     </ClCompile>
     <ClCompile Include="game\src\player\PlayerState.cpp">
       <Filter>Game\src\player</Filter>
+    <ClCompile Include="engine\src\PlayerObject.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\src\ObjectManager.cpp">
+      <Filter>Engine\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -197,5 +202,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="config.json" />
+    <ClInclude Include="engine\include\PlayerObject.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\ObjectManager.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

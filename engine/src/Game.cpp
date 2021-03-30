@@ -19,6 +19,16 @@ namespace engine
 			m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
 			m_renderMap.initMapTextures(*m_gameMap);
 			tileText.setString("0");
+			m_guiRectangle.setPosition(0, 620);
+			m_guiRectangle.setSize(sf::Vector2f(1280, 100));
+			m_guiRectangle.setFillColor(sf::Color::Blue);
+
+			selectedMapTile.setFillColor(sf::Color::Blue);
+			selectedMapTile.setPosition(0, 0);
+			selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
+	
+			testOM.createPO(10, 10, 1, 1);
+			testOM.createPO(20, 20, 1, 1);		
 		}
 	}
 
@@ -28,7 +38,8 @@ namespace engine
 		m_window = new sf::RenderWindow(m_videoMode, "Neumann Game", sf::Style::Titlebar | sf::Style::Close);
 		m_window->setFramerateLimit(60);
 		m_view.setSize(sf::Vector2f(1280.f, 720.f));
-		//defaultView.setSize(sf::Vector2f(1280.f, 720.f));
+		defaultView.setSize(sf::Vector2f(1280.f, 720.f));
+		defaultView.setCenter(1280/2, 720/2);
 		
 		//Shader shader;
 		//shader.doStuff();
@@ -48,21 +59,37 @@ namespace engine
 
 	void Game::clickMap(int x, int y)
 	{
-		if (x >= 0 && y >= 0 && x <= tileSize * (m_gameMap->getWidth()) && y <= tileSize * m_gameMap->getHeight())
+		if (x >= 0 && y >= 0 && x < tileSize * (m_gameMap->getWidth()) && y < tileSize * m_gameMap->getHeight())
 		{
+			x = x / tileSize;
+			y = y / tileSize;
 			
-			
-			
-			char c = (unsigned char)m_gameMap->getTile(x/tileSize, y/tileSize)->getType();
-			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c);
-			std::cout << m_gameMap->getTile(x / tileSize, y / tileSize)->getType();
 
-			// m_gameMap->getTile(x, y);
+			
+			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer);
+			
+			if (testPO != nullptr)
+			{
+				unitIsSelected = true;
+			}
+			else
+			{
+				unitIsSelected = false;
+			}
 
+			char c = (unsigned char)m_gameMap->getTile(x, y)->getType();
+			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c) + " ";
+			//std::cout << m_gameMap->getTile(x, y)->getType();
 
 			setDisplayText(&tileText, str);
+			setClickedTile(x, y, &selectedMapTile);
+			//return m_gameMap->getTile(x, y);
 		}
 		
+	}
+	void Game::setClickedTile(int x, int y, sf::RectangleShape* rs)
+	{
+		rs->setPosition(x*tileSize, y*tileSize);
 	}
 
 	void Game::setDisplayText(sf::Text *text, sf::String str) {
@@ -72,11 +99,7 @@ namespace engine
 
 		// set the string to display
 		text->setString(str);
-
-		// set the character size
-		text->setCharacterSize(50); // in pixels, not points!
-
-		// set the color
+		text->setCharacterSize(40); // in pixels
 		text->setFillColor(sf::Color::Red);
 
 		// set the text style
@@ -85,8 +108,6 @@ namespace engine
 	}
 	
 	
-	
-
 	const bool Game::isRunning() const
 	{
 		return m_window->isOpen();
@@ -102,26 +123,60 @@ namespace engine
 				m_window->close();
 				break;
 
-			case sf::Event::MouseWheelMoved:
-				if (ZoomLevel <= 2.8 && m_event.mouseWheel.delta == -1 || ZoomLevel > 0.2 && m_event.mouseWheel.delta == 1)
+			case sf::Event::MouseWheelMoved:					//zoom
+				if (ZoomLevel <= 3.0 && m_event.mouseWheel.delta == -1 || ZoomLevel > 0.2 && m_event.mouseWheel.delta == 1)
 				{
 					m_view.zoom(1 + 0.1f * -(m_event.mouseWheel.delta));
 					ZoomLevel += (0.1f * -(m_event.mouseWheel.delta));
 				}
 				break;
 
-			case sf::Event::MouseButtonPressed:
-				pixelPos = sf::Mouse::getPosition(*m_window);
-				worldPos = m_window->mapPixelToCoords(pixelPos);
+			case sf::Event::MouseButtonPressed:				//click
+				if (m_event.mouseButton.button == sf::Mouse::Left) {
 
-				std::cout << worldPos.x;
-				std::cout << " ";
-				std::cout << worldPos.y;
-				std::cout << '\n';
-				clickMap(worldPos.x, worldPos.y);
-				
+
+					pixelPos = sf::Mouse::getPosition(*m_window);
+					worldPos = m_window->mapPixelToCoords(pixelPos);
+
+					//if(pixelPos.y < GuiHeight)
+					clickMap(worldPos.x, worldPos.y);
+
+					/*
+					else
+					{
+					clickGui(pixelPos.x, pixelPos.y);
+					}
+					*/
+				}
+				if (m_event.mouseButton.button == sf::Mouse::Right)
+				{
+					if (unitIsSelected) {
+						pixelPos = sf::Mouse::getPosition(*m_window);
+						worldPos = m_window->mapPixelToCoords(pixelPos);
+						testPO->move(worldPos.x/tileSize, worldPos.y/tileSize);
+					}
+				}
 				break;
 
+				case sf::Event::KeyPressed:							//key pressed
+					if (m_event.key.code == sf::Keyboard::Space)	//space pressed switch player
+					{
+						if (activePlayer == Player1)
+						{
+							unitIsSelected = false;
+							testPO = nullptr;
+							activePlayer = Player2;
+						}
+						else
+						{
+							unitIsSelected = false;
+							testPO = nullptr;
+							activePlayer = Player1;
+						}
+						std::cout << activePlayer;
+					}
+					break;
+					
 			default:
 				break;
 			}
@@ -129,7 +184,7 @@ namespace engine
 	}
 
 	void Game::update()
-	{
+	{																	//View movement map
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
 			if (m_view.getCenter().x > -40)
@@ -172,8 +227,8 @@ namespace engine
 		tileText.setFont(font);
 		m_window->clear();
 
-
-		if (changed == 1) {
+		if (changed == 1) 
+		{
 			m_renderTexture.clear();
 			m_renderMap.renderMap(*m_gameMap, m_renderTexture);
 			changed=0;
@@ -185,14 +240,14 @@ namespace engine
 		m_frame.setTexture(texture);
 		m_window->setView(m_view);
 		m_window->draw(m_frame);
-		
+		testOM.drawAll(m_window);
 		
 		m_window->setView(defaultView);
+		m_window->draw(m_guiRectangle);
 		m_window->draw(tileText);
-		m_window->display();
 		m_window->setView(m_view);
-		
+		m_window->draw(selectedMapTile);
 
-		
+		m_window->display();
 	}
 }
