@@ -1,21 +1,24 @@
 #pragma once
+
 #include <SFML\Graphics\Texture.hpp>
 #include <map>
-#include "../include/Game.hpp"
+
+#include "JsonParser.hpp"
 
 namespace engine
 {
+	class TextureHandler;
+	extern std::unique_ptr<TextureHandler> textures;
+
 	class TextureHandler
 	{
 	private:
-		std::map<std::string, sf::Texture*> texturemap;
-		sf::Texture** text;
-		sf::Texture* retText;
+		std::map<std::string, sf::Texture*> textureMap;
 
 	public:
 		TextureHandler();
 		void LoadTextures();
-		sf::Texture* getTexture(std::string str);
+		sf::Texture* getTexture(const std::string &name);
 	};
 
 }

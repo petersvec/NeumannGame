@@ -1,13 +1,13 @@
 #include "../include/Planet.hpp"
 
-namespace engine
+namespace game
 {
 	Planet::Planet()
 	{
-		m_owner = (unsigned char)0;
+		m_owner = Ownership::Unoccupied;
 	}
 
-	unsigned char Planet::getOwner()
+	Ownership Planet::getOwner()
 	{
 		return m_owner;
 	}

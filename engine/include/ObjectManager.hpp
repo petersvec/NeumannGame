@@ -1,7 +1,10 @@
 #pragma once
-#include "PlayerObject.hpp"
+
 #include <vector>
 #include <memory>
+
+#include "Utilities.hpp"
+#include "../../game/include/units/IUnit.hpp"
 
 namespace engine
 {
@@ -12,10 +15,10 @@ namespace engine
 		ObjectManager();
 		
 		void drawAll(sf::RenderWindow* window);
-		void createPO(int x, int y, int type, int value);
-		std::shared_ptr<PlayerObject> findUnit(int x, int y, int player);
+		void addUnit(game::IUnitPtr unit);
+		game::IUnitPtr findUnit(int x, int y, game::Player player);
 	private:
-		std::vector<std::shared_ptr<PlayerObject>> playerObjectVector;
+		std::vector<game::IUnitPtr > playerObjectVector;
 		
 
 	};

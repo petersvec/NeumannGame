@@ -12,7 +12,7 @@ namespace engine
 		{
 			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
-				m_map[i][j] = std::make_shared<Tile>(0);
+				m_map[i][j] = std::make_shared<game::Tile>(0);
 			}
 		}
 
@@ -29,7 +29,7 @@ namespace engine
 		{
 			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
-				m_map[i][j] = std::make_shared<Tile>(0);
+				m_map[i][j] = std::make_shared<game::Tile>(0);
 			}
 		}
 
@@ -46,7 +46,7 @@ namespace engine
 		{
 			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
-				m_map[i][j] = std::make_shared<Tile>(0);
+				m_map[i][j] = std::make_shared<game::Tile>(0);
 			}
 		}
 
@@ -59,7 +59,7 @@ namespace engine
 		{
 			for (unsigned short j = 0; j < m_mapWidth; ++j)
 			{
-				(m_map[i][j])->setPosition(i * 50.F, j * 50.0F);
+				(m_map[i][j])->setPosition(i * 50.F, j * 50.F);
 			}
 		}
 	}
@@ -82,6 +82,21 @@ namespace engine
 	TilePtr Map::getTile(unsigned short mapHeight, unsigned short mapWidth)
 	{
 		return m_map[mapHeight][mapWidth];
+	}
+
+	std::pair<unsigned short, unsigned short> Map::getTileXY(TilePtr tilePtr)
+	{
+		for (unsigned short i = 0; i < m_mapHeight; ++i)
+		{
+			for (unsigned short j = 0; j < m_mapWidth; ++j)
+			{
+				if (m_map[i][j] == tilePtr)
+				{
+					return std::make_pair(i, j);
+				}
+			}
+		}
+		return std::make_pair(G_MAX_MAP_SIZE, G_MAX_MAP_SIZE);
 	}
 
 	void Map::setTile(unsigned short mapHeight, unsigned short mapWidth, unsigned char type)

@@ -1,4 +1,4 @@
-#include "../../engine/include/Game.hpp"
+#include "../include/Main.hpp"
 
 int main(void)
 {

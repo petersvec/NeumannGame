@@ -1,10 +1,22 @@
 {
-"Settings":
-    {
-    "MaxMapSize": 255,
-    "MapHeight": 50,
-    "MapWidth": 50,
-    "NumberOfPlanets": 50,
-    "MaxRadiusOfPlanet": 2
-    }
+	"MapHeight": 50,
+	"MapWidth": 50,
+	"NumberOfPlanets": 5,
+	"MaxRadiusOfPlanet": 3,
+    "TileSize": 50,
+  "Textures": {
+    "Jupiter": "data/textures/Jupiter.jpg",
+    "Mars": "data/textures/Mars.jpg",
+    "Mercury": "data/textures/Mercury.jpg",
+    "Void": "data/textures/Void.jpg",
+    "AirBase": "data/textures/AirBase.png",
+    "Melee": "data/textures/Melee.png",
+    "MilitaryBase": "data/textures/MilitaryBase.png",
+    "Mine": "data/textures/Mine.png",
+    "Probe": "data/textures/Probe.png",
+    "Ranged": "data/textures/Ranged.png",
+    "SpaceStation": "data/textures/SpaceStation.png",
+    "Tower": "data/textures/Tower.png",
+    "Worker": "data/textures/Worker.png"
+  }
 }
