@@ -3,9 +3,9 @@
 #include "MapGenerator.hpp"
 #include "RenderMap.hpp"
 #include "JsonParser.hpp"
-#include "JsonToString.hpp"
-#include "PlayerObject.hpp"
 #include "ObjectManager.hpp"
+#include "Utilities.hpp"
+#include "IObject.hpp"
 
 namespace engine
 {
@@ -32,15 +32,13 @@ namespace engine
 		sf::String str;
 		sf::View defaultView;
 		int changed = 1;
-		JsonToString m_config;
 		sf::RectangleShape m_guiRectangle;
 		ObjectManager testOM;
-		std::shared_ptr<PlayerObject> testPO;
+		engine::IObjectPtr testPO;
 		bool unitIsSelected;
 		sf::RectangleShape selectedMapTile;
 	public:
-		enum Player { Player1, Player2 };
-		Player activePlayer = Player1;
+		game::Player activePlayer = game::Player::Player1;
 
 		void initVariables();
 		void initWindow();

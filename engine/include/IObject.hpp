@@ -1,10 +1,16 @@
 #pragma once
+
 #include <SFML\Graphics\Sprite.hpp>
+#include <SFML\Graphics\RenderWindow.hpp>
+
 #include "../../game/include/ObjectType.hpp"
-#include "Map.hpp"
+#include "Utilities.hpp"
 
 namespace engine
 {
+	class IObject;
+	using IObjectPtr = std::shared_ptr<engine::IObject>;
+
 	class IObject
 	{
 	private:
@@ -14,18 +20,59 @@ namespace engine
 		game::ObjectType m_type;
 		sf::Sprite m_sprite;
 		TilePtr m_location;
+		game::Player m_owner;
 
-		IObject(unsigned short hp, game::ObjectType type, const sf::Texture& texture, TilePtr location)
+		IObject(unsigned short hp, game::ObjectType type, const sf::Texture& texture, TilePtr location, game::Player owner)
 			:
 			m_hp{ hp },
 			m_type{ type },
 			m_sprite{},
-			m_location{ location }
+			m_owner{owner}
 		{
 			setSprite(texture);
+			setLocation(location);
 		}
 
 	public:
+		virtual void draw(sf::RenderWindow* window)
+		{
+			if (m_owner == game::Player::Player1)
+			{
+				m_sprite.setColor(sf::Color::Red);
+			}
+			else
+			{
+				m_sprite.setColor(sf::Color::Blue);
+			}
+
+			window->draw(m_sprite);
+		}
+
+		virtual void update()
+		{
+
+		}
+
+		void setOwner(game::Player player)
+		{
+			m_owner = player;
+		}
+
+		game::Player GetOwner() const
+		{
+			return m_owner;
+		}
+
+		void setPosition(const sf::Vector2u& position)
+		{
+			m_sprite.setPosition(TileToScreen(position));
+		}
+
+		sf::Vector2f getPosition() const
+		{
+			return m_sprite.getPosition();
+		}
+
 		unsigned short getHp()
 		{
 			return m_hp;
@@ -65,6 +112,7 @@ namespace engine
 		void setLocation(TilePtr location)
 		{
 			m_location = location;
+			m_sprite.setPosition(location->getPosition());
 		}
 	};
 }

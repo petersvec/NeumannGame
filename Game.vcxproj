@@ -25,7 +25,6 @@
     <ClCompile Include="engine\src\Map.cpp" />
     <ClCompile Include="engine\src\MapGenerator.cpp" />
     <ClCompile Include="engine\src\ObjectManager.cpp" />
-    <ClCompile Include="engine\src\Planet.cpp" />
     <ClCompile Include="engine\src\PlayerObject.cpp" />
     <ClCompile Include="engine\src\RenderMap.cpp" />
     <ClCompile Include="engine\src\Shader.cpp" />
@@ -52,11 +51,11 @@
     <ClInclude Include="engine\include\Map.hpp" />
     <ClInclude Include="engine\include\MapGenerator.hpp" />
     <ClInclude Include="engine\include\ObjectManager.hpp" />
-    <ClInclude Include="engine\include\Planet.hpp" />
     <ClInclude Include="engine\include\PlayerObject.hpp" />
     <ClInclude Include="engine\include\RenderMap.hpp" />
     <ClInclude Include="engine\include\Shader.hpp" />
     <ClInclude Include="engine\include\TextureHandler.hpp" />
+    <ClInclude Include="engine\include\Utilities.hpp" />
     <ClInclude Include="game\include\buildings\AirBase.hpp" />
     <ClInclude Include="game\include\buildings\IBuilding.hpp" />
     <ClInclude Include="game\include\buildings\MilitaryBase.hpp" />

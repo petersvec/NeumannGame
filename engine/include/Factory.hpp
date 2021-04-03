@@ -1,6 +1,8 @@
 #pragma once
+
 #include <memory>
-#include "../include/IObject.hpp"
+#include <SFML\Graphics\Texture.hpp>
+
 #include "../../game/include/ObjectType.hpp"
 #include "../../game/include/units/Melee.hpp"
 #include "../../game/include/units/Probe.hpp"
@@ -11,19 +13,23 @@
 #include "../../game/include/buildings/Mine.hpp"
 #include "../../game/include/buildings/SpaceStation.hpp"
 #include "../../game/include/buildings/Tower.hpp"
-#include <SFML\Graphics\Texture.hpp>
-#include "TextureHandler.hpp"
-using IObjectPtr = std::shared_ptr<engine::IObject>;
+
+#include "IObject.hpp"
+#include "Utilities.hpp"
 
 namespace engine
 {
-	class Factory
+	class UnitFactory;
+	using UnitFactoryPtr = std::unique_ptr<UnitFactory>;
+	extern UnitFactoryPtr unitFactory;
+
+	class UnitFactory
 	{
 	private:
 
 	protected:
 
 	public:
-		IObjectPtr getObject(game::ObjectType objType, TilePtr location, TextureHandler textureHandler);
+		engine::IObjectPtr create(game::ObjectType objType, TilePtr location, game::Player owner);
 	};
 }

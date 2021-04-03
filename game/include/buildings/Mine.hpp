@@ -17,7 +17,8 @@ namespace game
 			TilePtr location,
 			unsigned short ironCost,
 			unsigned short copperCost,
-			unsigned short siliconCost);
+			unsigned short siliconCost,
+			Player owner);
 
 		unsigned short getMiningCapacity()
 		{

@@ -20,9 +20,10 @@ namespace game
 			unsigned char armour,
 			unsigned short ironCost,
 			unsigned short copperCost, 
-			unsigned short siliconCost);
+			unsigned short siliconCost,
+			Player owner);
 
-		virtual void attack(engine::IObject object);
+		virtual void attack(engine::IObjectPtr object);
 
 		void update(engine::Map);
 	};

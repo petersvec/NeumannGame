@@ -2,13 +2,15 @@
 
 namespace engine
 {
-    bool JsonParser::setGameConfig(const char* jsonFile, const char* jsonType)
+    std::unique_ptr<JsonParser> config = std::make_unique<JsonParser>();
+
+    bool JsonParser::setGameConfig(const std::string &jsonFile, const std::string &jsonType)
     {
         using namespace rapidjson;
         setConfigType(jsonType);
 
         FILE* fp = nullptr;
-        fopen_s(&fp, jsonFile, "rb");
+        fopen_s(&fp, jsonFile.c_str(), "rb");
 
         if (!fp)
         {
@@ -33,9 +35,9 @@ namespace engine
         return true;
     }
 
-    void JsonParser::setConfigType(const char* jsonType)
+    void JsonParser::setConfigType(const std::string &jsonType)
     {
-        m_configType = std::string(jsonType);
+        m_configType = jsonType;
     }
 
     unsigned short JsonParser::getMapHeight()
@@ -55,6 +57,18 @@ namespace engine
         else
         {
             return G_MIN_MAP_SIZE;
+        }
+    }
+
+    unsigned JsonParser::getTileSize() const
+    {
+        if (m_gameConfigFile.HasMember("TileSize") && m_gameConfigFile["TileSize"].IsInt())
+        {
+            return m_gameConfigFile["TileSize"].GetInt();
+        }
+        else
+        {
+            return G_MIN_TILE_SIZE;
         }
     }
 
@@ -113,13 +127,13 @@ namespace engine
     std::map<std::string, std::string> JsonParser::getTextures()
     {
         std::map<std::string, std::string> texturePairs;
-        if (!m_gameConfigFile.HasMember("Textures") ||
-            !m_gameConfigFile["Textures"].IsObject())
+
+        if (m_gameConfigFile.HasMember("Textures"))
         {
             const rapidjson::Value& textures = m_gameConfigFile["Textures"].GetObject();
 
             for (auto& m : textures.GetObject()) {
-                texturePairs.insert(m.name.GetString(), m.value.GetString());
+                texturePairs[m.name.GetString()] = m.value.GetString();
             }
         }
         return texturePairs;

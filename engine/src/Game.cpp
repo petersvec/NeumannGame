@@ -1,35 +1,46 @@
 #include <iostream>
 #include "../include/Game.hpp"
 #include "../include/Shader.hpp"
+#include "../include/TextureHandler.hpp"
+#include "../include/Factory.hpp"
 
 namespace engine
 {
 	void Game::initVariables()
 	{
-		m_window = nullptr;
-		if (!m_gameConfig.setGameConfig("config.json", "Settings"))
+		if (!config->setGameConfig("config.json", "Settings"))
 		{
 			exit(-555);
 		}
-		else
-		{
-			m_gameMap = new Map(m_gameConfig.getMapHeight(), m_gameConfig.getMapWidth());
-			MapGenerator* m_mapGenerator = new MapGenerator();
-			m_mapGenerator->generateMap(m_gameMap, m_gameConfig.getNumberOfPlanets(), m_gameConfig.getMaxRadiusOfPlanet());
-			m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
-			m_renderMap.initMapTextures(*m_gameMap);
-			tileText.setString("0");
-			m_guiRectangle.setPosition(0, 620);
-			m_guiRectangle.setSize(sf::Vector2f(1280, 100));
-			m_guiRectangle.setFillColor(sf::Color::Blue);
 
-			selectedMapTile.setFillColor(sf::Color::Blue);
-			selectedMapTile.setPosition(0, 0);
-			selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
+		m_window = nullptr;
+		m_gameMap = new Map(config->getMapHeight(), config->getMapWidth());
+		MapGenerator* m_mapGenerator = new MapGenerator();
+		m_mapGenerator->generateMap(m_gameMap, config->getNumberOfPlanets(), config->getMaxRadiusOfPlanet());
+		m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
+		textures->LoadTextures();
+		m_renderMap.initMapTextures(*m_gameMap);
+		tileText.setString("0");
+		m_guiRectangle.setPosition(0, 620);
+		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
+		m_guiRectangle.setFillColor(sf::Color::Blue);
+
+		selectedMapTile.setFillColor(sf::Color::Transparent);
+		selectedMapTile.setOutlineColor(sf::Color::Blue);
+		selectedMapTile.setOutlineThickness(3);
+		selectedMapTile.setPosition(0, 0);
+		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
 	
-			testOM.createPO(10, 10, 1, 1);
-			testOM.createPO(20, 20, 1, 1);		
-		}
+		auto unit_1 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 10), game::Player::Player1);
+		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Player::Player2);
+
+		auto building_1 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(1, 1), game::Player::Player1);
+		auto building_2 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(3, 3), game::Player::Player2);
+
+		testOM.addUnit(unit_1);
+		testOM.addUnit(unit_2);
+		testOM.addUnit(building_1);
+		testOM.addUnit(building_2);
 	}
 
 	void Game::initWindow()
@@ -153,7 +164,7 @@ namespace engine
 					if (unitIsSelected) {
 						pixelPos = sf::Mouse::getPosition(*m_window);
 						worldPos = m_window->mapPixelToCoords(pixelPos);
-						testPO->move(worldPos.x/tileSize, worldPos.y/tileSize);
+						testPO->setPosition(sf::Vector2u(worldPos.x/tileSize, worldPos.y/tileSize));
 					}
 				}
 				break;
@@ -161,19 +172,19 @@ namespace engine
 				case sf::Event::KeyPressed:							//key pressed
 					if (m_event.key.code == sf::Keyboard::Space)	//space pressed switch player
 					{
-						if (activePlayer == Player1)
+						if (activePlayer == game::Player::Player1)
 						{
 							unitIsSelected = false;
 							testPO = nullptr;
-							activePlayer = Player2;
+							activePlayer = game::Player::Player2;
 						}
 						else
 						{
 							unitIsSelected = false;
 							testPO = nullptr;
-							activePlayer = Player1;
+							activePlayer = game::Player::Player1;
 						}
-						std::cout << activePlayer;
+						std::cout << (int)activePlayer;
 					}
 					break;
 					

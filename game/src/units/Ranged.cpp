@@ -8,14 +8,15 @@ namespace game
 		TilePtr location,
 		unsigned char moveSpeed,
 		unsigned char attackDamage,
-		unsigned char armour)
+		unsigned char armour,
+		Player owner)
 		:
-		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour },
-		IObject{ hp, type, texture, location }
+		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
+		IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Ranged::attack(engine::IObject object)
+	void Ranged::attack(engine::IObjectPtr object)
 	{
-		object.setHp(object.getHp() - getAttackDamage() / 2);
+		object->setHp(object->getHp() - getAttackDamage() / 2);
 	}
 }

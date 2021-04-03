@@ -1,8 +1,9 @@
 {
-	"MapHeight": 250,
-	"MapWidth": 251,
-	"NumberOfPlanets": 1000,
-	"MaxRadiusOfPlanet": 5,
+	"MapHeight": 50,
+	"MapWidth": 50,
+	"NumberOfPlanets": 5,
+	"MaxRadiusOfPlanet": 3,
+    "TileSize": 50,
   "Textures": {
     "Jupiter": "data/textures/Jupiter.jpg",
     "Mars": "data/textures/Mars.jpg",

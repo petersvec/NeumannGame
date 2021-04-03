@@ -13,27 +13,25 @@ namespace engine
 	{
 		for (int it = 0; it < this->playerObjectVector.size(); it++)
 		{
-			this->playerObjectVector[it]->drawObj(window);
+			this->playerObjectVector[it]->draw(window);
 		}
 	}
 
-	void ObjectManager::createPO(int x, int y, int type, int value)
+	void ObjectManager::addUnit(engine::IObjectPtr unit)
 	{
-		std::shared_ptr<PlayerObject> po = std::make_shared<PlayerObject>();
-		po->setPos(x, y);
-		this->playerObjectVector.push_back(po);
+		playerObjectVector.push_back(unit);
 	}
 
-	std::shared_ptr<PlayerObject> ObjectManager::findUnit(int x, int y,  int player)
+	engine::IObjectPtr ObjectManager::findUnit(int x, int y, game::Player player)
 	{
 		for (int it = 0; it < this->playerObjectVector.size(); it++)
 		{
-			if (this->playerObjectVector[it]->circle.getPosition().x == x && this->playerObjectVector[it]->circle.getPosition().y == y)
+			if (this->playerObjectVector[it]->getPosition().x == x && this->playerObjectVector[it]->getPosition().y == y)
 			{
 				std::cout << "found ";
-				std::cout << this->playerObjectVector[it]->owner;
+				std::cout << (int)this->playerObjectVector[it]->GetOwner();
 				std::cout << '\n';
-				if (player == this->playerObjectVector[it]->owner)
+				if (player == this->playerObjectVector[it]->GetOwner())
 				{
 					std::cout << "Unit selected\n";
 					return this->playerObjectVector[it];

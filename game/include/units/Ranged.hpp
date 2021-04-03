@@ -18,8 +18,9 @@ namespace game
 			TilePtr location,
 			unsigned char moveSpeed,
 			unsigned char attackDamage,
-			unsigned char armour);
+			unsigned char armour,
+			Player owner);
 
-		virtual void attack(engine::IObject object);
+		virtual void attack(engine::IObjectPtr object);
 	};
 }

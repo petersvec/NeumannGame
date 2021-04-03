@@ -11,6 +11,7 @@ namespace game
 	protected:
 		TileType m_type;
 		sf::Sprite m_sprite;
+		bool occupied = 0;
 
 	public:
 		Tile();
@@ -21,9 +22,12 @@ namespace game
 
 		unsigned char getType();
 		sf::Sprite getSprite();
+		sf::Vector2f getPosition() const;
 
 		void setType(unsigned char type);
 		void setSprite(const sf::Texture& texture);
 		void setPosition(float, float);
+		bool getOccupied();
+		void setOccupied(bool value);
 	};
 }

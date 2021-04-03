@@ -1,5 +1,6 @@
 #include "../include/RenderMap.hpp"
 #include "../include/TextureHandler.hpp"
+#include <SFML/Graphics/RenderTexture.hpp>
 
 namespace engine
 {
@@ -21,8 +22,6 @@ namespace engine
 
 		//}
 
-		TextureHandler* handler = new TextureHandler();
-		handler->LoadTextures();
 		for (int i = 0; i < map.getHeight(); i++)
 		{
 			for (int j = 0; j < map.getWidth(); j++)
@@ -30,19 +29,19 @@ namespace engine
 				switch (map.getTile(i, j)->getType())
 				{
 				case 0:
-					map.getTile(i, j)->setSprite(*(handler)->getTexture("Void"));
+					map.getTile(i, j)->setSprite(*textures->getTexture("Void"));
 					break;
 				case 1:
-					map.getTile(i, j)->setSprite(*(handler)->getTexture("Jupiter"));
+					map.getTile(i, j)->setSprite(*textures->getTexture("Jupiter"));
 					break;
 				case 2:
-					map.getTile(i, j)->setSprite(*(handler)->getTexture("Mercury"));
+					map.getTile(i, j)->setSprite(*textures->getTexture("Mercury"));
 					break;
 				case 3:
-					map.getTile(i, j)->setSprite(*(handler)->getTexture("Mars"));
+					map.getTile(i, j)->setSprite(*textures->getTexture("Mars"));
 					break;
 				default:
-					map.getTile(i, j)->setSprite(*(handler)->getTexture("Void"));
+					map.getTile(i, j)->setSprite(*textures->getTexture("Void"));
 					break;
 				}
 			}

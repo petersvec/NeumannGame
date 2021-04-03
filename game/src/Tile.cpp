@@ -31,6 +31,11 @@ namespace game
 		return false;
 	}
 
+	sf::Vector2f Tile::getPosition() const
+	{
+		return m_sprite.getPosition();
+	}
+
 	unsigned char Tile::getType()
 	{
 		return (unsigned char)m_type;

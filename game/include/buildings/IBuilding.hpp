@@ -1,6 +1,8 @@
 #pragma once
+
 #include "../../../engine/include/IObject.hpp"
 #include "../player/PlayerState.hpp"
+#include "../../../engine/include/Utilities.hpp"
 
 namespace game
 {
@@ -19,9 +21,10 @@ namespace game
 			TilePtr location,
 			unsigned short ironCost,
 			unsigned short copperCost,
-			unsigned short siliconCost)
+			unsigned short siliconCost,
+			Player owner)
 			:
-			IObject{ hp, type, texture, location },
+			IObject{ hp, type, texture, location, owner },
 			m_ironCost{ ironCost },
 			m_copperCost{ copperCost },
 			m_siliconCost{ siliconCost }

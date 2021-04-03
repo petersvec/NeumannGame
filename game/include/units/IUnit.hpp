@@ -3,6 +3,9 @@
 
 namespace game
 {
+	class IUnit;
+	using IUnitPtr = std::shared_ptr<IUnit>;
+
 	class IUnit : virtual public engine::IObject
 	{
 	private:
@@ -18,20 +21,31 @@ namespace game
 			TilePtr location,
 			unsigned char moveSpeed,
 			unsigned char attackDamage,
-			unsigned char armour)
+			unsigned char armour,
+			Player owner)
 			:
-			IObject{ hp, type, texture, location },
+			IObject{ hp, type, texture, location, owner },
 			m_moveSpeed{ moveSpeed },
 			m_attackDamage{ attackDamage },
 			m_armour{ armour }
 		{}
 
 	public:
-		virtual void attack(engine::IObject object) = 0;
+		virtual void attack(engine::IObjectPtr object) = 0;
 
 		unsigned char getMoveSpeed()
 		{
 			return m_moveSpeed;
+		}
+
+		void setOwner(Player player)
+		{
+			m_owner = player;
+		}
+
+		Player GetOwner() const
+		{
+			return m_owner;
 		}
 
 		unsigned char getAttackDamage()

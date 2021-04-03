@@ -4,48 +4,29 @@
 
 namespace engine
 {
+    std::unique_ptr<TextureHandler> textures = std::make_unique<TextureHandler>();
+
     TextureHandler::TextureHandler() {}
 
     void TextureHandler::LoadTextures()
     {
-        textureMap.begin();
-        std::ifstream file("textureslist.txt");
-        std::string line;
-        int i=0, numberOfLines=0;
-        std::string delimiter = "::";
-        std::string texturePath;
-        int pos = 0;
-        
-        while (std::getline(file, line))
+        for (auto &[key, value] : config->getTextures())
         {
-            numberOfLines++;
-        }
-        file.clear();
-        file.seekg(0);
-        
-        retText = new sf::Texture();
-        text = new sf::Texture * [numberOfLines];
-
-        for (i = 0; i < numberOfLines; i++)
-        {
-            text[i] = new sf::Texture();
-        }
-        i = 0;
-
-        while (std::getline(file, line))
-        {
-            pos = line.find(delimiter);
-            texturePath = line.substr(0, pos);
-            line = line.erase(0, pos + 2);
-            text[i]->loadFromFile(texturePath);
-            textureMap.insert(std::pair < std::string, sf::Texture* >(line, text[i]));
-            i++;
+            sf::Texture* tex = new sf::Texture();
+            tex->loadFromFile(value);
+            textureMap[key] = tex;
         }
     }
 
-    sf::Texture* TextureHandler::getTexture(std::string str)
+    sf::Texture* TextureHandler::getTexture(const std::string& name)
     {
-        retText = textureMap.at(str);
-        return retText;
+        if (textureMap.find(name) == textureMap.end())
+        {
+            return nullptr;
+        }
+        else
+        {
+            return textureMap[name];
+        }
     }
 }
