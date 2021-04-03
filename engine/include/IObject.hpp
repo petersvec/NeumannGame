@@ -36,6 +36,15 @@ namespace engine
 	public:
 		virtual void draw(sf::RenderWindow* window)
 		{
+			if (m_owner == game::Player::Player1)
+			{
+				m_sprite.setColor(sf::Color::Red);
+			}
+			else
+			{
+				m_sprite.setColor(sf::Color::Blue);
+			}
+
 			window->draw(m_sprite);
 		}
 

@@ -25,18 +25,22 @@ namespace engine
 		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
 		m_guiRectangle.setFillColor(sf::Color::Blue);
 
-		selectedMapTile.setFillColor(sf::Color::Blue);
+		selectedMapTile.setFillColor(sf::Color::Transparent);
+		selectedMapTile.setOutlineColor(sf::Color::Blue);
+		selectedMapTile.setOutlineThickness(3);
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
 	
 		auto unit_1 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 10), game::Player::Player1);
-		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Player::Player1);
+		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Player::Player2);
 
-		auto building_1 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(0, 0), game::Player::Player1);
+		auto building_1 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(1, 1), game::Player::Player1);
+		auto building_2 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(3, 3), game::Player::Player2);
 
 		testOM.addUnit(unit_1);
 		testOM.addUnit(unit_2);
 		testOM.addUnit(building_1);
+		testOM.addUnit(building_2);
 	}
 
 	void Game::initWindow()
