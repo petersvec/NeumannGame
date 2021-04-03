@@ -17,12 +17,12 @@ namespace engine
 		}
 	}
 
-	void ObjectManager::addUnit(game::IUnitPtr unit)
+	void ObjectManager::addUnit(engine::IObjectPtr unit)
 	{
 		playerObjectVector.push_back(unit);
 	}
 
-	game::IUnitPtr ObjectManager::findUnit(int x, int y, game::Player player)
+	engine::IObjectPtr ObjectManager::findUnit(int x, int y, game::Player player)
 	{
 		for (int it = 0; it < this->playerObjectVector.size(); it++)
 		{

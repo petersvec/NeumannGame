@@ -5,6 +5,7 @@
 #include "JsonParser.hpp"
 #include "ObjectManager.hpp"
 #include "Utilities.hpp"
+#include "IObject.hpp"
 
 namespace engine
 {
@@ -33,7 +34,7 @@ namespace engine
 		int changed = 1;
 		sf::RectangleShape m_guiRectangle;
 		ObjectManager testOM;
-		game::IUnitPtr testPO;
+		engine::IObjectPtr testPO;
 		bool unitIsSelected;
 		sf::RectangleShape selectedMapTile;
 	public:

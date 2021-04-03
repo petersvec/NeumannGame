@@ -11,8 +11,8 @@ namespace game
 		unsigned char armour,
 		Player owner)
 		:
-		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
-		engine::IObject{ hp, type, texture, location }
+		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner},
+		engine::IObject{ hp, type, texture, location, owner }
 	{}
 
 	void Worker::attack(engine::IObject object)

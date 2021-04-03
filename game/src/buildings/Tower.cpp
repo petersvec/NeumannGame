@@ -16,7 +16,7 @@ namespace game
 		:
 		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner },
 		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
-		IObject{ hp, type, texture, location }
+		IObject{ hp, type, texture, location, owner }
 	{}
 
 	void Tower::attack(engine::IObject object)

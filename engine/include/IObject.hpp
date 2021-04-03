@@ -4,7 +4,6 @@
 #include <SFML\Graphics\RenderWindow.hpp>
 
 #include "../../game/include/ObjectType.hpp"
-#include "Map.hpp"
 #include "Utilities.hpp"
 
 namespace engine
@@ -21,12 +20,14 @@ namespace engine
 		game::ObjectType m_type;
 		sf::Sprite m_sprite;
 		TilePtr m_location;
+		game::Player m_owner;
 
-		IObject(unsigned short hp, game::ObjectType type, const sf::Texture& texture, TilePtr location)
+		IObject(unsigned short hp, game::ObjectType type, const sf::Texture& texture, TilePtr location, game::Player owner)
 			:
 			m_hp{ hp },
 			m_type{ type },
-			m_sprite{}
+			m_sprite{},
+			m_owner{owner}
 		{
 			setSprite(texture);
 			setLocation(location);
@@ -41,6 +42,16 @@ namespace engine
 		virtual void update()
 		{
 
+		}
+
+		void setOwner(game::Player player)
+		{
+			m_owner = player;
+		}
+
+		game::Player GetOwner() const
+		{
+			return m_owner;
 		}
 
 		void setPosition(const sf::Vector2u& position)

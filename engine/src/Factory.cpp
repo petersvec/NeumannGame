@@ -5,7 +5,7 @@ namespace engine
 {
     UnitFactoryPtr unitFactory = std::make_unique<UnitFactory>();
 
-    game::IUnitPtr UnitFactory::create(game::ObjectType objType, TilePtr location, game::Player owner)
+    engine::IObjectPtr UnitFactory::create(game::ObjectType objType, TilePtr location, game::Player owner)
     {
         sf::Texture texture;
 
@@ -19,7 +19,7 @@ namespace engine
             return std::make_shared<game::Ranged>(game::Ranged(50, objType, *textures->getTexture("Ranged"), location, 3, 5, 2, owner));
         case game::ObjectType::Worker:
             return std::make_shared<game::Worker>(game::Worker(25, objType, *textures->getTexture("Worker"), location, 5, 1, 1, owner));
-        /*case game::ObjectType::AirBase:
+        case game::ObjectType::AirBase:
             return std::make_shared<game::AirBase>(game::AirBase(2500, objType, *textures->getTexture("AirBase"), location, 1000, 1000, 1000, owner));
         case game::ObjectType::MilitaryBase:
             return std::make_shared<game::MilitaryBase>(game::MilitaryBase(2500, objType, *textures->getTexture("MilitaryBase"), location, 500, 500, 500, owner));
@@ -30,7 +30,7 @@ namespace engine
         case game::ObjectType::Tower:
             return std::make_shared<game::Tower>(game::Tower(2000, objType, *textures->getTexture("Tower"), location, 15, 10, 10, 1000, 1000, 1000, owner));
         default:
-            throw "Invalid object!";*/
+            throw "Invalid object!";
         }
 
         return nullptr;
