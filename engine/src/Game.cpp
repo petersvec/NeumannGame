@@ -32,8 +32,11 @@ namespace engine
 		auto unit_1 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 10), game::Player::Player1);
 		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Player::Player1);
 
+		auto building_1 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(0, 0), game::Player::Player1);
+
 		testOM.addUnit(unit_1);
 		testOM.addUnit(unit_2);
+		testOM.addUnit(building_1);
 	}
 
 	void Game::initWindow()

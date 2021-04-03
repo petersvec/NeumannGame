@@ -15,15 +15,15 @@ namespace game
 		IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Melee::attack(engine::IObject object)
+	void Melee::attack(engine::IObjectPtr object)
 	{
-		if (object.getType() == game::ObjectType::Ranged)
+		if (object->getType() == game::ObjectType::Ranged)
 		{
-			object.setHp(object.getHp() - (getAttackDamage() * 2));
+			object->setHp(object->getHp() - (getAttackDamage() * 2));
 		}
 		else
 		{
-			object.setHp(object.getHp() - getAttackDamage());
+			object->setHp(object->getHp() - getAttackDamage());
 		}
 	}
 }

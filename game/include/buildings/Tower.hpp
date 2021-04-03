@@ -23,7 +23,7 @@ namespace game
 			unsigned short siliconCost,
 			Player owner);
 
-		virtual void attack(engine::IObject object);
+		virtual void attack(engine::IObjectPtr object);
 
 		void update(engine::Map);
 	};

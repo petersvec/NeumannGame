@@ -31,7 +31,7 @@ namespace game
 		{}
 
 	public:
-		virtual void attack(engine::IObject object) = 0;
+		virtual void attack(engine::IObjectPtr object) = 0;
 
 		unsigned char getMoveSpeed()
 		{

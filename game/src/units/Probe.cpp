@@ -15,8 +15,8 @@ namespace game
 		IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Probe::attack(engine::IObject object)
+	void Probe::attack(engine::IObjectPtr object)
 	{
-		object.setHp(object.getHp() - getAttackDamage());
+		object->setHp(object->getHp() - getAttackDamage());
 	}
 }

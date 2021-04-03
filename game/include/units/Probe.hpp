@@ -19,6 +19,6 @@ namespace game
 			unsigned char armour,
 			Player owner);
 
-		virtual void attack(engine::IObject object);
+		virtual void attack(engine::IObjectPtr object);
 	};
 }

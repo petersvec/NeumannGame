@@ -19,9 +19,9 @@ namespace game
 		IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Tower::attack(engine::IObject object)
+	void Tower::attack(engine::IObjectPtr object)
 	{
-		object.setHp(object.getHp() - getAttackDamage());
+		object->setHp(object->getHp() - getAttackDamage());
 	}
 
 	void Tower::update(engine::Map map)
