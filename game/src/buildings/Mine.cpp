@@ -12,6 +12,6 @@ namespace game
 		Player owner)
 		:
 		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner },
-		IObject{ hp, type, texture, location }
+		IObject{ hp, type, texture, location, owner }
 	{}
 }

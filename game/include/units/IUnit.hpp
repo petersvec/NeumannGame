@@ -14,7 +14,6 @@ namespace game
 		unsigned char m_moveSpeed;
 		unsigned char m_attackDamage;
 		unsigned char m_armour;
-		Player m_owner;
 		
 		IUnit(unsigned short hp,
 			game::ObjectType type,
@@ -25,15 +24,14 @@ namespace game
 			unsigned char armour,
 			Player owner)
 			:
-			IObject{ hp, type, texture, location },
+			IObject{ hp, type, texture, location, owner },
 			m_moveSpeed{ moveSpeed },
 			m_attackDamage{ attackDamage },
-			m_armour{ armour },
-			m_owner{owner}
+			m_armour{ armour }
 		{}
 
 	public:
-		virtual void attack(engine::IObject object) = 0;
+		virtual void attack(engine::IObjectPtr object) = 0;
 
 		unsigned char getMoveSpeed()
 		{

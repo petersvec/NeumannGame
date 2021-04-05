@@ -12,11 +12,11 @@ namespace game
 		Player owner)
 		:
 		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
-		IObject{ hp, type, texture, location }
+		IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Ranged::attack(engine::IObject object)
+	void Ranged::attack(engine::IObjectPtr object)
 	{
-		object.setHp(object.getHp() - getAttackDamage() / 2);
+		object->setHp(object->getHp() - getAttackDamage() / 2);
 	}
 }

@@ -4,22 +4,19 @@
 #include <memory>
 
 #include "Utilities.hpp"
-#include "../../game/include/units/IUnit.hpp"
+#include "IObject.hpp"
 
 namespace engine
 {
 	class ObjectManager
 	{
-		
 	public:
 		ObjectManager();
 		
 		void drawAll(sf::RenderWindow* window);
-		void addUnit(game::IUnitPtr unit);
-		game::IUnitPtr findUnit(int x, int y, game::Player player);
+		void addUnit(engine::IObjectPtr unit);
+		engine::IObjectPtr findUnit(int x, int y, game::Player player);
 	private:
-		std::vector<game::IUnitPtr > playerObjectVector;
-		
-
+		std::vector<engine::IObjectPtr> playerObjectVector;
 	};
 }

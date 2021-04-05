@@ -14,7 +14,6 @@ namespace game
 		unsigned short m_ironCost;
 		unsigned short m_copperCost;
 		unsigned short m_siliconCost;
-		Player m_owner;
 
 		IBuilding(unsigned short hp,
 			game::ObjectType type,
@@ -25,11 +24,10 @@ namespace game
 			unsigned short siliconCost,
 			Player owner)
 			:
-			IObject{ hp, type, texture, location },
+			IObject{ hp, type, texture, location, owner },
 			m_ironCost{ ironCost },
 			m_copperCost{ copperCost },
-			m_siliconCost{ siliconCost },
-			m_owner{owner}
+			m_siliconCost{ siliconCost }
 		{}
 
 	public:

@@ -12,11 +12,11 @@ namespace game
 		Player owner)
 		:
 		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
-		IObject{ hp, type, texture, location }
+		IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Probe::attack(engine::IObject object)
+	void Probe::attack(engine::IObjectPtr object)
 	{
-		object.setHp(object.getHp() - getAttackDamage());
+		object->setHp(object->getHp() - getAttackDamage());
 	}
 }
