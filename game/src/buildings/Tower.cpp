@@ -24,9 +24,9 @@ namespace game
 		object->setHp(object->getHp() - getAttackDamage());
 	}
 
-	void Tower::update(engine::Map map)
+	void Tower::update(std::shared_ptr<engine::Map> map)
 	{
-		std::pair<unsigned short, unsigned short> xyLocation = map.getTileXY(getLocation());
+		std::pair<unsigned short, unsigned short> xyLocation = map->getTileXY(getLocation());
 
 		if (xyLocation.first == 10000 || xyLocation.second == 10000)
 		{
@@ -35,18 +35,18 @@ namespace game
 
 		for (unsigned short i = xyLocation.first - ((getMoveSpeed() / 5) / 2); i < xyLocation.first + ((getMoveSpeed() / 5) / 2); ++i)
 		{
-			if (i < 0 || i >= map.getHeight())
+			if (i < 0 || i >= map->getHeight())
 			{
 				continue;
 			}
 			for (unsigned short j = xyLocation.first - ((getMoveSpeed() / 5) / 2); j < xyLocation.first + ((getMoveSpeed() / 5) / 2); ++j)
 			{
-				if (j < 0 || j >= map.getWidth())
+				if (j < 0 || j >= map->getWidth())
 				{
 					continue;
 				}
 				
-				//TODO: apply damage to objects on tile pointer map.getTile(i, j);
+				//TODO: apply damage to objects on tile pointer map->getTile(i, j); if there are any
 			}
 		}
 	}

@@ -25,6 +25,6 @@ namespace game
 
 		virtual void attack(engine::IObjectPtr object);
 
-		void update(engine::Map);
+		void update(std::shared_ptr<engine::Map> map);
 	};
 }
