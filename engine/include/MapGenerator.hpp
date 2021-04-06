@@ -6,7 +6,7 @@ namespace engine
 	class MapGenerator
 	{
 	private:
-		void setPlanet(Map, unsigned short, unsigned short, unsigned char, unsigned char);
+		void setPlanet(Map*, unsigned short, unsigned short, unsigned char, unsigned char);
 
 	public:
 		void generateMap(Map*, unsigned short, unsigned char);

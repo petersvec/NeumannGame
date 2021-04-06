@@ -18,7 +18,7 @@ namespace engine
 			unsigned char type = rand() % 3 + 1;
 			unsigned char radius = rand() % maxRadiusOfPlanet + 1;
 			map->setTile(x, y, type);
-
+			map->setLand(1);
 
 			if (radius == 0)
 			{
@@ -43,6 +43,7 @@ namespace engine
 					}
 
 					map->setTile(i, j, type);
+					map->setLand(1);
 				}
 
 				if (polovica < radius && flag)
@@ -59,12 +60,13 @@ namespace engine
 			if (map->getTile(x, y) == 0)
 			{
 				map->setTile(x, y, type);
-				setPlanet(*map, x, y, type, radius);
+				map->setLand(1);
+				setPlanet(map, x, y, type, radius);
 			}
 		}
 	}
 
-	void MapGenerator::setPlanet(Map map, unsigned short x, unsigned short y, unsigned char type, unsigned char radius)
+	void MapGenerator::setPlanet(Map* map, unsigned short x, unsigned short y, unsigned char type, unsigned char radius)
 	{
 		if (radius == 0)
 		{
@@ -73,21 +75,22 @@ namespace engine
 
 		for (unsigned char i = x - radius; i < x + radius; ++i)
 		{
-			if (i < 0 || i >= map.getHeight())
+			if (i < 0 || i >= map->getHeight())
 			{
 				continue;
 			}
 
 			for (unsigned char j = y - radius; j <= y + radius; ++j)
 			{
-				if (j < 0 || j >= map.getWidth())
+				if (j < 0 || j >= map->getWidth())
 				{
 					continue;
 				}
 
-				if (map.getTile(i, j) == 0)
+				if (map->getTile(i, j) == 0)
 				{
-					map.setTile(i, j, type);
+					map->setTile(i, j, type);
+					map->setLand(1);
 				}
 			}
 		}

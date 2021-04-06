@@ -18,7 +18,7 @@ namespace engine
 	{
 	private:
 		MapPtr m_map;
-		unsigned short m_mapHeight, m_mapWidth;
+		unsigned short m_mapHeight, m_mapWidth, m_land;
 
 		void setSpritesPosition();
 
@@ -30,6 +30,8 @@ namespace engine
 		MapPtr getMap();
 		unsigned short getHeight();
 		unsigned short getWidth();
+		unsigned short getLand();
+		void setLand(unsigned char);
 		TilePtr getTile(unsigned short, unsigned short);
 		std::pair<unsigned short, unsigned short> getTileXY(TilePtr tilePtr);
 		void setTile(unsigned short, unsigned short, unsigned char);
