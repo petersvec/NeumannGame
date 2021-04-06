@@ -32,7 +32,7 @@ namespace game
 
 	public:
 		virtual void attack(engine::IObjectPtr object) = 0;
-		virtual void move(engine::TilePtr tile) = 0;
+		virtual void move(engine::TilePtr tile, unsigned char tileSize) = 0;
 
 		unsigned char getMoveSpeed()
 		{

@@ -20,14 +20,14 @@ namespace game
 		object->setHp(object->getHp() - getAttackDamage());
 	}
 
-	void Worker::move(engine::TilePtr tile)
+	void Worker::move(engine::TilePtr tile, unsigned char tileSize)
 	{
 		unsigned short x1 = tile->getPosition().x;
 		unsigned short y1 = tile->getPosition().y;
 		unsigned short x2 = getLocation()->getPosition().x;
 		unsigned short y2 = getLocation()->getPosition().y;
 
-		if (getMoveSpeed() <= sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)))
+		if (getMoveSpeed() <= (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / tileSize))
 		{
 			setPosition(engine::ScreenToTile(tile->getPosition()));
 		}

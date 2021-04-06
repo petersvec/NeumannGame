@@ -20,6 +20,6 @@ namespace game
 			Player owner);
 
 		virtual void attack(engine::IObjectPtr object);
-		virtual void move(engine::TilePtr tile);
+		virtual void move(engine::TilePtr tile, unsigned char tileSize);
 	};
 }

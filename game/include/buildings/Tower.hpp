@@ -24,7 +24,6 @@ namespace game
 			Player owner);
 
 		virtual void attack(engine::IObjectPtr object);
-		virtual void move(engine::TilePtr object) {};
 
 		void update(std::shared_ptr<engine::Map> map);
 	};
