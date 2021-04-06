@@ -22,7 +22,7 @@ namespace game
 			unsigned char moveSpeed,
 			unsigned char attackDamage,
 			unsigned char armour,
-			Player owner)
+			game::Ownership owner)
 			:
 			IObject{ hp, type, texture, location, owner },
 			m_moveSpeed{ moveSpeed },
@@ -37,16 +37,6 @@ namespace game
 		unsigned char getMoveSpeed()
 		{
 			return m_moveSpeed;
-		}
-
-		void setOwner(Player player)
-		{
-			m_owner = player;
-		}
-
-		Player GetOwner() const
-		{
-			return m_owner;
 		}
 
 		unsigned char getAttackDamage()

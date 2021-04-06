@@ -17,7 +17,7 @@ namespace game
 			unsigned char moveSpeed,
 			unsigned char attackDamage,
 			unsigned char armour,
-			Player owner);
+			game::Ownership owner);
 
 		virtual void attack(engine::IObjectPtr object);
 		virtual void move(engine::TilePtr tile, unsigned char tileSize);

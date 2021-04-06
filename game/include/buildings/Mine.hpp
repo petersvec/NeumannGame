@@ -14,11 +14,11 @@ namespace game
 		Mine(unsigned short hp,
 			game::ObjectType type,
 			const sf::Texture& texture,
-			TilePtr location,
+			engine::TilePtr location,
 			unsigned short ironCost,
 			unsigned short copperCost,
 			unsigned short siliconCost,
-			Player owner);
+			game::Ownership owner);
 
 		unsigned short getMiningCapacity()
 		{

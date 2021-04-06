@@ -29,9 +29,9 @@ namespace engine
 			if (this->playerObjectVector[it]->getPosition().x == x && this->playerObjectVector[it]->getPosition().y == y)
 			{
 				std::cout << "found ";
-				std::cout << (int)this->playerObjectVector[it]->GetOwner();
+				std::cout << (int)this->playerObjectVector[it]->getOwner();
 				std::cout << '\n';
-				if (player == this->playerObjectVector[it]->GetOwner())
+				if (player == this->playerObjectVector[it]->getOwner())
 				{
 					std::cout << "Unit selected\n";
 					return this->playerObjectVector[it];

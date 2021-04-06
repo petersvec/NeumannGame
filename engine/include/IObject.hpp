@@ -48,14 +48,12 @@ namespace engine
 			window->draw(m_sprite);
 		}
 
-		virtual void update() = 0;
-
 		void setOwner(game::Ownership player)
 		{
 			m_owner = player;
 		}
 
-		game::Ownership GetOwner() const
+		game::Ownership getOwner() const
 		{
 			return m_owner;
 		}

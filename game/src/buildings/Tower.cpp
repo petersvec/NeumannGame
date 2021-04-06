@@ -5,14 +5,14 @@ namespace game
 	Tower::Tower(unsigned short hp,
 		game::ObjectType type,
 		const sf::Texture& texture,
-		TilePtr location,
+		engine::TilePtr location,
 		unsigned char moveSpeed,
 		unsigned char attackDamage,
 		unsigned char armour,
 		unsigned short ironCost,
 		unsigned short copperCost,
 		unsigned short siliconCost,
-		Player owner)
+		game::Ownership owner)
 		:
 		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner },
 		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
