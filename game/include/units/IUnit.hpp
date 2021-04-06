@@ -15,6 +15,7 @@ namespace game
 		unsigned char m_attackDamage;
 		unsigned char m_armour;
 		
+		
 		IUnit(unsigned short hp,
 			game::ObjectType type,
 			const sf::Texture& texture,
@@ -28,6 +29,7 @@ namespace game
 			m_moveSpeed{ moveSpeed },
 			m_attackDamage{ attackDamage },
 			m_armour{ armour }
+			
 		{}
 
 	public:

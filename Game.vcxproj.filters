@@ -90,9 +90,6 @@
     <ClCompile Include="game\src\buildings\AirBase.cpp">
       <Filter>Game\src\buildings</Filter>
     </ClCompile>
-    <ClCompile Include="game\src\units\Melee.cpp">
-      <Filter>Game\src\units</Filter>
-    </ClCompile>
     <ClCompile Include="game\src\units\Probe.cpp">
       <Filter>Game\src\units</Filter>
     </ClCompile>
@@ -116,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="engine\src\ObjectManager.cpp">
       <Filter>Engine\src</Filter>
+    </ClCompile>
+    <ClCompile Include="game\src\units\Melee.cpp">
+      <Filter>Game\src\units</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -161,7 +161,10 @@ namespace engine
 					if (unitIsSelected) {
 						pixelPos = sf::Mouse::getPosition(*m_window);
 						worldPos = m_window->mapPixelToCoords(pixelPos);
-						testPO->setPosition(sf::Vector2u(worldPos.x/tileSize, worldPos.y/tileSize));
+						if (testPO->getIsBuilding() == false)
+						{
+							testPO->setPosition(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
+						}
 					}
 				}
 				break;
@@ -174,14 +177,14 @@ namespace engine
 							unitIsSelected = false;
 							testPO = nullptr;
 							activePlayer = game::Player::Player2;
-							ActivePlayerText.setString("Player2");
+							ActivePlayerText.setString("Player 2");
 						}
 						else
 						{
 							unitIsSelected = false;
 							testPO = nullptr;
 							activePlayer = game::Player::Player1;
-							ActivePlayerText.setString("Player1");
+							ActivePlayerText.setString("Player 1");
 						}
 						std::cout << (int)activePlayer;
 					}
