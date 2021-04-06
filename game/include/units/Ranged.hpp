@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
 #include "IUnit.hpp"
-using TilePtr = std::shared_ptr<game::Tile>;
 
 namespace game
 {
@@ -15,12 +14,13 @@ namespace game
 		Ranged(unsigned short hp,
 			game::ObjectType type,
 			const sf::Texture& texture,
-			TilePtr location,
+			engine::TilePtr location,
 			unsigned char moveSpeed,
 			unsigned char attackDamage,
 			unsigned char armour,
 			Player owner);
 
 		virtual void attack(engine::IObjectPtr object);
+		virtual void move(engine::TilePtr tile);
 	};
 }

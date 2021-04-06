@@ -18,7 +18,7 @@ namespace game
 		IUnit(unsigned short hp,
 			game::ObjectType type,
 			const sf::Texture& texture,
-			TilePtr location,
+			engine::TilePtr location,
 			unsigned char moveSpeed,
 			unsigned char attackDamage,
 			unsigned char armour,
@@ -32,6 +32,7 @@ namespace game
 
 	public:
 		virtual void attack(engine::IObjectPtr object) = 0;
+		virtual void move(engine::TilePtr tile) = 0;
 
 		unsigned char getMoveSpeed()
 		{

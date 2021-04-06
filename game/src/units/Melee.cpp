@@ -5,7 +5,7 @@ namespace game
 	Melee::Melee(unsigned short hp,
 		game::ObjectType type,
 		const sf::Texture& texture,
-		TilePtr location,
+		engine::TilePtr location,
 		unsigned char moveSpeed,
 		unsigned char attackDamage,
 		unsigned char armour,
@@ -24,6 +24,19 @@ namespace game
 		else
 		{
 			object->setHp(object->getHp() - getAttackDamage());
+		}
+	}
+
+	void Melee::move(engine::TilePtr tile)
+	{
+		unsigned short x1 = tile->getPosition().x;
+		unsigned short y1 = tile->getPosition().y;
+		unsigned short x2 = getLocation()->getPosition().x;
+		unsigned short y2 = getLocation()->getPosition().y;
+
+		if (getMoveSpeed() <= sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)))
+		{
+			setPosition(engine::ScreenToTile(tile->getPosition()));
 		}
 	}
 }

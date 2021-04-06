@@ -48,10 +48,7 @@ namespace engine
 			window->draw(m_sprite);
 		}
 
-		virtual void update()
-		{
-
-		}
+		virtual void update() = 0;
 
 		void setOwner(game::Player player)
 		{

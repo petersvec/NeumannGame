@@ -1,11 +1,7 @@
 #pragma once
-
 #include <memory>
 #include <vector>
 #include "../../game/include/Tile.hpp"
-
-using TilePtr = std::shared_ptr<game::Tile>;
-using MapPtr = std::vector<std::vector<TilePtr>>;
 
 const unsigned short G_MIN_MAP_SIZE = 50;
 const unsigned short G_MAX_MAP_SIZE = 10000;
@@ -15,6 +11,9 @@ const unsigned short G_MIN_TILE_SIZE = 50;
 
 namespace engine
 {
+	using TilePtr = std::shared_ptr<game::Tile>;
+	using MapPtr = std::vector<std::vector<TilePtr>>;
+
 	class Map
 	{
 	private:
