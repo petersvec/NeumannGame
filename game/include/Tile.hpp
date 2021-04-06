@@ -10,6 +10,7 @@ namespace game
 	private:
 
 	protected:
+		unsigned short m_minerals;
 		TileType m_type;
 		sf::Sprite m_sprite;
 		game::Ownership m_occupied;
@@ -21,10 +22,12 @@ namespace game
 		Tile operator = (const unsigned char);
 		bool operator == (const unsigned char);
 
+		unsigned short getMinerals();
 		unsigned char getType();
 		sf::Sprite getSprite();
 		sf::Vector2f getPosition() const;
 
+		void setMinerals(unsigned short);
 		void setType(unsigned char type);
 		void setSprite(const sf::Texture& texture);
 		void setPosition(float, float);

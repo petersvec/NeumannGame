@@ -20,6 +20,8 @@ namespace game
 			unsigned short siliconCost,
 			game::Ownership owner);
 
+		unsigned short mine();
+
 		unsigned short getMiningCapacity()
 		{
 			return m_miningCapacity;

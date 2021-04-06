@@ -6,6 +6,7 @@ namespace game
 {
 	Tile::Tile()
 	{
+		setMinerals(0);
 		m_occupied = game::Ownership::Unoccupied;
 		srand(static_cast<unsigned int>(time(nullptr)));
 		m_type = TileType(rand() % 4);
@@ -15,6 +16,14 @@ namespace game
 	Tile::Tile(unsigned char type)
 	{
 		m_occupied = game::Ownership::Unoccupied;
+		if (type > 0)
+		{
+			setMinerals(400 + rand() % 201);
+		}
+		else
+		{
+			setMinerals(0);
+		}
 		m_type = TileType(type);
 		m_sprite.setScale(sf::Vector2f(1, 1));
 	}
@@ -33,6 +42,11 @@ namespace game
 		return false;
 	}
 
+	unsigned short Tile::getMinerals()
+	{
+		return m_minerals;
+	}
+
 	sf::Vector2f Tile::getPosition() const
 	{
 		return m_sprite.getPosition();
@@ -46,6 +60,11 @@ namespace game
 	sf::Sprite Tile::getSprite()
 	{
 		return m_sprite;
+	}
+
+	void Tile::setMinerals(unsigned short minerals)
+	{
+		m_minerals = minerals;
 	}
 
 	void Tile::setType(unsigned char type)

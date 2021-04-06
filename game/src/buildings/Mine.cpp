@@ -14,4 +14,11 @@ namespace game
 		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner },
 		IObject{ hp, type, texture, location, owner }
 	{}
+
+	unsigned short Mine::mine()
+	{
+		return getLocation()->getMinerals();
+
+		//or TODO: add minerals into player state
+	}
 }
