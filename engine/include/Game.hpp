@@ -37,6 +37,9 @@ namespace engine
 		engine::IObjectPtr testPO;
 		bool unitIsSelected;
 		sf::RectangleShape selectedMapTile;
+		game::PlayerState player1State;
+		game::PlayerState player2State;
+
 	public:
 		game::Player activePlayer = game::Player::Player1;
 

@@ -75,8 +75,6 @@ namespace engine
 			x = x / tileSize;
 			y = y / tileSize;
 			
-
-			
 			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer);
 			
 			if (testPO != nullptr)
