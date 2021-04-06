@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics/Sprite.hpp>
 #include "TileType.hpp"
+#include "Ownership.hpp"
 
 namespace game
 {
@@ -11,7 +12,7 @@ namespace game
 	protected:
 		TileType m_type;
 		sf::Sprite m_sprite;
-		bool occupied = 0;
+		game::Ownership m_occupied;
 
 	public:
 		Tile();
@@ -27,7 +28,7 @@ namespace game
 		void setType(unsigned char type);
 		void setSprite(const sf::Texture& texture);
 		void setPosition(float, float);
-		bool getOccupied();
-		void setOccupied(bool value);
+		game::Ownership getOccupied();
+		void setOccupied(game::Ownership ownership);
 	};
 }

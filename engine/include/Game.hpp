@@ -6,6 +6,7 @@
 #include "ObjectManager.hpp"
 #include "Utilities.hpp"
 #include "IObject.hpp"
+#include "../../game/include/player/PlayerState.hpp"
 
 namespace engine
 {
@@ -41,7 +42,7 @@ namespace engine
 		game::PlayerState player2State;
 
 	public:
-		game::Player activePlayer = game::Player::Player1;
+		game::Ownership activePlayer = game::Ownership::Player1;
 
 		void initVariables();
 		void initWindow();

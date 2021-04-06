@@ -6,6 +6,7 @@ namespace game
 {
 	Tile::Tile()
 	{
+		m_occupied = game::Ownership::Unoccupied;
 		srand(static_cast<unsigned int>(time(nullptr)));
 		m_type = TileType(rand() % 4);
 		m_sprite.setScale(sf::Vector2f(1, 1));
@@ -13,6 +14,7 @@ namespace game
 
 	Tile::Tile(unsigned char type)
 	{
+		m_occupied = game::Ownership::Unoccupied;
 		m_type = TileType(type);
 		m_sprite.setScale(sf::Vector2f(1, 1));
 	}
@@ -56,13 +58,13 @@ namespace game
 		m_sprite.setTexture(texture);
 		m_sprite.setTextureRect(sf::IntRect(0, 0, 50, 50));  //a.k.a tileSize
 	}
-	bool Tile::getOccupied()
+	game::Ownership Tile::getOccupied()
 	{
-		return occupied;
+		return m_occupied;
 	}
-	void Tile::setOccupied(bool value)
+	void Tile::setOccupied(game::Ownership ownership)
 	{
-		occupied = value;
+		m_occupied = ownership;
 	}
 
 	void Tile::setPosition(float x, float y)

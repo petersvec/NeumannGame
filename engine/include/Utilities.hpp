@@ -1,17 +1,6 @@
 #pragma once
-
 #include <SFML/System/Vector2.hpp>
-
 #include "JsonParser.hpp"
-
-namespace game
-{
-	enum class Player
-	{
-		Player1,
-		Player2
-	};
-}
 
 namespace engine
 {

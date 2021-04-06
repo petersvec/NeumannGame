@@ -19,10 +19,10 @@ namespace engine
 		unsigned short m_hp;
 		game::ObjectType m_type;
 		sf::Sprite m_sprite;
-		TilePtr m_location;
-		game::Player m_owner;
+		engine::TilePtr m_location;
+		game::Ownership m_owner;
 
-		IObject(unsigned short hp, game::ObjectType type, const sf::Texture& texture, TilePtr location, game::Player owner)
+		IObject(unsigned short hp, game::ObjectType type, const sf::Texture& texture, TilePtr location, game::Ownership owner)
 			:
 			m_hp{ hp },
 			m_type{ type },
@@ -36,7 +36,7 @@ namespace engine
 	public:
 		virtual void draw(sf::RenderWindow* window)
 		{
-			if (m_owner == game::Player::Player1)
+			if (m_owner == game::Ownership::Player1)
 			{
 				m_sprite.setColor(sf::Color::Red);
 			}
@@ -50,12 +50,12 @@ namespace engine
 
 		virtual void update() = 0;
 
-		void setOwner(game::Player player)
+		void setOwner(game::Ownership player)
 		{
 			m_owner = player;
 		}
 
-		game::Player GetOwner() const
+		game::Ownership GetOwner() const
 		{
 			return m_owner;
 		}

@@ -30,6 +30,6 @@ namespace engine
 	protected:
 
 	public:
-		engine::IObjectPtr create(game::ObjectType objType, TilePtr location, game::Player owner);
+		engine::IObjectPtr create(game::ObjectType objType, TilePtr location, game::Ownership owner);
 	};
 }

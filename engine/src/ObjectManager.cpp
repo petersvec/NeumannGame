@@ -22,7 +22,7 @@ namespace engine
 		playerObjectVector.push_back(unit);
 	}
 
-	engine::IObjectPtr ObjectManager::findUnit(int x, int y, game::Player player)
+	engine::IObjectPtr ObjectManager::findUnit(int x, int y, game::Ownership player)
 	{
 		for (int it = 0; it < this->playerObjectVector.size(); it++)
 		{

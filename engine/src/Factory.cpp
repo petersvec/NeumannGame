@@ -5,7 +5,7 @@ namespace engine
 {
     UnitFactoryPtr unitFactory = std::make_unique<UnitFactory>();
 
-    engine::IObjectPtr UnitFactory::create(game::ObjectType objType, TilePtr location, game::Player owner)
+    engine::IObjectPtr UnitFactory::create(game::ObjectType objType, TilePtr location, game::Ownership owner)
     {
         sf::Texture texture;
 
