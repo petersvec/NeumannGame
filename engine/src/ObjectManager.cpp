@@ -1,6 +1,7 @@
 #include "../include/ObjectManager.hpp"
 #include <iostream>
 #include "../include/Game.hpp"
+#include "../include/Gui.hpp"
 
 namespace engine
 {
