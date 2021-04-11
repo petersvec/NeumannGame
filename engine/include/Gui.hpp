@@ -1,4 +1,6 @@
+#pragma once
 #include "IObject.hpp"
+#include <SFML/Graphics.hpp>
 namespace engine
 {
 	class Gui
@@ -6,6 +8,8 @@ namespace engine
 	public:
 		Gui();
 
-		void LoadObject(sf::Window&, IObjectPtr);
+		void LoadObject(IObjectPtr);
+		sf::Font font;
+		sf::Text text;
 	};
 }

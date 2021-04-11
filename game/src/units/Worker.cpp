@@ -19,4 +19,9 @@ namespace game
 	{
 		object->setHp(object->getHp() - getAttackDamage());
 	}
+	std::string Worker::getName()
+	{
+		return "Worker";
+	}
+	
 }

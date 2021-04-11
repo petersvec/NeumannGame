@@ -79,7 +79,7 @@ namespace engine
 			
 
 			
-			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer);
+			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer, &m_gui);
 			
 			if (testPO != nullptr)
 			{
@@ -260,6 +260,7 @@ namespace engine
 		m_window->draw(m_guiRectangle);
 		m_window->draw(tileText);
 		m_window->draw(ActivePlayerText);
+		m_window->draw(m_gui.text);
 		m_window->setView(m_view);
 		m_window->draw(selectedMapTile);
 

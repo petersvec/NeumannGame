@@ -123,5 +123,9 @@ namespace engine
 			m_location = location;
 			m_sprite.setPosition(location->getPosition());
 		}
+		virtual std::string getName()
+		{
+			return "null";
+		}
 	};
 }

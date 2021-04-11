@@ -19,4 +19,9 @@ namespace game
 	{
 		object->setHp(object->getHp() - getAttackDamage() / 2);
 	}
+	std::string Ranged::getName()
+	{
+		return "Ranged";
+	}
+	
 }

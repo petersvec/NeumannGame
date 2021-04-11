@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="engine\src\Factory.cpp" />
     <ClCompile Include="engine\src\Game.cpp" />
+    <ClCompile Include="engine\src\Gui.cpp" />
     <ClCompile Include="engine\src\JsonParser.cpp" />
     <ClCompile Include="engine\src\Map.cpp" />
     <ClCompile Include="engine\src\MapGenerator.cpp" />
@@ -46,6 +47,7 @@
   <ItemGroup>
     <ClInclude Include="engine\include\Factory.hpp" />
     <ClInclude Include="engine\include\Game.hpp" />
+    <ClInclude Include="engine\include\Gui.hpp" />
     <ClInclude Include="engine\include\IObject.hpp" />
     <ClInclude Include="engine\include\JsonParser.hpp" />
     <ClInclude Include="engine\include\Map.hpp" />

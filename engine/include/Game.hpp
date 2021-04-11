@@ -6,6 +6,7 @@
 #include "ObjectManager.hpp"
 #include "Utilities.hpp"
 #include "IObject.hpp"
+#include "Gui.hpp"
 
 namespace engine
 {
@@ -38,6 +39,7 @@ namespace engine
 		bool unitIsSelected;
 		sf::RectangleShape selectedMapTile;
 		sf::Text ActivePlayerText;
+		Gui m_gui;
 	public:
 		game::Player activePlayer = game::Player::Player1;
 

@@ -117,6 +117,9 @@
     <ClCompile Include="game\src\units\Melee.cpp">
       <Filter>Game\src\units</Filter>
     </ClCompile>
+    <ClCompile Include="engine\src\Gui.cpp">
+      <Filter>Engine\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\include\Map.hpp">
@@ -201,6 +204,9 @@
       <Filter>Game\include\player</Filter>
     </ClInclude>
     <ClInclude Include="engine\include\Utilities.hpp">
+      <Filter>Engine\include</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\include\Gui.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
   </ItemGroup>

@@ -18,5 +18,7 @@ namespace game
 			unsigned short copperCost,
 			unsigned short siliconCost,
 			Player owner);
+
+		std::string getName() override;
 	};
 }

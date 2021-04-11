@@ -14,4 +14,11 @@ namespace game
 		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner },
 		IObject{ hp, type, texture, location, owner }
 	{}
+
+	std::string MilitaryBase::getName()
+	{
+		return "Military Base";
+	}
+
+	
 }
