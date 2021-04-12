@@ -30,9 +30,34 @@ namespace game
 			m_armour{ armour }
 		{}
 
+		bool canMove(engine::TilePtr tile, unsigned char tileSize)
+		{
+			unsigned short x1 = tile->getPosition().x;
+			unsigned short y1 = tile->getPosition().y;
+			unsigned short x2 = getLocation()->getPosition().x;
+			unsigned short y2 = getLocation()->getPosition().y;
+
+			if (getMoveSpeed() > (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)) / tileSize))
+			{
+				return false;
+			}
+			return true;
+		}
+
 	public:
 		virtual void attack(engine::IObjectPtr object) = 0;
-		virtual void move(engine::TilePtr tile, unsigned char tileSize) = 0;
+
+		void move(engine::TilePtr tile, unsigned char tileSize)
+		{
+			if (canMove(tile, tileSize))
+			{
+				//move
+				setPosition(engine::ScreenToTile(tile->getPosition()));
+
+				//occupy new tile
+				tile->setOccupied(getOwner());
+			}
+		}
 
 		unsigned char getMoveSpeed()
 		{

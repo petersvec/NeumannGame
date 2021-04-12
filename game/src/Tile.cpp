@@ -84,6 +84,15 @@ namespace game
 	void Tile::setOccupied(game::Ownership ownership)
 	{
 		m_occupied = ownership;
+
+		if (ownership == game::Ownership::Player1)
+		{
+			m_sprite.setColor(sf::Color::Red);
+		}
+		else
+		{
+			m_sprite.setColor(sf::Color::Blue);
+		}
 	}
 
 	void Tile::setPosition(float x, float y)

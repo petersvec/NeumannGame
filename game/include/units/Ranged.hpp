@@ -19,7 +19,6 @@ namespace game
 			unsigned char armour,
 			game::Ownership owner);
 
-		virtual void attack(engine::IObjectPtr object);
-		virtual void move(engine::TilePtr tile, unsigned char tileSize);
+		virtual void attack(engine::IObjectPtr object) override;
 	};
 }
