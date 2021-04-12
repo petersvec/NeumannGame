@@ -20,6 +20,7 @@ namespace game
 			unsigned short siliconCost,
 			game::Ownership owner);
 
+		virtual void update() override;
 		unsigned short mine();
 
 		unsigned short getMiningCapacity()

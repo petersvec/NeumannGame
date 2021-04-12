@@ -34,6 +34,8 @@ namespace engine
 		}
 
 	public:
+		virtual void update() = 0;
+
 		virtual void draw(sf::RenderWindow* window)
 		{
 			if (m_owner == game::Ownership::Player1)

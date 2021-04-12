@@ -19,6 +19,7 @@ namespace game
 			unsigned char armour,
 			game::Ownership owner);
 
+		virtual void update() override;
 		virtual void attack(engine::IObjectPtr object) override;
 	};
 }

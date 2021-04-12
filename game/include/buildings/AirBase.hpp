@@ -18,5 +18,7 @@ namespace game
 			unsigned short copperCost,
 			unsigned short siliconCost,
 			game::Ownership owner);
+
+		virtual void update() override;
 	};
 }
