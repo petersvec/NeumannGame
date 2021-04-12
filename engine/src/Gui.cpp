@@ -15,7 +15,20 @@ namespace engine
 		text.setPosition(500, 640);
 		text.setCharacterSize(20);
 		text.setFont(font);
-		text.setString(object->getName());	 
+		std::string player;
+		if (object->GetOwner() == game::Player::Player1)
+		{
+			player = "| Owner: Player 1";
+		}
+		else
+		{
+			player = "| Owner: Player 2";
+		}
+		
+
+		std::string str = object->getName() + "| HP: " + std::to_string(object->getHp());
+		str = str + player;
+		text.setString(str);	 
 	}
 
 }
