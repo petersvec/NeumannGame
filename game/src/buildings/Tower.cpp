@@ -28,7 +28,7 @@ namespace game
 	{
 		std::pair<unsigned short, unsigned short> xyLocation = map->getTileXY(getLocation());
 
-		if (xyLocation.first == 10000 || xyLocation.second == 10000)
+		if (xyLocation.first == engine::G_MAX_MAP_SIZE || xyLocation.second == engine::G_MAX_MAP_SIZE)
 		{
 			return;
 		}

@@ -34,7 +34,7 @@ namespace engine
 		}
 
 	public:
-		virtual void update() = 0;
+		virtual void update(std::shared_ptr<engine::Map> map) = 0;
 
 		virtual void draw(sf::RenderWindow* window)
 		{
