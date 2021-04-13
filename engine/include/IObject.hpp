@@ -39,7 +39,7 @@ namespace engine
 		virtual void update(std::shared_ptr<engine::Map> map,
 							engine::ObjectManager objMan,
 							bool toUpdate,
-							UnitFactoryPtr unitFactory,
+							engine::UnitFactoryPtr unitFactory,
 							game::PlayerState playerState1) = 0;
 
 		virtual void draw(sf::RenderWindow* window)

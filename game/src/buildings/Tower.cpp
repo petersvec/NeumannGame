@@ -19,11 +19,6 @@ namespace game
 		IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Tower::attack(engine::IObjectPtr object)
-	{
-		object->setHp(object->getHp() - getAttackDamage());
-	}
-
 	void Tower::update(std::shared_ptr<engine::Map> map,
 					   engine::ObjectManager objMan,
 					   bool toUpdate,
@@ -55,5 +50,14 @@ namespace game
 				attack(objMan.findUnit(i, j, owner));
 			}
 		}
+	}
+
+	void Tower::attack(engine::IObjectPtr object)
+	{
+		if (object == nullptr)
+		{
+			return;
+		}
+		object->setHp(object->getHp() - getAttackDamage());
 	}
 }
