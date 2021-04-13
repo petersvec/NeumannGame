@@ -19,7 +19,11 @@ namespace game
 			unsigned char armour,
 			game::Ownership owner);
 
-		virtual void update() override;
+		virtual void update(std::shared_ptr<engine::Map> map,
+							engine::ObjectManager objMan,
+							bool toUpdate,
+							engine::UnitFactoryPtr unitFactory,
+							game::PlayerState playerState1) override;
 		virtual void attack(engine::IObjectPtr object) override;
 	};
 }

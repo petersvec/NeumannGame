@@ -15,8 +15,23 @@ namespace game
 		IObject{ hp, type, texture, location, owner }
 	{}
 
+	void Melee::update(std::shared_ptr<engine::Map> map,
+						engine::ObjectManager objMan,
+						bool toUpdate,
+						engine::UnitFactoryPtr unitFactory,
+						game::PlayerState playerState1)
+	{
+		Ownership owner = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
+		attack(objMan.findUnit(getPosition().x, getPosition().y, owner));
+	}
+
 	void Melee::attack(engine::IObjectPtr object)
 	{
+		if (object == nullptr)
+		{
+			return;
+		}
+
 		if (object->getType() == game::ObjectType::Ranged)
 		{
 			object->setHp(object->getHp() - (getAttackDamage() * 2));
