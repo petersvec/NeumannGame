@@ -19,6 +19,7 @@ namespace game
 			unsigned short siliconCost,
 			game::Ownership owner);
 
-		virtual void update() override;
+		virtual void update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan, bool toUpdate, engine::UnitFactoryPtr unitFactory) override;
+		void makeMelee(engine::UnitFactoryPtr unitFactory);
 	};
 }

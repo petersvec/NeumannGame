@@ -14,4 +14,17 @@ namespace game
 		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner },
 		IObject{ hp, type, texture, location, owner }
 	{}
+
+	void MilitaryBase::update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan, bool toUpdate, engine::UnitFactoryPtr unitFactory)
+	{
+		if (toUpdate)
+		{
+			makeMelee(unitFactory);
+		}
+	}
+
+	void MilitaryBase::makeMelee(engine::UnitFactoryPtr unitFactory)
+	{
+		unitFactory.get()->create(game::ObjectType::Melee, getLocation(), getOwner());
+	}
 }

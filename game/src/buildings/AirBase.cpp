@@ -15,7 +15,7 @@ namespace game
 		IObject{ hp, type, texture, location, owner }
 	{}
 
-	void AirBase::update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan, bool toUpdate, engine::UnitFactory unitFactory)
+	void AirBase::update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan, bool toUpdate, engine::UnitFactoryPtr unitFactory)
 	{
 		if (toUpdate)
 		{
@@ -23,8 +23,8 @@ namespace game
 		}
 	}
 
-	void AirBase::makeRanged(engine::UnitFactory unitFactory)
+	void AirBase::makeRanged(engine::UnitFactoryPtr unitFactory)
 	{
-		unitFactory.create(game::ObjectType::Ranged, getLocation(), getOwner());
+		unitFactory.get()->create(game::ObjectType::Ranged, getLocation(), getOwner());
 	}
 }

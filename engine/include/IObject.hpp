@@ -36,7 +36,7 @@ namespace engine
 		}
 
 	public:
-		virtual void update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan, bool toUpdate, engine::UnitFactory unitFactory) = 0;
+		virtual void update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan, bool toUpdate, UnitFactoryPtr unitFactory) = 0;
 
 		virtual void draw(sf::RenderWindow* window)
 		{

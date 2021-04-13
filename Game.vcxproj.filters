@@ -102,7 +102,7 @@
     <ClCompile Include="game\src\units\Worker.cpp">
       <Filter>Game\src\units</Filter>
     </ClCompile>
-    <ClCompile Include="engine\src\Factory.cpp">
+    <ClCompile Include="engine\src\UnitFactory.cpp">
       <Filter>Engine\src</Filter>
     </ClCompile>
     <ClCompile Include="game\src\buildings\Tower.cpp">
@@ -188,7 +188,7 @@
     <ClInclude Include="engine\include\IObject.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
-    <ClInclude Include="engine\include\Factory.hpp">
+    <ClInclude Include="engine\include\UnitFactory.hpp">
       <Filter>Engine\include</Filter>
     </ClInclude>
     <ClInclude Include="game\include\ObjectType.hpp">
