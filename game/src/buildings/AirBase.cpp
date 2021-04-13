@@ -15,7 +15,11 @@ namespace game
 		IObject{ hp, type, texture, location, owner }
 	{}
 
-	void AirBase::update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan, bool toUpdate, engine::UnitFactoryPtr unitFactory)
+	void AirBase::update(std::shared_ptr<engine::Map> map,
+						 engine::ObjectManager objMan,
+						 bool toUpdate,
+						 engine::UnitFactoryPtr unitFactory,
+						 game::PlayerState playerState1)
 	{
 		if (toUpdate)
 		{

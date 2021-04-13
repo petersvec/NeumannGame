@@ -24,7 +24,11 @@ namespace game
 		object->setHp(object->getHp() - getAttackDamage());
 	}
 
-	void Tower::update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan, bool toUpdate, engine::UnitFactoryPtr unitFactory)
+	void Tower::update(std::shared_ptr<engine::Map> map,
+					   engine::ObjectManager objMan,
+					   bool toUpdate,
+					   engine::UnitFactoryPtr unitFactory,
+					   game::PlayerState playerState1)
 	{
 		std::pair<unsigned short, unsigned short> xyLocation = map->getTileXY(getLocation());
 		std::vector<std::pair<unsigned short, unsigned short>> allTilesToApplyDamage;
