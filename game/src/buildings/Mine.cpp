@@ -15,10 +15,18 @@ namespace game
 		IObject{ hp, type, texture, location, owner }
 	{}
 
-	unsigned short Mine::mine()
+	void Mine::update(std::shared_ptr<engine::Map> map,
+					  engine::ObjectManager objMan,
+					  bool toUpdate,
+					  engine::UnitFactoryPtr unitFactory,
+					  game::PlayerState playerState1)
 	{
-		return getLocation()->getMinerals();
+		mine(playerState1);
+	}
 
-		//or TODO: add minerals into player state
+	void Mine::mine(PlayerState playerState)
+	{
+		unsigned minerals = getLocation()->getMinerals();
+		playerState.updatePlayerBalances(minerals, minerals, minerals);
 	}
 }

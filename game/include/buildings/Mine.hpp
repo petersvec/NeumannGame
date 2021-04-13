@@ -20,8 +20,12 @@ namespace game
 			unsigned short siliconCost,
 			game::Ownership owner);
 
-		virtual void update() override;
-		unsigned short mine();
+		virtual void update(std::shared_ptr<engine::Map> map,
+							engine::ObjectManager objMan,
+							bool toUpdate,
+							engine::UnitFactoryPtr unitFactory,
+							game::PlayerState playerState1) override;
+		void mine(PlayerState playerState);
 
 		unsigned short getMiningCapacity()
 		{
