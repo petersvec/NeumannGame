@@ -164,6 +164,23 @@ namespace engine
 						if (testPO->getIsBuilding() == false)
 						{
 							testPO->setPosition(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
+
+							if (activePlayer == game::Player::Player1)
+							{
+								unitIsSelected = false;
+								testPO = nullptr;
+								activePlayer = game::Player::Player2;
+								ActivePlayerText.setString("Player 2");
+							}
+							else
+							{
+								unitIsSelected = false;
+								testPO = nullptr;
+								activePlayer = game::Player::Player1;
+								ActivePlayerText.setString("Player 1");
+							}
+							
+						
 						}
 					}
 				}
