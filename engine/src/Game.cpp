@@ -165,6 +165,8 @@ namespace engine
 						{
 							testPO->setPosition(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
 
+							selectedMapTile.setPosition(worldPos.x / tileSize, worldPos.y / tileSize);
+
 							if (activePlayer == game::Player::Player1)
 							{
 								unitIsSelected = false;
