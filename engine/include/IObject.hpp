@@ -4,6 +4,7 @@
 #include <SFML\Graphics\RenderWindow.hpp>
 
 #include "../../game/include/ObjectType.hpp"
+#include "ObjectManager.hpp"
 #include "Utilities.hpp"
 
 namespace engine
@@ -34,7 +35,7 @@ namespace engine
 		}
 
 	public:
-		virtual void update(std::shared_ptr<engine::Map> map) = 0;
+		virtual void update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan) = 0;
 
 		virtual void draw(sf::RenderWindow* window)
 		{

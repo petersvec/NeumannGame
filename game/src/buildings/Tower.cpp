@@ -24,9 +24,11 @@ namespace game
 		object->setHp(object->getHp() - getAttackDamage());
 	}
 
-	void Tower::update(std::shared_ptr<engine::Map> map)
+	void Tower::update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan)
 	{
 		std::pair<unsigned short, unsigned short> xyLocation = map->getTileXY(getLocation());
+		std::vector<std::pair<unsigned short, unsigned short>> allTilesToApplyDamage;
+		Ownership owner = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player2);
 
 		if (xyLocation.first == engine::G_MAX_MAP_SIZE || xyLocation.second == engine::G_MAX_MAP_SIZE)
 		{
@@ -45,8 +47,8 @@ namespace game
 				{
 					continue;
 				}
-				
-				//TODO: apply damage to objects on tile pointer map->getTile(i, j); if there are any
+
+				attack(objMan.findUnit(i, j, owner));
 			}
 		}
 	}

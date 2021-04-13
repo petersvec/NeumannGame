@@ -23,7 +23,7 @@ namespace game
 			unsigned short siliconCost,
 			game::Ownership owner);
 
-		virtual void update(std::shared_ptr<engine::Map> map) override;
+		virtual void update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan) override;
 		virtual void attack(engine::IObjectPtr object);
 		virtual void move(engine::TilePtr tile, unsigned char tileSize) {}
 	};
