@@ -47,7 +47,7 @@ namespace game
 	public:
 		virtual void attack(engine::IObjectPtr object) = 0;
 
-		void move(engine::TilePtr tile, unsigned char tileSize)
+		void move(engine::TilePtr tile, unsigned char tileSize, PlayerState playerState)
 		{
 			if (canMove(tile, tileSize))
 			{
@@ -55,6 +55,7 @@ namespace game
 				setPosition(engine::ScreenToTile(tile->getPosition()));
 
 				//occupy new tile
+				playerState.updatePlayerLandConquered();
 				tile->setOccupied(getOwner());
 			}
 		}
