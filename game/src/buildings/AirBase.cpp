@@ -14,4 +14,17 @@ namespace game
 		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner},
 		IObject{ hp, type, texture, location, owner }
 	{}
+
+	void AirBase::update(std::shared_ptr<engine::Map> map, engine::ObjectManager objMan, bool toUpdate, engine::UnitFactory unitFactory)
+	{
+		if (toUpdate)
+		{
+			makeRanged(unitFactory);
+		}
+	}
+
+	void AirBase::makeRanged(engine::UnitFactory unitFactory)
+	{
+		unitFactory.create(game::ObjectType::Ranged, getLocation(), getOwner());
+	}
 }
