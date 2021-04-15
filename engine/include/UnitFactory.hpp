@@ -20,7 +20,7 @@
 namespace engine
 {
 	class UnitFactory;
-	using UnitFactoryPtr = std::unique_ptr<UnitFactory>;
+	using UnitFactoryPtr = std::shared_ptr<UnitFactory>;
 	extern UnitFactoryPtr unitFactory;
 
 	class UnitFactory
