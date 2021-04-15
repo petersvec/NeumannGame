@@ -9,6 +9,11 @@ namespace engine
 		
 	}
 
+	std::vector<engine::IObjectPtr> ObjectManager::getPlayerObjects()
+	{
+		return playerObjectVector;
+	}
+
 	void ObjectManager::drawAll(sf::RenderWindow* window)
 	{
 		for (int it = 0; it < this->playerObjectVector.size(); it++)

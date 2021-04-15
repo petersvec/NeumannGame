@@ -23,31 +23,21 @@ namespace game
 					   engine::ObjectManager objMan,
 					   bool toUpdate,
 					   engine::UnitFactoryPtr unitFactory,
-					   game::PlayerState playerState1)
+					   game::PlayerState& playerState,
+					   game::ObjectType objType)
 	{
-		std::pair<unsigned short, unsigned short> xyLocation = map->getTileXY(getLocation());
-		std::vector<std::pair<unsigned short, unsigned short>> allTilesToApplyDamage;
-		Ownership owner = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
+		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
 
-		if (xyLocation.first == engine::G_MAX_MAP_SIZE || xyLocation.second == engine::G_MAX_MAP_SIZE)
+		for (auto i : objMan.getPlayerObjects())
 		{
-			return;
-		}
-
-		for (unsigned short i = xyLocation.first - (getMoveSpeed() / 2); i < xyLocation.first + (getMoveSpeed() / 2); ++i)
-		{
-			if (i < 0 || i >= map->getHeight())
+			if (i->getOwner() != enemy)
 			{
 				continue;
 			}
-			for (unsigned short j = xyLocation.first - (getMoveSpeed() / 2); j < xyLocation.first + (getMoveSpeed() / 2); ++j)
-			{
-				if (j < 0 || j >= map->getWidth())
-				{
-					continue;
-				}
 
-				attack(objMan.findUnit(i, j, owner));
+			if (engine::TileDistance(getPosition(), i->getPosition()) <= getMoveSpeed())
+			{
+				attack(i);
 			}
 		}
 	}

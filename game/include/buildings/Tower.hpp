@@ -1,6 +1,7 @@
 #pragma once
 #include "IBuilding.hpp"
 #include "../units/IUnit.hpp"
+#include "../../../engine/include/Utilities.hpp"
 
 namespace game
 {
@@ -27,7 +28,8 @@ namespace game
 							engine::ObjectManager objMan,
 							bool toUpdate,
 							engine::UnitFactoryPtr unitFactory,
-							game::PlayerState playerState1) override;
+							game::PlayerState& playerState,
+							game::ObjectType objType) override;
 		virtual void attack(engine::IObjectPtr object);
 		virtual void move(engine::TilePtr tile, unsigned char tileSize) {}
 	};
