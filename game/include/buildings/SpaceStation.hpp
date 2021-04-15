@@ -25,6 +25,6 @@ namespace game
 							engine::UnitFactoryPtr unitFactory,
 							game::PlayerState& playerState,
 							game::ObjectType objType) override;
-		void makeWorker(engine::UnitFactoryPtr unitFactory);
+		void makeWorker(engine::UnitFactoryPtr unitFactory, engine::TilePtr location);
 	};
 }

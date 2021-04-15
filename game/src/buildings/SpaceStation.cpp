@@ -24,12 +24,14 @@ namespace game
 	{
 		if (toUpdate)
 		{
-			makeWorker(unitFactory);
+			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
+			engine::TilePtr location = map->getTile(xy.first, xy.second);
+			makeWorker(unitFactory, location);
 		}
 	}
 
-	void SpaceStation::makeWorker(engine::UnitFactoryPtr unitFactory)
+	void SpaceStation::makeWorker(engine::UnitFactoryPtr unitFactory, engine::TilePtr location)
 	{
-		unitFactory.get()->create(game::ObjectType::Worker, getLocation(), getOwner());
+		unitFactory.get()->create(game::ObjectType::Worker, location, getOwner());
 	}
 }
