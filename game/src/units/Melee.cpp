@@ -22,13 +22,18 @@ namespace game
 						game::PlayerState& playerState,
 						game::ObjectType objType)
 	{
-		Ownership owner = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
-		attack(objMan.findUnit(getPosition().x, getPosition().y, owner));
+		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
+		attack(objMan.findUnit(getPosition().x, getPosition().y, enemy));
 	}
 
 	void Melee::attack(engine::IObjectPtr object)
 	{
 		if (object == nullptr)
+		{
+			return;
+		}
+
+		if (engine::TileDistance(getPosition(), object->getPosition()) > getMoveSpeed())
 		{
 			return;
 		}
