@@ -16,6 +16,7 @@
 
 #include "IObject.hpp"
 #include "Utilities.hpp"
+#include "TextureHandler.hpp"
 
 namespace engine
 {
