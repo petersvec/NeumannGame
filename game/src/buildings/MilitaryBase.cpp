@@ -24,12 +24,14 @@ namespace game
 	{
 		if (toUpdate)
 		{
-			makeMelee(unitFactory);
+			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
+			engine::TilePtr location = map->getTile(xy.first, xy.second);
+			makeMelee(unitFactory, location);
 		}
 	}
 
-	void MilitaryBase::makeMelee(engine::UnitFactoryPtr unitFactory)
+	void MilitaryBase::makeMelee(engine::UnitFactoryPtr unitFactory, engine::TilePtr location)
 	{
-		unitFactory.get()->create(game::ObjectType::Melee, getLocation(), getOwner());
+		unitFactory.get()->create(game::ObjectType::Melee, location, getOwner());
 	}
 }

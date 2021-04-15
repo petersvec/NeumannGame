@@ -25,6 +25,6 @@ namespace game
 							engine::UnitFactoryPtr unitFactory,
 							game::PlayerState& playerState,
 							game::ObjectType objType) override;
-		void makeMelee(engine::UnitFactoryPtr unitFactory);
+		void makeMelee(engine::UnitFactoryPtr unitFactory, engine::TilePtr location);
 	};
 }
