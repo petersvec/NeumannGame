@@ -26,8 +26,8 @@ namespace engine
 
 	std::pair<unsigned short, unsigned short> GetNearestFreeLocation(TilePtr location, engine::ObjectManager objMan)
 	{
-		unsigned short x = location->getPosition().x;
-		unsigned short y = location->getPosition().y;
+		auto x = location->getPosition().x;
+		auto y = location->getPosition().y;
 
 		for (int k = 1; k < JsonParser().getMapWidth(); ++k)
 		{

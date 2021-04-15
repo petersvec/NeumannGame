@@ -24,7 +24,7 @@ namespace game
 	{
 		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
 
-		for (auto i : objMan.getPlayerObjects())
+		for (auto& i : objMan.getPlayerObjects())
 		{
 			if (i->getOwner() != enemy)
 			{
