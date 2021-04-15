@@ -23,7 +23,8 @@ namespace game
 							engine::ObjectManager objMan,
 							bool toUpdate,
 							engine::UnitFactoryPtr unitFactory,
-							game::PlayerState playerState1) override;
-		void makeRanged(engine::UnitFactoryPtr unitFactory);
+							game::PlayerState& playerState,
+							game::ObjectType objType) override;
+		void makeRanged(engine::UnitFactoryPtr unitFactory, engine::TilePtr location);
 	};
 }

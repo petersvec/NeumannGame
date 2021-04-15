@@ -19,16 +19,19 @@ namespace game
 						 engine::ObjectManager objMan,
 						 bool toUpdate,
 						 engine::UnitFactoryPtr unitFactory,
-						 game::PlayerState playerState1)
+						 game::PlayerState& playerState,
+				    	 game::ObjectType objType)
 	{
 		if (toUpdate)
 		{
-			makeRanged(unitFactory);
+			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
+			engine::TilePtr loc = map->getTile(xy.first, xy.second);
+			makeRanged(unitFactory, loc);
 		}
 	}
 
-	void AirBase::makeRanged(engine::UnitFactoryPtr unitFactory)
+	void AirBase::makeRanged(engine::UnitFactoryPtr unitFactory, engine::TilePtr location)
 	{
-		unitFactory.get()->create(game::ObjectType::Ranged, getLocation(), getOwner());
+		unitFactory->create(game::ObjectType::Ranged, location, getOwner());
 	}
 }

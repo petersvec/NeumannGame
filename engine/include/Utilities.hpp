@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/System/Vector2.hpp>
 #include "JsonParser.hpp"
-#include "JsonParser.hpp"
+#include "ObjectManager.hpp"
 
 namespace engine
 {
@@ -22,5 +22,34 @@ namespace engine
 		unsigned char tileSize = JsonParser().getTileSize();
 
 		return sqrt( x * x + y * y) / tileSize;
+	}
+
+	std::pair<unsigned short, unsigned short> GetNearestFreeLocation(TilePtr location, engine::ObjectManager objMan)
+	{
+		unsigned short x = location->getPosition().x;
+		unsigned short y = location->getPosition().y;
+
+		for (int k = 1; k < JsonParser().getMapWidth(); ++k)
+		{
+			for (int i = (-k); i <= k; ++i)
+			{
+				for (int j = (-k); j <= k; ++j)
+				{	
+					if (objMan.findUnit(x + i, y + j, game::Ownership::Player1) == nullptr &&
+						objMan.findUnit(x + i, y + j, game::Ownership::Player2) == nullptr)
+					{
+						if (x + i < 0 ||
+							x + i >= JsonParser().getMapHeight()||
+							y + j < 0 ||
+							y + j >= JsonParser().getMapWidth())
+						{
+							continue;
+						}
+
+						return std::make_pair(x + i, y + j);
+					}
+				}
+			}
+		}
 	}
 }
