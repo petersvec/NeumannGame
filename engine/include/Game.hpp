@@ -6,6 +6,9 @@
 #include "ObjectManager.hpp"
 #include "Utilities.hpp"
 #include "IObject.hpp"
+#include "Shader.hpp"
+#include "TextureHandler.hpp"
+#include "UnitFactory.hpp"
 #include "../../game/include/player/PlayerState.hpp"
 
 namespace engine

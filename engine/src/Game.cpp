@@ -1,8 +1,5 @@
 #include <iostream>
 #include "../include/Game.hpp"
-#include "../include/Shader.hpp"
-#include "../include/TextureHandler.hpp"
-#include "../include/Factory.hpp"
 
 namespace engine
 {
