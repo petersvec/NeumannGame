@@ -1,6 +1,4 @@
 #include "../include/Shader.hpp"
-#include <SFML\Graphics\Shader.hpp>
-
 
 namespace engine
 {

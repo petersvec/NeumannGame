@@ -1,6 +1,4 @@
 #include "../include/TextureHandler.hpp"
-#include <fstream>
-#include <iostream>
 
 namespace engine
 {

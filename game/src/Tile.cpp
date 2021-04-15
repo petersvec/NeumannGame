@@ -1,5 +1,3 @@
-#include <stdlib.h>
-#include <time.h>
 #include "../include/Tile.hpp"
 
 namespace game

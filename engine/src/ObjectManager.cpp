@@ -1,13 +1,8 @@
 #include "../include/ObjectManager.hpp"
-#include <iostream>
-#include "../include/Game.hpp"
 
 namespace engine
 {
-	ObjectManager::ObjectManager()
-	{
-		
-	}
+	ObjectManager::ObjectManager() {}
 
 	std::vector<engine::IObjectPtr> ObjectManager::getPlayerObjects()
 	{
@@ -18,7 +13,7 @@ namespace engine
 	{
 		for (int it = 0; it < this->playerObjectVector.size(); it++)
 		{
-			this->playerObjectVector[it]->draw(window);
+			playerObjectVector[it]->draw(window);
 		}
 	}
 

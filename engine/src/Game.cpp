@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../include/Game.hpp"
 
 namespace engine
