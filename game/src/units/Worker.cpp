@@ -22,12 +22,14 @@ namespace game
 						game::PlayerState& playerState,
 						game::ObjectType objType)
 	{
-		Ownership owner = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
-		attack(objMan.findUnit(getPosition().x, getPosition().y, owner));
+		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
+		attack(objMan.findUnit(getPosition().x, getPosition().y, enemy));
 
 		if (toUpdate)
 		{
-			build(unitFactory, objType);
+			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
+			engine::TilePtr location = map->getTile(xy.first, xy.second);
+			build(unitFactory, objType, location);
 		}
 	}
 
@@ -37,11 +39,17 @@ namespace game
 		{
 			return;
 		}
+		
+		if (engine::TileDistance(getPosition(), object->getPosition()) > getMoveSpeed())
+		{
+			return;
+		}
+
 		object->setHp(object->getHp() - getAttackDamage());
 	}
 
-	void Worker::build(engine::UnitFactoryPtr unitFactory, ObjectType objType)
+	void Worker::build(engine::UnitFactoryPtr unitFactory, ObjectType objType, engine::TilePtr location)
 	{
-		unitFactory.get()->create(objType, getLocation(), getOwner());
+		unitFactory.get()->create(objType, location, getOwner());
 	}
 }
