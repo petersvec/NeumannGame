@@ -25,8 +25,8 @@ namespace game
 		if (toUpdate)
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
-			engine::TilePtr loc = map->getTile(xy.first, xy.second);
-			makeRanged(unitFactory, loc);
+			engine::TilePtr location = map->getTile(xy.first, xy.second);
+			makeRanged(unitFactory, location);
 		}
 	}
 
