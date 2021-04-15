@@ -23,7 +23,7 @@ namespace game
 							engine::ObjectManager objMan,
 							bool toUpdate,
 							engine::UnitFactoryPtr unitFactory,
-							game::PlayerState playerState1,
+							game::PlayerState& playerState,
 							game::ObjectType objType) override;
 		virtual void attack(engine::IObjectPtr object) override;
 		void build(engine::UnitFactoryPtr unitFactory, ObjectType objType);

@@ -19,7 +19,8 @@ namespace game
 						engine::ObjectManager objMan,
 						bool toUpdate,
 						engine::UnitFactoryPtr unitFactory,
-						game::PlayerState playerState1)
+						game::PlayerState& playerState,
+						game::ObjectType objType)
 	{
 		Ownership owner = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
 		attack(objMan.findUnit(getPosition().x, getPosition().y, owner));
