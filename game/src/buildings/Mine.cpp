@@ -19,12 +19,13 @@ namespace game
 					  engine::ObjectManager objMan,
 					  bool toUpdate,
 					  engine::UnitFactoryPtr unitFactory,
-					  game::PlayerState playerState1)
+					  game::PlayerState& playerState,
+					  game::ObjectType objType)
 	{
-		mine(playerState1);
+		mine(playerState);
 	}
 
-	void Mine::mine(PlayerState playerState)
+	void Mine::mine(PlayerState& playerState)
 	{
 		unsigned minerals = getLocation()->getMinerals();
 		playerState.updatePlayerBalances(minerals, minerals, minerals);

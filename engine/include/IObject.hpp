@@ -40,7 +40,7 @@ namespace engine
 							engine::ObjectManager objMan,
 							bool toUpdate,
 							engine::UnitFactoryPtr unitFactory,
-							game::PlayerState playerState1,
+							game::PlayerState& playerState,
 							game::ObjectType objType) = 0;
 
 		virtual void draw(sf::RenderWindow* window)

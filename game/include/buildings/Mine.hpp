@@ -24,8 +24,9 @@ namespace game
 							engine::ObjectManager objMan,
 							bool toUpdate,
 							engine::UnitFactoryPtr unitFactory,
-							game::PlayerState playerState1) override;
-		void mine(PlayerState playerState);
+							game::PlayerState& playerState,
+							game::ObjectType objType) override;
+		void mine(PlayerState& playerState);
 
 		unsigned short getMiningCapacity()
 		{
