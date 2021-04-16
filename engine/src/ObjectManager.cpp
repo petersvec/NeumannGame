@@ -1,5 +1,6 @@
 #include "../include/ObjectManager.hpp"
 #include "../include/IObject.hpp"
+#include <iostream>
 
 namespace engine
 {
@@ -12,7 +13,7 @@ namespace engine
 
 	void ObjectManager::drawAll(sf::RenderWindow* window)
 	{
-		for (int it = 0; it < this->playerObjectVector.size(); it++)
+		for (int it = 0; it < playerObjectVector.size(); it++)
 		{
 			playerObjectVector[it]->draw(window);
 		}
@@ -25,17 +26,17 @@ namespace engine
 
 	IObjectPtr ObjectManager::findUnit(int x, int y, game::Ownership player)
 	{
-		for (int it = 0; it < this->playerObjectVector.size(); it++)
+		for (int it = 0; it < playerObjectVector.size(); it++)
 		{
-			if (this->playerObjectVector[it]->getPosition().x == x && this->playerObjectVector[it]->getPosition().y == y)
+			if (playerObjectVector[it]->getPosition().x == x && playerObjectVector[it]->getPosition().y == y)
 			{
 				std::cout << "found ";
-				std::cout << (int)this->playerObjectVector[it]->getOwner();
+				std::cout << (int)playerObjectVector[it]->getOwner();
 				std::cout << '\n';
-				if (player == this->playerObjectVector[it]->getOwner())
+				if (player == playerObjectVector[it]->getOwner())
 				{
 					std::cout << "Unit selected\n";
-					return this->playerObjectVector[it];
+					return playerObjectVector[it];
 				}
 				else
 				{
