@@ -79,10 +79,13 @@ namespace engine
 			
 			m_gui.text.setString("");
 			
-			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer, &m_gui);
+			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer);
+			
+			
 			
 			if (testPO != nullptr)
 			{
+				m_gui.LoadObject(testPO);
 				unitIsSelected = true;
 			}
 			else
@@ -156,16 +159,20 @@ namespace engine
 					}
 					*/
 				}
+				
+
 				if (m_event.mouseButton.button == sf::Mouse::Right)
 				{
 					if (unitIsSelected) {
 						pixelPos = sf::Mouse::getPosition(*m_window);
 						worldPos = m_window->mapPixelToCoords(pixelPos);
-						if (testPO->getIsBuilding() == false)
+						if (testPO->getIsBuilding() == false  && testPO->GetOwner() == activePlayer)
 						{
 							testPO->setPosition(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
-
-							selectedMapTile.setPosition(worldPos.x / tileSize, worldPos.y / tileSize);
+							
+							int posx = worldPos.x / tileSize;		//problem s celociselnym delenim
+							int posy = worldPos.y / tileSize;
+							selectedMapTile.setPosition(posx*tileSize, posy*tileSize);
 
 							if (activePlayer == game::Player::Player1)
 							{

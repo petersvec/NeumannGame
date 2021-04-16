@@ -23,7 +23,7 @@ namespace engine
 		playerObjectVector.push_back(unit);
 	}
 
-	engine::IObjectPtr ObjectManager::findUnit(int x, int y, game::Player player, Gui *gui)
+	engine::IObjectPtr ObjectManager::findUnit(int x, int y, game::Player player)
 	{
 		for (int it = 0; it < this->playerObjectVector.size(); it++)
 		{
@@ -33,16 +33,9 @@ namespace engine
 				std::cout << (int)this->playerObjectVector[it]->GetOwner();
 				std::cout << '\n';
 
-				gui->LoadObject(this->playerObjectVector[it]);
-				if (player == this->playerObjectVector[it]->GetOwner())
-				{
-					std::cout << "Unit selected\n";
-					return this->playerObjectVector[it];
-				}
-				else
-				{
-					std::cout << "Other players unit\n";
-				}
+				
+				return this->playerObjectVector[it];
+			
 			}
 			
 		}

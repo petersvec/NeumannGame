@@ -16,7 +16,7 @@ namespace engine
 		
 		void drawAll(sf::RenderWindow* window);
 		void addUnit(engine::IObjectPtr unit);
-		engine::IObjectPtr findUnit(int x, int y, game::Player player, Gui *gui);
+		engine::IObjectPtr findUnit(int x, int y, game::Player player);
 	private:
 		std::vector<engine::IObjectPtr> playerObjectVector;
 	};
