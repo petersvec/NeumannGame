@@ -1,8 +1,8 @@
 #pragma once
-
-#include <SFML\Graphics\Texture.hpp>
 #include <map>
-
+#include <string>
+#include <memory>
+#include <SFML/Graphics/Texture.hpp>
 #include "JsonParser.hpp"
 
 namespace engine
@@ -18,7 +18,7 @@ namespace engine
 	public:
 		TextureHandler();
 		void LoadTextures();
-		sf::Texture* getTexture(const std::string &name);
+		sf::Texture* getTexture(const std::string&);
 	};
 
 }

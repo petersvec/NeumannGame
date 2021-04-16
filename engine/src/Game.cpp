@@ -4,11 +4,6 @@ namespace engine
 {
 	void Game::initVariables()
 	{
-		if (!config->setGameConfig("config.json", "Settings"))
-		{
-			exit(-555);
-		}
-
 		m_window = nullptr;
 		m_gameMap = new Map(config->getMapHeight(), config->getMapWidth());
 		MapGenerator* m_mapGenerator = new MapGenerator();

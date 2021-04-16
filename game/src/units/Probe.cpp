@@ -3,24 +3,24 @@
 namespace game
 {
 	Probe::Probe(unsigned short hp,
-		game::ObjectType type,
-		const sf::Texture& texture,
-		engine::TilePtr location,
-		unsigned char moveSpeed,
-		unsigned char attackDamage,
-		unsigned char armour,
-		game::Ownership owner)
-		:
-		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
-		IObject{ hp, type, texture, location, owner }
+				 ObjectType type,
+				 const sf::Texture& texture,
+				 engine::TilePtr location,
+				 unsigned char moveSpeed,
+				 unsigned char attackDamage,
+				 unsigned char armour,
+				 Ownership owner)
+				 :
+				 IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
+				 IObject{ hp, type, texture, location, owner }
 	{}
 
 	void Probe::update(std::shared_ptr<engine::Map> map,
 					   engine::ObjectManager objMan,
 					   bool toUpdate,
 					   engine::UnitFactoryPtr unitFactory,
-					   game::PlayerState& playerState,
-					   game::ObjectType objType)
+					   PlayerState& playerState,
+					   ObjectType objType)
 	{
 		if (m_loaded)
 		{
@@ -36,7 +36,7 @@ namespace game
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			unitFactory->create(game::ObjectType::Ranged, location, getOwner());
+			unitFactory->create(ObjectType::Ranged, location, getOwner());
 			m_duplicateTime = 5;
 		}
 		else

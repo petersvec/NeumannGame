@@ -4,7 +4,7 @@ namespace engine
 {
 	ObjectManager::ObjectManager() {}
 
-	std::vector<engine::IObjectPtr> ObjectManager::getPlayerObjects()
+	std::vector<IObjectPtr> ObjectManager::getPlayerObjects()
 	{
 		return playerObjectVector;
 	}
@@ -17,12 +17,12 @@ namespace engine
 		}
 	}
 
-	void ObjectManager::addUnit(engine::IObjectPtr unit)
+	void ObjectManager::addUnit(IObjectPtr unit)
 	{
 		playerObjectVector.push_back(unit);
 	}
 
-	engine::IObjectPtr ObjectManager::findUnit(int x, int y, game::Ownership player)
+	IObjectPtr ObjectManager::findUnit(int x, int y, game::Ownership player)
 	{
 		for (int it = 0; it < this->playerObjectVector.size(); it++)
 		{

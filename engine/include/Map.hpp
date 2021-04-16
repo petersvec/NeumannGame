@@ -30,9 +30,9 @@ namespace engine
 		unsigned short getHeight();
 		unsigned short getWidth();
 		unsigned short getLand();
-		void setLand(unsigned char);
+		void setLand(unsigned short);
 		TilePtr getTile(unsigned short, unsigned short);
-		std::pair<unsigned short, unsigned short> getTileXY(TilePtr tilePtr);
+		std::pair<unsigned short, unsigned short> getTileXY(TilePtr);
 		void setTile(unsigned short, unsigned short, unsigned char);
 	};
 }

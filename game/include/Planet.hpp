@@ -1,6 +1,5 @@
 #pragma once
 #include "Tile.hpp"
-#include "Ownership.hpp"
 
 namespace game
 {
@@ -8,7 +7,6 @@ namespace game
 	{
 	private:
 		Ownership m_owner;
-
 
 	public:
 		Planet();

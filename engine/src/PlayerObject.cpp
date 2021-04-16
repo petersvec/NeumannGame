@@ -4,30 +4,29 @@ namespace engine
 {
 	PlayerObject::PlayerObject()
 	{
-		this->circle.setFillColor(sf::Color::Green);
-		this->circle.setRadius(25);
-		this->owner = 1;
-		this->value = 1;
-		
+		circle.setFillColor(sf::Color::Green);
+		circle.setRadius(25);
+		owner = 1;
+		value = 1;
 	}
 
 	void PlayerObject::setPos(int xPos, int yPos)
 	{
-		this->circle.setPosition(xPos * tileSize, yPos * tileSize);
+		circle.setPosition(xPos * tileSize, yPos * tileSize);
 	}
-
-	
 	
 	void PlayerObject::drawObj(sf::RenderWindow *RWindow)
 	{
-		RWindow->draw(this->circle);
+		RWindow->draw(circle);
 	}
+
 	void PlayerObject::updateObj()
 	{
 
 	}
+	
 	void PlayerObject::move(int x, int y)
 	{
-		this->setPos(x, y);
+		setPos(x, y);
 	}
 }

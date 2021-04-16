@@ -16,24 +16,24 @@ namespace game
 		unsigned char m_armour;
 		
 		IUnit(unsigned short hp,
-			game::ObjectType type,
-			const sf::Texture& texture,
-			engine::TilePtr location,
-			unsigned char moveSpeed,
-			unsigned char attackDamage,
-			unsigned char armour,
-			game::Ownership owner)
-			:
-			IObject{ hp, type, texture, location, owner },
-			m_moveSpeed{ moveSpeed },
-			m_attackDamage{ attackDamage },
-			m_armour{ armour }
+			  ObjectType type,
+			  const sf::Texture& texture,
+			  engine::TilePtr location,
+			  unsigned char moveSpeed,
+		  	  unsigned char attackDamage,
+			  unsigned char armour,
+			  Ownership owner)
+			  :
+			  IObject{ hp, type, texture, location, owner },
+			  m_moveSpeed{ moveSpeed },
+			  m_attackDamage{ attackDamage },
+			  m_armour{ armour }
 		{}
 
 	public:
 		virtual void attack(engine::IObjectPtr object) = 0;
 
-		void move(engine::TilePtr tile, unsigned char tileSize, PlayerState playerState)
+		virtual void move(engine::TilePtr tile, unsigned char tileSize, PlayerState& playerState)
 		{
 			if (engine::TileDistance(getPosition(), tile->getPosition()))
 			{

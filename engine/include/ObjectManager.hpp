@@ -1,10 +1,8 @@
 #pragma once
-
 #include <vector>
-#include <memory>
-
-#include "Utilities.hpp"
+#include <iostream>
 #include "IObject.hpp"
+#include <SFML/Graphics/RenderWindow.hpp>
 
 namespace engine
 {
@@ -13,12 +11,12 @@ namespace engine
 	public:
 		ObjectManager();
 		
-		void drawAll(sf::RenderWindow* window);
-		void addUnit(engine::IObjectPtr unit);
-		engine::IObjectPtr findUnit(int x, int y, game::Ownership player);
-		std::vector<engine::IObjectPtr> getPlayerObjects();
+		void drawAll(sf::RenderWindow*);
+		void addUnit(IObjectPtr);
+		IObjectPtr findUnit(int, int, game::Ownership);
+		std::vector<IObjectPtr> getPlayerObjects();
 
 	private:
-		std::vector<engine::IObjectPtr> playerObjectVector;
+		std::vector<IObjectPtr> playerObjectVector;
 	};
 }

@@ -4,10 +4,8 @@ namespace engine
 {
     UnitFactoryPtr unitFactory = std::make_unique<UnitFactory>();
 
-    engine::IObjectPtr UnitFactory::create(game::ObjectType objType, TilePtr location, game::Ownership owner)
+    IObjectPtr UnitFactory::create(game::ObjectType objType, TilePtr location, game::Ownership owner)
     {
-        sf::Texture texture;
-
         switch (objType)
         {
         case game::ObjectType::Melee:

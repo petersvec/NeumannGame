@@ -1,17 +1,16 @@
 #pragma once
-
-#include <SFML\Graphics\Sprite.hpp>
-#include <SFML\Graphics\RenderWindow.hpp>
-
-#include "../../game/include/ObjectType.hpp"
+#include "Map.hpp"
+#include "Utilities.hpp"
 #include "UnitFactory.hpp"
 #include "ObjectManager.hpp"
-#include "Utilities.hpp"
+#include "../../game/include/ObjectType.hpp"
+#include "../../game/include/player/PlayerState.hpp"
+#include <SFML/Graphics/RenderWindow.hpp>
 
 namespace engine
 {
 	class IObject;
-	using IObjectPtr = std::shared_ptr<engine::IObject>;
+	using IObjectPtr = std::shared_ptr<IObject>;
 
 	class IObject
 	{
@@ -21,7 +20,7 @@ namespace engine
 		unsigned short m_hp;
 		game::ObjectType m_type;
 		sf::Sprite m_sprite;
-		engine::TilePtr m_location;
+		TilePtr m_location;
 		game::Ownership m_owner;
 
 		IObject(unsigned short hp, game::ObjectType type, const sf::Texture& texture, TilePtr location, game::Ownership owner)
@@ -36,10 +35,10 @@ namespace engine
 		}
 
 	public:
-		virtual void update(std::shared_ptr<engine::Map> map,
-							engine::ObjectManager objMan,
+		virtual void update(std::shared_ptr<Map> map,
+							ObjectManager objMan,
 							bool toUpdate,
-							engine::UnitFactoryPtr unitFactory,
+							UnitFactoryPtr unitFactory,
 							game::PlayerState& playerState,
 							game::ObjectType objType) = 0;
 

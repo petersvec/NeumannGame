@@ -1,10 +1,10 @@
 #pragma once
-#include <cstdio>
-#include <string>
-#include <map>
 #include "../../rapidjson/document.h"
 #include "../../rapidjson/filereadstream.h"
-#include "../include/Map.hpp"
+#include <string>
+#include <memory>
+#include <map>
+#include "Map.hpp"
 
 namespace engine
 {
@@ -17,11 +17,11 @@ namespace engine
 		rapidjson::Document m_gameConfigFile;
 		std::string m_configType;
 
-		void setConfigType(const std::string &jsonType);
+		void setConfigType(const std::string&);
 
 	public:
 
-		bool setGameConfig(const std::string &jsonFile, const std::string &jsonType);
+		bool setGameConfig(const std::string&, const std::string&);
 		unsigned short getMapHeight();
 		unsigned short getMapWidth();
 		unsigned short getNumberOfPlanets();

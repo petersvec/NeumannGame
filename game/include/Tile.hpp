@@ -2,6 +2,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include "TileType.hpp"
 #include "Ownership.hpp"
+#include "../../engine/include/JsonParser.hpp"
+#include <time.h>
 
 namespace game
 {
@@ -13,11 +15,11 @@ namespace game
 		unsigned short m_minerals;
 		TileType m_type;
 		sf::Sprite m_sprite;
-		game::Ownership m_occupied;
+		Ownership m_occupied;
 
 	public:
 		Tile();
-		Tile(unsigned char type);
+		Tile(unsigned char);
 
 		Tile operator = (const unsigned char);
 		bool operator == (const unsigned char);
@@ -28,10 +30,10 @@ namespace game
 		sf::Vector2f getPosition() const;
 
 		void setMinerals(unsigned short);
-		void setType(unsigned char type);
-		void setSprite(const sf::Texture& texture);
+		void setType(unsigned char);
+		void setSprite(const sf::Texture&);
 		void setPosition(float, float);
-		game::Ownership getOccupied();
-		void setOccupied(game::Ownership ownership);
+		Ownership getOccupied();
+		void setOccupied(Ownership);
 	};
 }

@@ -11,20 +11,20 @@ namespace game
 
 	public:
 		MilitaryBase(unsigned short hp,
-			game::ObjectType type,
-			const sf::Texture& texture,
-			engine::TilePtr location,
-			unsigned short ironCost,
-			unsigned short copperCost,
-			unsigned short siliconCost,
-			game::Ownership owner);
+					 ObjectType type,
+					 const sf::Texture& texture,
+					 engine::TilePtr location,
+					 unsigned short ironCost,
+					 unsigned short copperCost,
+					 unsigned short siliconCost,
+					 Ownership owner);
 
 		virtual void update(std::shared_ptr<engine::Map> map,
 							engine::ObjectManager objMan,
 							bool toUpdate,
 							engine::UnitFactoryPtr unitFactory,
-							game::PlayerState& playerState,
-							game::ObjectType objType) override;
-		void makeMelee(engine::UnitFactoryPtr unitFactory, engine::TilePtr location);
+							PlayerState& playerState,
+							ObjectType objType) override;
+		void makeMelee(engine::UnitFactoryPtr, engine::TilePtr);
 	};
 }

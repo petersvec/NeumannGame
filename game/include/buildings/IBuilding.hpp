@@ -1,8 +1,5 @@
 #pragma once
-
 #include "../../../engine/include/IObject.hpp"
-#include "../player/PlayerState.hpp"
-#include "../../../engine/include/Utilities.hpp"
 
 namespace game
 {
@@ -16,23 +13,23 @@ namespace game
 		unsigned short m_siliconCost;
 
 		IBuilding(unsigned short hp,
-			game::ObjectType type,
-			const sf::Texture& texture,
-			engine::TilePtr location,
-			unsigned short ironCost,
-			unsigned short copperCost,
-			unsigned short siliconCost,
-			game::Ownership owner)
-			:
-			IObject{ hp, type, texture, location, owner },
-			m_ironCost{ ironCost },
-			m_copperCost{ copperCost },
-			m_siliconCost{ siliconCost }
+				  ObjectType type,
+				  const sf::Texture& texture,
+				  engine::TilePtr location,
+				  unsigned short ironCost,
+				  unsigned short copperCost,
+				  unsigned short siliconCost,
+				  Ownership owner)
+				  :
+				  IObject{ hp, type, texture, location, owner },
+				  m_ironCost{ ironCost },
+				  m_copperCost{ copperCost },
+				  m_siliconCost{ siliconCost }
 		{}
 
 	public:
 
-		void update(PlayerState playerState, int iron, int copper, int silicon)
+		void update(PlayerState& playerState, int iron, int copper, int silicon)
 		{
 			playerState.updatePlayerBalances(iron, copper, silicon);
 		}

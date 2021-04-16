@@ -60,7 +60,7 @@ namespace engine
 		return m_land;
 	}
 
-	void Map::setLand(unsigned char land)
+	void Map::setLand(unsigned short land)
 	{
 		m_land += land;
 	}

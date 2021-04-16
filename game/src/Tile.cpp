@@ -5,7 +5,7 @@ namespace game
 	Tile::Tile()
 	{
 		setMinerals(0);
-		m_occupied = game::Ownership::Unoccupied;
+		m_occupied = Ownership::Unoccupied;
 		srand(static_cast<unsigned int>(time(nullptr)));
 		m_type = TileType(rand() % 4);
 		m_sprite.setScale(sf::Vector2f(1, 1));
@@ -13,7 +13,7 @@ namespace game
 
 	Tile::Tile(unsigned char type)
 	{
-		m_occupied = game::Ownership::Unoccupied;
+		m_occupied = Ownership::Unoccupied;
 		if (type > 0)
 		{
 			setMinerals(400 + rand() % 201);
@@ -73,12 +73,14 @@ namespace game
 	void Tile::setSprite(const sf::Texture& texture)
 	{
 		m_sprite.setTexture(texture);
-		m_sprite.setTextureRect(sf::IntRect(0, 0, 50, 50));  //a.k.a tileSize
+		m_sprite.setTextureRect(sf::IntRect(0, 0, engine::config->getTileSize(), engine::config->getTileSize()));
 	}
-	game::Ownership Tile::getOccupied()
+
+	Ownership Tile::getOccupied()
 	{
 		return m_occupied;
 	}
+
 	void Tile::setOccupied(game::Ownership ownership)
 	{
 		m_occupied = ownership;
