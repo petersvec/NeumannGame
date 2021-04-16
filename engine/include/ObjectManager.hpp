@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "IObject.hpp"
 
 namespace engine
 {

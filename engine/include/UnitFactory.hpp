@@ -1,4 +1,7 @@
 #pragma once
+#include <memory>
+#include "../../game/include/ObjectType.hpp"
+#include "../../game/include/Ownership.hpp"
 
 namespace engine
 {
