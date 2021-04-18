@@ -1,17 +1,13 @@
 #pragma once
 #include "Map.hpp"
 #include "Utilities.hpp"
-#include "UnitFactory.hpp"
-#include "ObjectManager.hpp"
 #include "../../game/include/ObjectType.hpp"
 #include "../../game/include/player/PlayerState.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 
 namespace engine
 {
-	class IObject;
-	using IObjectPtr = std::shared_ptr<IObject>;
-
 	class IObject
 	{
 	private:
@@ -38,9 +34,8 @@ namespace engine
 
 	public:
 		virtual void update(std::shared_ptr<Map>,
-							ObjectManager,
+							std::shared_ptr<ObjectManager>,
 							bool,
-							UnitFactoryPtr,
 							game::PlayerState&,
 							game::ObjectType) = 0;
 
@@ -102,7 +97,6 @@ namespace engine
 		{
 			return m_location;
 		}
-
 		
 		void setHp(unsigned short hp)
 		{

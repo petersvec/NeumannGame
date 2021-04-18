@@ -1,5 +1,6 @@
 #pragma once
 #include "../../../engine/include/IObject.hpp"
+#include "../Tile.hpp"
 
 namespace game
 {
@@ -32,7 +33,7 @@ namespace game
 		{}
 
 	public:
-		virtual void attack(engine::IObjectPtr object) = 0;
+		virtual void attack(std::shared_ptr<engine::IObject> object) = 0;
 
 		virtual void move(engine::TilePtr tile, unsigned char tileSize, PlayerState& playerState)
 		{

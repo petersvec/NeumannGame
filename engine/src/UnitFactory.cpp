@@ -1,4 +1,5 @@
 #include "../include/UnitFactory.hpp"
+#include "../include/IObject.hpp"
 #include "../include/TextureHandler.hpp"
 #include "../../game/include/buildings/AirBase.hpp"
 #include "../../game/include/buildings/MilitaryBase.hpp"
@@ -14,7 +15,7 @@ namespace engine
 {
     UnitFactoryPtr unitFactory = std::make_unique<UnitFactory>();
 
-    IObjectPtr UnitFactory::create(game::ObjectType objType, TilePtr location, game::Ownership owner)
+    std::shared_ptr<IObject> UnitFactory::create(game::ObjectType objType, TilePtr location, game::Ownership owner)
     {
         switch (objType)
         {

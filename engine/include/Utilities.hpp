@@ -1,6 +1,9 @@
 #pragma once
+
 #include "JsonParser.hpp"
 #include "ObjectManager.hpp"
+#include "../../game/include/Tile.hpp"
+#include <memory>
 
 namespace engine
 {
@@ -23,7 +26,7 @@ namespace engine
 		return sqrt( x * x + y * y) / tileSize;
 	}
 
-	std::pair<unsigned short, unsigned short> GetNearestFreeLocation(TilePtr location, ObjectManager objMan)
+	static std::pair<unsigned short, unsigned short> GetNearestFreeLocation(std::shared_ptr<game::Tile> location, std::shared_ptr<ObjectManager> objMan)
 	{
 		auto x = location->getPosition().x;
 		auto y = location->getPosition().y;
@@ -34,8 +37,8 @@ namespace engine
 			{
 				for (int j = (-k); j <= k; ++j)
 				{	
-					if (objMan.findUnit(x + i, y + j, game::Ownership::Player1) == nullptr &&
-						objMan.findUnit(x + i, y + j, game::Ownership::Player2) == nullptr)
+					if (objMan->findUnit(x + i, y + j, game::Ownership::Player1) == nullptr &&
+						objMan->findUnit(x + i, y + j, game::Ownership::Player2) == nullptr)
 					{
 						if (x + i < 0 ||
 							x + i >= config->getMapHeight()||

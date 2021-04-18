@@ -1,4 +1,5 @@
 #include "../include/Tile.hpp"
+#include "../../engine/include/JsonParser.hpp"
 
 namespace game
 {
@@ -24,6 +25,18 @@ namespace game
 		}
 		m_type = TileType(type);
 		m_sprite.setScale(sf::Vector2f(1, 1));
+	}
+
+	void Tile::GenerateMinerals()
+	{
+		if (m_type != TileType::Void)
+		{
+			setMinerals(400 + rand() % 201);
+		}
+		else
+		{
+			setMinerals(0);
+		}
 	}
 
 	Tile Tile::operator=(const unsigned char type)
@@ -55,7 +68,27 @@ namespace game
 		return (unsigned char)m_type;
 	}
 
-	sf::Sprite Tile::getSprite()
+	std::string Tile::getTypeString() const
+	{
+		if (m_type == TileType::Void)
+		{
+			return "Void";
+		}
+		else if (m_type == TileType::Copper)
+		{
+			return "Copper";
+		}
+		else if (m_type == TileType::Iron)
+		{
+			return "Iron";
+		}
+		else if (m_type == TileType::Silicon)
+		{
+			return "Silicon";
+		}
+	}
+
+	sf::Sprite& Tile::getSprite()
 	{
 		return m_sprite;
 	}
@@ -68,6 +101,7 @@ namespace game
 	void Tile::setType(unsigned char type)
 	{
 		m_type = (TileType)type;
+		GenerateMinerals();
 	}
 
 	void Tile::setSprite(const sf::Texture& texture)
@@ -87,16 +121,21 @@ namespace game
 
 		if (ownership == game::Ownership::Player1)
 		{
-			m_sprite.setColor(sf::Color::Red);
+			m_sprite.setColor(sf::Color(255, 0, 0, 230));
 		}
 		else
 		{
-			m_sprite.setColor(sf::Color::Blue);
+			m_sprite.setColor(sf::Color(0, 0, 255, 230));
 		}
 	}
 
 	void Tile::setPosition(float x, float y)
 	{
 		m_sprite.setPosition(x, y);
+	}
+
+	TileType Tile::getTileType() const
+	{
+		return m_type;
 	}
 }

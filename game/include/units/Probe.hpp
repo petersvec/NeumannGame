@@ -8,7 +8,7 @@ namespace game
 	private:
 
 	protected:
-		engine::IObjectPtr m_troop = nullptr;
+		std::shared_ptr<engine::IObject> m_troop = nullptr;
 		bool m_loaded = false;
 		unsigned char m_duplicateTime = 5;
 
@@ -23,14 +23,13 @@ namespace game
 			  Ownership owner);
 
 		virtual void update(std::shared_ptr<engine::Map> map,
-							engine::ObjectManager objMan,
+							std::shared_ptr<engine::ObjectManager> objMan,
 							bool toUpdate,
-							engine::UnitFactoryPtr unitFactory,
 							PlayerState& playerState,
 							ObjectType objType) override;
-		virtual void attack(engine::IObjectPtr object) override;
-		void duplicate(engine::UnitFactoryPtr, engine::ObjectManager, std::shared_ptr<engine::Map>);
-		void load(engine::IObjectPtr);
+		virtual void attack(std::shared_ptr<engine::IObject> object) override;
+		void duplicate(std::shared_ptr<engine::ObjectManager>, std::shared_ptr<engine::Map>);
+		void load(std::shared_ptr<engine::IObject>);
 		void deploy();
 		std::string getName() override;
 	};

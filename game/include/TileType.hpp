@@ -5,8 +5,8 @@ namespace game
 	enum class TileType
 	{
 		Void = 0,
-		Iron,
-		Copper,
-		Silicon
+		Iron = 1,
+		Copper = 2,
+		Silicon = 3
 	};
 }

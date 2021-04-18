@@ -1,9 +1,15 @@
 #include "../include/Game.hpp"
+#include <SFML/Window/Mouse.hpp>
 
 namespace engine
 {
 	void Game::initVariables()
 	{
+		if (!config->setGameConfig("config.json", "Settings"))
+		{
+			exit(-555);
+		}
+
 		m_window = nullptr;
 		m_gameMap = new Map(config->getMapHeight(), config->getMapWidth());
 		MapGenerator* m_mapGenerator = new MapGenerator();
@@ -14,12 +20,14 @@ namespace engine
 		ActivePlayerText.setString("Player 1");
 		ActivePlayerText.setPosition(1100, 640);
 		ActivePlayerText.setCharacterSize(40);
+		ActivePlayerText.setFillColor(sf::Color::Red);
+		ActivePlayerText.setFont(m_gui.GetFont());
 		m_guiRectangle.setPosition(0, 620);
 		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
-		m_guiRectangle.setFillColor(sf::Color::Blue);
+		m_guiRectangle.setFillColor(sf::Color(41, 43, 44));
 
 		selectedMapTile.setFillColor(sf::Color::Transparent);
-		selectedMapTile.setOutlineColor(sf::Color::Blue);
+		selectedMapTile.setOutlineColor(sf::Color::Green);
 		selectedMapTile.setOutlineThickness(3);
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
@@ -34,6 +42,12 @@ namespace engine
 		testOM.addUnit(unit_2);
 		testOM.addUnit(building_1);
 		testOM.addUnit(building_2);
+
+		clickMap(0, 0);
+
+		m_cursor.setTexture(*textures->getTexture("cursor"));
+
+		m_gui.SetPlayerState(player1State);
 	}
 
 	void Game::initWindow()
@@ -44,6 +58,7 @@ namespace engine
 		m_view.setSize(sf::Vector2f(1280.f, 720.f));
 		defaultView.setSize(sf::Vector2f(1280.f, 720.f));
 		defaultView.setCenter(1280/2, 720/2);
+		m_window->setMouseCursorVisible(false);
 		
 		//Shader shader;
 		//shader.doStuff();
@@ -81,8 +96,8 @@ namespace engine
 				unitIsSelected = false;
 			}
 
-			char c = (unsigned char)m_gameMap->getTile(x, y)->getType();
-			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c) + " ";
+			auto tile = m_gameMap->getTile(x, y);
+			str = "X: " + std::to_string(x) + "\nY: " + std::to_string(y) + "\nType: " + tile->getTypeString() + "\nMinerals: " + std::to_string(tile->getMinerals());
 			setDisplayText(&tileText, str);
 			setClickedTile(x, y, &selectedMapTile);
 			//return m_gameMap->getTile(x, y);
@@ -101,9 +116,10 @@ namespace engine
 
 		// set the string to display
 		text->setString(str);
-		text->setCharacterSize(40); // in pixels
-		text->setFillColor(sf::Color::Red);
-		text->setPosition(0, 640);
+		text->setCharacterSize(20); // in pixels
+		text->setFillColor(sf::Color::White);
+		text->setPosition(0, 0);
+		text->setFont(m_gui.GetFont());
 	}
 	
 	
@@ -154,7 +170,7 @@ namespace engine
 					if (unitIsSelected) {
 						pixelPos = sf::Mouse::getPosition(*m_window);
 						worldPos = m_window->mapPixelToCoords(pixelPos);
-						if (testPO->getIsBuilding() == false  && testPO->GetOwner() == activePlayer)
+						if (testPO->getIsBuilding() == false  && testPO->getOwner() == activePlayer)
 						{
 							testPO->setPosition(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
 							
@@ -162,22 +178,36 @@ namespace engine
 							int posy = worldPos.y / tileSize;
 							selectedMapTile.setPosition(posx*tileSize, posy*tileSize);
 
-							if (activePlayer == game::Player::Player1)
+							// obsadzovanie (do samostatnej funkcie)
+							//////
+							auto tile = m_gameMap->getTile(posx, posy);
+							if (tile->getTileType() != game::TileType::Void)
+							{
+								tile->setOccupied(activePlayer);
+								if (activePlayer == game::Ownership::Player1) player1State.updateLand(1);
+								if (activePlayer == game::Ownership::Player2) player2State.updateLand(1);
+								changed = 1; // <- prekreslit treba mapu ofc
+							}
+							//////
+
+							if (activePlayer == game::Ownership::Player1)
 							{
 								unitIsSelected = false;
 								testPO = nullptr;
-								activePlayer = game::Player::Player2;
+								activePlayer = game::Ownership::Player2;
 								ActivePlayerText.setString("Player 2");
+								ActivePlayerText.setFillColor(sf::Color::Blue);
+								m_gui.SetPlayerState(player2State);
 							}
 							else
 							{
 								unitIsSelected = false;
 								testPO = nullptr;
-								activePlayer = game::Player::Player1;
+								activePlayer = game::Ownership::Player1;
 								ActivePlayerText.setString("Player 1");
+								ActivePlayerText.setFillColor(sf::Color::Red);
+								m_gui.SetPlayerState(player1State);
 							}
-							
-						
 						}
 					}
 				}
@@ -245,14 +275,13 @@ namespace engine
 		}
 
 		pollEvents();
+
+		auto mouse_position = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window));
+		m_cursor.setPosition(mouse_position);
 	}
 
 	void Game::render()
 	{
-		sf::Font font;
-		font.loadFromFile("data/fonts/OpenSans-Bold.ttf");
-		tileText.setFont(font);
-		ActivePlayerText.setFont(font);
 		m_window->clear();
 
 		if (changed == 1) 
@@ -269,15 +298,18 @@ namespace engine
 		m_window->setView(m_view);
 		m_window->draw(m_frame);
 		testOM.drawAll(m_window);
+
 		
 		m_window->setView(defaultView);
 		m_window->draw(m_guiRectangle);
 		m_window->draw(tileText);
 		m_window->draw(ActivePlayerText);
+		m_window->draw(m_gui.GetPlayerStateText());
 		m_window->draw(m_gui.text);
+		m_window->draw(m_cursor);
+
 		m_window->setView(m_view);
 		m_window->draw(selectedMapTile);
-
 		m_window->display();
 	}
 }

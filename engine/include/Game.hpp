@@ -50,13 +50,14 @@ namespace engine
 		int changed = 1;
 		sf::RectangleShape m_guiRectangle;
 		ObjectManager testOM;
-		IObjectPtr testPO;
+		std::shared_ptr<IObject> testPO;
 		bool unitIsSelected;
 		sf::RectangleShape selectedMapTile;
 		game::PlayerState player1State;
 		game::PlayerState player2State;
 		sf::Text ActivePlayerText;
 		Gui m_gui;
+		sf::Sprite m_cursor;
 
 	public:
 		game::Ownership activePlayer = game::Ownership::Player1;

@@ -16,17 +16,16 @@ namespace game
 	{}
 
 	void Melee::update(std::shared_ptr<engine::Map> map,
-					   engine::ObjectManager objMan,
+					   std::shared_ptr<engine::ObjectManager> objMan,
 					   bool toUpdate,
-					   engine::UnitFactoryPtr unitFactory,
 					   PlayerState& playerState,
 					   ObjectType objType)
 	{
 		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
-		attack(objMan.findUnit(getPosition().x, getPosition().y, enemy));
+		attack(objMan->findUnit(getPosition().x, getPosition().y, enemy));
 	}
 
-	void Melee::attack(engine::IObjectPtr object)
+	void Melee::attack(std::shared_ptr<engine::IObject> object)
 	{
 		if (object == nullptr)
 		{

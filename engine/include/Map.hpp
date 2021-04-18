@@ -1,7 +1,11 @@
 #pragma once
 #include <memory>
 #include <vector>
-#include "../../game/include/Tile.hpp"
+
+namespace game
+{
+	class Tile;
+}
 
 namespace engine
 {
@@ -10,6 +14,7 @@ namespace engine
 	const unsigned short G_MIN_NUMBER_OF_PLANETS = 50;
 	const unsigned short G_MIN_RADIUS_OF_PLANET = 2;
 	const unsigned short G_MIN_TILE_SIZE = 50;
+
 	using TilePtr = std::shared_ptr<game::Tile>;
 	using MapPtr = std::vector<std::vector<TilePtr>>;
 

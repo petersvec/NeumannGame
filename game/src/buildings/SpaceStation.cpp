@@ -1,4 +1,5 @@
 #include "../../include/buildings/SpaceStation.hpp"
+#include "../../../engine/include/UnitFactory.hpp"
 
 namespace game
 {
@@ -16,9 +17,8 @@ namespace game
 	{}
 
 	void SpaceStation::update(std::shared_ptr<engine::Map> map,
-							  engine::ObjectManager objMan,
+							  std::shared_ptr<engine::ObjectManager> objMan,
 							  bool toUpdate,
-							  engine::UnitFactoryPtr unitFactory,
 							  PlayerState& playerState,
 							  ObjectType objType)
 	{
@@ -26,13 +26,13 @@ namespace game
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			makeWorker(unitFactory, location);
+			makeWorker(location);
 		}
 	}
 
-	void SpaceStation::makeWorker(engine::UnitFactoryPtr unitFactory, engine::TilePtr location)
+	void SpaceStation::makeWorker(engine::TilePtr location)
 	{
-		unitFactory.get()->create(ObjectType::Worker, location, getOwner());
+		engine::unitFactory->create(ObjectType::Worker, location, getOwner());
 	}
   
 	std::string SpaceStation::getName()

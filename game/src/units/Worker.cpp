@@ -1,4 +1,5 @@
 #include "../../include/units/Worker.hpp"
+#include "../../../engine/include/UnitFactory.hpp"
 
 namespace game
 {
@@ -16,24 +17,23 @@ namespace game
 	{}
 
 	void Worker::update(std::shared_ptr<engine::Map> map,
-						engine::ObjectManager objMan,
+						std::shared_ptr<engine::ObjectManager> objMan,
 						bool toUpdate,
-						engine::UnitFactoryPtr unitFactory,
 						PlayerState& playerState,
 						ObjectType objType)
 	{
 		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
-		attack(objMan.findUnit(getPosition().x, getPosition().y, enemy));
+		attack(objMan->findUnit(getPosition().x, getPosition().y, enemy));
 
 		if (toUpdate)
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			build(unitFactory, objType, location);
+			build(objType, location);
 		}
 	}
 
-	void Worker::attack(engine::IObjectPtr object)
+	void Worker::attack(std::shared_ptr<engine::IObject> object)
 	{
 		if (object == nullptr)
 		{
@@ -48,9 +48,9 @@ namespace game
 		object->setHp(object->getHp() - getAttackDamage());
 	}
 
-	void Worker::build(engine::UnitFactoryPtr unitFactory, ObjectType objType, engine::TilePtr location)
+	void Worker::build(ObjectType objType, engine::TilePtr location)
 	{
-		unitFactory.get()->create(objType, location, getOwner());
+		engine::unitFactory->create(objType, location, getOwner());
 	}
   
 	std::string Worker::getName()

@@ -1,4 +1,5 @@
 #include "../../include/buildings/AirBase.hpp"
+#include "../../../engine/include/UnitFactory.hpp"
 
 namespace game
 {
@@ -16,9 +17,8 @@ namespace game
 	{}
 
 	void AirBase::update(std::shared_ptr<engine::Map> map,
-						 engine::ObjectManager objMan,
+						 std::shared_ptr<engine::ObjectManager> objMan,
 						 bool toUpdate,
-						 engine::UnitFactoryPtr unitFactory,
 						 PlayerState& playerState,
 				    	 ObjectType objType)
 	{
@@ -26,13 +26,13 @@ namespace game
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			makeRanged(unitFactory, location);
+			makeRanged(location);
 		}
 	}
 
-	void AirBase::makeRanged(engine::UnitFactoryPtr unitFactory, engine::TilePtr location)
+	void AirBase::makeRanged(engine::TilePtr location)
 	{
-		unitFactory->create(ObjectType::Ranged, location, getOwner());
+		engine::unitFactory->create(ObjectType::Ranged, location, getOwner());
 	}
   
 	std::string AirBase::getName()

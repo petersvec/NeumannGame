@@ -2,15 +2,16 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include "TileType.hpp"
 #include "Ownership.hpp"
-#include "../../engine/include/JsonParser.hpp"
 #include <time.h>
+#include <SFML/System/Vector2.hpp>
+#include <string>
 
 namespace game
 {
 	class Tile
 	{
 	private:
-
+		void GenerateMinerals();
 	protected:
 		unsigned short m_minerals;
 		TileType m_type;
@@ -26,7 +27,8 @@ namespace game
 
 		unsigned short getMinerals();
 		unsigned char getType();
-		sf::Sprite getSprite();
+		std::string getTypeString() const; 
+		sf::Sprite &getSprite();
 		sf::Vector2f getPosition() const;
 
 		void setMinerals(unsigned short);
@@ -35,5 +37,6 @@ namespace game
 		void setPosition(float, float);
 		Ownership getOccupied();
 		void setOccupied(Ownership);
+		TileType getTileType() const;
 	};
 }

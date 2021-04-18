@@ -17,6 +17,7 @@
     "Ranged": "data/textures/Ranged.png",
     "SpaceStation": "data/textures/SpaceStation.png",
     "Tower": "data/textures/Tower.png",
-    "Worker": "data/textures/Worker.png"
+    "Worker": "data/textures/Worker.png",
+    "cursor": "data/textures/cursor.png"
   }
 }
