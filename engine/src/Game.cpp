@@ -19,12 +19,13 @@ namespace engine
 		ActivePlayerText.setString("Player 1");
 		ActivePlayerText.setPosition(1100, 640);
 		ActivePlayerText.setCharacterSize(40);
+		ActivePlayerText.setFillColor(sf::Color::Red);
 		m_guiRectangle.setPosition(0, 620);
 		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
-		m_guiRectangle.setFillColor(sf::Color::Blue);
+		m_guiRectangle.setFillColor(sf::Color(41, 43, 44));
 
 		selectedMapTile.setFillColor(sf::Color::Transparent);
-		selectedMapTile.setOutlineColor(sf::Color::Blue);
+		selectedMapTile.setOutlineColor(sf::Color::Green);
 		selectedMapTile.setOutlineThickness(3);
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
@@ -39,6 +40,8 @@ namespace engine
 		testOM.addUnit(unit_2);
 		testOM.addUnit(building_1);
 		testOM.addUnit(building_2);
+
+		clickMap(0, 0);
 	}
 
 	void Game::initWindow()
@@ -86,8 +89,8 @@ namespace engine
 				unitIsSelected = false;
 			}
 
-			char c = (unsigned char)m_gameMap->getTile(x, y)->getType();
-			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c) + " ";
+			auto type = m_gameMap->getTile(x, y)->getTypeString();
+			str = "X: " + std::to_string(x) + "\nY: " + std::to_string(y) + "\nType: " + type;
 			setDisplayText(&tileText, str);
 			setClickedTile(x, y, &selectedMapTile);
 			//return m_gameMap->getTile(x, y);
@@ -106,9 +109,9 @@ namespace engine
 
 		// set the string to display
 		text->setString(str);
-		text->setCharacterSize(40); // in pixels
-		text->setFillColor(sf::Color::Red);
-		text->setPosition(0, 640);
+		text->setCharacterSize(20); // in pixels
+		text->setFillColor(sf::Color::White);
+		text->setPosition(0, 0);
 	}
 	
 	
@@ -173,6 +176,7 @@ namespace engine
 								testPO = nullptr;
 								activePlayer = game::Ownership::Player2;
 								ActivePlayerText.setString("Player 2");
+								ActivePlayerText.setFillColor(sf::Color::Blue);
 							}
 							else
 							{
@@ -180,6 +184,7 @@ namespace engine
 								testPO = nullptr;
 								activePlayer = game::Ownership::Player1;
 								ActivePlayerText.setString("Player 1");
+								ActivePlayerText.setFillColor(sf::Color::Red);
 							}
 							
 						

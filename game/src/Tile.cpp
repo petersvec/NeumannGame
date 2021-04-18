@@ -56,6 +56,26 @@ namespace game
 		return (unsigned char)m_type;
 	}
 
+	std::string Tile::getTypeString() const
+	{
+		if (m_type == TileType::Void)
+		{
+			return "Void";
+		}
+		else if (m_type == TileType::Copper)
+		{
+			return "Copper";
+		}
+		else if (m_type == TileType::Iron)
+		{
+			return "Iron";
+		}
+		else if (m_type == TileType::Silicon)
+		{
+			return "Silicon";
+		}
+	}
+
 	sf::Sprite Tile::getSprite()
 	{
 		return m_sprite;

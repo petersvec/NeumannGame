@@ -4,6 +4,7 @@
 #include "Ownership.hpp"
 #include <time.h>
 #include <SFML/System/Vector2.hpp>
+#include <string>
 
 namespace game
 {
@@ -26,6 +27,7 @@ namespace game
 
 		unsigned short getMinerals();
 		unsigned char getType();
+		std::string getTypeString() const; 
 		sf::Sprite getSprite();
 		sf::Vector2f getPosition() const;
 
