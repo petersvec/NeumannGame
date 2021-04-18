@@ -57,6 +57,7 @@ namespace engine
 		game::PlayerState player2State;
 		sf::Text ActivePlayerText;
 		Gui m_gui;
+		sf::Sprite m_cursor;
 
 	public:
 		game::Ownership activePlayer = game::Ownership::Player1;

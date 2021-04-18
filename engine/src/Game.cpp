@@ -1,4 +1,5 @@
 #include "../include/Game.hpp"
+#include <SFML/Window/Mouse.hpp>
 
 namespace engine
 {
@@ -42,6 +43,8 @@ namespace engine
 		testOM.addUnit(building_2);
 
 		clickMap(0, 0);
+
+		m_cursor.setTexture(*textures->getTexture("cursor"));
 	}
 
 	void Game::initWindow()
@@ -52,6 +55,7 @@ namespace engine
 		m_view.setSize(sf::Vector2f(1280.f, 720.f));
 		defaultView.setSize(sf::Vector2f(1280.f, 720.f));
 		defaultView.setCenter(1280/2, 720/2);
+		m_window->setMouseCursorVisible(false);
 		
 		//Shader shader;
 		//shader.doStuff();
@@ -255,6 +259,9 @@ namespace engine
 		}
 
 		pollEvents();
+
+		auto mouse_position = static_cast<sf::Vector2f>(sf::Mouse::getPosition(*m_window));
+		m_cursor.setPosition(mouse_position);
 	}
 
 	void Game::render()
@@ -279,15 +286,17 @@ namespace engine
 		m_window->setView(m_view);
 		m_window->draw(m_frame);
 		testOM.drawAll(m_window);
+
 		
 		m_window->setView(defaultView);
 		m_window->draw(m_guiRectangle);
 		m_window->draw(tileText);
 		m_window->draw(ActivePlayerText);
 		m_window->draw(m_gui.text);
+		m_window->draw(m_cursor);
+
 		m_window->setView(m_view);
 		m_window->draw(selectedMapTile);
-
 		m_window->display();
 	}
 }
