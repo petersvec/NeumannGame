@@ -26,5 +26,7 @@ namespace game
 		virtual void attack(engine::IObjectPtr object);
 
 		void update(engine::Map);
+
+		std::string getName() override;
 	};
 }

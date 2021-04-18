@@ -29,5 +29,6 @@ namespace game
 		{
 			m_miningCapacity = miningCapacity;
 		}
+		std::string getName() override;
 	};
 }

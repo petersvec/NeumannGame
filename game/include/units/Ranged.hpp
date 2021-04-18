@@ -22,5 +22,6 @@ namespace game
 			Player owner);
 
 		virtual void attack(engine::IObjectPtr object);
+		std::string getName() override;
 	};
 }

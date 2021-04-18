@@ -14,6 +14,7 @@ namespace game
 		unsigned short m_ironCost;
 		unsigned short m_copperCost;
 		unsigned short m_siliconCost;
+		
 
 		IBuilding(unsigned short hp,
 			game::ObjectType type,
@@ -28,7 +29,8 @@ namespace game
 			m_ironCost{ ironCost },
 			m_copperCost{ copperCost },
 			m_siliconCost{ siliconCost }
-		{}
+			
+		{m_isBuilding = true;}
 
 	public:
 
@@ -66,5 +68,6 @@ namespace game
 		{
 			m_siliconCost = siliconCost;
 		}
+		
 	};
 }

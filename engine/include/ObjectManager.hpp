@@ -5,6 +5,7 @@
 
 #include "Utilities.hpp"
 #include "IObject.hpp"
+#include "../include/Gui.hpp"
 
 namespace engine
 {

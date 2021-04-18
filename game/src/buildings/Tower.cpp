@@ -50,4 +50,9 @@ namespace game
 			}
 		}
 	}
+	std::string Tower::getName()
+	{
+		return "Tower";
+	}
+	
 }

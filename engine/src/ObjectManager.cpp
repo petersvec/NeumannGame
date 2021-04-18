@@ -1,6 +1,7 @@
 #include "../include/ObjectManager.hpp"
 #include <iostream>
 #include "../include/Game.hpp"
+#include "../include/Gui.hpp"
 
 namespace engine
 {
@@ -31,15 +32,10 @@ namespace engine
 				std::cout << "found ";
 				std::cout << (int)this->playerObjectVector[it]->GetOwner();
 				std::cout << '\n';
-				if (player == this->playerObjectVector[it]->GetOwner())
-				{
-					std::cout << "Unit selected\n";
-					return this->playerObjectVector[it];
-				}
-				else
-				{
-					std::cout << "Other players unit\n";
-				}
+
+				
+				return this->playerObjectVector[it];
+			
 			}
 			
 		}

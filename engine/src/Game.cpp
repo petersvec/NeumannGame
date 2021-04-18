@@ -20,7 +20,9 @@ namespace engine
 		m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
 		textures->LoadTextures();
 		m_renderMap.initMapTextures(*m_gameMap);
-		tileText.setString("0");
+		ActivePlayerText.setString("Player 1");
+		ActivePlayerText.setPosition(1100, 640);
+		ActivePlayerText.setCharacterSize(40);
 		m_guiRectangle.setPosition(0, 620);
 		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
 		m_guiRectangle.setFillColor(sf::Color::Blue);
@@ -75,12 +77,15 @@ namespace engine
 			x = x / tileSize;
 			y = y / tileSize;
 			
-
+			m_gui.text.setString("");
 			
 			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer);
 			
+			
+			
 			if (testPO != nullptr)
 			{
+				m_gui.LoadObject(testPO);
 				unitIsSelected = true;
 			}
 			else
@@ -90,8 +95,6 @@ namespace engine
 
 			char c = (unsigned char)m_gameMap->getTile(x, y)->getType();
 			str = std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(c) + " ";
-			//std::cout << m_gameMap->getTile(x, y)->getType();
-
 			setDisplayText(&tileText, str);
 			setClickedTile(x, y, &selectedMapTile);
 			//return m_gameMap->getTile(x, y);
@@ -112,10 +115,7 @@ namespace engine
 		text->setString(str);
 		text->setCharacterSize(40); // in pixels
 		text->setFillColor(sf::Color::Red);
-
-		// set the text style
-		text->setStyle(sf::Text::Bold | sf::Text::Underlined);
-		text->setPosition(0, 0);
+		text->setPosition(0, 640);
 	}
 	
 	
@@ -149,9 +149,9 @@ namespace engine
 					pixelPos = sf::Mouse::getPosition(*m_window);
 					worldPos = m_window->mapPixelToCoords(pixelPos);
 
-					//if(pixelPos.y < GuiHeight)
-					clickMap(worldPos.x, worldPos.y);
-
+					if (pixelPos.y < 620) {
+						clickMap(worldPos.x, worldPos.y);
+					}
 					/*
 					else
 					{
@@ -159,12 +159,38 @@ namespace engine
 					}
 					*/
 				}
+				
+
 				if (m_event.mouseButton.button == sf::Mouse::Right)
 				{
 					if (unitIsSelected) {
 						pixelPos = sf::Mouse::getPosition(*m_window);
 						worldPos = m_window->mapPixelToCoords(pixelPos);
-						testPO->setPosition(sf::Vector2u(worldPos.x/tileSize, worldPos.y/tileSize));
+						if (testPO->getIsBuilding() == false  && testPO->GetOwner() == activePlayer)
+						{
+							testPO->setPosition(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
+							
+							int posx = worldPos.x / tileSize;		//problem s celociselnym delenim
+							int posy = worldPos.y / tileSize;
+							selectedMapTile.setPosition(posx*tileSize, posy*tileSize);
+
+							if (activePlayer == game::Player::Player1)
+							{
+								unitIsSelected = false;
+								testPO = nullptr;
+								activePlayer = game::Player::Player2;
+								ActivePlayerText.setString("Player 2");
+							}
+							else
+							{
+								unitIsSelected = false;
+								testPO = nullptr;
+								activePlayer = game::Player::Player1;
+								ActivePlayerText.setString("Player 1");
+							}
+							
+						
+						}
 					}
 				}
 				break;
@@ -177,12 +203,14 @@ namespace engine
 							unitIsSelected = false;
 							testPO = nullptr;
 							activePlayer = game::Player::Player2;
+							ActivePlayerText.setString("Player 2");
 						}
 						else
 						{
 							unitIsSelected = false;
 							testPO = nullptr;
 							activePlayer = game::Player::Player1;
+							ActivePlayerText.setString("Player 1");
 						}
 						std::cout << (int)activePlayer;
 					}
@@ -236,6 +264,7 @@ namespace engine
 		sf::Font font;
 		font.loadFromFile("data/fonts/OpenSans-Bold.ttf");
 		tileText.setFont(font);
+		ActivePlayerText.setFont(font);
 		m_window->clear();
 
 		if (changed == 1) 
@@ -256,6 +285,8 @@ namespace engine
 		m_window->setView(defaultView);
 		m_window->draw(m_guiRectangle);
 		m_window->draw(tileText);
+		m_window->draw(ActivePlayerText);
+		m_window->draw(m_gui.text);
 		m_window->setView(m_view);
 		m_window->draw(selectedMapTile);
 
