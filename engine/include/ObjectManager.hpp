@@ -2,6 +2,7 @@
 #include <vector>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "IObject.hpp"
+#include "../include/Gui.hpp"
 
 namespace engine
 {

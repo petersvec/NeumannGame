@@ -34,4 +34,9 @@ namespace game
 	{
 		unitFactory.get()->create(ObjectType::Melee, location, getOwner());
 	}
+  
+	std::string MilitaryBase::getName()
+	{
+		return "Military Base";
+	}
 }

@@ -15,6 +15,7 @@ namespace game
 		unsigned char m_attackDamage;
 		unsigned char m_armour;
 		
+		
 		IUnit(unsigned short hp,
 			  ObjectType type,
 			  const sf::Texture& texture,

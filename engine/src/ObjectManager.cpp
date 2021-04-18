@@ -42,6 +42,7 @@ namespace engine
 				{
 					std::cout << "Other players unit\n";
 				}
+				return this->playerObjectVector[it];
 			}
 			
 		}

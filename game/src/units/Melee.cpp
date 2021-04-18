@@ -47,4 +47,9 @@ namespace game
 			object->setHp(object->getHp() - getAttackDamage());
 		}
 	}
+	std::string Melee::getName()
+	{
+		return "Melee";
+	}
+	
 }

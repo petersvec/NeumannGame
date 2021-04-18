@@ -52,4 +52,9 @@ namespace game
 	{
 		unitFactory.get()->create(objType, location, getOwner());
 	}
+  
+	std::string Worker::getName()
+	{
+		return "Worker";
+	}
 }

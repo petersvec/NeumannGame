@@ -62,4 +62,9 @@ namespace game
 	{
 		object->setHp(object->getHp() - getAttackDamage());
 	}
+	std::string Probe::getName()
+	{
+		return "Probe";
+	}
+	
 }

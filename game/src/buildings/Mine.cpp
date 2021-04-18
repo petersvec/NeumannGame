@@ -30,4 +30,9 @@ namespace game
 		unsigned minerals = getLocation()->getMinerals();
 		playerState.updatePlayerBalances(minerals, minerals, minerals);
 	}
+  
+	std::string Mine::getName()
+	{
+		return "Mine";
+	}
 }

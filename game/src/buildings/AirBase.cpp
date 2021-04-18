@@ -34,4 +34,9 @@ namespace game
 	{
 		unitFactory->create(ObjectType::Ranged, location, getOwner());
 	}
+  
+	std::string AirBase::getName()
+	{
+		return "Air base";
+	}
 }

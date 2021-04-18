@@ -18,9 +18,10 @@
 #include "../../game/include/Ownership.hpp"
 #include "../../game/include/ObjectType.hpp"
 
-
 //temporary
 #include <iostream>
+#include "Gui.hpp"
+
 
 namespace engine
 {
@@ -54,6 +55,8 @@ namespace engine
 		sf::RectangleShape selectedMapTile;
 		game::PlayerState player1State;
 		game::PlayerState player2State;
+		sf::Text ActivePlayerText;
+		Gui m_gui;
 
 	public:
 		game::Ownership activePlayer = game::Ownership::Player1;

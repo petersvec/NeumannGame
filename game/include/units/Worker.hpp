@@ -27,5 +27,6 @@ namespace game
 							ObjectType objType) override;
 		virtual void attack(engine::IObjectPtr object) override;
 		void build(engine::UnitFactoryPtr, ObjectType, engine::TilePtr);
+		std::string getName() override;
 	};
 }

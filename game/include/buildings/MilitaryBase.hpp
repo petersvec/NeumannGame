@@ -26,5 +26,8 @@ namespace game
 							PlayerState& playerState,
 							ObjectType objType) override;
 		void makeMelee(engine::UnitFactoryPtr, engine::TilePtr);
+    
+		std::string getName() override;
 	};
+	
 }

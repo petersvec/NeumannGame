@@ -34,4 +34,9 @@ namespace game
 	{
 		unitFactory.get()->create(ObjectType::Worker, location, getOwner());
 	}
+  
+	std::string SpaceStation::getName()
+	{
+		return "Space station";
+	}
 }

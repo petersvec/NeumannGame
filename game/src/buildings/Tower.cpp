@@ -50,4 +50,9 @@ namespace game
 		}
 		object->setHp(object->getHp() - getAttackDamage());
 	}
+  
+	std::string Tower::getName()
+	{
+		return "Tower";
+	}
 }

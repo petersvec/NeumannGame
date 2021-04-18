@@ -22,7 +22,7 @@ namespace game
 			  unsigned short copperCost, 
 			  unsigned short siliconCost,
 			  Ownership owner);
-
+        
 		virtual void update(std::shared_ptr<engine::Map> map,
 							engine::ObjectManager objMan,
 							bool toUpdate,
@@ -31,5 +31,7 @@ namespace game
 							ObjectType objType) override;
 		virtual void attack(engine::IObjectPtr object) override;
 		virtual void move(engine::TilePtr, unsigned char, PlayerState&) override {}
+
+		std::string getName() override;
 	};
 }

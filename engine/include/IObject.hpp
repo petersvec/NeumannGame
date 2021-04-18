@@ -22,13 +22,15 @@ namespace engine
 		sf::Sprite m_sprite;
 		TilePtr m_location;
 		game::Ownership m_owner;
+		bool m_isBuilding = false;
 
 		IObject(unsigned short hp, game::ObjectType type, const sf::Texture& texture, TilePtr location, game::Ownership owner)
 			:
 			m_hp{ hp },
 			m_type{ type },
 			m_sprite{},
-			m_owner{owner}
+			m_owner{ owner }
+
 		{
 			setSprite(texture);
 			setLocation(location);
@@ -91,11 +93,17 @@ namespace engine
 			return m_sprite;
 		}
 
+		bool getIsBuilding()
+		{
+			return m_isBuilding;
+		}
+
 		TilePtr getLocation()
 		{
 			return m_location;
 		}
 
+		
 		void setHp(unsigned short hp)
 		{
 			m_hp = hp;
@@ -116,6 +124,10 @@ namespace engine
 		{
 			m_location = location;
 			m_sprite.setPosition(location->getPosition());
+		}
+		virtual std::string getName()
+		{
+			return "null";
 		}
 	};
 }

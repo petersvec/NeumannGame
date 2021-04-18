@@ -32,5 +32,6 @@ namespace game
 		void duplicate(engine::UnitFactoryPtr, engine::ObjectManager, std::shared_ptr<engine::Map>);
 		void load(engine::IObjectPtr);
 		void deploy();
+		std::string getName() override;
 	};
 }

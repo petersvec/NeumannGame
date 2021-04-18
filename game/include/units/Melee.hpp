@@ -26,5 +26,6 @@ namespace game
 							PlayerState& playerState,
 							ObjectType objType) override;
 		virtual void attack(engine::IObjectPtr object) override;
-	};
+		std::string getName() override;
+    };
 }
