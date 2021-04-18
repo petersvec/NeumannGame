@@ -2,8 +2,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include "TileType.hpp"
 #include "Ownership.hpp"
-#include "../../engine/include/JsonParser.hpp"
 #include <time.h>
+#include <SFML/System/Vector2.hpp>
 
 namespace game
 {

@@ -45,7 +45,7 @@ namespace game
 		}
 	}
 
-	void Probe::load(engine::IObjectPtr troop)
+	void Probe::load(std::shared_ptr<IObject> troop)
 	{
 		m_troop = troop;
 		m_loaded = true;
@@ -58,7 +58,7 @@ namespace game
 		m_loaded = false;
 	}
 
-	void Probe::attack(engine::IObjectPtr object)
+	void Probe::attack(std::shared_ptr<engine::IObject> object)
 	{
 		object->setHp(object->getHp() - getAttackDamage());
 	}

@@ -2,23 +2,23 @@
 
 #include <vector>
 #include <SFML/Graphics/RenderWindow.hpp>
-
-#include "IObject.hpp"
 #include "../../game/include/Ownership.hpp"
 
 namespace engine
 {
+	class IObject;
+
 	class ObjectManager
 	{
 	public:
 		ObjectManager();
 		
 		void drawAll(sf::RenderWindow* window);
-		void addUnit(IObjectPtr unit);
-		IObjectPtr findUnit(int x, int y, game::Ownership player);
-		std::vector<IObjectPtr> getPlayerObjects();
+		void addUnit(std::shared_ptr<IObject> unit);
+		std::shared_ptr<IObject> findUnit(int x, int y, game::Ownership player);
+		std::vector<std::shared_ptr<IObject>> getPlayerObjects();
 
 	private:
-		std::vector<IObjectPtr> playerObjectVector;
+		std::vector<std::shared_ptr<IObject>> playerObjectVector;
 	};
 }

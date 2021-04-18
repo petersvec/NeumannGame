@@ -1,4 +1,5 @@
 #include "../include/Tile.hpp"
+#include "../../engine/include/JsonParser.hpp"
 
 namespace game
 {

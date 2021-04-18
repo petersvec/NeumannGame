@@ -1,11 +1,12 @@
 #include "../include/ObjectManager.hpp"
+#include "../include/IObject.hpp"
 #include <iostream>
 
 namespace engine
 {
 	ObjectManager::ObjectManager() {}
 
-	std::vector<IObjectPtr> ObjectManager::getPlayerObjects()
+	std::vector<std::shared_ptr<IObject>> ObjectManager::getPlayerObjects()
 	{
 		return playerObjectVector;
 	}
@@ -18,12 +19,12 @@ namespace engine
 		}
 	}
 
-	void ObjectManager::addUnit(IObjectPtr unit)
+	void ObjectManager::addUnit(std::shared_ptr<IObject> unit)
 	{
 		playerObjectVector.push_back(unit);
 	}
 
-	IObjectPtr ObjectManager::findUnit(int x, int y, game::Ownership player)
+	std::shared_ptr<IObject> ObjectManager::findUnit(int x, int y, game::Ownership player)
 	{
 		for (int it = 0; it < playerObjectVector.size(); it++)
 		{

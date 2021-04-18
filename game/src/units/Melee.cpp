@@ -25,7 +25,7 @@ namespace game
 		attack(objMan->findUnit(getPosition().x, getPosition().y, enemy));
 	}
 
-	void Melee::attack(engine::IObjectPtr object)
+	void Melee::attack(std::shared_ptr<engine::IObject> object)
 	{
 		if (object == nullptr)
 		{

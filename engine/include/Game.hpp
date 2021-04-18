@@ -50,7 +50,7 @@ namespace engine
 		int changed = 1;
 		sf::RectangleShape m_guiRectangle;
 		ObjectManager testOM;
-		IObjectPtr testPO;
+		std::shared_ptr<IObject> testPO;
 		bool unitIsSelected;
 		sf::RectangleShape selectedMapTile;
 		game::PlayerState player1State;

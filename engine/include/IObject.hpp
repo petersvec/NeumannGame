@@ -4,12 +4,10 @@
 #include "../../game/include/ObjectType.hpp"
 #include "../../game/include/player/PlayerState.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 
 namespace engine
 {
-	class IObject;
-	using IObjectPtr = std::shared_ptr<IObject>;
-
 	class IObject
 	{
 	private:

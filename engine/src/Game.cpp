@@ -4,6 +4,11 @@ namespace engine
 {
 	void Game::initVariables()
 	{
+		if (!config->setGameConfig("config.json", "Settings"))
+		{
+			exit(-555);
+		}
+
 		m_window = nullptr;
 		m_gameMap = new Map(config->getMapHeight(), config->getMapWidth());
 		MapGenerator* m_mapGenerator = new MapGenerator();
@@ -154,7 +159,7 @@ namespace engine
 					if (unitIsSelected) {
 						pixelPos = sf::Mouse::getPosition(*m_window);
 						worldPos = m_window->mapPixelToCoords(pixelPos);
-						if (testPO->getIsBuilding() == false  && testPO->GetOwner() == activePlayer)
+						if (testPO->getIsBuilding() == false  && testPO->getOwner() == activePlayer)
 						{
 							testPO->setPosition(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
 							
@@ -162,18 +167,18 @@ namespace engine
 							int posy = worldPos.y / tileSize;
 							selectedMapTile.setPosition(posx*tileSize, posy*tileSize);
 
-							if (activePlayer == game::Player::Player1)
+							if (activePlayer == game::Ownership::Player1)
 							{
 								unitIsSelected = false;
 								testPO = nullptr;
-								activePlayer = game::Player::Player2;
+								activePlayer = game::Ownership::Player2;
 								ActivePlayerText.setString("Player 2");
 							}
 							else
 							{
 								unitIsSelected = false;
 								testPO = nullptr;
-								activePlayer = game::Player::Player1;
+								activePlayer = game::Ownership::Player1;
 								ActivePlayerText.setString("Player 1");
 							}
 							

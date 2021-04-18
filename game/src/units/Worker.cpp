@@ -33,7 +33,7 @@ namespace game
 		}
 	}
 
-	void Worker::attack(engine::IObjectPtr object)
+	void Worker::attack(std::shared_ptr<engine::IObject> object)
 	{
 		if (object == nullptr)
 		{

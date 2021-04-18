@@ -1,4 +1,5 @@
 #include "../../include/buildings/Mine.hpp"
+#include "../../include/Tile.hpp"
 
 namespace game
 {

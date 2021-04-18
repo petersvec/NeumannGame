@@ -8,7 +8,7 @@ namespace engine
 	public:
 		Gui();
 
-		void LoadObject(IObjectPtr);
+		void LoadObject(std::shared_ptr<IObject>);
 		sf::Font font;
 		sf::Text text;
 	};

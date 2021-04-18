@@ -37,7 +37,7 @@ namespace game
 		}
 	}
 
-	void Ranged::attack(engine::IObjectPtr object)
+	void Ranged::attack(std::shared_ptr<engine::IObject> object)
 	{
 		if (object == nullptr)
 		{

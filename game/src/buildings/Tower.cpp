@@ -41,7 +41,7 @@ namespace game
 		}
 	}
 
-	void Tower::attack(engine::IObjectPtr object)
+	void Tower::attack(std::shared_ptr<engine::IObject> object)
 	{
 		if (object == nullptr)
 		{

@@ -1,4 +1,5 @@
 #include "../include/Map.hpp"
+#include "../../game/include/Tile.hpp"
 
 namespace engine
 {
