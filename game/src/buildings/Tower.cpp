@@ -3,56 +3,56 @@
 namespace game
 {
 	Tower::Tower(unsigned short hp,
-		game::ObjectType type,
-		const sf::Texture& texture,
-		TilePtr location,
-		unsigned char moveSpeed,
-		unsigned char attackDamage,
-		unsigned char armour,
-		unsigned short ironCost,
-		unsigned short copperCost,
-		unsigned short siliconCost,
-		Player owner)
-		:
-		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner },
-		IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
-		IObject{ hp, type, texture, location, owner }
+				 ObjectType type,
+				 const sf::Texture& texture,
+				 engine::TilePtr location,
+				 unsigned char moveSpeed,
+				 unsigned char attackDamage,
+				 unsigned char armour,
+				 unsigned short ironCost,
+				 unsigned short copperCost,
+				 unsigned short siliconCost,
+				 Ownership owner)
+				 :
+				 IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner },
+				 IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
+				 IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Tower::attack(engine::IObjectPtr object)
+	void Tower::update(std::shared_ptr<engine::Map> map,
+					   engine::ObjectManager objMan,
+					   bool toUpdate,
+					   engine::UnitFactoryPtr unitFactory,
+					   PlayerState& playerState,
+					   ObjectType objType)
 	{
-		object->setHp(object->getHp() - getAttackDamage());
-	}
+		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
 
-	void Tower::update(engine::Map map)
-	{
-		std::pair<unsigned short, unsigned short> xyLocation = map.getTileXY(getLocation());
-
-		if (xyLocation.first == 10000 || xyLocation.second == 10000)
+		for (auto& i : objMan.getPlayerObjects())
 		{
-			return;
-		}
-
-		for (unsigned short i = xyLocation.first - ((getMoveSpeed() / 5) / 2); i < xyLocation.first + ((getMoveSpeed() / 5) / 2); ++i)
-		{
-			if (i < 0 || i >= map.getHeight())
+			if (i->getOwner() != enemy)
 			{
 				continue;
 			}
-			for (unsigned short j = xyLocation.first - ((getMoveSpeed() / 5) / 2); j < xyLocation.first + ((getMoveSpeed() / 5) / 2); ++j)
+
+			if (engine::TileDistance(getPosition(), i->getPosition()) <= getMoveSpeed())
 			{
-				if (j < 0 || j >= map.getWidth())
-				{
-					continue;
-				}
-				
-				//TODO: apply damage to objects on tile pointer map.getTile(i, j);
+				attack(i);
 			}
 		}
 	}
+
+	void Tower::attack(engine::IObjectPtr object)
+	{
+		if (object == nullptr)
+		{
+			return;
+		}
+		object->setHp(object->getHp() - getAttackDamage());
+	}
+  
 	std::string Tower::getName()
 	{
 		return "Tower";
 	}
-	
 }

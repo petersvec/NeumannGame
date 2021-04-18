@@ -31,4 +31,9 @@ namespace game
 	{
 		return std::make_tuple(getIronBalance(), getCopperBalance(), getSiliconBalance(), getLandConquered());
 	}
+
+	void PlayerState::updatePlayerLandConquered()
+	{
+		setLandConquered(getLandConquered() + 1);
+	}
 }

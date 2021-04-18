@@ -6,6 +6,7 @@ namespace engine
 	{
 		m_mapHeight = 0;
 		m_mapWidth = 0;
+		m_land = 0;
 		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, nullptr));
 
 		for (unsigned short i = 0; i < m_mapHeight; ++i)
@@ -23,6 +24,7 @@ namespace engine
 	{
 		m_mapHeight = mapSize;
 		m_mapWidth = mapSize;
+		m_land = 0;
 		m_map.resize(m_mapHeight, std::vector<TilePtr>(m_mapWidth, nullptr));
 
 		for (unsigned short i = 0; i < m_mapHeight; ++i)
@@ -51,6 +53,16 @@ namespace engine
 		}
 
 		setSpritesPosition();
+	}
+
+	unsigned short Map::getLand()
+	{
+		return m_land;
+	}
+
+	void Map::setLand(unsigned short land)
+	{
+		m_land += land;
 	}
 
 	void Map::setSpritesPosition()

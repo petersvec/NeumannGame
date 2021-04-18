@@ -1,7 +1,9 @@
 #pragma once
-#include <SFML\Graphics\Texture.hpp>
-#include <SFML\Graphics\Shader.hpp>
+#include <SFML/Graphics/Shader.hpp>
+#include <SFML/Graphics/RenderTexture.hpp>
 #include "Map.hpp"
+#include "JsonParser.hpp"
+#include "TextureHandler.hpp"
 
 namespace engine
 {

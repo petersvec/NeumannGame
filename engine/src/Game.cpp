@@ -1,18 +1,9 @@
-#include <iostream>
 #include "../include/Game.hpp"
-#include "../include/Shader.hpp"
-#include "../include/TextureHandler.hpp"
-#include "../include/Factory.hpp"
 
 namespace engine
 {
 	void Game::initVariables()
 	{
-		if (!config->setGameConfig("config.json", "Settings"))
-		{
-			exit(-555);
-		}
-
 		m_window = nullptr;
 		m_gameMap = new Map(config->getMapHeight(), config->getMapWidth());
 		MapGenerator* m_mapGenerator = new MapGenerator();
@@ -33,11 +24,11 @@ namespace engine
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
 	
-		auto unit_1 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 10), game::Player::Player1);
-		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Player::Player2);
+		auto unit_1 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 10), game::Ownership::Player1);
+		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Ownership::Player2);
 
-		auto building_1 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(1, 1), game::Player::Player1);
-		auto building_2 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(3, 3), game::Player::Player2);
+		auto building_1 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(1, 1), game::Ownership::Player1);
+		auto building_2 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(3, 3), game::Ownership::Player2);
 
 		testOM.addUnit(unit_1);
 		testOM.addUnit(unit_2);
@@ -78,10 +69,7 @@ namespace engine
 			y = y / tileSize;
 			
 			m_gui.text.setString("");
-			
 			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer);
-			
-			
 			
 			if (testPO != nullptr)
 			{
@@ -198,18 +186,18 @@ namespace engine
 				case sf::Event::KeyPressed:							//key pressed
 					if (m_event.key.code == sf::Keyboard::Space)	//space pressed switch player
 					{
-						if (activePlayer == game::Player::Player1)
+						if (activePlayer == game::Ownership::Player1)
 						{
 							unitIsSelected = false;
 							testPO = nullptr;
-							activePlayer = game::Player::Player2;
+							activePlayer = game::Ownership::Player2;
 							ActivePlayerText.setString("Player 2");
 						}
 						else
 						{
 							unitIsSelected = false;
 							testPO = nullptr;
-							activePlayer = game::Player::Player1;
+							activePlayer = game::Ownership::Player1;
 							ActivePlayerText.setString("Player 1");
 						}
 						std::cout << (int)activePlayer;

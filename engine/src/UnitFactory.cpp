@@ -1,14 +1,21 @@
-#include "../include/Factory.hpp"
+#include "../include/UnitFactory.hpp"
 #include "../include/TextureHandler.hpp"
+#include "../../game/include/buildings/AirBase.hpp"
+#include "../../game/include/buildings/MilitaryBase.hpp"
+#include "../../game/include/buildings/Mine.hpp"
+#include "../../game/include/buildings/SpaceStation.hpp"
+#include "../../game/include/buildings/Tower.hpp"
+#include "../../game/include/units/Melee.hpp"
+#include "../../game/include/units/Probe.hpp"
+#include "../../game/include/units/Ranged.hpp"
+#include "../../game/include/units/Worker.hpp"
 
 namespace engine
 {
     UnitFactoryPtr unitFactory = std::make_unique<UnitFactory>();
 
-    engine::IObjectPtr UnitFactory::create(game::ObjectType objType, TilePtr location, game::Player owner)
+    IObjectPtr UnitFactory::create(game::ObjectType objType, TilePtr location, game::Ownership owner)
     {
-        sf::Texture texture;
-
         switch (objType)
         {
         case game::ObjectType::Melee:

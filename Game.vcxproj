@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="engine\src\Factory.cpp" />
+    <ClCompile Include="engine\src\UnitFactory.cpp" />
     <ClCompile Include="engine\src\Game.cpp" />
     <ClCompile Include="engine\src\Gui.cpp" />
     <ClCompile Include="engine\src\JsonParser.cpp" />
@@ -45,7 +45,7 @@
     <ClCompile Include="main\src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="engine\include\Factory.hpp" />
+    <ClInclude Include="engine\include\UnitFactory.hpp" />
     <ClInclude Include="engine\include\Game.hpp" />
     <ClInclude Include="engine\include\Gui.hpp" />
     <ClInclude Include="engine\include\IObject.hpp" />

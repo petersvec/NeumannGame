@@ -1,15 +1,16 @@
 #pragma once
-
-#include <SFML\Graphics\Sprite.hpp>
-#include <SFML\Graphics\RenderWindow.hpp>
-
-#include "../../game/include/ObjectType.hpp"
+#include "Map.hpp"
 #include "Utilities.hpp"
+#include "UnitFactory.hpp"
+#include "ObjectManager.hpp"
+#include "../../game/include/ObjectType.hpp"
+#include "../../game/include/player/PlayerState.hpp"
+#include <SFML/Graphics/RenderWindow.hpp>
 
 namespace engine
 {
 	class IObject;
-	using IObjectPtr = std::shared_ptr<engine::IObject>;
+	using IObjectPtr = std::shared_ptr<IObject>;
 
 	class IObject
 	{
@@ -20,11 +21,10 @@ namespace engine
 		game::ObjectType m_type;
 		sf::Sprite m_sprite;
 		TilePtr m_location;
-		game::Player m_owner;
+		game::Ownership m_owner;
 		bool m_isBuilding = false;
 
-
-		IObject(unsigned short hp, game::ObjectType type, const sf::Texture& texture, TilePtr location, game::Player owner)
+		IObject(unsigned short hp, game::ObjectType type, const sf::Texture& texture, TilePtr location, game::Ownership owner)
 			:
 			m_hp{ hp },
 			m_type{ type },
@@ -37,9 +37,16 @@ namespace engine
 		}
 
 	public:
+		virtual void update(std::shared_ptr<Map>,
+							ObjectManager,
+							bool,
+							UnitFactoryPtr,
+							game::PlayerState&,
+							game::ObjectType) = 0;
+
 		virtual void draw(sf::RenderWindow* window)
 		{
-			if (m_owner == game::Player::Player1)
+			if (m_owner == game::Ownership::Player1)
 			{
 				m_sprite.setColor(sf::Color::Red);
 			}
@@ -51,17 +58,12 @@ namespace engine
 			window->draw(m_sprite);
 		}
 
-		virtual void update()
-		{
-
-		}
-
-		void setOwner(game::Player player)
+		void setOwner(game::Ownership player)
 		{
 			m_owner = player;
 		}
 
-		game::Player GetOwner() const
+		game::Ownership getOwner() const
 		{
 			return m_owner;
 		}

@@ -124,6 +124,22 @@ namespace engine
         }
     }
 
+    unsigned char JsonParser::getTileSize()
+    {
+        unsigned char size = 0;
+        if (!m_gameConfigFile.HasMember("TileSize") ||
+            !m_gameConfigFile["TileSize"].IsNumber() ||
+            !m_gameConfigFile["TileSize"].IsInt() ||
+            ((size = m_gameConfigFile["TileSize"].GetInt()) < G_MIN_TILE_SIZE))
+        {
+            return G_MIN_TILE_SIZE;
+        }
+        else
+        {
+            return m_gameConfigFile["TileSize"].GetInt();
+        }
+    }
+
     std::map<std::string, std::string> JsonParser::getTextures()
     {
         std::map<std::string, std::string> texturePairs;

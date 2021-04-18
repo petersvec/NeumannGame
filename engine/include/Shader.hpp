@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Graphics/Shader.hpp>
 
 namespace engine
 {

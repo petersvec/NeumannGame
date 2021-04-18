@@ -11,15 +11,21 @@ namespace game
 
 	public:
 		Melee(unsigned short hp,
-			game::ObjectType type,
-			const sf::Texture& texture,
-			TilePtr location,
-			unsigned char moveSpeed,
-			unsigned char attackDamage,
-			unsigned char armour,
-			Player owner);
+			  ObjectType type,
+			  const sf::Texture& texture,
+			  engine::TilePtr location,
+			  unsigned char moveSpeed,
+			  unsigned char attackDamage,
+		 	  unsigned char armour,
+			  Ownership owner);
 
-		virtual void attack(engine::IObjectPtr object);
+		virtual void update(std::shared_ptr<engine::Map> map,
+							engine::ObjectManager objMan,
+							bool toUpdate,
+							engine::UnitFactoryPtr unitFactory,
+							PlayerState& playerState,
+							ObjectType objType) override;
+		virtual void attack(engine::IObjectPtr object) override;
 		std::string getName() override;
-	};
+    };
 }
