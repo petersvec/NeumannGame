@@ -88,7 +88,7 @@ namespace game
 		}
 	}
 
-	sf::Sprite Tile::getSprite()
+	sf::Sprite& Tile::getSprite()
 	{
 		return m_sprite;
 	}
@@ -121,16 +121,21 @@ namespace game
 
 		if (ownership == game::Ownership::Player1)
 		{
-			m_sprite.setColor(sf::Color::Red);
+			m_sprite.setColor(sf::Color(255, 0, 0, 230));
 		}
 		else
 		{
-			m_sprite.setColor(sf::Color::Blue);
+			m_sprite.setColor(sf::Color(0, 0, 255, 230));
 		}
 	}
 
 	void Tile::setPosition(float x, float y)
 	{
 		m_sprite.setPosition(x, y);
+	}
+
+	TileType Tile::getTileType() const
+	{
+		return m_type;
 	}
 }

@@ -10,17 +10,22 @@ namespace game
 		int m_ironBalance;
 		int m_copperBalance;
 		int m_siliconBalance;
-		unsigned char m_landConquered;
+		int m_landConquered;
 
 	protected:
 
 	public:
 		PlayerState();
-		PlayerState(int, int, int, unsigned char);
-		void initializePlayerState(int, int, int, unsigned char);
+		PlayerState(int, int, int, int);
+		void initializePlayerState(int, int, int, int);
 		void updatePlayerLandConquered();
 		void updatePlayerBalances(int, int, int);
-		std::tuple<int, int, int, unsigned char> getPlayerState();
+		std::tuple<int, int, int, int> getPlayerState();
+
+		void updateLand(int value)
+		{
+			m_landConquered += value;
+		}
 
 		int getIronBalance()
 		{
@@ -52,12 +57,12 @@ namespace game
 			m_siliconBalance = silicon;
 		}
 
-		void setLandConquered(unsigned char land)
+		void setLandConquered(int land)
 		{
 			m_landConquered = land;
 		}
 
-		unsigned char getLandConquered()
+		int getLandConquered()
 		{
 			return m_landConquered;
 		}

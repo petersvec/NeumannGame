@@ -7,12 +7,12 @@ namespace game
 		initializePlayerState(2000, 2000, 2000, 1);
 	}
 
-	PlayerState::PlayerState(int iron, int copper, int silicon, unsigned char land)
+	PlayerState::PlayerState(int iron, int copper, int silicon, int land)
 	{
 		initializePlayerState(iron, copper, silicon, land);
 	}
 
-	void PlayerState::initializePlayerState(int iron, int copper, int silicon, unsigned char land)
+	void PlayerState::initializePlayerState(int iron, int copper, int silicon, int land)
 	{
 		setIronBalance(iron);
 		setCopperBalance(copper);
@@ -27,7 +27,7 @@ namespace game
 		setSiliconBalance(getSiliconBalance() + silicon);
 	}
 
-	std::tuple<int, int, int, unsigned char> PlayerState::getPlayerState()
+	std::tuple<int, int, int, int> PlayerState::getPlayerState()
 	{
 		return std::make_tuple(getIronBalance(), getCopperBalance(), getSiliconBalance(), getLandConquered());
 	}

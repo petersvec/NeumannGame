@@ -28,7 +28,7 @@ namespace game
 		unsigned short getMinerals();
 		unsigned char getType();
 		std::string getTypeString() const; 
-		sf::Sprite getSprite();
+		sf::Sprite &getSprite();
 		sf::Vector2f getPosition() const;
 
 		void setMinerals(unsigned short);
@@ -37,5 +37,6 @@ namespace game
 		void setPosition(float, float);
 		Ownership getOccupied();
 		void setOccupied(Ownership);
+		TileType getTileType() const;
 	};
 }

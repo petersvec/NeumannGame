@@ -178,6 +178,18 @@ namespace engine
 							int posy = worldPos.y / tileSize;
 							selectedMapTile.setPosition(posx*tileSize, posy*tileSize);
 
+							// obsadzovanie (do samostatnej funkcie)
+							//////
+							auto tile = m_gameMap->getTile(posx, posy);
+							if (tile->getTileType() != game::TileType::Void)
+							{
+								tile->setOccupied(activePlayer);
+								if (activePlayer == game::Ownership::Player1) player1State.updateLand(1);
+								if (activePlayer == game::Ownership::Player2) player2State.updateLand(1);
+								changed = 1; // <- prekreslit treba mapu ofc
+							}
+							//////
+
 							if (activePlayer == game::Ownership::Player1)
 							{
 								unitIsSelected = false;
@@ -185,7 +197,7 @@ namespace engine
 								activePlayer = game::Ownership::Player2;
 								ActivePlayerText.setString("Player 2");
 								ActivePlayerText.setFillColor(sf::Color::Blue);
-								m_gui.SetPlayerState(player1State);
+								m_gui.SetPlayerState(player2State);
 							}
 							else
 							{
@@ -194,7 +206,7 @@ namespace engine
 								activePlayer = game::Ownership::Player1;
 								ActivePlayerText.setString("Player 1");
 								ActivePlayerText.setFillColor(sf::Color::Red);
-								m_gui.SetPlayerState(player2State);
+								m_gui.SetPlayerState(player1State);
 							}
 						}
 					}
