@@ -1,5 +1,4 @@
 #include "../include/ObjectManager.hpp"
-#include "../include/IObject.hpp"
 #include <iostream>
 
 namespace engine

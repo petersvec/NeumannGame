@@ -1,4 +1,5 @@
 #include "../../include/buildings/MilitaryBase.hpp"
+#include "../../../engine/include/UnitFactory.hpp"
 
 namespace game
 {
@@ -16,9 +17,8 @@ namespace game
 	{}
 
 	void MilitaryBase::update(std::shared_ptr<engine::Map> map,
-							  engine::ObjectManager objMan,
+							  std::shared_ptr<engine::ObjectManager> objMan,
 							  bool toUpdate,
-							  engine::UnitFactoryPtr unitFactory,
 							  PlayerState& playerState,
 							  ObjectType objType)
 	{
@@ -26,13 +26,13 @@ namespace game
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			makeMelee(unitFactory, location);
+			makeMelee(location);
 		}
 	}
 
-	void MilitaryBase::makeMelee(engine::UnitFactoryPtr unitFactory, engine::TilePtr location)
+	void MilitaryBase::makeMelee(engine::TilePtr location)
 	{
-		unitFactory.get()->create(ObjectType::Melee, location, getOwner());
+		engine::unitFactory->create(ObjectType::Melee, location, getOwner());
 	}
   
 	std::string MilitaryBase::getName()

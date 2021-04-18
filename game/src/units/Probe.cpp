@@ -1,4 +1,5 @@
 #include "../../include/units/Probe.hpp"
+#include "../../../engine/include/UnitFactory.hpp"
 
 namespace game
 {
@@ -16,9 +17,8 @@ namespace game
 	{}
 
 	void Probe::update(std::shared_ptr<engine::Map> map,
-					   engine::ObjectManager objMan,
+					   std::shared_ptr<engine::ObjectManager> objMan,
 					   bool toUpdate,
-					   engine::UnitFactoryPtr unitFactory,
 					   PlayerState& playerState,
 					   ObjectType objType)
 	{
@@ -27,16 +27,16 @@ namespace game
 			deploy();
 		}
 
-		duplicate(unitFactory, objMan, map);
+		duplicate(objMan, map);
 	}
 
-	void Probe::duplicate(engine::UnitFactoryPtr unitFactory, engine::ObjectManager objMan, std::shared_ptr<engine::Map> map)
+	void Probe::duplicate(std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
 	{
 		if (m_duplicateTime == 0)
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			unitFactory->create(ObjectType::Ranged, location, getOwner());
+			engine::unitFactory->create(ObjectType::Ranged, location, getOwner());
 			m_duplicateTime = 5;
 		}
 		else
@@ -53,7 +53,7 @@ namespace game
 
 	void Probe::deploy()
 	{
-		m_troop.get()->setLocation(getLocation());
+		m_troop->setLocation(getLocation());
 		m_troop = nullptr;
 		m_loaded = false;
 	}

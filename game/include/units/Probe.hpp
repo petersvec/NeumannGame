@@ -23,13 +23,12 @@ namespace game
 			  Ownership owner);
 
 		virtual void update(std::shared_ptr<engine::Map> map,
-							engine::ObjectManager objMan,
+							std::shared_ptr<engine::ObjectManager> objMan,
 							bool toUpdate,
-							engine::UnitFactoryPtr unitFactory,
 							PlayerState& playerState,
 							ObjectType objType) override;
 		virtual void attack(engine::IObjectPtr object) override;
-		void duplicate(engine::UnitFactoryPtr, engine::ObjectManager, std::shared_ptr<engine::Map>);
+		void duplicate(std::shared_ptr<engine::ObjectManager>, std::shared_ptr<engine::Map>);
 		void load(engine::IObjectPtr);
 		void deploy();
 		std::string getName() override;

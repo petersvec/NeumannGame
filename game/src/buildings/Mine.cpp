@@ -16,9 +16,8 @@ namespace game
 	{}
 
 	void Mine::update(std::shared_ptr<engine::Map> map,
-					  engine::ObjectManager objMan,
+					  std::shared_ptr<engine::ObjectManager> objMan,
 					  bool toUpdate,
-					  engine::UnitFactoryPtr unitFactory,
 					  PlayerState& playerState,
 					  ObjectType objType)
 	{

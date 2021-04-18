@@ -20,12 +20,11 @@ namespace game
 					 Ownership owner);
 
 		virtual void update(std::shared_ptr<engine::Map> map,
-							engine::ObjectManager objMan,
+							std::shared_ptr<engine::ObjectManager> objMan,
 							bool toUpdate,
-							engine::UnitFactoryPtr unitFactory,
 							PlayerState& playerState,
 							ObjectType objType) override;
-		void makeMelee(engine::UnitFactoryPtr, engine::TilePtr);
+		void makeMelee(engine::TilePtr);
     
 		std::string getName() override;
 	};

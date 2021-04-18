@@ -16,15 +16,14 @@ namespace game
 	{}
 
 	void Ranged::update(std::shared_ptr<engine::Map> map,
-						engine::ObjectManager objMan,
+						std::shared_ptr<engine::ObjectManager> objMan,
 						bool toUpdate,
-						engine::UnitFactoryPtr unitFactory,
 						PlayerState& playerState,
 						ObjectType objType)
 	{
 		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
 
-		for (auto& i : objMan.getPlayerObjects())
+		for (auto& i : objMan->getPlayerObjects())
 		{
 			if (i->getOwner() != enemy)
 			{
