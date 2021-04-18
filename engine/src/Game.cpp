@@ -21,6 +21,7 @@ namespace engine
 		ActivePlayerText.setPosition(1100, 640);
 		ActivePlayerText.setCharacterSize(40);
 		ActivePlayerText.setFillColor(sf::Color::Red);
+		ActivePlayerText.setFont(m_gui.GetFont());
 		m_guiRectangle.setPosition(0, 620);
 		m_guiRectangle.setSize(sf::Vector2f(1280, 100));
 		m_guiRectangle.setFillColor(sf::Color(41, 43, 44));
@@ -45,6 +46,8 @@ namespace engine
 		clickMap(0, 0);
 
 		m_cursor.setTexture(*textures->getTexture("cursor"));
+
+		m_gui.SetPlayerState(player1State);
 	}
 
 	void Game::initWindow()
@@ -93,8 +96,8 @@ namespace engine
 				unitIsSelected = false;
 			}
 
-			auto type = m_gameMap->getTile(x, y)->getTypeString();
-			str = "X: " + std::to_string(x) + "\nY: " + std::to_string(y) + "\nType: " + type;
+			auto tile = m_gameMap->getTile(x, y);
+			str = "X: " + std::to_string(x) + "\nY: " + std::to_string(y) + "\nType: " + tile->getTypeString() + "\nMinerals: " + std::to_string(tile->getMinerals());
 			setDisplayText(&tileText, str);
 			setClickedTile(x, y, &selectedMapTile);
 			//return m_gameMap->getTile(x, y);
@@ -116,6 +119,7 @@ namespace engine
 		text->setCharacterSize(20); // in pixels
 		text->setFillColor(sf::Color::White);
 		text->setPosition(0, 0);
+		text->setFont(m_gui.GetFont());
 	}
 	
 	
@@ -181,6 +185,7 @@ namespace engine
 								activePlayer = game::Ownership::Player2;
 								ActivePlayerText.setString("Player 2");
 								ActivePlayerText.setFillColor(sf::Color::Blue);
+								m_gui.SetPlayerState(player1State);
 							}
 							else
 							{
@@ -189,9 +194,8 @@ namespace engine
 								activePlayer = game::Ownership::Player1;
 								ActivePlayerText.setString("Player 1");
 								ActivePlayerText.setFillColor(sf::Color::Red);
+								m_gui.SetPlayerState(player2State);
 							}
-							
-						
 						}
 					}
 				}
@@ -266,10 +270,6 @@ namespace engine
 
 	void Game::render()
 	{
-		sf::Font font;
-		font.loadFromFile("data/fonts/OpenSans-Bold.ttf");
-		tileText.setFont(font);
-		ActivePlayerText.setFont(font);
 		m_window->clear();
 
 		if (changed == 1) 
@@ -292,6 +292,7 @@ namespace engine
 		m_window->draw(m_guiRectangle);
 		m_window->draw(tileText);
 		m_window->draw(ActivePlayerText);
+		m_window->draw(m_gui.GetPlayerStateText());
 		m_window->draw(m_gui.text);
 		m_window->draw(m_cursor);
 

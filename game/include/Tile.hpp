@@ -11,7 +11,7 @@ namespace game
 	class Tile
 	{
 	private:
-
+		void GenerateMinerals();
 	protected:
 		unsigned short m_minerals;
 		TileType m_type;

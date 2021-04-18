@@ -27,6 +27,18 @@ namespace game
 		m_sprite.setScale(sf::Vector2f(1, 1));
 	}
 
+	void Tile::GenerateMinerals()
+	{
+		if (m_type != TileType::Void)
+		{
+			setMinerals(400 + rand() % 201);
+		}
+		else
+		{
+			setMinerals(0);
+		}
+	}
+
 	Tile Tile::operator=(const unsigned char type)
 	{
 		return Tile(type);
@@ -89,6 +101,7 @@ namespace game
 	void Tile::setType(unsigned char type)
 	{
 		m_type = (TileType)type;
+		GenerateMinerals();
 	}
 
 	void Tile::setSprite(const sf::Texture& texture)
