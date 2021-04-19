@@ -33,7 +33,7 @@ namespace engine
 
 		std::string str = object->getName() + "| HP: " + std::to_string(object->getHp());
 		str = str + player;
-		if (object->getIsBuilding() == true)
+		if (object->getIsBuilding() == true && object->getOwner() == game::Ownership::Player1)
 		{
 			str = str + '\n' + "Press 1 to build an unit";
 		}

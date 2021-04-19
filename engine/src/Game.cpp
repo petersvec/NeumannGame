@@ -232,13 +232,10 @@ namespace engine
 						}
 						std::cout << (int)activePlayer;
 					}
-					break;
 
 					if (m_event.key.code == sf::Keyboard::Num1)
 					{
 						if (unitIsSelected) {
-							pixelPos = sf::Mouse::getPosition(*m_window);
-							worldPos = m_window->mapPixelToCoords(pixelPos);
 							if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
 							{
 								//testPO->build();
