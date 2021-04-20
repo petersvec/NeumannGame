@@ -29,7 +29,7 @@ namespace game
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			build(objType, location);
+			build(playerState, objType, location);
 		}
 	}
 
@@ -48,8 +48,35 @@ namespace game
 		object->setHp(object->getHp() - getAttackDamage());
 	}
 
-	void Worker::build(ObjectType objType, engine::TilePtr location)
+	void Worker::build(PlayerState& playerState, ObjectType objType, engine::TilePtr location)
 	{
+		if (objType == ObjectType::AirBase ||
+			objType == ObjectType::MilitaryBase ||
+			objType == ObjectType::Tower)
+		{
+			if (!playerState.checkBalance(500, 500, 500))
+			{
+				return;
+			}
+		}
+		else if (objType == ObjectType::Mine)
+		{
+			if (!playerState.checkBalance(200, 200, 200))
+			{
+				return;
+			}
+		}
+		else if (objType == ObjectType::SpaceStation)
+		{
+			if (!playerState.checkBalance(2000, 2000, 2000))
+			{
+				return;
+			}
+		}
+		else
+		{
+			return;
+		}
 		engine::unitFactory->create(objType, location, getOwner());
 	}
   
