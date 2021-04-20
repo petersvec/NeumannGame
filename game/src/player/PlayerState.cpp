@@ -20,6 +20,15 @@ namespace game
 		setLandConquered(land);
 	}
 
+	bool PlayerState::checkBalance(int iron, int copper, int silicon)
+	{
+		if (m_ironBalance < iron || m_copperBalance < copper || m_siliconBalance < silicon) {
+			return false;
+		}
+		
+		return true;
+	}
+
 	void PlayerState::updatePlayerBalances(int iron, int copper, int silicon)
 	{
 		setIronBalance(getIronBalance() + iron);

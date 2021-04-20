@@ -20,6 +20,7 @@ namespace game
 		void initializePlayerState(int, int, int, int);
 		void updatePlayerLandConquered();
 		void updatePlayerBalances(int, int, int);
+		bool checkBalance(int, int, int);
 		std::tuple<int, int, int, int> getPlayerState();
 
 		void updateLand(int value)
