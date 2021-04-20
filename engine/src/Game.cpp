@@ -32,16 +32,45 @@ namespace engine
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
 	
-		auto unit_1 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 10), game::Ownership::Player1);
-		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Ownership::Player2);
+		auto unit_1 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(1, 10), game::Ownership::Player1);
+		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 10), game::Ownership::Player2);
+		auto unit_3 = unitFactory->create(game::ObjectType::Ranged, m_gameMap->getTile(1, 11), game::Ownership::Player1);
+		auto unit_4 = unitFactory->create(game::ObjectType::Ranged, m_gameMap->getTile(10, 11), game::Ownership::Player2);
+		auto unit_5 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(1, 12), game::Ownership::Player1);
+		auto unit_6 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(10, 12), game::Ownership::Player2);
+		auto unit_7 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(1, 13), game::Ownership::Player1);
+		auto unit_8 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(10, 13), game::Ownership::Player2);
 
-		auto building_1 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(1, 1), game::Ownership::Player1);
-		auto building_2 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(3, 3), game::Ownership::Player2);
+		auto building_1 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(1, 1), game::Ownership::Player1);
+		auto building_2 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(10, 1), game::Ownership::Player2);
+		auto building_3 = unitFactory->create(game::ObjectType::AirBase, m_gameMap->getTile(1, 2), game::Ownership::Player1);
+		auto building_4 = unitFactory->create(game::ObjectType::AirBase, m_gameMap->getTile(10, 2), game::Ownership::Player2);
+		auto building_5 = unitFactory->create(game::ObjectType::MilitaryBase, m_gameMap->getTile(1, 3), game::Ownership::Player1);
+		auto building_6 = unitFactory->create(game::ObjectType::MilitaryBase, m_gameMap->getTile(10, 3), game::Ownership::Player2);
+		auto building_7 = unitFactory->create(game::ObjectType::Mine, m_gameMap->getTile(1, 4), game::Ownership::Player1);
+		auto building_8 = unitFactory->create(game::ObjectType::Mine, m_gameMap->getTile(10, 4), game::Ownership::Player2);
+		auto building_9 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(1, 5), game::Ownership::Player1);
+		auto building_10 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(10, 5), game::Ownership::Player2);
 
 		testOM.addUnit(unit_1);
 		testOM.addUnit(unit_2);
+		testOM.addUnit(unit_3);
+		testOM.addUnit(unit_4);
+		testOM.addUnit(unit_5);
+		testOM.addUnit(unit_6);
+		testOM.addUnit(unit_7);
+		testOM.addUnit(unit_8);
+
 		testOM.addUnit(building_1);
 		testOM.addUnit(building_2);
+		testOM.addUnit(building_3);
+		testOM.addUnit(building_4);
+		testOM.addUnit(building_5);
+		testOM.addUnit(building_6);
+		testOM.addUnit(building_7);
+		testOM.addUnit(building_8);
+		testOM.addUnit(building_9);
+		testOM.addUnit(building_10);
 
 		clickMap(0, 0);
 
