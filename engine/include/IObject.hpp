@@ -127,5 +127,7 @@ namespace engine
 		{
 
 		}
+		virtual void workerBuild(engine::TilePtr location, ObjectManager* OM, int number) {
+		}
 	};
 }

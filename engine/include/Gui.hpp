@@ -11,7 +11,7 @@ namespace engine
 	public:
 		Gui();
 
-		void LoadObject(std::shared_ptr<IObject>);
+		void LoadObject(std::shared_ptr<IObject>, game::Ownership);
 		sf::Font font;
 		sf::Text text;
 

@@ -32,7 +32,7 @@ namespace engine
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
 	
-		auto unit_1 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 10), game::Ownership::Player1);
+		auto unit_1 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(10, 10), game::Ownership::Player1);
 		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Ownership::Player2);
 
 		auto building_1 = unitFactory->create(game::ObjectType::MilitaryBase, m_gameMap->getTile(1, 1), game::Ownership::Player1);
@@ -88,7 +88,7 @@ namespace engine
 			
 			if (testPO != nullptr)
 			{
-				m_gui.LoadObject(testPO);
+				m_gui.LoadObject(testPO, activePlayer);
 				unitIsSelected = true;
 			}
 			else
@@ -100,7 +100,6 @@ namespace engine
 			m_gui.setMapText(x, y, tile);
 			tileText = m_gui.getMapText();
 			setClickedTile(x, y, &selectedMapTile);
-			//return m_gameMap->getTile(x, y);
 		}
 		
 	}
@@ -222,23 +221,41 @@ namespace engine
 						std::cout << (int)activePlayer;
 					}
 
-					if (m_event.key.code == sf::Keyboard::Num1)
-					{
-						if (unitIsSelected) {
-							if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
-							{
-								
-								//engine:GetNearestFreeLocation(testPO->getLocation(), &testOM);
+					if (unitIsSelected) {
+						tempx = testPO->getPosition().x / tileSize + 1;
+						tempy = testPO->getPosition().y / tileSize;
+						if (m_event.key.code == sf::Keyboard::Num1)
+						{
+							if (unitIsSelected) {
+								if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
+								{
 
-								tempx = testPO->getPosition().x / tileSize + 1;
-								tempy = testPO->getPosition().y / tileSize;
-								testPO->build(m_gameMap->getTile(tempx, tempy), &testOM);	
+									//engine:GetNearestFreeLocation(testPO->getLocation(), &testOM);
+									testPO->build(m_gameMap->getTile(tempx, tempy), &testOM);
+								}
+
+								if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+								{
+									testPO->workerBuild(m_gameMap->getTile(tempx, tempy), &testOM, 1);
+								}
+							}
+						}
+
+						if (m_event.key.code == sf::Keyboard::Num2)
+						{
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							{
+								testPO->workerBuild(m_gameMap->getTile(tempx, tempy), &testOM, 2);
+							}
+						}
+						if (m_event.key.code == sf::Keyboard::Num3)
+						{
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							{
+								testPO->workerBuild(m_gameMap->getTile(tempx, tempy), &testOM, 3);
 							}
 						}
 					}
-					break;
-
-					
 			default:
 				break;
 			}

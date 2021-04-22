@@ -1,5 +1,6 @@
 #include "../../include/units/Worker.hpp"
 #include "../../../engine/include/UnitFactory.hpp"
+#include <iostream>
 
 namespace game
 {
@@ -29,7 +30,7 @@ namespace game
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			build(objType, location);
+			//build(objType, location);
 		}
 	}
 
@@ -48,9 +49,23 @@ namespace game
 		object->setHp(object->getHp() - getAttackDamage());
 	}
 
-	void Worker::build(ObjectType objType, engine::TilePtr location)
+	void Worker::workerBuild(engine::TilePtr location, engine::ObjectManager* OM, int number)
 	{
-		engine::unitFactory->create(objType, location, getOwner());
+		
+		if (number == 1) {
+			auto unit = engine::unitFactory->create(ObjectType::SpaceStation, location, getOwner());
+			std::cout << "hereee";
+			OM->addUnit(unit);
+		}
+		if (number == 2) {
+			auto unit = engine::unitFactory->create(ObjectType::MilitaryBase, location, getOwner());
+			OM->addUnit(unit);
+		}
+		if (number == 3) {
+			auto unit = engine::unitFactory->create(ObjectType::AirBase, location, getOwner());
+			OM->addUnit(unit);
+		}
+		
 	}
   
 	std::string Worker::getName()

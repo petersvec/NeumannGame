@@ -77,5 +77,6 @@ namespace game
 		{
 			m_armour = armour;
 		}
+		
 	};
 }

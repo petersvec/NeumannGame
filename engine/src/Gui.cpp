@@ -15,7 +15,7 @@ namespace engine
 		m_player_state_text.setFont(font);
 	}
 
-	void Gui::LoadObject(std::shared_ptr<IObject> object)
+	void Gui::LoadObject(std::shared_ptr<IObject> object, game::Ownership activePlayer)
 	{
 		text.setPosition(500, 640);
 		text.setCharacterSize(20);
@@ -33,9 +33,13 @@ namespace engine
 
 		std::string str = object->getName() + "| HP: " + std::to_string(object->getHp());
 		str = str + player;
-		if (object->getIsBuilding() == true && object->getOwner() == game::Ownership::Player1)
+		if (object->getIsBuilding() == true && object->getOwner()==activePlayer)
 		{
 			str = str + '\n' + "Press 1 to build an unit";
+		}
+		if (object->getName() == "Worker" && object->getOwner() == activePlayer)
+		{
+			str = str + '\n' + "Press 1 - SpaceStation | 2 - MilitaryBase | 3 - AirBase";
 		}
 		text.setString(str);
 	}
