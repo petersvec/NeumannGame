@@ -58,6 +58,7 @@ namespace engine
 		sf::Text ActivePlayerText;
 		Gui m_gui;
 		sf::Sprite m_cursor;
+		unsigned short tempx, tempy;
 
 	public:
 		game::Ownership activePlayer = game::Ownership::Player1;

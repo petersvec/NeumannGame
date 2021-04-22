@@ -26,7 +26,7 @@ namespace game
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			build(location);
+			//build(location);
 		}
 	}
 

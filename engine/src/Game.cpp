@@ -238,7 +238,13 @@ namespace engine
 						if (unitIsSelected) {
 							if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
 							{
-								testPO->build(testPO->getLocation(), &testOM);
+								
+								//engine:GetNearestFreeLocation(testPO->getLocation(), &testOM);
+
+								tempx = testPO->getPosition().x / tileSize + 1;
+								tempy = testPO->getPosition().y / tileSize;
+								testPO->build(m_gameMap->getTile(tempx, tempy), &testOM);
+								
 							}
 						}
 					}
