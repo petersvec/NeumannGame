@@ -30,7 +30,7 @@ namespace game
 		}
 	}
 
-	void AirBase::build(engine::TilePtr location, engine::ObjectManager* OM)
+	void AirBase::build(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)
 	{
 		auto unit = engine::unitFactory->create(ObjectType::Ranged, location, getOwner());
 		OM->addUnit(unit);

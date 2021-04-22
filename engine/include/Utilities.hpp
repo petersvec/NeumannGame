@@ -28,9 +28,8 @@ namespace engine
 
 	static std::pair<unsigned short, unsigned short> GetNearestFreeLocation(std::shared_ptr<game::Tile> location, std::shared_ptr<ObjectManager> objMan)
 	{
-		auto x = location->getPosition().x;
-		auto y = location->getPosition().y;
-
+		int x = location->getPosition().x/50;
+		int y = location->getPosition().y/50;
 		for (int k = 1; k < config->getMapWidth(); ++k)
 		{
 			for (int i = (-k); i <= k; ++i)
@@ -45,7 +44,7 @@ namespace engine
 							y + j < 0 ||
 							y + j >= config->getMapWidth())
 						{
-							continue;
+							break;
 						}
 
 						return std::make_pair(x + i, y + j);

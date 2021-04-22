@@ -24,7 +24,7 @@ namespace game
 			bool toUpdate,
 			PlayerState& playerState,
 			ObjectType objType) override;
-		void build(engine::TilePtr, engine::ObjectManager*);
+		void build(engine::TilePtr, std::shared_ptr<engine::ObjectManager> OM);
 
 		std::string getName() override;
 	};

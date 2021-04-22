@@ -25,7 +25,7 @@ namespace game
 							PlayerState& playerState,
 							ObjectType objType) override;
 		virtual void attack(std::shared_ptr<engine::IObject> object) override;
-		void workerBuild(engine::TilePtr, engine::ObjectManager*, int);
+		void workerBuild(engine::TilePtr, std::shared_ptr<engine::ObjectManager> OM, int);
 		std::string getName() override;
 	};
 }

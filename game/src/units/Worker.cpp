@@ -49,12 +49,11 @@ namespace game
 		object->setHp(object->getHp() - getAttackDamage());
 	}
 
-	void Worker::workerBuild(engine::TilePtr location, engine::ObjectManager* OM, int number)
+	void Worker::workerBuild(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, int number)
 	{
 		
 		if (number == 1) {
 			auto unit = engine::unitFactory->create(ObjectType::SpaceStation, location, getOwner());
-			std::cout << "hereee";
 			OM->addUnit(unit);
 		}
 		if (number == 2) {

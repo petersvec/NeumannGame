@@ -49,7 +49,7 @@ namespace engine
 		sf::View defaultView;
 		int changed = 1;
 		sf::RectangleShape m_guiRectangle;
-		ObjectManager testOM;
+		std::shared_ptr<ObjectManager> testOM;
 		std::shared_ptr<IObject> testPO;
 		bool unitIsSelected;
 		sf::RectangleShape selectedMapTile;

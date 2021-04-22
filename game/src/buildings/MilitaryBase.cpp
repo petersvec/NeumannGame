@@ -32,7 +32,7 @@ namespace game
 		}
 	}
 
-	void MilitaryBase::build(engine::TilePtr location, engine::ObjectManager* OM)
+	void MilitaryBase::build(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)
 	{
 		auto unit = engine::unitFactory->create(ObjectType::Melee, location, getOwner());
 		OM->addUnit(unit);
