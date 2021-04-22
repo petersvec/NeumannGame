@@ -36,8 +36,8 @@ namespace engine
 			{
 				for (int j = (-k); j <= k; ++j)
 				{	
-					if (objMan->findUnit(x + i, y + j, game::Ownership::Player1) == nullptr &&
-						objMan->findUnit(x + i, y + j, game::Ownership::Player2) == nullptr)
+					if (objMan->findUnit((x + i)*config->getTileSize(), (y + j)*config->getTileSize(), game::Ownership::Player1) == nullptr &&
+						objMan->findUnit((x + i)*config->getTileSize(), (y + j)*config->getTileSize(), game::Ownership::Player2) == nullptr)
 					{
 						if (x + i < 0 ||
 							x + i >= config->getMapHeight()||

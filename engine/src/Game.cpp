@@ -240,7 +240,7 @@ namespace engine
 								if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 								{
 									auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-									testPO->workerBuild(m_gameMap->getTile(tempx,tempy), testOM, 1);
+									testPO->workerBuild(m_gameMap->getTile(tempx, tempy), testOM, 1);
 								}
 						}
 						
