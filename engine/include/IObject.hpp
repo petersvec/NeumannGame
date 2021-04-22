@@ -123,5 +123,9 @@ namespace engine
 		{
 			return "null";
 		}
+		virtual void build(engine::TilePtr location, ObjectManager* OM)
+		{
+
+		}
 	};
 }

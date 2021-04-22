@@ -35,7 +35,7 @@ namespace engine
 		auto unit_1 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 10), game::Ownership::Player1);
 		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Ownership::Player2);
 
-		auto building_1 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(1, 1), game::Ownership::Player1);
+		auto building_1 = unitFactory->create(game::ObjectType::MilitaryBase, m_gameMap->getTile(1, 1), game::Ownership::Player1);
 		auto building_2 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(3, 3), game::Ownership::Player2);
 
 		testOM.addUnit(unit_1);
@@ -238,7 +238,7 @@ namespace engine
 						if (unitIsSelected) {
 							if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
 							{
-								//testPO->build();
+								testPO->build(testPO->getLocation(), &testOM);
 							}
 						}
 					}
