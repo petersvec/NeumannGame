@@ -62,4 +62,19 @@ namespace engine
 
 		m_player_state_text.setString(state_str);
 	}
+	void Gui::setMapText(int x, int y, engine::TilePtr tile)
+	{
+		m_mapText.setPosition(0, 0);
+		m_mapText.setCharacterSize(20);
+		m_mapText.setFont(font);
+		std::string mapstr = "";
+		mapstr = "X: " + std::to_string(x) + "\nY: " + std::to_string(y) + "\nType: " + tile->getTypeString() + "\nMinerals: " + std::to_string(tile->getMinerals());
+		m_mapText.setString(mapstr);
+
+
+	}
+	sf::Text Gui::getMapText()
+	{
+		return m_mapText;
+	}
 }

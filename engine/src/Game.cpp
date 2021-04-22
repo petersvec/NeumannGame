@@ -97,8 +97,8 @@ namespace engine
 			}
 
 			auto tile = m_gameMap->getTile(x, y);
-			str = "X: " + std::to_string(x) + "\nY: " + std::to_string(y) + "\nType: " + tile->getTypeString() + "\nMinerals: " + std::to_string(tile->getMinerals());
-			setDisplayText(&tileText, str);
+			m_gui.setMapText(x, y, tile);
+			tileText = m_gui.getMapText();
 			setClickedTile(x, y, &selectedMapTile);
 			//return m_gameMap->getTile(x, y);
 		}
@@ -109,18 +109,7 @@ namespace engine
 		rs->setPosition(x*tileSize, y*tileSize);
 	}
 
-	void Game::setDisplayText(sf::Text *text, sf::String str) {
 
-		// select the font
-		
-
-		// set the string to display
-		text->setString(str);
-		text->setCharacterSize(20); // in pixels
-		text->setFillColor(sf::Color::White);
-		text->setPosition(0, 0);
-		text->setFont(m_gui.GetFont());
-	}
 	
 	
 	const bool Game::isRunning() const
@@ -243,8 +232,7 @@ namespace engine
 
 								tempx = testPO->getPosition().x / tileSize + 1;
 								tempy = testPO->getPosition().y / tileSize;
-								testPO->build(m_gameMap->getTile(tempx, tempy), &testOM);
-								
+								testPO->build(m_gameMap->getTile(tempx, tempy), &testOM);	
 							}
 						}
 					}
