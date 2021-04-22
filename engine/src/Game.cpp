@@ -231,33 +231,33 @@ namespace engine
 								if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
 								{
 
-									//auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+									auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
 									
-									testPO->build(m_gameMap->getTile(tempx, tempy), testOM);
+									testPO->build(m_gameMap->getTile(pair.first, pair.second), testOM);
 									
 								}
 
 								if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 								{
-									//auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-									testPO->workerBuild(m_gameMap->getTile(tempx, tempy), testOM, 1);
+									auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+									testPO->workerBuild(m_gameMap->getTile(tempx,tempy), testOM, 1);
 								}
 						}
-
+						
 						if (m_event.key.code == sf::Keyboard::Num2)
 						{
 							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 							{
-								//auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(m_gameMap->getTile(tempx, tempy), testOM, 2);
+								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+								testPO->workerBuild(m_gameMap->getTile(tempx,tempy), testOM, 2);
 							}
 						}
 						if (m_event.key.code == sf::Keyboard::Num3)
 						{
 							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 							{
-								//auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(m_gameMap->getTile(tempx, tempy), testOM, 3);
+								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+								testPO->workerBuild(m_gameMap->getTile(tempx,tempy), testOM, 3);
 							}
 						}
 					}
