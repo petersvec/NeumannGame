@@ -36,18 +36,26 @@ namespace game
 
 			if (engine::TileDistance(getPosition(), i->getPosition()) <= getMoveSpeed())
 			{
-				attack(i);
+				attack(i, objMan);
 			}
 		}
 	}
 
-	void Tower::attack(std::shared_ptr<engine::IObject> object)
+	void Tower::attack(std::shared_ptr<engine::IObject> object, std::shared_ptr<engine::ObjectManager> objMan)
 	{
 		if (object == nullptr)
 		{
 			return;
 		}
-		object->setHp(object->getHp() - getAttackDamage());
+
+		if (object->getHp() > getAttackDamage())
+		{
+			object->setHp(object->getHp() - getAttackDamage());
+		}
+		else
+		{
+			objMan->removeUnit(object);
+		}
 	}
   
 	std::string Tower::getName()

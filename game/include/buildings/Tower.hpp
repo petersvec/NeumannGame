@@ -28,7 +28,7 @@ namespace game
 							bool toUpdate,
 							PlayerState& playerState,
 							ObjectType objType) override;
-		virtual void attack(std::shared_ptr<engine::IObject> object) override;
+		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) override;
 		virtual void move(engine::TilePtr, unsigned char, PlayerState&) override {}
 
 		std::string getName() override;
