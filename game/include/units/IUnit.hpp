@@ -33,16 +33,13 @@ namespace game
 		{}
 
 	public:
-		virtual void attack(std::shared_ptr<engine::IObject> object) = 0;
+		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) = 0;
 
 		virtual void move(engine::TilePtr tile, unsigned char tileSize, PlayerState& playerState)
 		{
 			if (engine::TileDistance(getPosition(), tile->getPosition()))
 			{
-				//move
 				setPosition(engine::ScreenToTile(tile->getPosition()));
-
-				//occupy new tile
 				playerState.updatePlayerLandConquered();
 				tile->setOccupied(getOwner());
 			}

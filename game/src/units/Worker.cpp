@@ -16,24 +16,7 @@ namespace game
 				   engine::IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Worker::update(std::shared_ptr<engine::Map> map,
-						std::shared_ptr<engine::ObjectManager> objMan,
-						bool toUpdate,
-						PlayerState& playerState,
-						ObjectType objType)
-	{
-		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
-		attack(objMan->findUnit(getPosition().x, getPosition().y, enemy));
-
-		if (toUpdate)
-		{
-			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
-			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			build(playerState, objType, location);
-		}
-	}
-
-	void Worker::attack(std::shared_ptr<engine::IObject> object)
+	void Worker::attack(std::shared_ptr<engine::IObject> object, std::shared_ptr<engine::ObjectManager> objMan)
 	{
 		if (object == nullptr)
 		{
@@ -45,7 +28,14 @@ namespace game
 			return;
 		}
 
-		object->setHp(object->getHp() - getAttackDamage());
+		if (object->getHp() > getAttackDamage())
+		{
+			object->setHp(object->getHp() - getAttackDamage());
+		}
+		else
+		{
+			objMan->removeUnit(object);
+		}
 	}
 
 	void Worker::build(PlayerState& playerState, ObjectType objType, engine::TilePtr location)
