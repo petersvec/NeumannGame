@@ -15,39 +15,25 @@ namespace game
 				   IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Ranged::update(std::shared_ptr<engine::Map> map,
-						std::shared_ptr<engine::ObjectManager> objMan,
-						bool toUpdate,
-						PlayerState& playerState,
-						ObjectType objType)
-	{
-		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
-
-		for (auto& i : objMan->getPlayerObjects())
-		{
-			if (i->getOwner() != enemy)
-			{
-				continue;
-			}
-
-			if (engine::TileDistance(getPosition(), i->getPosition()) <= getMoveSpeed())
-			{
-				attack(i);
-			}
-		}
-	}
-
-	void Ranged::attack(std::shared_ptr<engine::IObject> object)
+	void Ranged::attack(std::shared_ptr<engine::IObject> object, std::shared_ptr<engine::ObjectManager> objMan)
 	{
 		if (object == nullptr)
 		{
 			return;
 		}
-		object->setHp(object->getHp() - getAttackDamage() / 2);
+
+		if (object->getHp() > getAttackDamage())
+		{
+			object->setHp(object->getHp() - getAttackDamage());
+		}
+		else
+		{
+			objMan->removeUnit(object);
+		}
 	}
+
 	std::string Ranged::getName()
 	{
 		return "Ranged";
 	}
-	
 }
