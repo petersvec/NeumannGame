@@ -15,6 +15,7 @@ namespace engine
 		
 		void drawAll(sf::RenderWindow* window);
 		void addUnit(std::shared_ptr<IObject> unit);
+		void removeUnit(std::shared_ptr<IObject>);
 		std::shared_ptr<IObject> findUnit(int x, int y, game::Ownership player);
 		std::vector<std::shared_ptr<IObject>> getPlayerObjects();
 

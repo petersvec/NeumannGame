@@ -1,6 +1,7 @@
 #include "../include/ObjectManager.hpp"
 #include "../include/IObject.hpp"
 #include <iostream>
+#include <algorithm>
 
 namespace engine
 {
@@ -22,6 +23,11 @@ namespace engine
 	void ObjectManager::addUnit(std::shared_ptr<IObject> unit)
 	{
 		playerObjectVector.push_back(unit);
+	}
+
+	void ObjectManager::removeUnit(std::shared_ptr<IObject> unit)
+	{
+		playerObjectVector.erase(std::remove(playerObjectVector.begin(), playerObjectVector.end(), unit), playerObjectVector.end());
 	}
 
 	std::shared_ptr<IObject> ObjectManager::findUnit(int x, int y, game::Ownership player)
