@@ -32,6 +32,11 @@ namespace game
     }
 
 	public:
+		virtual void update(std::shared_ptr<engine::Map>,
+							std::shared_ptr<engine::ObjectManager>,
+							bool,
+							game::PlayerState&,
+							game::ObjectType) = 0;
 
 		void update(PlayerState& playerState, int iron, int copper, int silicon)
 		{

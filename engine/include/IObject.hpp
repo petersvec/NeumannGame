@@ -33,11 +33,6 @@ namespace engine
 		}
 
 	public:
-		virtual void update(std::shared_ptr<Map>,
-							std::shared_ptr<ObjectManager>,
-							bool,
-							game::PlayerState&,
-							game::ObjectType) = 0;
 
 		virtual void draw(sf::RenderWindow* window)
 		{
