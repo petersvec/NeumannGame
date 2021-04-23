@@ -6,11 +6,12 @@ namespace game
 	class Probe : public IUnit
 	{
 	private:
+		std::shared_ptr<engine::IObject> m_troop = nullptr;
+		bool m_isLoaded = false;
+		bool m_isDuplicating = false;
+		unsigned char m_duplicateTime = 5;
 
 	protected:
-		std::shared_ptr<engine::IObject> m_troop = nullptr;
-		bool m_loaded = false;
-		unsigned char m_duplicateTime = 5;
 
 	public:
 		Probe(unsigned short hp,
@@ -22,15 +23,18 @@ namespace game
 			  unsigned char armour,
 			  Ownership owner);
 
-		virtual void update(std::shared_ptr<engine::Map> map,
-							std::shared_ptr<engine::ObjectManager> objMan,
-							bool toUpdate,
-							PlayerState& playerState,
-							ObjectType objType) override;
-		virtual void attack(std::shared_ptr<engine::IObject> object) override;
+		unsigned char getDuplicateTime();
+		void setDuplicateTime(unsigned char);
+		bool isLoaded();
+		void setLoading(bool);
+		bool isDuplicating();
+		void setDuplicating(bool);
+		std::shared_ptr<engine::IObject> getTroop();
+		void setTroop(std::shared_ptr<engine::IObject>);
+		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) override;
 		void duplicate(std::shared_ptr<engine::ObjectManager>, std::shared_ptr<engine::Map>);
 		void load(std::shared_ptr<engine::IObject>);
-		void deploy();
+		void deploy(std::shared_ptr<engine::ObjectManager>, std::shared_ptr<engine::Map>);
 		std::string getName() override;
 	};
 }
