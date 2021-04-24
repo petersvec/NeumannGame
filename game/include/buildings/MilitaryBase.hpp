@@ -20,7 +20,7 @@ namespace game
 					 Ownership owner);
 
 		virtual void attack(std::shared_ptr<IObject>, std::shared_ptr<engine::ObjectManager>) override {};
-		virtual void move(engine::TilePtr, PlayerState&) override {};
+		virtual void move(engine::TilePtr, PlayerState&, PlayerState&, int*) override {};
 		virtual unsigned char getMoveSpeed() override { return 0; };
 		virtual unsigned char getRange() override { return 0; };
 		virtual void update(std::shared_ptr<engine::Map> map,

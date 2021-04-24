@@ -1,6 +1,5 @@
 #include "../../include/units/Worker.hpp"
 #include "../../../engine/include/UnitFactory.hpp"
-#include <iostream>
 
 namespace game
 {

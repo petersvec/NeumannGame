@@ -36,16 +36,27 @@ namespace game
 	public:
 		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) override = 0;
 
-		virtual void move(engine::TilePtr tile, PlayerState& playerState) override
+		virtual void move(engine::TilePtr tile, PlayerState& playerState1, PlayerState& playerState2, int* change) override
 		{
 			if ((engine::TileDistance(getPosition(), tile->getPosition())) <= getMoveSpeed())
 			{
 				setLocation(tile);
 
+				if (tile->getOccupied() == getOwner())
+				{
+					return;
+				}
+
 				if (tile->getTileType() != TileType::Void)
 				{
-					playerState.updatePlayerLandConquered();
+					if (tile->getOccupied() != Ownership::Unoccupied)
+					{
+						playerState2.updateLand(-1);
+					}
+
+					playerState1.updateLand(1);
 					tile->setOccupied(getOwner());
+					*change = 1;
 				}
 			}
 		}

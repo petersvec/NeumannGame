@@ -30,7 +30,7 @@ namespace game
 							PlayerState& playerState,
 							ObjectType objType) override;
 		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) override;
-		virtual void move(engine::TilePtr, PlayerState&) override {}
+		virtual void move(engine::TilePtr, PlayerState&, PlayerState&, int*) override {};
 
 		std::string getName() override;
 	};

@@ -206,20 +206,19 @@ namespace engine
 								int x = worldPos.x / tileSize;
 								int y = worldPos.y / tileSize;
 
+								IObjectPtr otherTileUnit = nullptr;
 								auto enemy = activePlayer;
-								auto enemyState = player1State;
 								if (activePlayer == game::Ownership::Player1)
 								{
 									enemy = game::Ownership::Player2;
-									enemyState = player2State;
+									otherTileUnit = testOM.findUnit(x * tileSize, y * tileSize, game::Ownership::Player2);
 								}
 								else
 								{
 									enemy = game::Ownership::Player1;
-									enemyState = player1State;
+									otherTileUnit = testOM.findUnit(x * tileSize, y * tileSize, game::Ownership::Player1);
 								}
 
-								auto otherTileUnit = testOM.findUnit(x * tileSize, y * tileSize, enemy);
 								auto tile = m_gameMap->getTile(x, y);
 								setClickedTile(x, y, &selectedMapTile);
 
@@ -227,8 +226,14 @@ namespace engine
 								{
 									if (otherTileUnit == nullptr)
 									{
-										testPO->move(tile, enemyState);
-										changed = 1;
+										if (activePlayer == game::Ownership::Player1)
+										{
+											testPO->move(tile, player1State, player2State, &changed);
+										}
+										else
+										{
+											testPO->move(tile, player2State, player1State, &changed);
+										}
 										endMove();
 										std::cout << "moved\n";
 									}
