@@ -228,6 +228,7 @@ namespace engine
 									if (otherTileUnit == nullptr)
 									{
 										testPO->move(tile, enemyState);
+										changed = 1;
 										endMove();
 										std::cout << "moved\n";
 									}

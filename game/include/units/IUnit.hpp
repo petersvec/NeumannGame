@@ -38,7 +38,7 @@ namespace game
 
 		virtual void move(engine::TilePtr tile, PlayerState& playerState) override
 		{
-			if ((engine::TileDistance(getPosition(), tile->getPosition())) < getMoveSpeed())
+			if ((engine::TileDistance(getPosition(), tile->getPosition())) <= getMoveSpeed())
 			{
 				setLocation(tile);
 
