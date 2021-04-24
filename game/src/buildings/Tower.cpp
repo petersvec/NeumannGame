@@ -7,6 +7,7 @@ namespace game
 				 const sf::Texture& texture,
 				 engine::TilePtr location,
 				 unsigned char moveSpeed,
+				 unsigned char range,
 				 unsigned char attackDamage,
 				 unsigned char armour,
 				 unsigned short ironCost,
@@ -15,7 +16,7 @@ namespace game
 				 Ownership owner)
 				 :
 				 IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner },
-				 IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
+				 IUnit{ hp, type, texture, location, moveSpeed, range, attackDamage, armour, owner },
 				 IObject{ hp, type, texture, location, owner }
 	{}
 
@@ -34,7 +35,7 @@ namespace game
 				continue;
 			}
 
-			if (engine::TileDistance(getPosition(), i->getPosition()) <= getMoveSpeed())
+			if (engine::TileDistance(getPosition(), i->getPosition()) <= getRange())
 			{
 				attack(i, objMan);
 			}

@@ -7,11 +7,12 @@ namespace game
 				 const sf::Texture& texture,
 				 engine::TilePtr location,
 				 unsigned char moveSpeed,
+				 unsigned char range,
 				 unsigned char attackDamage,
 				 unsigned char armour,
 				 Ownership owner)
 				 :
-				 IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
+				 IUnit{ hp, type, texture, location, moveSpeed, range, attackDamage, armour, owner },
 				 IObject{ hp, type, texture, location, owner }
 	{}
 
@@ -22,7 +23,7 @@ namespace game
 			return;
 		}
 
-		if (engine::TileDistance(getPosition(), object->getPosition()) > getMoveSpeed())
+		if (engine::TileDistance(getPosition(), object->getPosition()) > getRange())
 		{
 			return;
 		}

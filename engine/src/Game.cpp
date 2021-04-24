@@ -223,7 +223,7 @@ namespace engine
 								auto tile = m_gameMap->getTile(x, y);
 								setClickedTile(x, y, &selectedMapTile);
 
-								if (TileDistance(testPO->getPosition(), click) < testPO->getMoveSpeed())
+								if (TileDistance(testPO->getPosition(), click) <= testPO->getMoveSpeed())
 								{
 									if (otherTileUnit == nullptr)
 									{
@@ -233,13 +233,12 @@ namespace engine
 									}
 									else if (otherTileUnit->getOwner() == enemy)
 									{
-										testPO->attack(otherTileUnit, std::make_shared<ObjectManager>(testOM));
-										endMove();
-										std::cout << "attacked\n";
-									}
-									else
-									{
-										std::cout << "elsed\n";
+										if (TileDistance(testPO->getPosition(), click) <= testPO->getRange())
+										{
+											testPO->attack(otherTileUnit, std::make_shared<ObjectManager>(testOM));
+											endMove();
+											std::cout << "attacked\n";
+										}
 									}
 								}
 							}

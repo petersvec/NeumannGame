@@ -19,6 +19,7 @@ namespace game
 			  const sf::Texture& texture,
 			  engine::TilePtr location,
 			  unsigned char moveSpeed,
+			  unsigned char range,
 			  unsigned char attackDamage,
 			  unsigned char armour,
 			  Ownership owner);

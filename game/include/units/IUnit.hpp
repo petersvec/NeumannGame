@@ -10,24 +10,25 @@ namespace game
 	class IUnit : virtual public engine::IObject
 	{
 	private:
-
-	protected:
 		unsigned char m_moveSpeed;
+		unsigned char m_range;
 		unsigned char m_attackDamage;
 		unsigned char m_armour;
-		
-		
+
+	protected:
 		IUnit(unsigned short hp,
 			  ObjectType type,
 			  const sf::Texture& texture,
 			  engine::TilePtr location,
 			  unsigned char moveSpeed,
+			  unsigned char range,
 		  	  unsigned char attackDamage,
 			  unsigned char armour,
 			  Ownership owner)
 			  :
 			  IObject{ hp, type, texture, location, owner },
 			  m_moveSpeed{ moveSpeed },
+			  m_range{ range },
 			  m_attackDamage{ attackDamage },
 			  m_armour{ armour }
 		{}
@@ -54,6 +55,11 @@ namespace game
 			return m_moveSpeed;
 		}
 
+		unsigned char getRange() override
+		{
+			return m_range;
+		}
+
 		unsigned char getAttackDamage()
 		{
 			return m_attackDamage;
@@ -67,6 +73,11 @@ namespace game
 		void setMoveSpeed(unsigned char moveSpeed)
 		{
 			m_moveSpeed = moveSpeed;
+		}
+
+		void setRange(unsigned char range)
+		{
+			m_range = range;
 		}
 
 		void setAttackDamage(unsigned char attackDamage)
