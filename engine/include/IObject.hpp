@@ -33,6 +33,9 @@ namespace engine
 		}
 
 	public:
+		virtual void attack(std::shared_ptr<IObject>, std::shared_ptr<ObjectManager>) = 0;
+		virtual void move(TilePtr, game::PlayerState&) = 0;
+		virtual unsigned char getMoveSpeed() = 0;
 
 		virtual void draw(sf::RenderWindow* window)
 		{

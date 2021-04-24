@@ -33,19 +33,23 @@ namespace game
 		{}
 
 	public:
-		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) = 0;
+		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) override = 0;
 
-		virtual void move(engine::TilePtr tile, unsigned char tileSize, PlayerState& playerState)
+		virtual void move(engine::TilePtr tile, PlayerState& playerState) override
 		{
-			if (engine::TileDistance(getPosition(), tile->getPosition()))
+			if ((engine::TileDistance(getPosition(), tile->getPosition())) < getMoveSpeed())
 			{
-				setPosition(engine::ScreenToTile(tile->getPosition()));
-				playerState.updatePlayerLandConquered();
-				tile->setOccupied(getOwner());
+				setLocation(tile);
+
+				if (tile->getTileType() != TileType::Void)
+				{
+					playerState.updatePlayerLandConquered();
+					tile->setOccupied(getOwner());
+				}
 			}
 		}
 
-		unsigned char getMoveSpeed()
+		unsigned char getMoveSpeed() override
 		{
 			return m_moveSpeed;
 		}

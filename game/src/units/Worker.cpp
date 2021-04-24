@@ -1,5 +1,6 @@
 #include "../../include/units/Worker.hpp"
 #include "../../../engine/include/UnitFactory.hpp"
+#include <iostream>
 
 namespace game
 {
@@ -23,7 +24,7 @@ namespace game
 			return;
 		}
 		
-		if (engine::TileDistance(getPosition(), object->getPosition()) > getMoveSpeed())
+		if (engine::TileDistance(getPosition(), object->getPosition()) > (getMoveSpeed() / getMoveSpeed()))
 		{
 			return;
 		}
