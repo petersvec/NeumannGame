@@ -160,6 +160,17 @@ namespace engine
 				mine_obj->update(m_gameMap, testOM, true, GetCurrentPlayerState());
 			}
 		}
+
+		// WINNING CHECK
+		if (player1State.getLandConquered() >= (m_gameMap->getLand() / 2))
+		{
+			std::cout << "PLAYER 1 WIN!!!" << std::endl;
+		}
+
+		if (player2State.getLandConquered() >= (m_gameMap->getLand() / 2))
+		{
+			std::cout << "PLAYER 2 WIN!!!" << std::endl;
+		}
 	}
 	
 	const bool Game::isRunning() const
