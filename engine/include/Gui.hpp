@@ -22,6 +22,9 @@ namespace engine
 		sf::Text getMapText();
 		sf::Font& GetFont();
 	private:
+		std::string CreateBuildingCostString(const std::string& unit) const;
+		std::string CreateUnitCostString(std::shared_ptr<IObject> unit);
+	private:
 		sf::Text m_player_state_text;
 		sf::Text m_mapText;
 	};

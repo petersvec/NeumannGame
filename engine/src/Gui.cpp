@@ -1,6 +1,7 @@
 #include "../include/Gui.hpp"
 #include <SFML/Graphics/Text.hpp>
 #include <iostream>
+#include "../include/JsonParser.hpp"
 
 namespace engine
 {
@@ -17,8 +18,8 @@ namespace engine
 
 	void Gui::LoadObject(std::shared_ptr<IObject> object, game::Ownership activePlayer)
 	{
-		text.setPosition(300, 640);
-		text.setCharacterSize(20);
+		text.setPosition(150, 630);
+		text.setCharacterSize(15);
 		text.setFont(font);
 		std::string player;
 		if (object->getOwner() == game::Ownership::Player1)
@@ -35,11 +36,16 @@ namespace engine
 		str = str + player;
 		if (object->getIsBuilding() == true && object->getOwner()==activePlayer)
 		{
-			str = str + '\n' + "Press 1 to build an unit";
+			str = str + '\n' + "Press 1 to build an unit " + CreateUnitCostString(object);
 		}
 		if (object->getName() == "Worker" && object->getOwner() == activePlayer)
 		{
-			str = str + '\n' + "1 - SpaceStation | 2 - MilitaryBase | 3 - AirBase | 4 - Mine | 5 - Tower";
+			str += "\n";
+			str += "1: SpaceStation" + CreateBuildingCostString("SpaceStation") + " | ";
+			str += "2: MilitaryBase" + CreateBuildingCostString("MilitaryBase") + " | ";
+			str += "3: AirBase" + CreateBuildingCostString("AirBase") + "\n";
+			str += "4: Mine" + CreateBuildingCostString("Mine") + " | ";
+			str += "5: Tower" + CreateBuildingCostString("Tower");
 		}
 		text.setString(str);
 	}
@@ -52,6 +58,22 @@ namespace engine
 	sf::Text Gui::GetPlayerStateText()
 	{
 		return m_player_state_text;
+	}
+
+	std::string Gui::CreateUnitCostString(std::shared_ptr<IObject> unit)
+	{
+		if (unit->getType() != game::ObjectType::Tower && unit->getType() != game::ObjectType::Mine)
+		{
+			auto cost = config->GetCost(unit->getBuildUnitName());
+			return "(" + unit->getBuildUnitName() + " - " + std::to_string(cost["iron"]) + "/" + std::to_string(cost["copper"]) + "/" + std::to_string(cost["silicon"]) + ")";
+		}
+		else return "";
+	}
+
+	std::string Gui::CreateBuildingCostString(const std::string& unit) const
+	{
+		auto cost = config->GetCost(unit);
+		return "(" + std::to_string(cost["iron"]) + "/" + std::to_string(cost["copper"]) + "/" + std::to_string(cost["silicon"]) + ")";
 	}
 
 	void Gui::SetPlayerState(game::PlayerState& state)

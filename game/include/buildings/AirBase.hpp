@@ -28,7 +28,7 @@ namespace game
 			bool toUpdate,
 			PlayerState& playerState) override;
 		void build(engine::TilePtr, std::shared_ptr<engine::ObjectManager> OM);
-
+		virtual std::string getBuildUnitName() override;
 		std::string getName() override;
 	};
 }

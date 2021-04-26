@@ -126,6 +126,12 @@ namespace engine
 		{
 			return "null";
 		}
+
+		virtual std::string getBuildUnitName()
+		{
+			return "null";
+		}
+
 		virtual void build(game::PlayerState &playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)
 		{
 

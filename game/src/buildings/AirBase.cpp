@@ -43,4 +43,9 @@ namespace game
 	{
 		return "Air base";
 	}
+
+	std::string AirBase::getBuildUnitName()
+	{
+		return "Ranged";
+	}
 }

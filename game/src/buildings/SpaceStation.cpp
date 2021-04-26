@@ -39,6 +39,11 @@ namespace game
 		OM->addUnit(unit);
 	}
   
+	std::string SpaceStation::getBuildUnitName()
+	{
+		return "Worker";
+	}
+
 	std::string SpaceStation::getName()
 	{
 		return "Space station";

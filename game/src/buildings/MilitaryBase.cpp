@@ -45,4 +45,9 @@ namespace game
 	{
 		return "Military Base";
 	}
+
+	std::string MilitaryBase::getBuildUnitName()
+	{
+		return "Melee";
+	}
 }
