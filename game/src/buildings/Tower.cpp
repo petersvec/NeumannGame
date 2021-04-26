@@ -23,8 +23,7 @@ namespace game
 	void Tower::update(std::shared_ptr<engine::Map> map,
 					   std::shared_ptr<engine::ObjectManager> objMan,
 					   bool toUpdate,
-					   PlayerState& playerState,
-					   ObjectType objType)
+					   PlayerState& playerState)
 	{
 		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
 

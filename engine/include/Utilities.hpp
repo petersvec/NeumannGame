@@ -4,6 +4,7 @@
 #include "ObjectManager.hpp"
 #include "../../game/include/Tile.hpp"
 #include <memory>
+#include "../../game/include/ObjectType.hpp"
 
 namespace engine
 {
@@ -52,5 +53,19 @@ namespace engine
 				}
 			}
 		}
+	}
+
+	static std::string ObjectTypeToString(const game::ObjectType& type)
+	{
+		if (type == game::ObjectType::Melee) return "Melee";
+		else if (type == game::ObjectType::Probe) return "Probe";
+		else if (type == game::ObjectType::Ranged) return "Ranged";
+		else if (type == game::ObjectType::Worker) return "Worker";
+		else if (type == game::ObjectType::AirBase) return "AirBase";
+		else if (type == game::ObjectType::MilitaryBase) return "MilitaryBase";
+		else if (type == game::ObjectType::Mine) return "Mine";
+		else if (type == game::ObjectType::SpaceStation) return "SpaceStation";
+		else if (type == game::ObjectType::Tower) return "Tower";
+		else return "";
 	}
 }

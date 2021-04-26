@@ -1,5 +1,6 @@
 #include "../include/Game.hpp"
 #include <SFML/Window/Mouse.hpp>
+#include "../../game/include/buildings/IBuilding.hpp"
 
 namespace engine
 {
@@ -11,9 +12,9 @@ namespace engine
 		}
 
 		m_window = nullptr;
-		m_gameMap = new Map(config->getMapHeight(), config->getMapWidth());
+		m_gameMap = std::make_shared<Map>(config->getMapHeight(), config->getMapWidth());
 		MapGenerator* m_mapGenerator = new MapGenerator();
-		m_mapGenerator->generateMap(m_gameMap, config->getNumberOfPlanets(), config->getMaxRadiusOfPlanet());
+		m_mapGenerator->generateMap(m_gameMap.get(), config->getNumberOfPlanets(), config->getMaxRadiusOfPlanet());
 		m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
 		textures->LoadTextures();
 		m_renderMap.initMapTextures(*m_gameMap);
@@ -40,7 +41,7 @@ namespace engine
 		auto building_1 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(1, 3), game::Ownership::Player1);
 		auto building_2 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(10, 3), game::Ownership::Player2);
     
-    testOM = std::make_shared<engine::ObjectManager>();
+		testOM = std::make_shared<engine::ObjectManager>();
 
 		testOM->addUnit(unit_1);
 		testOM->addUnit(unit_2);
@@ -147,6 +148,29 @@ namespace engine
 			ActivePlayerText.setFillColor(sf::Color::Red);
 			m_gui.SetPlayerState(player1State);
 		}
+
+		// Global update po kazdom tahu:
+		// 1. Mining
+		// 2. Tower attacks
+		for (auto& obj : testOM->getPlayerObjects())
+		{
+			if (obj->getName() == "Mine" || obj->getName() == "Tower")
+			{
+				auto mine_obj = dynamic_cast<game::IBuilding*>(obj.get());
+				mine_obj->update(m_gameMap, testOM, true, GetCurrentPlayerState());
+			}
+		}
+
+		// WINNING CHECK
+		if (player1State.getLandConquered() >= (m_gameMap->getLand() / 2))
+		{
+			std::cout << "PLAYER 1 WIN!!!" << std::endl;
+		}
+
+		if (player2State.getLandConquered() >= (m_gameMap->getLand() / 2))
+		{
+			std::cout << "PLAYER 2 WIN!!!" << std::endl;
+		}
 	}
 	
 	const bool Game::isRunning() const
@@ -210,12 +234,12 @@ namespace engine
 								if (activePlayer == game::Ownership::Player1)
 								{
 									enemy = game::Ownership::Player2;
-									otherTileUnit = testOM.findUnit(x * tileSize, y * tileSize, game::Ownership::Player2);
+									otherTileUnit = testOM->findUnit(x * tileSize, y * tileSize, game::Ownership::Player2);
 								}
 								else
 								{
 									enemy = game::Ownership::Player1;
-									otherTileUnit = testOM.findUnit(x * tileSize, y * tileSize, game::Ownership::Player1);
+									otherTileUnit = testOM->findUnit(x * tileSize, y * tileSize, game::Ownership::Player1);
 								}
 
 								auto tile = m_gameMap->getTile(x, y);
@@ -240,7 +264,7 @@ namespace engine
 									{
 										if (TileDistance(testPO->getPosition(), click) <= testPO->getRange())
 										{
-											testPO->attack(otherTileUnit, std::make_shared<ObjectManager>(testOM));
+											testPO->attack(otherTileUnit, testOM);
 											endMove();
 											std::cout << "attacked\n";
 										}
@@ -272,26 +296,27 @@ namespace engine
 						std::cout << (int)activePlayer;
 					}
 
-					if (unitIsSelected) {
+					// REFAKTOR PLS
+					if (unitIsSelected && testPO != nullptr) {
 						tempx = testPO->getPosition().x / tileSize + 1;
 						tempy = testPO->getPosition().y / tileSize;
 						
 						if (m_event.key.code == sf::Keyboard::Num1)
 						{
-			
 								if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
 								{
-
-									auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-									
-									testPO->build(m_gameMap->getTile(pair.first, pair.second), testOM);
-									
+									auto building = dynamic_cast<game::IBuilding*>(testPO.get());
+									building->update(m_gameMap, testOM, true, GetCurrentPlayerState());
+									endMove();
+									return;
 								}
 
 								if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 								{
 									auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-									testPO->workerBuild(m_gameMap->getTile(tempx, tempy), testOM, 1);
+									testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::SpaceStation);
+									endMove();
+									return;
 								}
 						}
 						
@@ -300,17 +325,45 @@ namespace engine
 							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 							{
 								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(m_gameMap->getTile(tempx,tempy), testOM, 2);
+								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::MilitaryBase);
+								endMove();
+								return;
 							}
 						}
+
 						if (m_event.key.code == sf::Keyboard::Num3)
 						{
 							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 							{
 								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(m_gameMap->getTile(tempx,tempy), testOM, 3);
+								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::AirBase);
+								endMove();
+								return;
 							}
 						}
+
+						if (m_event.key.code == sf::Keyboard::Num4)
+						{
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							{
+								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::Mine);
+								endMove();
+								return;
+							}
+						}
+
+						if (m_event.key.code == sf::Keyboard::Num5)
+						{
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							{
+								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::Tower);
+								endMove();
+								return;
+							}
+						}
+
 					}
 			default:
 				break;
@@ -389,5 +442,17 @@ namespace engine
 		m_window->setView(m_view);
 		m_window->draw(selectedMapTile);
 		m_window->display();
+	}
+
+	game::PlayerState &Game::GetCurrentPlayerState()
+	{
+		if (activePlayer == game::Ownership::Player1)
+		{
+			return player1State;
+		}
+		else
+		{
+			return player2State;
+		}
 	}
 }

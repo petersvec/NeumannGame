@@ -21,17 +21,16 @@ namespace game
 	void MilitaryBase::update(std::shared_ptr<engine::Map> map,
 		std::shared_ptr<engine::ObjectManager> objMan,
 		bool toUpdate,
-		PlayerState& playerState,
-		ObjectType objType)
+		PlayerState& playerState)
 	{
 		if (toUpdate)
 		{
-			if (playerState.checkBalance(200, 200, 200))
+			if (playerState.checkBalance(getIronCost(), getCopperCost(), getSiliconCost()))
 			{
-				playerState.updatePlayerBalances(-200, -200, -200);
+				playerState.updatePlayerBalances(-getIronCost(), -getCopperCost(), -getSiliconCost());
 				auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 				engine::TilePtr location = map->getTile(xy.first, xy.second);
-				makeMelee(location);
+				build(location, objMan);
 			}
 		}
 	}
@@ -45,5 +44,10 @@ namespace game
 	std::string MilitaryBase::getName()
 	{
 		return "Military Base";
+	}
+
+	std::string MilitaryBase::getBuildUnitName()
+	{
+		return "Melee";
 	}
 }

@@ -19,8 +19,7 @@ namespace game
 	void Mine::update(std::shared_ptr<engine::Map> map,
 					  std::shared_ptr<engine::ObjectManager> objMan,
 					  bool toUpdate,
-					  PlayerState& playerState,
-					  ObjectType objType)
+					  PlayerState& playerState)
 	{
 		mine(playerState);
 	}

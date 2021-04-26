@@ -19,6 +19,10 @@ namespace engine
 
 		void setConfigType(const std::string&);
 
+		std::map<std::string, std::map<std::string, int>> m_costs;
+
+		void parseCosts();
+
 	public:
 
 		bool setGameConfig(const std::string&, const std::string&);
@@ -29,5 +33,6 @@ namespace engine
 		unsigned char getMaxRadiusOfPlanet();
 		unsigned char getTileSize();
 		std::map<std::string, std::string> getTextures();
+		std::map<std::string, int> GetCost(const std::string& unit);
 	};
 }

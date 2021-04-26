@@ -1,5 +1,6 @@
 #include "../../include/units/Worker.hpp"
 #include "../../../engine/include/UnitFactory.hpp"
+#include "../../../engine/include/JsonParser.hpp"
 #include <iostream>
 
 namespace game
@@ -40,54 +41,75 @@ namespace game
 		}
 	}
 
-	void Worker::build(PlayerState& playerState, ObjectType objType, engine::TilePtr location)
+	void Worker::build(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)
 	{
-		if (objType == ObjectType::AirBase ||
-			objType == ObjectType::MilitaryBase ||
-			objType == ObjectType::Tower)
+
+	}
+
+	void Worker::workerBuild(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, game::ObjectType type)
+	{
+		if (type == ObjectType::AirBase)
 		{
-			if (!playerState.checkBalance(500, 500, 500))
+			auto cost = engine::config->GetCost("AirBase");
+
+			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
 				return;
 			}
+
+			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
-		else if (objType == ObjectType::Mine)
+		else if(type == ObjectType::MilitaryBase)
 		{
-			if (!playerState.checkBalance(200, 200, 200))
+			auto cost = engine::config->GetCost("MilitaryBase");
+
+			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
 				return;
 			}
+
+			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
-		else if (objType == ObjectType::SpaceStation)
+		else if(type == ObjectType::Tower)
 		{
-			if (!playerState.checkBalance(2000, 2000, 2000))
+			auto cost = engine::config->GetCost("Tower");
+
+			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
 				return;
 			}
+
+			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
+		}
+		else if (type == ObjectType::Mine)
+		{
+			auto cost = engine::config->GetCost("Mine");
+
+			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
+			{
+				return;
+			}
+
+			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
+		}
+		else if (type == ObjectType::SpaceStation)
+		{
+			auto cost = engine::config->GetCost("SpaceStation");
+
+			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
+			{
+				return;
+			}
+
+			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
 		else
 		{
 			return;
 		}
-		engine::unitFactory->create(objType, location, getOwner());
-  }
-  /*
-	void Worker::workerBuild(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, int number)
-	{
-		
-		if (number == 1) {
-			auto unit = engine::unitFactory->create(ObjectType::SpaceStation, location, getOwner());
-			OM->addUnit(unit);
-		}
-		if (number == 2) {
-			auto unit = engine::unitFactory->create(ObjectType::MilitaryBase, location, getOwner());
-			OM->addUnit(unit);
-		}
-		if (number == 3) {
-			auto unit = engine::unitFactory->create(ObjectType::AirBase, location, getOwner());
-			OM->addUnit(unit);
-		}
-	}*/
+		auto unit = engine::unitFactory->create(type, location, getOwner());
+		OM->addUnit(unit);
+	}
   
 	std::string Worker::getName()
 	{
