@@ -1,5 +1,6 @@
 #include "../../include/units/Worker.hpp"
 #include "../../../engine/include/UnitFactory.hpp"
+#include "../../../engine/include/JsonParser.hpp"
 #include <iostream>
 
 namespace game
@@ -47,33 +48,60 @@ namespace game
 
 	void Worker::workerBuild(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, game::ObjectType type)
 	{
-		if (type == ObjectType::AirBase ||
-			type == ObjectType::MilitaryBase ||
-			type == ObjectType::Tower)
+		if (type == ObjectType::AirBase)
 		{
-			if (!playerState.checkBalance(500, 500, 500))
+			auto cost = engine::config->GetCost("AirBase");
+
+			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
 				return;
 			}
 
-			playerState.updatePlayerBalances(-500, -500, -500);
+			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
+		}
+		else if(type == ObjectType::MilitaryBase)
+		{
+			auto cost = engine::config->GetCost("MilitaryBase");
+
+			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
+			{
+				return;
+			}
+
+			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
+		}
+		else if(type == ObjectType::Tower)
+		{
+			auto cost = engine::config->GetCost("Tower");
+
+			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
+			{
+				return;
+			}
+
+			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
 		else if (type == ObjectType::Mine)
 		{
-			if (!playerState.checkBalance(200, 200, 200))
+			auto cost = engine::config->GetCost("Mine");
+
+			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
 				return;
 			}
-			playerState.updatePlayerBalances(-200, -200, -200);
+
+			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
 		else if (type == ObjectType::SpaceStation)
 		{
-			if (!playerState.checkBalance(2000, 2000, 2000))
+			auto cost = engine::config->GetCost("SpaceStation");
+
+			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
 				return;
 			}
-			
-			playerState.updatePlayerBalances(-2000, -2000, -2000);
+
+			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
 		else
 		{

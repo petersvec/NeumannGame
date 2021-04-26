@@ -32,6 +32,8 @@ namespace engine
             return false;
         }
 
+        parseCosts();
+        
         return true;
     }
 
@@ -153,5 +155,34 @@ namespace engine
             }
         }
         return texturePairs;
+    }
+
+    void JsonParser::parseCosts()
+    {
+        if (m_gameConfigFile.HasMember("Costs"))
+        {
+            for (auto& c : m_gameConfigFile["Costs"].GetObject())
+            {
+                auto unit_name = c.name.GetString();
+                
+                int i = 0;
+                for (auto& m : c.value.GetArray())
+                {
+                    auto value = m.GetInt();
+
+                    if(i == 0) m_costs[unit_name]["iron"] = value;
+                    if(i == 1) m_costs[unit_name]["copper"] = value;
+                    if(i == 2) m_costs[unit_name]["silicon"] = value;
+
+                    i += 1;
+                }
+            }
+        }
+    }
+
+    std::map<std::string, int> JsonParser::GetCost(const std::string& unit)
+    {
+        // add check
+        return m_costs[unit];
     }
 }
