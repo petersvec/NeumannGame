@@ -21,8 +21,7 @@ namespace game
 	void MilitaryBase::update(std::shared_ptr<engine::Map> map,
 		std::shared_ptr<engine::ObjectManager> objMan,
 		bool toUpdate,
-		PlayerState& playerState,
-		ObjectType objType)
+		PlayerState& playerState)
 	{
 		if (toUpdate)
 		{

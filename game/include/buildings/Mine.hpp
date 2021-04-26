@@ -27,8 +27,7 @@ namespace game
 		virtual void update(std::shared_ptr<engine::Map> map,
 							std::shared_ptr<engine::ObjectManager> objMan,
 							bool toUpdate,
-							PlayerState& playerState,
-							ObjectType objType) override;
+							PlayerState& playerState) override;
 		void mine(PlayerState&);
 
 		unsigned short getMiningCapacity()

@@ -31,7 +31,7 @@ namespace engine
 		
 		sf::RenderWindow* m_window;
 		sf::Event m_event;
-		Map* m_gameMap;
+		std::shared_ptr<Map> m_gameMap;
 		MapGenerator m_mapGenerator;
 		sf::Sprite m_frame;
 		sf::VideoMode m_videoMode;

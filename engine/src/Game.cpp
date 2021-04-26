@@ -1,5 +1,7 @@
 #include "../include/Game.hpp"
 #include <SFML/Window/Mouse.hpp>
+#include "../../game/include/buildings/IBuilding.hpp"
+#include "../../game/include/buildings/SpaceStation.hpp"
 
 namespace engine
 {
@@ -11,9 +13,9 @@ namespace engine
 		}
 
 		m_window = nullptr;
-		m_gameMap = new Map(config->getMapHeight(), config->getMapWidth());
+		m_gameMap = std::make_shared<Map>(config->getMapHeight(), config->getMapWidth());
 		MapGenerator* m_mapGenerator = new MapGenerator();
-		m_mapGenerator->generateMap(m_gameMap, config->getNumberOfPlanets(), config->getMaxRadiusOfPlanet());
+		m_mapGenerator->generateMap(m_gameMap.get(), config->getNumberOfPlanets(), config->getMaxRadiusOfPlanet());
 		m_renderTexture.create(m_gameMap->getWidth() * tileSize, m_gameMap->getHeight() * tileSize);
 		textures->LoadTextures();
 		m_renderMap.initMapTextures(*m_gameMap);
@@ -281,8 +283,8 @@ namespace engine
 			
 								if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
 								{
-									auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-									testPO->build(GetCurrentPlayerState(), m_gameMap->getTile(pair.first, pair.second), testOM);
+									auto building = dynamic_cast<game::IBuilding*>(testPO.get());
+									building->update(m_gameMap, testOM, true, GetCurrentPlayerState());
 								}
 
 								if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
