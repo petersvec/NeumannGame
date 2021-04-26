@@ -40,54 +40,48 @@ namespace game
 		}
 	}
 
-	void Worker::build(PlayerState& playerState, ObjectType objType, engine::TilePtr location)
+	void Worker::build(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)
 	{
-		if (objType == ObjectType::AirBase ||
-			objType == ObjectType::MilitaryBase ||
-			objType == ObjectType::Tower)
+
+	}
+
+	void Worker::workerBuild(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, game::ObjectType type)
+	{
+		if (type == ObjectType::AirBase ||
+			type == ObjectType::MilitaryBase ||
+			type == ObjectType::Tower)
 		{
 			if (!playerState.checkBalance(500, 500, 500))
 			{
 				return;
 			}
+
+			playerState.updatePlayerBalances(-500, -500, -500);
 		}
-		else if (objType == ObjectType::Mine)
+		else if (type == ObjectType::Mine)
 		{
 			if (!playerState.checkBalance(200, 200, 200))
 			{
 				return;
 			}
+			playerState.updatePlayerBalances(-200, -200, -200);
 		}
-		else if (objType == ObjectType::SpaceStation)
+		else if (type == ObjectType::SpaceStation)
 		{
 			if (!playerState.checkBalance(2000, 2000, 2000))
 			{
 				return;
 			}
+			
+			playerState.updatePlayerBalances(-2000, -2000, -2000);
 		}
 		else
 		{
 			return;
 		}
-		engine::unitFactory->create(objType, location, getOwner());
-  }
-  /*
-	void Worker::workerBuild(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, int number)
-	{
-		
-		if (number == 1) {
-			auto unit = engine::unitFactory->create(ObjectType::SpaceStation, location, getOwner());
-			OM->addUnit(unit);
-		}
-		if (number == 2) {
-			auto unit = engine::unitFactory->create(ObjectType::MilitaryBase, location, getOwner());
-			OM->addUnit(unit);
-		}
-		if (number == 3) {
-			auto unit = engine::unitFactory->create(ObjectType::AirBase, location, getOwner());
-			OM->addUnit(unit);
-		}
-	}*/
+		auto unit = engine::unitFactory->create(type, location, getOwner());
+		OM->addUnit(unit);
+	}
   
 	std::string Worker::getName()
 	{

@@ -31,7 +31,7 @@ namespace game
 				playerState.updatePlayerBalances(-200, -200, -200);
 				auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 				engine::TilePtr location = map->getTile(xy.first, xy.second);
-				makeMelee(location);
+				build(location, objMan);
 			}
 		}
 	}

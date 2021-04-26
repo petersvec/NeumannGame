@@ -59,6 +59,8 @@ namespace engine
 		Gui m_gui;
 		sf::Sprite m_cursor;
 		unsigned short tempx, tempy;
+	private:
+		game::PlayerState &GetCurrentPlayerState();
 
 	public:
 		game::Ownership activePlayer = game::Ownership::Player1;

@@ -126,11 +126,11 @@ namespace engine
 		{
 			return "null";
 		}
-		virtual void build(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)
+		virtual void build(game::PlayerState &playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)
 		{
 
 		}
-		virtual void workerBuild(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, int number) {
+		virtual void workerBuild(game::PlayerState &playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, game::ObjectType type) {
 		}
 	};
 }
