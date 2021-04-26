@@ -8,6 +8,10 @@
 
 namespace engine
 {
+	class IObject;
+
+	using IObjectPtr = std::shared_ptr<IObject>;
+
 	class IObject
 	{
 	private:
@@ -33,11 +37,10 @@ namespace engine
 		}
 
 	public:
-		virtual void update(std::shared_ptr<Map>,
-							std::shared_ptr<ObjectManager>,
-							bool,
-							game::PlayerState&,
-							game::ObjectType) = 0;
+		virtual void attack(std::shared_ptr<IObject>, std::shared_ptr<ObjectManager>) = 0;
+		virtual void move(TilePtr, game::PlayerState&, game::PlayerState&, int*) = 0;
+		virtual unsigned char getMoveSpeed() = 0;
+		virtual unsigned char getRange() = 0;
 
 		virtual void draw(sf::RenderWindow* window)
 		{

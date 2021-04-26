@@ -32,17 +32,24 @@ namespace engine
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
 	
-		auto unit_1 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(12, 12), game::Ownership::Player1);
-		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Ownership::Player2);
+		auto unit_1 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(1, 1), game::Ownership::Player1);
+		auto unit_2 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(10, 1), game::Ownership::Player2);
+		auto unit_3 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(1, 2), game::Ownership::Player1);
+		auto unit_4 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(10, 2), game::Ownership::Player2);
 
-		auto building_1 = unitFactory->create(game::ObjectType::MilitaryBase, m_gameMap->getTile(5, 5), game::Ownership::Player1);
-		auto building_2 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(3, 3), game::Ownership::Player2);
-		testOM = std::make_shared<engine::ObjectManager>();
+		auto building_1 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(1, 3), game::Ownership::Player1);
+		auto building_2 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(10, 3), game::Ownership::Player2);
+    
+    testOM = std::make_shared<engine::ObjectManager>();
+
 		testOM->addUnit(unit_1);
 		testOM->addUnit(unit_2);
+		testOM->addUnit(unit_3);
+		testOM->addUnit(unit_4);
+
 		testOM->addUnit(building_1);
 		testOM->addUnit(building_2);
-
+    
 		clickMap(0, 0);
 
 		m_cursor.setTexture(*textures->getTexture("cursor"));
@@ -82,10 +89,11 @@ namespace engine
 		{
 			x = x / tileSize;
 			y = y / tileSize;
-			
+
 			m_gui.text.setString("");
+      
 			testPO=testOM->findUnit(x * tileSize, y * tileSize, activePlayer);
-			
+
 			if (testPO != nullptr)
 			{
 				m_gui.LoadObject(testPO, activePlayer);
@@ -101,15 +109,45 @@ namespace engine
 			tileText = m_gui.getMapText();
 			setClickedTile(x, y, &selectedMapTile);
 		}
-		
 	}
+
 	void Game::setClickedTile(int x, int y, sf::RectangleShape* rs)
 	{
 		rs->setPosition(x*tileSize, y*tileSize);
 	}
 
+  void Game::setDisplayText(sf::Text *text, sf::String str) 
+  { 
+		// set the string to display
+		text->setString(str);
+		text->setCharacterSize(20); // in pixels
+		text->setFillColor(sf::Color::White);
+		text->setPosition(0, 0);
+		text->setFont(m_gui.GetFont());
+	}
 
-	
+	void Game::endMove()
+	{
+		m_gui.text.setString("");
+		if (activePlayer == game::Ownership::Player1)
+		{
+			unitIsSelected = false;
+			testPO = nullptr;
+			activePlayer = game::Ownership::Player2;
+			ActivePlayerText.setString("Player 2");
+			ActivePlayerText.setFillColor(sf::Color::Blue);
+			m_gui.SetPlayerState(player2State);
+		}
+		else
+		{
+			unitIsSelected = false;
+			testPO = nullptr;
+			activePlayer = game::Ownership::Player1;
+			ActivePlayerText.setString("Player 1");
+			ActivePlayerText.setFillColor(sf::Color::Red);
+			m_gui.SetPlayerState(player1State);
+		}
+	}
 	
 	const bool Game::isRunning() const
 	{
@@ -135,9 +173,8 @@ namespace engine
 				break;
 
 			case sf::Event::MouseButtonPressed:				//click
-				if (m_event.mouseButton.button == sf::Mouse::Left) {
-
-
+				if (m_event.mouseButton.button == sf::Mouse::Left)
+				{
 					pixelPos = sf::Mouse::getPosition(*m_window);
 					worldPos = m_window->mapPixelToCoords(pixelPos);
 
@@ -155,46 +192,60 @@ namespace engine
 
 				if (m_event.mouseButton.button == sf::Mouse::Right)
 				{
-					if (unitIsSelected) {
+					if (unitIsSelected && testPO->getOwner() == activePlayer)
+					{
 						pixelPos = sf::Mouse::getPosition(*m_window);
 						worldPos = m_window->mapPixelToCoords(pixelPos);
-						if (testPO->getIsBuilding() == false  && testPO->getOwner() == activePlayer)
+						auto click = TileToScreen(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
+
+						if (testPO->getIsBuilding() == false)
 						{
-							testPO->setPosition(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
-							
-							int posx = worldPos.x / tileSize;		//problem s celociselnym delenim
-							int posy = worldPos.y / tileSize;
-							selectedMapTile.setPosition(posx*tileSize, posy*tileSize);
+							if (worldPos.x >= 0 && worldPos.y >= 0 && worldPos.x < tileSize * (m_gameMap->getWidth()) && worldPos.y < tileSize * m_gameMap->getHeight())
+							{
+								int x = worldPos.x / tileSize;
+								int y = worldPos.y / tileSize;
 
-							// obsadzovanie (do samostatnej funkcie)
-							//////
-							auto tile = m_gameMap->getTile(posx, posy);
-							if (tile->getTileType() != game::TileType::Void)
-							{
-								tile->setOccupied(activePlayer);
-								if (activePlayer == game::Ownership::Player1) player1State.updateLand(1);
-								if (activePlayer == game::Ownership::Player2) player2State.updateLand(1);
-								changed = 1; // <- prekreslit treba mapu ofc
-							}
-							//////
+								IObjectPtr otherTileUnit = nullptr;
+								auto enemy = activePlayer;
+								if (activePlayer == game::Ownership::Player1)
+								{
+									enemy = game::Ownership::Player2;
+									otherTileUnit = testOM.findUnit(x * tileSize, y * tileSize, game::Ownership::Player2);
+								}
+								else
+								{
+									enemy = game::Ownership::Player1;
+									otherTileUnit = testOM.findUnit(x * tileSize, y * tileSize, game::Ownership::Player1);
+								}
 
-							if (activePlayer == game::Ownership::Player1)
-							{
-								unitIsSelected = false;
-								testPO = nullptr;
-								activePlayer = game::Ownership::Player2;
-								ActivePlayerText.setString("Player 2");
-								ActivePlayerText.setFillColor(sf::Color::Blue);
-								m_gui.SetPlayerState(player2State);
-							}
-							else
-							{
-								unitIsSelected = false;
-								testPO = nullptr;
-								activePlayer = game::Ownership::Player1;
-								ActivePlayerText.setString("Player 1");
-								ActivePlayerText.setFillColor(sf::Color::Red);
-								m_gui.SetPlayerState(player1State);
+								auto tile = m_gameMap->getTile(x, y);
+								setClickedTile(x, y, &selectedMapTile);
+
+								if (TileDistance(testPO->getPosition(), click) <= testPO->getMoveSpeed())
+								{
+									if (otherTileUnit == nullptr)
+									{
+										if (activePlayer == game::Ownership::Player1)
+										{
+											testPO->move(tile, player1State, player2State, &changed);
+										}
+										else
+										{
+											testPO->move(tile, player2State, player1State, &changed);
+										}
+										endMove();
+										std::cout << "moved\n";
+									}
+									else if (otherTileUnit->getOwner() == enemy)
+									{
+										if (TileDistance(testPO->getPosition(), click) <= testPO->getRange())
+										{
+											testPO->attack(otherTileUnit, std::make_shared<ObjectManager>(testOM));
+											endMove();
+											std::cout << "attacked\n";
+										}
+									}
+								}
 							}
 						}
 					}

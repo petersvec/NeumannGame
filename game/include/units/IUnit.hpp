@@ -10,47 +10,65 @@ namespace game
 	class IUnit : virtual public engine::IObject
 	{
 	private:
-
-	protected:
 		unsigned char m_moveSpeed;
+		unsigned char m_range;
 		unsigned char m_attackDamage;
 		unsigned char m_armour;
-		
-		
+
+	protected:
 		IUnit(unsigned short hp,
 			  ObjectType type,
 			  const sf::Texture& texture,
 			  engine::TilePtr location,
 			  unsigned char moveSpeed,
+			  unsigned char range,
 		  	  unsigned char attackDamage,
 			  unsigned char armour,
 			  Ownership owner)
 			  :
 			  IObject{ hp, type, texture, location, owner },
 			  m_moveSpeed{ moveSpeed },
+			  m_range{ range },
 			  m_attackDamage{ attackDamage },
 			  m_armour{ armour }
 		{}
 
 	public:
-		virtual void attack(std::shared_ptr<engine::IObject> object) = 0;
+		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) override = 0;
 
-		virtual void move(engine::TilePtr tile, unsigned char tileSize, PlayerState& playerState)
+		virtual void move(engine::TilePtr tile, PlayerState& playerState1, PlayerState& playerState2, int* change) override
 		{
-			if (engine::TileDistance(getPosition(), tile->getPosition()))
+			if ((engine::TileDistance(getPosition(), tile->getPosition())) <= getMoveSpeed())
 			{
-				//move
-				setPosition(engine::ScreenToTile(tile->getPosition()));
+				setLocation(tile);
 
-				//occupy new tile
-				playerState.updatePlayerLandConquered();
-				tile->setOccupied(getOwner());
+				if (tile->getOccupied() == getOwner())
+				{
+					return;
+				}
+
+				if (tile->getTileType() != TileType::Void)
+				{
+					if (tile->getOccupied() != Ownership::Unoccupied)
+					{
+						playerState2.updateLand(-1);
+					}
+
+					playerState1.updateLand(1);
+					tile->setOccupied(getOwner());
+					*change = 1;
+				}
 			}
 		}
 
-		unsigned char getMoveSpeed()
+		unsigned char getMoveSpeed() override
 		{
 			return m_moveSpeed;
+		}
+
+		unsigned char getRange() override
+		{
+			return m_range;
 		}
 
 		unsigned char getAttackDamage()
@@ -66,6 +84,11 @@ namespace game
 		void setMoveSpeed(unsigned char moveSpeed)
 		{
 			m_moveSpeed = moveSpeed;
+		}
+
+		void setRange(unsigned char range)
+		{
+			m_range = range;
 		}
 
 		void setAttackDamage(unsigned char attackDamage)

@@ -70,6 +70,7 @@ namespace engine
 		Game();
 		virtual ~Game();
 
+		void endMove();
 		void clickMap(int, int);
 		void setClickedTile(int, int, sf::RectangleShape*);
 		void setDisplayText(sf::Text*, sf::String);

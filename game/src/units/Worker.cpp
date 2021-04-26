@@ -9,46 +9,69 @@ namespace game
 				   const sf::Texture& texture,
 				   engine::TilePtr location,
 				   unsigned char moveSpeed,
+				   unsigned char range,
 				   unsigned char attackDamage,
 				   unsigned char armour,
 				   Ownership owner)
 				   :
-				   IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner},
+				   IUnit{ hp, type, texture, location, moveSpeed, range, attackDamage, armour, owner},
 				   engine::IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Worker::update(std::shared_ptr<engine::Map> map,
-						std::shared_ptr<engine::ObjectManager> objMan,
-						bool toUpdate,
-						PlayerState& playerState,
-						ObjectType objType)
-	{
-		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
-		attack(objMan->findUnit(getPosition().x, getPosition().y, enemy));
-
-		if (toUpdate)
-		{
-			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
-			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			//build(objType, location);
-		}
-	}
-
-	void Worker::attack(std::shared_ptr<engine::IObject> object)
-	{
+	void Worker::attack(std::shared_ptr<engine::IObject> object, std::shared_ptr<engine::ObjectManager> objMan)
+  	{
 		if (object == nullptr)
 		{
 			return;
 		}
 		
-		if (engine::TileDistance(getPosition(), object->getPosition()) > getMoveSpeed())
+		if (engine::TileDistance(getPosition(), object->getPosition()) > getRange())
 		{
 			return;
 		}
 
-		object->setHp(object->getHp() - getAttackDamage());
+		if (object->getHp() > getAttackDamage())
+		{
+			object->setHp(object->getHp() - getAttackDamage());
+		}
+		else
+		{
+			objMan->removeUnit(object);
+		}
 	}
 
+	void Worker::build(PlayerState& playerState, ObjectType objType, engine::TilePtr location)
+	{
+		if (objType == ObjectType::AirBase ||
+			objType == ObjectType::MilitaryBase ||
+			objType == ObjectType::Tower)
+		{
+			if (!playerState.checkBalance(500, 500, 500))
+			{
+				return;
+			}
+		}
+		else if (objType == ObjectType::Mine)
+		{
+			if (!playerState.checkBalance(200, 200, 200))
+			{
+				return;
+			}
+		}
+		else if (objType == ObjectType::SpaceStation)
+		{
+			if (!playerState.checkBalance(2000, 2000, 2000))
+			{
+				return;
+			}
+		}
+		else
+		{
+			return;
+		}
+		engine::unitFactory->create(objType, location, getOwner());
+  }
+  /*
 	void Worker::workerBuild(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, int number)
 	{
 		
@@ -64,8 +87,7 @@ namespace game
 			auto unit = engine::unitFactory->create(ObjectType::AirBase, location, getOwner());
 			OM->addUnit(unit);
 		}
-		
-	}
+	}*/
   
 	std::string Worker::getName()
 	{

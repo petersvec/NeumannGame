@@ -8,63 +8,111 @@ namespace game
 				 const sf::Texture& texture,
 				 engine::TilePtr location,
 				 unsigned char moveSpeed,
+				 unsigned char range,
 				 unsigned char attackDamage,
 				 unsigned char armour,
 				 Ownership owner)
 				 :
-				 IUnit{ hp, type, texture, location, moveSpeed, attackDamage, armour, owner },
+				 IUnit{ hp, type, texture, location, moveSpeed, range, attackDamage, armour, owner },
 				 IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Probe::update(std::shared_ptr<engine::Map> map,
-					   std::shared_ptr<engine::ObjectManager> objMan,
-					   bool toUpdate,
-					   PlayerState& playerState,
-					   ObjectType objType)
+	unsigned char Probe::getDuplicateTime()
 	{
-		if (m_loaded)
-		{
-			deploy();
-		}
+		return m_duplicateTime;
+	}
 
-		duplicate(objMan, map);
+	void Probe::setDuplicateTime(unsigned char duplicateTime)
+	{
+		m_duplicateTime = duplicateTime;
+	}
+
+	bool Probe::isLoaded()
+	{
+		return m_isLoaded;
+	}
+
+	void Probe::setLoading(bool loading)
+	{
+		m_isLoaded = loading;
+	}
+
+	bool Probe::isDuplicating()
+	{
+		return m_isDuplicating;
+	}
+
+	void Probe::setDuplicating(bool duplicating)
+	{
+		m_isDuplicating = duplicating;
+	}
+
+	std::shared_ptr<engine::IObject> Probe::getTroop()
+	{
+		return m_troop;
+	}
+
+	void Probe::setTroop(std::shared_ptr<engine::IObject> troop)
+	{
+		m_troop = troop;
 	}
 
 	void Probe::duplicate(std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
 	{
-		if (m_duplicateTime == 0)
+		if (getDuplicateTime() == 0)
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			engine::unitFactory->create(ObjectType::Ranged, location, getOwner());
-			m_duplicateTime = 5;
+			engine::unitFactory->create(ObjectType::Probe, location, getOwner());
+			setDuplicateTime(5);
+			setDuplicating(false);
 		}
 		else
 		{
-			m_duplicateTime -= 1;
+			setDuplicateTime(getDuplicateTime() - 1);
 		}
 	}
 
 	void Probe::load(std::shared_ptr<IObject> troop)
 	{
+		if (isLoaded())
+		{
+			return;
+		}
+
 		m_troop = troop;
-		m_loaded = true;
+		setLoading(true);
 	}
 
-	void Probe::deploy()
+	void Probe::deploy(std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
 	{
-		m_troop->setLocation(getLocation());
-		m_troop = nullptr;
-		m_loaded = false;
+		if (!isLoaded())
+		{
+			return;
+		}
+
+		auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
+		engine::TilePtr location = map->getTile(xy.first, xy.second);
+
+		m_troop->setLocation(location);
+		setTroop(nullptr);
+		setLoading(false);
 	}
 
-	void Probe::attack(std::shared_ptr<engine::IObject> object)
+	void Probe::attack(std::shared_ptr<engine::IObject> object, std::shared_ptr<engine::ObjectManager> objMan)
 	{
-		object->setHp(object->getHp() - getAttackDamage());
+		if (object->getHp() > getAttackDamage())
+		{
+			object->setHp(object->getHp() - getAttackDamage());
+		}
+		else
+		{
+			objMan->removeUnit(object);
+		}
 	}
+
 	std::string Probe::getName()
 	{
 		return "Probe";
 	}
-	
 }

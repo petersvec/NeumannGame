@@ -16,6 +16,7 @@ namespace game
 			  const sf::Texture& texture,
 			  engine::TilePtr location,
 			  unsigned char moveSpeed,
+			  unsigned char range,
 			  unsigned char attackDamage,
 			  unsigned char armour,
 			  unsigned short ironCost,
@@ -28,8 +29,8 @@ namespace game
 							bool toUpdate,
 							PlayerState& playerState,
 							ObjectType objType) override;
-		virtual void attack(std::shared_ptr<engine::IObject> object) override;
-		virtual void move(engine::TilePtr, unsigned char, PlayerState&) override {}
+		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) override;
+		virtual void move(engine::TilePtr, PlayerState&, PlayerState&, int*) override {};
 
 		std::string getName() override;
 	};
