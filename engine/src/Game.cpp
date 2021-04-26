@@ -1,7 +1,6 @@
 #include "../include/Game.hpp"
 #include <SFML/Window/Mouse.hpp>
 #include "../../game/include/buildings/IBuilding.hpp"
-#include "../../game/include/buildings/SpaceStation.hpp"
 
 namespace engine
 {
@@ -148,6 +147,18 @@ namespace engine
 			ActivePlayerText.setString("Player 1");
 			ActivePlayerText.setFillColor(sf::Color::Red);
 			m_gui.SetPlayerState(player1State);
+		}
+
+		// Global update po kazdom tahu:
+		// 1. Mining
+		// 2. Tower attacks
+		for (auto& obj : testOM->getPlayerObjects())
+		{
+			if (obj->getName() == "Mine" || obj->getName() == "Tower")
+			{
+				auto mine_obj = dynamic_cast<game::IBuilding*>(obj.get());
+				mine_obj->update(m_gameMap, testOM, true, GetCurrentPlayerState());
+			}
 		}
 	}
 	
