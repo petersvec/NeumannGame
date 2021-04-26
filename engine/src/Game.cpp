@@ -274,7 +274,8 @@ namespace engine
 						std::cout << (int)activePlayer;
 					}
 
-					if (unitIsSelected) {
+					// REFAKTOR PLS
+					if (unitIsSelected && testPO != nullptr) {
 						tempx = testPO->getPosition().x / tileSize + 1;
 						tempy = testPO->getPosition().y / tileSize;
 						
@@ -284,12 +285,16 @@ namespace engine
 								{
 									auto building = dynamic_cast<game::IBuilding*>(testPO.get());
 									building->update(m_gameMap, testOM, true, GetCurrentPlayerState());
+									endMove();
+									return;
 								}
 
 								if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 								{
 									auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
 									testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::SpaceStation);
+									endMove();
+									return;
 								}
 						}
 						
@@ -299,6 +304,8 @@ namespace engine
 							{
 								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
 								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::MilitaryBase);
+								endMove();
+								return;
 							}
 						}
 
@@ -308,6 +315,8 @@ namespace engine
 							{
 								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
 								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::AirBase);
+								endMove();
+								return;
 							}
 						}
 
@@ -317,6 +326,8 @@ namespace engine
 							{
 								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
 								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::Mine);
+								endMove();
+								return;
 							}
 						}
 
@@ -326,6 +337,8 @@ namespace engine
 							{
 								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
 								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::Tower);
+								endMove();
+								return;
 							}
 						}
 
