@@ -280,7 +280,6 @@ namespace engine
 						
 						if (m_event.key.code == sf::Keyboard::Num1)
 						{
-			
 								if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
 								{
 									auto building = dynamic_cast<game::IBuilding*>(testPO.get());
@@ -302,6 +301,7 @@ namespace engine
 								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::MilitaryBase);
 							}
 						}
+
 						if (m_event.key.code == sf::Keyboard::Num3)
 						{
 							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
@@ -310,6 +310,25 @@ namespace engine
 								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::AirBase);
 							}
 						}
+
+						if (m_event.key.code == sf::Keyboard::Num4)
+						{
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							{
+								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::Mine);
+							}
+						}
+
+						if (m_event.key.code == sf::Keyboard::Num5)
+						{
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							{
+								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::Tower);
+							}
+						}
+
 					}
 			default:
 				break;

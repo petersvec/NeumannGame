@@ -17,7 +17,7 @@ namespace engine
 
 	void Gui::LoadObject(std::shared_ptr<IObject> object, game::Ownership activePlayer)
 	{
-		text.setPosition(500, 640);
+		text.setPosition(300, 640);
 		text.setCharacterSize(20);
 		text.setFont(font);
 		std::string player;
@@ -39,7 +39,7 @@ namespace engine
 		}
 		if (object->getName() == "Worker" && object->getOwner() == activePlayer)
 		{
-			str = str + '\n' + "Press 1 - SpaceStation | 2 - MilitaryBase | 3 - AirBase";
+			str = str + '\n' + "1 - SpaceStation | 2 - MilitaryBase | 3 - AirBase | 4 - Mine | 5 - Tower";
 		}
 		text.setString(str);
 	}
