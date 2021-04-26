@@ -28,24 +28,23 @@ namespace engine
 
 	static std::pair<unsigned short, unsigned short> GetNearestFreeLocation(std::shared_ptr<game::Tile> location, std::shared_ptr<ObjectManager> objMan)
 	{
-		auto x = location->getPosition().x;
-		auto y = location->getPosition().y;
-
+		int x = location->getPosition().x/config->getTileSize();
+		int y = location->getPosition().y/config->getTileSize();
 		for (int k = 1; k < config->getMapWidth(); ++k)
 		{
 			for (int i = (-k); i <= k; ++i)
 			{
 				for (int j = (-k); j <= k; ++j)
 				{	
-					if (objMan->findUnit(x + i, y + j, game::Ownership::Player1) == nullptr &&
-						objMan->findUnit(x + i, y + j, game::Ownership::Player2) == nullptr)
+					if (objMan->findUnit((x + i)*config->getTileSize(), (y + j)*config->getTileSize(), game::Ownership::Player1) == nullptr &&
+						objMan->findUnit((x + i)*config->getTileSize(), (y + j)*config->getTileSize(), game::Ownership::Player2) == nullptr)
 					{
 						if (x + i < 0 ||
 							x + i >= config->getMapHeight()||
 							y + j < 0 ||
 							y + j >= config->getMapWidth())
 						{
-							continue;
+							break;
 						}
 
 						return std::make_pair(x + i, y + j);

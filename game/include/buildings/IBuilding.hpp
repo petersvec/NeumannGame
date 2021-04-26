@@ -67,6 +67,5 @@ namespace game
 		{
 			m_siliconCost = siliconCost;
 		}
-		
 	};
 }

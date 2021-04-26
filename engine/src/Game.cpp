@@ -32,16 +32,16 @@ namespace engine
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
 	
-		auto unit_1 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 10), game::Ownership::Player1);
+		auto unit_1 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(12, 12), game::Ownership::Player1);
 		auto unit_2 = unitFactory->create(game::ObjectType::Melee, m_gameMap->getTile(10, 11), game::Ownership::Player2);
 
-		auto building_1 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(1, 1), game::Ownership::Player1);
+		auto building_1 = unitFactory->create(game::ObjectType::MilitaryBase, m_gameMap->getTile(5, 5), game::Ownership::Player1);
 		auto building_2 = unitFactory->create(game::ObjectType::Tower, m_gameMap->getTile(3, 3), game::Ownership::Player2);
-
-		testOM.addUnit(unit_1);
-		testOM.addUnit(unit_2);
-		testOM.addUnit(building_1);
-		testOM.addUnit(building_2);
+		testOM = std::make_shared<engine::ObjectManager>();
+		testOM->addUnit(unit_1);
+		testOM->addUnit(unit_2);
+		testOM->addUnit(building_1);
+		testOM->addUnit(building_2);
 
 		clickMap(0, 0);
 
@@ -84,11 +84,11 @@ namespace engine
 			y = y / tileSize;
 			
 			m_gui.text.setString("");
-			testPO=testOM.findUnit(x * tileSize, y * tileSize, activePlayer);
+			testPO=testOM->findUnit(x * tileSize, y * tileSize, activePlayer);
 			
 			if (testPO != nullptr)
 			{
-				m_gui.LoadObject(testPO);
+				m_gui.LoadObject(testPO, activePlayer);
 				unitIsSelected = true;
 			}
 			else
@@ -97,10 +97,9 @@ namespace engine
 			}
 
 			auto tile = m_gameMap->getTile(x, y);
-			str = "X: " + std::to_string(x) + "\nY: " + std::to_string(y) + "\nType: " + tile->getTypeString() + "\nMinerals: " + std::to_string(tile->getMinerals());
-			setDisplayText(&tileText, str);
+			m_gui.setMapText(x, y, tile);
+			tileText = m_gui.getMapText();
 			setClickedTile(x, y, &selectedMapTile);
-			//return m_gameMap->getTile(x, y);
 		}
 		
 	}
@@ -109,18 +108,7 @@ namespace engine
 		rs->setPosition(x*tileSize, y*tileSize);
 	}
 
-	void Game::setDisplayText(sf::Text *text, sf::String str) {
 
-		// select the font
-		
-
-		// set the string to display
-		text->setString(str);
-		text->setCharacterSize(20); // in pixels
-		text->setFillColor(sf::Color::White);
-		text->setPosition(0, 0);
-		text->setFont(m_gui.GetFont());
-	}
 	
 	
 	const bool Game::isRunning() const
@@ -232,8 +220,47 @@ namespace engine
 						}
 						std::cout << (int)activePlayer;
 					}
-					break;
-					
+
+					if (unitIsSelected) {
+						tempx = testPO->getPosition().x / tileSize + 1;
+						tempy = testPO->getPosition().y / tileSize;
+						
+						if (m_event.key.code == sf::Keyboard::Num1)
+						{
+			
+								if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
+								{
+
+									auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+									
+									testPO->build(m_gameMap->getTile(pair.first, pair.second), testOM);
+									
+								}
+
+								if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+								{
+									auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+									testPO->workerBuild(m_gameMap->getTile(tempx, tempy), testOM, 1);
+								}
+						}
+						
+						if (m_event.key.code == sf::Keyboard::Num2)
+						{
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							{
+								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+								testPO->workerBuild(m_gameMap->getTile(tempx,tempy), testOM, 2);
+							}
+						}
+						if (m_event.key.code == sf::Keyboard::Num3)
+						{
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							{
+								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+								testPO->workerBuild(m_gameMap->getTile(tempx,tempy), testOM, 3);
+							}
+						}
+					}
 			default:
 				break;
 			}
@@ -297,7 +324,7 @@ namespace engine
 		m_frame.setTexture(texture);
 		m_window->setView(m_view);
 		m_window->draw(m_frame);
-		testOM.drawAll(m_window);
+		testOM->drawAll(m_window);
 
 		
 		m_window->setView(defaultView);
