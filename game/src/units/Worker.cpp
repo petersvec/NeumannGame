@@ -1,5 +1,6 @@
 #include "../../include/units/Worker.hpp"
 #include "../../../engine/include/UnitFactory.hpp"
+#include <iostream>
 
 namespace game
 {
@@ -18,7 +19,7 @@ namespace game
 	{}
 
 	void Worker::attack(std::shared_ptr<engine::IObject> object, std::shared_ptr<engine::ObjectManager> objMan)
-	{
+  	{
 		if (object == nullptr)
 		{
 			return;
@@ -69,7 +70,24 @@ namespace game
 			return;
 		}
 		engine::unitFactory->create(objType, location, getOwner());
-	}
+  }
+  /*
+	void Worker::workerBuild(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, int number)
+	{
+		
+		if (number == 1) {
+			auto unit = engine::unitFactory->create(ObjectType::SpaceStation, location, getOwner());
+			OM->addUnit(unit);
+		}
+		if (number == 2) {
+			auto unit = engine::unitFactory->create(ObjectType::MilitaryBase, location, getOwner());
+			OM->addUnit(unit);
+		}
+		if (number == 3) {
+			auto unit = engine::unitFactory->create(ObjectType::AirBase, location, getOwner());
+			OM->addUnit(unit);
+		}
+	}*/
   
 	std::string Worker::getName()
 	{

@@ -34,9 +34,10 @@ namespace game
 		}
 	}
 
-	void SpaceStation::makeWorker(engine::TilePtr location)
+	void SpaceStation::build(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)
 	{
-		engine::unitFactory->create(ObjectType::Worker, location, getOwner());
+		auto unit = engine::unitFactory->create(ObjectType::Worker, location, getOwner());
+		OM->addUnit(unit);
 	}
   
 	std::string SpaceStation::getName()

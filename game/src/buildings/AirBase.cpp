@@ -4,23 +4,23 @@
 namespace game
 {
 	AirBase::AirBase(unsigned short hp,
-					 ObjectType type,
-					 const sf::Texture& texture,
-					 engine::TilePtr location,
-					 unsigned short ironCost,
-					 unsigned short copperCost,
-			 		 unsigned short siliconCost,
-					 Ownership owner)
-					 :
-					 IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner},
-					 IObject{ hp, type, texture, location, owner }
+		ObjectType type,
+		const sf::Texture& texture,
+		engine::TilePtr location,
+		unsigned short ironCost,
+		unsigned short copperCost,
+		unsigned short siliconCost,
+		Ownership owner)
+		:
+		IBuilding{ hp, type, texture, location, ironCost, copperCost, siliconCost, owner },
+		IObject{ hp, type, texture, location, owner }
 	{}
 
 	void AirBase::update(std::shared_ptr<engine::Map> map,
-						 std::shared_ptr<engine::ObjectManager> objMan,
-						 bool toUpdate,
-						 PlayerState& playerState,
-				    	 ObjectType objType)
+		std::shared_ptr<engine::ObjectManager> objMan,
+		bool toUpdate,
+		PlayerState& playerState,
+		ObjectType objType)
 	{
 		if (toUpdate)
 		{
@@ -34,11 +34,12 @@ namespace game
 		}
 	}
 
-	void AirBase::makeRanged(engine::TilePtr location)
+	void AirBase::build(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)
 	{
-		engine::unitFactory->create(ObjectType::Ranged, location, getOwner());
+		auto unit = engine::unitFactory->create(ObjectType::Ranged, location, getOwner());
+		OM->addUnit(unit);
 	}
-  
+
 	std::string AirBase::getName()
 	{
 		return "Air base";
