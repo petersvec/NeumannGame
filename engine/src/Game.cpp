@@ -1,6 +1,7 @@
 #include "../include/Game.hpp"
 #include <SFML/Window/Mouse.hpp>
 #include "../../game/include/buildings/IBuilding.hpp"
+#include "../../game/include/units/Probe.hpp"
 
 namespace engine
 {
@@ -32,14 +33,14 @@ namespace engine
 		selectedMapTile.setOutlineThickness(3);
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
-	
-		auto unit_1 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(1, 1), game::Ownership::Player1);
-		auto unit_2 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(10, 1), game::Ownership::Player2);
-		auto unit_3 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(1, 2), game::Ownership::Player1);
-		auto unit_4 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(10, 2), game::Ownership::Player2);
 
-		auto building_1 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(1, 3), game::Ownership::Player1);
-		auto building_2 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(10, 3), game::Ownership::Player2);
+		auto building_1 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(1, 1), game::Ownership::Player1);
+		auto unit_1 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(1, 2), game::Ownership::Player1);
+		auto unit_3 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(2, 1), game::Ownership::Player1);
+
+		auto building_2 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(48, 48), game::Ownership::Player2);
+		auto unit_2 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(48, 47), game::Ownership::Player2);
+		auto unit_4 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(47, 48), game::Ownership::Player2);
     
 		testOM = std::make_shared<engine::ObjectManager>();
 
@@ -158,6 +159,14 @@ namespace engine
 			{
 				auto mine_obj = dynamic_cast<game::IBuilding*>(obj.get());
 				mine_obj->update(m_gameMap, testOM, true, GetCurrentPlayerState());
+			}
+			else if (obj->getName() == "Probe")
+			{
+				auto probe_obj = dynamic_cast<game::Probe*>(obj.get());
+				if (probe_obj->isDuplicating() && probe_obj->getOwner() == activePlayer)
+				{
+					probe_obj->duplicate(testOM, m_gameMap);
+				}
 			}
 		}
 
@@ -303,21 +312,34 @@ namespace engine
 						
 						if (m_event.key.code == sf::Keyboard::Num1)
 						{
-								if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
-								{
-									auto building = dynamic_cast<game::IBuilding*>(testPO.get());
-									building->update(m_gameMap, testOM, true, GetCurrentPlayerState());
-									endMove();
-									return;
-								}
+							if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
+							{
+								auto building = dynamic_cast<game::IBuilding*>(testPO.get());
+								building->update(m_gameMap, testOM, true, GetCurrentPlayerState());
+								endMove();
+								return;
+							}
 
-								if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							{
+								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
+								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::SpaceStation);
+								endMove();
+								return;
+							}
+
+							if (testPO->getName() == "Probe" && testPO->getOwner() == activePlayer)
+							{
+								auto probe_obj = dynamic_cast<game::Probe*>(testPO.get());
+								if (probe_obj->getLocation()->getTypeString() != "Void" &&
+									!probe_obj->isDuplicating())
 								{
-									auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-									testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::SpaceStation);
+									probe_obj->setDuplicating(true);
+									probe_obj->duplicate(testOM, m_gameMap);
 									endMove();
 									return;
 								}
+							}
 						}
 						
 						if (m_event.key.code == sf::Keyboard::Num2)
@@ -328,6 +350,15 @@ namespace engine
 								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::MilitaryBase);
 								endMove();
 								return;
+							}
+
+							if (testPO->getName() == "Probe" && testPO->getOwner() == activePlayer)
+							{
+								auto probe_obj = dynamic_cast<game::Probe*>(testPO.get());
+								if (probe_obj->isLoaded())
+								{
+									probe_obj->deploy(testOM, m_gameMap);
+								}
 							}
 						}
 

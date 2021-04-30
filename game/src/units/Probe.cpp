@@ -63,7 +63,7 @@ namespace game
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			engine::unitFactory->create(ObjectType::Probe, location, getOwner());
+			objMan->addUnit(engine::unitFactory->create(ObjectType::Probe, location, getOwner()));
 			setDuplicateTime(5);
 			setDuplicating(false);
 		}
