@@ -20,15 +20,15 @@
     "Worker": "data/textures/Worker.png",
     "cursor": "data/textures/cursor.png"
   },
-  "Costs" : {
-        "AirBase": [ 500, 500, 500],
-        "Melee": [500, 500, 500],
-        "MilitaryBase": [500, 500, 500],
-        "Mine": [200, 200, 200],
-        "Probe": [1000, 1000, 1000],
-        "Ranged": [1000, 1000, 1000],
-        "SpaceStation": [2000, 2000, 2000],
-        "Tower": [500, 500, 500],
-        "Worker": [5000,  5000, 5000]
+  "Costs": {
+    "Worker": [ 100, 100, 100 ],
+    "Melee": [ 500, 500, 500 ],
+    "Ranged": [ 1000, 1000, 1000 ],
+    "Probe": [ 400, 400, 400 ],
+    "Mine": [ 200, 200, 200 ],
+    "Tower": [ 2000, 2000, 2000 ],
+    "MilitaryBase": [ 500, 500, 500 ],
+    "AirBase": [ 500, 500, 500 ],
+    "SpaceStation": [ 5000, 5000, 5000 ]
   }
 }
