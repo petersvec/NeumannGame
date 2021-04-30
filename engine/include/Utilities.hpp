@@ -36,18 +36,18 @@ namespace engine
 			for (int i = (-k); i <= k; ++i)
 			{
 				for (int j = (-k); j <= k; ++j)
-				{	
+				{
+					if (x + i < 0 ||
+						x + i >= config->getMapHeight() ||
+						y + j < 0 ||
+						y + j >= config->getMapWidth())
+					{
+						continue;
+					}
+
 					if (objMan->findUnit((x + i)*config->getTileSize(), (y + j)*config->getTileSize(), game::Ownership::Player1) == nullptr &&
 						objMan->findUnit((x + i)*config->getTileSize(), (y + j)*config->getTileSize(), game::Ownership::Player2) == nullptr)
 					{
-						if (x + i < 0 ||
-							x + i >= config->getMapHeight()||
-							y + j < 0 ||
-							y + j >= config->getMapWidth())
-						{
-							break;
-						}
-
 						return std::make_pair(x + i, y + j);
 					}
 				}
