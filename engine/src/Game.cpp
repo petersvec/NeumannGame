@@ -237,6 +237,7 @@ namespace engine
 							{
 								int x = worldPos.x / tileSize;
 								int y = worldPos.y / tileSize;
+								auto tile = m_gameMap->getTile(x, y);
 
 								IObjectPtr otherTileUnit = nullptr;
 								auto enemy = activePlayer;
@@ -251,7 +252,6 @@ namespace engine
 									otherTileUnit = testOM->findUnit(x * tileSize, y * tileSize, game::Ownership::Player1);
 								}
 
-								auto tile = m_gameMap->getTile(x, y);
 								setClickedTile(x, y, &selectedMapTile);
 
 								if (TileDistance(testPO->getPosition(), click) <= testPO->getMoveSpeed())
@@ -267,7 +267,6 @@ namespace engine
 											testPO->move(tile, player2State, player1State, &changed);
 										}
 										endMove();
-										std::cout << "moved\n";
 									}
 									else if (otherTileUnit->getOwner() == enemy)
 									{
@@ -275,8 +274,13 @@ namespace engine
 										{
 											testPO->attack(otherTileUnit, testOM);
 											endMove();
-											std::cout << "attacked\n";
 										}
+									}
+									else if (otherTileUnit->getName() == "Probe" && testPO->getName() != "Probe")
+									{
+										auto probe_obj = dynamic_cast<game::Probe*>(otherTileUnit.get());
+										probe_obj->load(testPO, testOM);
+										endMove();
 									}
 								}
 							}

@@ -30,6 +30,16 @@ namespace engine
 		playerObjectVector.erase(std::remove(playerObjectVector.begin(), playerObjectVector.end(), unit), playerObjectVector.end());
 	}
 
+	void ObjectManager::addLoadedUnit(std::shared_ptr<IObject> unit)
+	{
+		playersLoadedObjectsVector.push_back(unit);
+	}
+
+	void ObjectManager::removeLoadedUnit(std::shared_ptr<IObject> unit)
+	{
+		playersLoadedObjectsVector.erase(std::remove(playersLoadedObjectsVector.begin(), playersLoadedObjectsVector.end(), unit), playersLoadedObjectsVector.end());
+	}
+
 	std::shared_ptr<IObject> ObjectManager::findUnit(int x, int y, game::Ownership player)
 	{
 		for (int it = 0; it < playerObjectVector.size(); it++)

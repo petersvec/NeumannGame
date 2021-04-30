@@ -13,13 +13,16 @@ namespace engine
 	public:
 		ObjectManager();
 		
-		void drawAll(sf::RenderWindow* window);
-		void addUnit(std::shared_ptr<IObject> unit);
+		void drawAll(sf::RenderWindow*);
+		void addUnit(std::shared_ptr<IObject>);
 		void removeUnit(std::shared_ptr<IObject>);
-		std::shared_ptr<IObject> findUnit(int x, int y, game::Ownership player);
+		void addLoadedUnit(std::shared_ptr<IObject>);
+		void removeLoadedUnit(std::shared_ptr<IObject>);
+		std::shared_ptr<IObject> findUnit(int, int, game::Ownership);
 		std::vector<std::shared_ptr<IObject>> getPlayerObjects();
 
 	private:
 		std::vector<std::shared_ptr<IObject>> playerObjectVector;
+		std::vector<std::shared_ptr<IObject>> playersLoadedObjectsVector;
 	};
 }

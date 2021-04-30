@@ -32,9 +32,9 @@ namespace game
 		return m_isLoaded;
 	}
 
-	void Probe::setLoading(bool loading)
+	void Probe::setIsLoaded(bool isLoaded)
 	{
-		m_isLoaded = loading;
+		m_isLoaded = isLoaded;
 	}
 
 	bool Probe::isDuplicating()
@@ -73,7 +73,7 @@ namespace game
 		}
 	}
 
-	void Probe::load(std::shared_ptr<IObject> troop)
+	void Probe::load(std::shared_ptr<IObject> troop, std::shared_ptr<engine::ObjectManager> objMan)
 	{
 		if (isLoaded())
 		{
@@ -81,7 +81,9 @@ namespace game
 		}
 
 		m_troop = troop;
-		setLoading(true);
+		objMan->addLoadedUnit(troop);
+		objMan->removeUnit(troop);
+		setIsLoaded(true);
 	}
 
 	void Probe::deploy(std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
@@ -95,8 +97,10 @@ namespace game
 		engine::TilePtr location = map->getTile(xy.first, xy.second);
 
 		m_troop->setLocation(location);
+		objMan->addUnit(m_troop);
+		objMan->removeLoadedUnit(m_troop);
 		setTroop(nullptr);
-		setLoading(false);
+		setIsLoaded(false);
 	}
 
 	void Probe::attack(std::shared_ptr<engine::IObject> object, std::shared_ptr<engine::ObjectManager> objMan)
