@@ -1,7 +1,7 @@
 #include "../../include/units/Worker.hpp"
 #include "../../../engine/include/UnitFactory.hpp"
 #include "../../../engine/include/JsonParser.hpp"
-#include <iostream>
+#include "../../include/units/Probe.hpp"
 
 namespace game
 {
@@ -37,6 +37,16 @@ namespace game
 		}
 		else
 		{
+			if (object->getType() == ObjectType::Probe)
+			{
+				auto probe = dynamic_cast<Probe*>(object.get());
+
+				if (probe->isLoaded())
+				{
+					objMan->removeLoadedUnit(probe->getTroop());
+				}
+			}
+
 			objMan->removeUnit(object);
 		}
 	}
