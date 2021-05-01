@@ -229,16 +229,14 @@ namespace engine
 					{
 						pixelPos = sf::Mouse::getPosition(*m_window);
 						worldPos = m_window->mapPixelToCoords(pixelPos);
-						auto click = TileToScreen(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
+						int x = worldPos.x / tileSize;
+						int y = worldPos.y / tileSize;
+						auto tile = m_gameMap->getTile(x, y);
 
 						if (testPO->getIsBuilding() == false)
 						{
 							if (worldPos.x >= 0 && worldPos.y >= 0 && worldPos.x < tileSize * (m_gameMap->getWidth()) && worldPos.y < tileSize * m_gameMap->getHeight())
 							{
-								int x = worldPos.x / tileSize;
-								int y = worldPos.y / tileSize;
-								auto tile = m_gameMap->getTile(x, y);
-
 								IObjectPtr otherTileUnit = nullptr;
 								auto enemy = activePlayer;
 								if (activePlayer == game::Ownership::Player1)
@@ -254,7 +252,7 @@ namespace engine
 
 								setClickedTile(x, y, &selectedMapTile);
 
-								if (TileDistance(testPO->getPosition(), click) <= testPO->getMoveSpeed())
+								if (TileDistance(testPO->getPosition(), tile->getPosition()) <= testPO->getMoveSpeed())
 								{
 									if (otherTileUnit == nullptr)
 									{
@@ -270,7 +268,7 @@ namespace engine
 									}
 									else if (otherTileUnit->getOwner() == enemy)
 									{
-										if (TileDistance(testPO->getPosition(), click) <= testPO->getRange())
+										if (TileDistance(testPO->getPosition(), tile->getPosition()) <= testPO->getRange())
 										{
 											testPO->attack(otherTileUnit, testOM);
 											endMove();
@@ -362,6 +360,8 @@ namespace engine
 								if (probe_obj->isLoaded())
 								{
 									probe_obj->deploy(testOM, m_gameMap);
+									endMove();
+									return;
 								}
 							}
 						}

@@ -21,15 +21,12 @@ namespace game
 							  bool toUpdate,
 							  PlayerState& playerState)
 	{
-		if (toUpdate)
+		if (toUpdate && playerState.checkBalance(getIronCost(), getCopperCost(), getSiliconCost()))
 		{
-			if (playerState.checkBalance(getIronCost(), getCopperCost(), getSiliconCost()))
-			{
-				playerState.updatePlayerBalances(-getIronCost(), -getCopperCost(), -getSiliconCost());
-				auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
-				engine::TilePtr location = map->getTile(xy.first, xy.second);
-				build(location, objMan);
-			}
+			playerState.updatePlayerBalances(-getIronCost(), -getCopperCost(), -getSiliconCost());
+			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
+			engine::TilePtr location = map->getTile(xy.first, xy.second);
+			build(location, objMan);
 		}
 	}
 
