@@ -322,7 +322,8 @@ namespace engine
 								return;
 							}
 
-							else if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							else if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
+									 TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 							{
 								auto worker = dynamic_cast<game::Worker*>(testPO.get());
 								worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::SpaceStation);
@@ -346,7 +347,8 @@ namespace engine
 						
 						if (m_event.key.code == sf::Keyboard::Num2)
 						{
-							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
+								TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 							{
 								auto worker = dynamic_cast<game::Worker*>(testPO.get());
 								worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::MilitaryBase);
@@ -368,7 +370,8 @@ namespace engine
 
 						if (m_event.key.code == sf::Keyboard::Num3)
 						{
-							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
+								TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 							{
 								auto worker = dynamic_cast<game::Worker*>(testPO.get());
 								worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::AirBase);
@@ -379,7 +382,8 @@ namespace engine
 
 						if (m_event.key.code == sf::Keyboard::Num4)
 						{
-							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
+								TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 							{
 								auto worker = dynamic_cast<game::Worker*>(testPO.get());
 								worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Mine);
@@ -390,7 +394,8 @@ namespace engine
 
 						if (m_event.key.code == sf::Keyboard::Num5)
 						{
-							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
+								TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 							{
 								auto worker = dynamic_cast<game::Worker*>(testPO.get());
 								worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Tower);
