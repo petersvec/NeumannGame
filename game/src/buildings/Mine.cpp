@@ -16,12 +16,12 @@ namespace game
 			   IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Mine::update(std::shared_ptr<engine::Map> map,
+	bool Mine::update(std::shared_ptr<engine::Map> map,
 					  std::shared_ptr<engine::ObjectManager> objMan,
-					  bool toUpdate,
 					  PlayerState& playerState)
 	{
 		mine(playerState);
+		return true;
 	}
 
 	void Mine::mine(PlayerState& playerState)
