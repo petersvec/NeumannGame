@@ -4,7 +4,7 @@ namespace game
 {
 	PlayerState::PlayerState()
 	{
-		initializePlayerState(2000, 2000, 2000, 0);
+		initializePlayerState(100, 100, 100, 0);
 	}
 
 	PlayerState::PlayerState(int iron, int copper, int silicon, int land)

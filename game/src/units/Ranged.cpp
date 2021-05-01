@@ -39,7 +39,6 @@ namespace game
 					objMan->removeLoadedUnit(probe->getTroop());
 				}
 			}
-
 			objMan->removeUnit(object);
 		}
 	}

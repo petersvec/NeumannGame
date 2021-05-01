@@ -46,12 +46,11 @@ namespace game
 					objMan->removeLoadedUnit(probe->getTroop());
 				}
 			}
-
 			objMan->removeUnit(object);
 		}
 	}
 
-	void Worker::build(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, game::ObjectType type)
+	bool Worker::build(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, game::ObjectType type)
 	{
 		if (type == ObjectType::AirBase)
 		{
@@ -59,7 +58,7 @@ namespace game
 
 			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
-				return;
+				return false;
 			}
 
 			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
@@ -70,7 +69,7 @@ namespace game
 
 			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
-				return;
+				return false;
 			}
 
 			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
@@ -81,7 +80,7 @@ namespace game
 
 			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
-				return;
+				return false;
 			}
 
 			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
@@ -92,7 +91,7 @@ namespace game
 
 			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
-				return;
+				return false;
 			}
 
 			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
@@ -103,18 +102,19 @@ namespace game
 
 			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
-				return;
+				return false;
 			}
 
 			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
 		else
 		{
-			return;
+			return false;
 		}
 
 		auto unit = engine::unitFactory->create(type, location, getOwner());
 		OM->addUnit(unit);
+		return true;
 	}
   
 	std::string Worker::getName()
