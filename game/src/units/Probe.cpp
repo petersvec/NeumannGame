@@ -67,8 +67,9 @@ namespace game
 			setDuplicateTime(5);
 			setDuplicating(false);
 		}
-		else
+		else if (getLocation()->getMinerals() >= 80)
 		{
+			getLocation()->setMinerals(getLocation()->getMinerals() - 80);
 			setDuplicateTime(getDuplicateTime() - 1);
 		}
 	}
