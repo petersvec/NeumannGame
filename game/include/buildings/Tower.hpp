@@ -24,10 +24,7 @@ namespace game
 			  unsigned short siliconCost,
 			  Ownership owner);
         
-		virtual void update(std::shared_ptr<engine::Map> map,
-							std::shared_ptr<engine::ObjectManager> objMan,
-							bool toUpdate,
-							PlayerState& playerState) override;
+		virtual bool update(std::shared_ptr<engine::Map>, std::shared_ptr<engine::ObjectManager>, PlayerState&) override;
 		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) override;
 		virtual void move(engine::TilePtr, PlayerState&, PlayerState&, int*) override {};
 

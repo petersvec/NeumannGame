@@ -21,9 +21,8 @@ namespace game
 				 IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Tower::update(std::shared_ptr<engine::Map> map,
+	bool Tower::update(std::shared_ptr<engine::Map> map,
 					   std::shared_ptr<engine::ObjectManager> objMan,
-					   bool toUpdate,
 					   PlayerState& playerState)
 	{
 		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
@@ -40,6 +39,7 @@ namespace game
 				attack(i, objMan);
 			}
 		}
+		return true;
 	}
 
 	void Tower::attack(std::shared_ptr<engine::IObject> object, std::shared_ptr<engine::ObjectManager> objMan)
@@ -64,7 +64,6 @@ namespace game
 					objMan->removeLoadedUnit(probe->getTroop());
 				}
 			}
-
 			objMan->removeUnit(object);
 		}
 	}
