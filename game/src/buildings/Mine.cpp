@@ -27,7 +27,21 @@ namespace game
 	void Mine::mine(PlayerState& playerState)
 	{
 		unsigned minerals = getLocation()->getMinerals();
-		playerState.updatePlayerBalances(minerals, minerals, minerals);
+		if (minerals == 0)
+		{
+			return;
+		}
+		
+		if (minerals >= 100)
+		{
+			playerState.updatePlayerBalances(100, 100, 100);
+			getLocation()->setMinerals(minerals - 100);
+		}
+		else
+		{
+			playerState.updatePlayerBalances(minerals, minerals, minerals);
+			getLocation()->setMinerals(0);
+		}
 	}
   
 	std::string Mine::getName()
