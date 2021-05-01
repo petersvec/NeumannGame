@@ -2,6 +2,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include "../../game/include/buildings/IBuilding.hpp"
 #include "../../game/include/units/Probe.hpp"
+#include "../../game/include/units/Worker.hpp"
 
 namespace engine
 {
@@ -308,10 +309,9 @@ namespace engine
 					}
 
 					// REFAKTOR PLS
-					if (unitIsSelected && testPO != nullptr) {
-						tempx = testPO->getPosition().x / tileSize + 1;
-						tempy = testPO->getPosition().y / tileSize;
-						
+					if (unitIsSelected && testPO != nullptr)
+					{
+						auto xy = GetNearestFreeLandLocation(testPO->getLocation(), testOM, m_gameMap);
 						if (m_event.key.code == sf::Keyboard::Num1)
 						{
 							if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
@@ -322,15 +322,15 @@ namespace engine
 								return;
 							}
 
-							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
+							else if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 							{
-								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::SpaceStation);
+								auto worker = dynamic_cast<game::Worker*>(testPO.get());
+								worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::SpaceStation);
 								endMove();
 								return;
 							}
 
-							if (testPO->getName() == "Probe" && testPO->getOwner() == activePlayer)
+							else if (testPO->getName() == "Probe" && testPO->getOwner() == activePlayer)
 							{
 								auto probe_obj = dynamic_cast<game::Probe*>(testPO.get());
 								if (probe_obj->getLocation()->getTypeString() != "Void" &&
@@ -348,8 +348,8 @@ namespace engine
 						{
 							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 							{
-								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::MilitaryBase);
+								auto worker = dynamic_cast<game::Worker*>(testPO.get());
+								worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::MilitaryBase);
 								endMove();
 								return;
 							}
@@ -370,8 +370,8 @@ namespace engine
 						{
 							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 							{
-								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::AirBase);
+								auto worker = dynamic_cast<game::Worker*>(testPO.get());
+								worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::AirBase);
 								endMove();
 								return;
 							}
@@ -381,8 +381,8 @@ namespace engine
 						{
 							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 							{
-								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::Mine);
+								auto worker = dynamic_cast<game::Worker*>(testPO.get());
+								worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Mine);
 								endMove();
 								return;
 							}
@@ -392,8 +392,8 @@ namespace engine
 						{
 							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
 							{
-								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::Tower);
+								auto worker = dynamic_cast<game::Worker*>(testPO.get());
+								worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Tower);
 								endMove();
 								return;
 							}

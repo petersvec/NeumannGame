@@ -41,12 +41,7 @@ namespace game
 		}
 	}
 
-	void Worker::build(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)
-	{
-
-	}
-
-	void Worker::workerBuild(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, game::ObjectType type)
+	void Worker::build(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, game::ObjectType type)
 	{
 		if (type == ObjectType::AirBase)
 		{
@@ -59,7 +54,7 @@ namespace game
 
 			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
-		else if(type == ObjectType::MilitaryBase)
+		else if (type == ObjectType::MilitaryBase)
 		{
 			auto cost = engine::config->GetCost("MilitaryBase");
 
@@ -70,7 +65,7 @@ namespace game
 
 			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
-		else if(type == ObjectType::Tower)
+		else if (type == ObjectType::Tower)
 		{
 			auto cost = engine::config->GetCost("Tower");
 
@@ -107,6 +102,7 @@ namespace game
 		{
 			return;
 		}
+
 		auto unit = engine::unitFactory->create(type, location, getOwner());
 		OM->addUnit(unit);
 	}

@@ -55,6 +55,35 @@ namespace engine
 		}
 	}
 
+	static std::pair<unsigned short, unsigned short> GetNearestFreeLandLocation(std::shared_ptr<game::Tile> location, std::shared_ptr<ObjectManager> objMan, std::shared_ptr<Map> gameMap)
+	{
+		int x = location->getPosition().x / config->getTileSize();
+		int y = location->getPosition().y / config->getTileSize();
+		for (int k = 1; k < config->getMapWidth(); ++k)
+		{
+			for (int i = (-k); i <= k; ++i)
+			{
+				for (int j = (-k); j <= k; ++j)
+				{
+					if (x + i < 0 ||
+						x + i >= config->getMapHeight() ||
+						y + j < 0 ||
+						y + j >= config->getMapWidth() ||
+						gameMap->getTile(x + i, y + j)->getTypeString() == "Void")
+					{
+						continue;
+					}
+
+					if (objMan->findUnit((x + i) * config->getTileSize(), (y + j) * config->getTileSize(), game::Ownership::Player1) == nullptr &&
+						objMan->findUnit((x + i) * config->getTileSize(), (y + j) * config->getTileSize(), game::Ownership::Player2) == nullptr)
+					{
+						return std::make_pair(x + i, y + j);
+					}
+				}
+			}
+		}
+	}
+
 	static std::string ObjectTypeToString(const game::ObjectType& type)
 	{
 		if (type == game::ObjectType::Melee) return "Melee";
