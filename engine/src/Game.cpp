@@ -158,15 +158,15 @@ namespace engine
 		{
 			if (obj->getName() == "Mine" || obj->getName() == "Tower")
 			{
-				auto mine_obj = dynamic_cast<game::IBuilding*>(obj.get());
-				mine_obj->update(m_gameMap, testOM, true, GetCurrentPlayerState());
+				auto mine = dynamic_cast<game::IBuilding*>(obj.get());
+				mine->update(m_gameMap, testOM, GetCurrentPlayerState());
 			}
 			else if (obj->getName() == "Probe")
 			{
-				auto probe_obj = dynamic_cast<game::Probe*>(obj.get());
-				if (probe_obj->isDuplicating() && probe_obj->getOwner() == activePlayer)
+				auto probe = dynamic_cast<game::Probe*>(obj.get());
+				if (probe->isDuplicating() && probe->getOwner() == activePlayer)
 				{
-					probe_obj->duplicate(testOM, m_gameMap);
+					probe->duplicate(testOM, m_gameMap);
 				}
 			}
 		}
@@ -212,7 +212,8 @@ namespace engine
 					pixelPos = sf::Mouse::getPosition(*m_window);
 					worldPos = m_window->mapPixelToCoords(pixelPos);
 
-					if (pixelPos.y < 620) {
+					if (pixelPos.y < 620)
+					{
 						clickMap(worldPos.x, worldPos.y);
 					}
 					/*
@@ -277,8 +278,8 @@ namespace engine
 									}
 									else if (otherTileUnit->getName() == "Probe" && testPO->getName() != "Probe")
 									{
-										auto probe_obj = dynamic_cast<game::Probe*>(otherTileUnit.get());
-										probe_obj->load(testPO, testOM);
+										auto probe = dynamic_cast<game::Probe*>(otherTileUnit.get());
+										probe->load(testPO, testOM);
 										endMove();
 									}
 								}
@@ -317,28 +318,32 @@ namespace engine
 						if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
 						{
 							auto building = dynamic_cast<game::IBuilding*>(testPO.get());
-							building->update(m_gameMap, testOM, true, GetCurrentPlayerState());
-							endMove();
-							return;
+							if (building->update(m_gameMap, testOM, GetCurrentPlayerState()))
+							{
+								endMove();
+								return;
+							}
 						}
 
 						else if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
-									TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
+							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 						{
 							auto worker = dynamic_cast<game::Worker*>(testPO.get());
-							worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::SpaceStation);
-							endMove();
-							return;
+							if (worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::SpaceStation))
+							{
+								endMove();
+								return;
+							}
 						}
 
 						else if (testPO->getName() == "Probe" && testPO->getOwner() == activePlayer)
 						{
-							auto probe_obj = dynamic_cast<game::Probe*>(testPO.get());
-							if (probe_obj->getLocation()->getTypeString() != "Void" &&
-								!probe_obj->isDuplicating())
+							auto probe = dynamic_cast<game::Probe*>(testPO.get());
+							if (probe->getLocation()->getTypeString() != "Void" &&
+								!probe->isDuplicating())
 							{
-								probe_obj->setDuplicating(true);
-								probe_obj->duplicate(testOM, m_gameMap);
+								probe->setDuplicating(true);
+								probe->duplicate(testOM, m_gameMap);
 								endMove();
 								return;
 							}
@@ -351,17 +356,19 @@ namespace engine
 							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 						{
 							auto worker = dynamic_cast<game::Worker*>(testPO.get());
-							worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::MilitaryBase);
-							endMove();
-							return;
+							if (worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::MilitaryBase))
+							{
+								endMove();
+								return;
+							}
 						}
 
 						else if (testPO->getName() == "Probe" && testPO->getOwner() == activePlayer)
 						{
-							auto probe_obj = dynamic_cast<game::Probe*>(testPO.get());
-							if (probe_obj->isLoaded())
+							auto probe = dynamic_cast<game::Probe*>(testPO.get());
+							if (probe->isLoaded())
 							{
-								probe_obj->deploy(testOM, m_gameMap);
+								probe->deploy(testOM, m_gameMap);
 								endMove();
 								return;
 							}
@@ -374,9 +381,11 @@ namespace engine
 							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 						{
 							auto worker = dynamic_cast<game::Worker*>(testPO.get());
-							worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::AirBase);
-							endMove();
-							return;
+							if (worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::AirBase))
+							{
+								endMove();
+								return;
+							}
 						}
 					}
 
@@ -386,9 +395,11 @@ namespace engine
 							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 						{
 							auto worker = dynamic_cast<game::Worker*>(testPO.get());
-							worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Mine);
-							endMove();
-							return;
+							if (worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Mine))
+							{
+								endMove();
+								return;
+							}
 						}
 					}
 
@@ -398,9 +409,11 @@ namespace engine
 							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 						{
 							auto worker = dynamic_cast<game::Worker*>(testPO.get());
-							worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Tower);
-							endMove();
-							return;
+							if (worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Tower))
+							{
+								endMove();
+								return;
+							}
 						}
 					}
 				}
