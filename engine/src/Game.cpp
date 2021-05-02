@@ -112,20 +112,15 @@ namespace engine
 		}
 	}
 
+	void Game::BuildButtonPressed(sf::Event ev, TilePtr tpr) {
+		testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::MilitaryBase);
+	}
+
 	void Game::setClickedTile(int x, int y, sf::RectangleShape* rs)
 	{
 		rs->setPosition(x*tileSize, y*tileSize);
 	}
 
-  void Game::setDisplayText(sf::Text *text, sf::String str) 
-  { 
-		// set the string to display
-		text->setString(str);
-		text->setCharacterSize(20); // in pixels
-		text->setFillColor(sf::Color::White);
-		text->setPosition(0, 0);
-		text->setFont(m_gui.GetFont());
-	}
 
 	void Game::endMove()
 	{
@@ -216,57 +211,61 @@ namespace engine
 
 				if (m_event.mouseButton.button == sf::Mouse::Right)
 				{
-					if (unitIsSelected && testPO->getOwner() == activePlayer)
-					{
-						pixelPos = sf::Mouse::getPosition(*m_window);
-						worldPos = m_window->mapPixelToCoords(pixelPos);
-						auto click = TileToScreen(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
+					if (pixelPos.y < 620) {
 
-						if (testPO->getIsBuilding() == false)
+
+						if (unitIsSelected && testPO->getOwner() == activePlayer)
 						{
-							if (worldPos.x >= 0 && worldPos.y >= 0 && worldPos.x < tileSize * (m_gameMap->getWidth()) && worldPos.y < tileSize * m_gameMap->getHeight())
+							pixelPos = sf::Mouse::getPosition(*m_window);
+							worldPos = m_window->mapPixelToCoords(pixelPos);
+							auto click = TileToScreen(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
+
+							if (testPO->getIsBuilding() == false)
 							{
-								int x = worldPos.x / tileSize;
-								int y = worldPos.y / tileSize;
-
-								IObjectPtr otherTileUnit = nullptr;
-								auto enemy = activePlayer;
-								if (activePlayer == game::Ownership::Player1)
+								if (worldPos.x >= 0 && worldPos.y >= 0 && worldPos.x < tileSize * (m_gameMap->getWidth()) && worldPos.y < tileSize * m_gameMap->getHeight())
 								{
-									enemy = game::Ownership::Player2;
-									otherTileUnit = testOM->findUnit(x * tileSize, y * tileSize, game::Ownership::Player2);
-								}
-								else
-								{
-									enemy = game::Ownership::Player1;
-									otherTileUnit = testOM->findUnit(x * tileSize, y * tileSize, game::Ownership::Player1);
-								}
+									int x = worldPos.x / tileSize;
+									int y = worldPos.y / tileSize;
 
-								auto tile = m_gameMap->getTile(x, y);
-								setClickedTile(x, y, &selectedMapTile);
-
-								if (TileDistance(testPO->getPosition(), click) <= testPO->getMoveSpeed())
-								{
-									if (otherTileUnit == nullptr)
+									IObjectPtr otherTileUnit = nullptr;
+									auto enemy = activePlayer;
+									if (activePlayer == game::Ownership::Player1)
 									{
-										if (activePlayer == game::Ownership::Player1)
-										{
-											testPO->move(tile, player1State, player2State, &changed);
-										}
-										else
-										{
-											testPO->move(tile, player2State, player1State, &changed);
-										}
-										endMove();
-										std::cout << "moved\n";
+										enemy = game::Ownership::Player2;
+										otherTileUnit = testOM->findUnit(x * tileSize, y * tileSize, game::Ownership::Player2);
 									}
-									else if (otherTileUnit->getOwner() == enemy)
+									else
 									{
-										if (TileDistance(testPO->getPosition(), click) <= testPO->getRange())
+										enemy = game::Ownership::Player1;
+										otherTileUnit = testOM->findUnit(x * tileSize, y * tileSize, game::Ownership::Player1);
+									}
+
+									auto tile = m_gameMap->getTile(x, y);
+									setClickedTile(x, y, &selectedMapTile);
+
+									if (TileDistance(testPO->getPosition(), click) <= testPO->getMoveSpeed())
+									{
+										if (otherTileUnit == nullptr)
 										{
-											testPO->attack(otherTileUnit, testOM);
+											if (activePlayer == game::Ownership::Player1)
+											{
+												testPO->move(tile, player1State, player2State, &changed);
+											}
+											else
+											{
+												testPO->move(tile, player2State, player1State, &changed);
+											}
 											endMove();
-											std::cout << "attacked\n";
+											std::cout << "moved\n";
+										}
+										else if (otherTileUnit->getOwner() == enemy)
+										{
+											if (TileDistance(testPO->getPosition(), click) <= testPO->getRange())
+											{
+												testPO->attack(otherTileUnit, testOM);
+												endMove();
+												std::cout << "attacked\n";
+											}
 										}
 									}
 								}
@@ -277,25 +276,7 @@ namespace engine
 				break;
 
 				case sf::Event::KeyPressed:							//key pressed
-					if (m_event.key.code == sf::Keyboard::Space)	//space pressed switch player
-					{
-						if (activePlayer == game::Ownership::Player1)
-						{
-							unitIsSelected = false;
-							testPO = nullptr;
-							activePlayer = game::Ownership::Player2;
-							ActivePlayerText.setString("Player 2");
-						}
-						else
-						{
-							unitIsSelected = false;
-							testPO = nullptr;
-							activePlayer = game::Ownership::Player1;
-							ActivePlayerText.setString("Player 1");
-						}
-						std::cout << (int)activePlayer;
-					}
-
+					
 					// REFAKTOR PLS
 					if (unitIsSelected && testPO != nullptr) {
 						tempx = testPO->getPosition().x / tileSize + 1;
@@ -429,7 +410,7 @@ namespace engine
 		m_window->setView(m_view);
 		m_window->draw(m_frame);
 		testOM->drawAll(m_window);
-
+		m_window->draw(selectedMapTile);
 		
 		m_window->setView(defaultView);
 		m_window->draw(m_guiRectangle);
@@ -440,7 +421,7 @@ namespace engine
 		m_window->draw(m_cursor);
 
 		m_window->setView(m_view);
-		m_window->draw(selectedMapTile);
+		
 		m_window->display();
 	}
 

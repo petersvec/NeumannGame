@@ -74,6 +74,7 @@ namespace engine
 
 		void endMove();
 		void clickMap(int, int);
+		void BuildButtonPressed(sf::Event ev, TilePtr tpr);
 		void setClickedTile(int, int, sf::RectangleShape*);
 		void setDisplayText(sf::Text*, sf::String);
 		
