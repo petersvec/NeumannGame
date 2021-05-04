@@ -32,12 +32,6 @@ namespace engine
 		selectedMapTile.setOutlineThickness(3);
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
-
-		selectedMoveRange.setFillColor(sf::Color::Transparent);
-		selectedMoveRange.setOutlineColor(sf::Color::Yellow);
-		selectedMoveRange.setOutlineThickness(3);
-		selectedMoveRange.setPosition(0, 0);
-		selectedMoveRange.setSize(sf::Vector2f(tileSize, tileSize));
 	
 		auto unit_1 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(1, 1), game::Ownership::Player1);
 		auto unit_2 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(10, 1), game::Ownership::Player2);
@@ -104,14 +98,10 @@ namespace engine
 			if (testPO != nullptr)
 			{
 				m_gui.LoadObject(testPO, activePlayer);
-				float sizef = testPO->getMoveSpeed();
-				selectedMoveRange.setSize(sf::Vector2f(tileSize*sizef*2+tileSize, tileSize*sizef*2+tileSize));
-				selectedMoveRange.setPosition(testPO->getPosition().x-(sizef*tileSize), testPO->getPosition().y-(sizef*tileSize));
 				unitIsSelected = true;
 			}
 			else
 			{
-				selectedMoveRange.setSize(sf::Vector2f(0, 0));
 				unitIsSelected = false;
 			}
 
@@ -421,7 +411,6 @@ namespace engine
 		m_window->draw(m_frame);
 		testOM->drawAll(m_window);
 		m_window->draw(selectedMapTile);
-		m_window->draw(selectedMoveRange);
 		
 		m_window->setView(defaultView);
 		m_window->draw(m_guiRectangle);
