@@ -412,14 +412,14 @@ namespace engine
 			m_renderMap.renderMap(*m_gameMap, m_renderTexture);
 			changed=0;
 		}
-		
+		testOM->drawAll(&m_renderTexture);
 		m_renderTexture.display();
 		
 		const sf::Texture& texture = m_renderTexture.getTexture();
 		m_frame.setTexture(texture);
 		m_window->setView(m_view);
 		m_window->draw(m_frame);
-		testOM->drawAll(m_window);
+		
 		m_window->draw(selectedMapTile);
 		m_window->draw(selectedMoveRange);
 		

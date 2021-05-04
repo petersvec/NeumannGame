@@ -3,7 +3,7 @@
 #include "Utilities.hpp"
 #include "../../game/include/ObjectType.hpp"
 #include "../../game/include/player/PlayerState.hpp"
-#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 
 namespace engine
@@ -42,7 +42,7 @@ namespace engine
 		virtual unsigned char getMoveSpeed() = 0;
 		virtual unsigned char getRange() = 0;
 
-		virtual void draw(sf::RenderWindow* window)
+		virtual void draw(sf::RenderTexture* window)
 		{
 			if (m_owner == game::Ownership::Player1)
 			{

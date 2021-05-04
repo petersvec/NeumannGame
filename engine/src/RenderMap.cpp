@@ -12,14 +12,14 @@ namespace engine
 	{
 		
 
-		if (!shader.loadFromFile("storm.vert", sf::Shader::Vertex))
+		if (!shader.loadFromFile("data\\shaders\\storm.vert", sf::Shader::Vertex))
 		{
 			// error...
 		}
-		//if (!shader.loadFromFile("blink.frag", sf::Shader::Fragment))
-		//{
+		if (!shader.loadFromFile("data\\shaders\\example_004.frag", sf::Shader::Fragment))
+		{
 
-		//}
+		}
 
 		for (int i = 0; i < map.getHeight(); i++)
 		{
