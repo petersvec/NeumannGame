@@ -57,7 +57,7 @@ namespace game
 		m_troop = troop;
 	}
 
-	void Probe::duplicate(std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
+	void Probe::duplicate(PlayerState& playerState1, PlayerState& playerState2, int* changed, std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
 	{
 		if (getDuplicateTime() == 0)
 		{
@@ -66,6 +66,24 @@ namespace game
 			objMan->addUnit(engine::unitFactory->create(ObjectType::Probe, location, getOwner()));
 			setDuplicateTime(5);
 			setDuplicating(false);
+
+			if (location->getTileType() != TileType::Void)
+			{
+				if (location->getOccupied() == getOwner()) {}
+				else if (location->getOccupied() == Ownership::Unoccupied)
+				{
+					playerState1.updateLand(1);
+					location->setOccupied(getOwner());
+					*changed = 1;
+				}
+				else
+				{
+					playerState1.updateLand(1);
+					playerState2.updateLand(-1);
+					location->setOccupied(getOwner());
+					*changed = 1;
+				}
+			}
 		}
 		else if (getLocation()->getMinerals() >= 80)
 		{
@@ -87,7 +105,7 @@ namespace game
 		setIsLoaded(true);
 	}
 
-	void Probe::deploy(std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
+	void Probe::deploy(PlayerState& playerState1, PlayerState& playerState2, int* changed, std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
 	{
 		if (!isLoaded())
 		{
@@ -96,6 +114,24 @@ namespace game
 
 		auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 		engine::TilePtr location = map->getTile(xy.first, xy.second);
+
+		if (location->getTileType() != TileType::Void)
+		{
+			if (location->getOccupied() == getOwner()) {}
+			else if (location->getOccupied() == Ownership::Unoccupied)
+			{
+				playerState1.updateLand(1);
+				location->setOccupied(getOwner());
+				*changed = 1;
+			}
+			else
+			{
+				playerState1.updateLand(1);
+				playerState2.updateLand(-1);
+				location->setOccupied(getOwner());
+				*changed = 1;
+			}
+		}
 
 		m_troop->setLocation(location);
 		objMan->addUnit(m_troop);

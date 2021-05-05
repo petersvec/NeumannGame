@@ -131,6 +131,26 @@ namespace engine
 
 	void Game::endMove()
 	{
+		// Global update po kazdom tahu:
+		// 1. Mining
+		// 2. Tower attacks
+		for (auto& obj : testOM->getPlayerObjects())
+		{
+			if (obj->getName() == "Mine" || obj->getName() == "Tower")
+			{
+				auto mine = dynamic_cast<game::IBuilding*>(obj.get());
+				mine->update(m_gameMap, testOM, GetCurrentPlayerState());
+			}
+			else if (obj->getName() == "Probe")
+			{
+				auto probe = dynamic_cast<game::Probe*>(obj.get());
+				if (probe->isDuplicating() && probe->getOwner() == activePlayer)
+				{
+					probe->duplicate(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, testOM, m_gameMap);
+				}
+			}
+		}
+
 		m_gui.text.setString("");
 		if (activePlayer == game::Ownership::Player1)
 		{
@@ -149,26 +169,6 @@ namespace engine
 			ActivePlayerText.setString("Player 1");
 			ActivePlayerText.setFillColor(sf::Color::Red);
 			m_gui.SetPlayerState(player1State);
-		}
-
-		// Global update po kazdom tahu:
-		// 1. Mining
-		// 2. Tower attacks
-		for (auto& obj : testOM->getPlayerObjects())
-		{
-			if (obj->getName() == "Mine" || obj->getName() == "Tower")
-			{
-				auto mine = dynamic_cast<game::IBuilding*>(obj.get());
-				mine->update(m_gameMap, testOM, GetCurrentPlayerState());
-			}
-			else if (obj->getName() == "Probe")
-			{
-				auto probe = dynamic_cast<game::Probe*>(obj.get());
-				if (probe->isDuplicating() && probe->getOwner() == activePlayer)
-				{
-					probe->duplicate(testOM, m_gameMap);
-				}
-			}
 		}
 
 		// WINNING CHECK
@@ -258,14 +258,7 @@ namespace engine
 								{
 									if (otherTileUnit == nullptr)
 									{
-										if (activePlayer == game::Ownership::Player1)
-										{
-											testPO->move(tile, player1State, player2State, &changed);
-										}
-										else
-										{
-											testPO->move(tile, player2State, player1State, &changed);
-										}
+										testPO->move(tile, GetCurrentPlayerState(), GetEnemyPlayerState(), &changed);
 										endMove();
 									}
 									else if (otherTileUnit->getOwner() == enemy)
@@ -343,7 +336,7 @@ namespace engine
 								!probe->isDuplicating())
 							{
 								probe->setDuplicating(true);
-								probe->duplicate(testOM, m_gameMap);
+								probe->duplicate(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, testOM, m_gameMap);
 								endMove();
 								return;
 							}
@@ -368,7 +361,7 @@ namespace engine
 							auto probe = dynamic_cast<game::Probe*>(testPO.get());
 							if (probe->isLoaded())
 							{
-								probe->deploy(testOM, m_gameMap);
+								probe->deploy(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, testOM, m_gameMap);
 								endMove();
 								return;
 							}
