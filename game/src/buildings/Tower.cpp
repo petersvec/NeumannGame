@@ -21,9 +21,9 @@ namespace game
 				 IObject{ hp, type, texture, location, owner }
 	{}
 
-	bool Tower::update(std::shared_ptr<engine::Map> map,
-					   std::shared_ptr<engine::ObjectManager> objMan,
-					   PlayerState& playerState)
+	bool Tower::update(PlayerState& playerState1, PlayerState& playerState2, int* changed, 
+					   std::shared_ptr<engine::Map> map,
+					   std::shared_ptr<engine::ObjectManager> objMan)
 	{
 		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
 

@@ -139,7 +139,7 @@ namespace engine
 			if (obj->getName() == "Mine" || obj->getName() == "Tower")
 			{
 				auto mine = dynamic_cast<game::IBuilding*>(obj.get());
-				mine->update(m_gameMap, testOM, GetCurrentPlayerState());
+				mine->update(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap, testOM);
 			}
 			else if (obj->getName() == "Probe")
 			{
@@ -311,7 +311,7 @@ namespace engine
 						if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
 						{
 							auto building = dynamic_cast<game::IBuilding*>(testPO.get());
-							if (building->update(m_gameMap, testOM, GetCurrentPlayerState()))
+							if (building->update(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap, testOM))
 							{
 								endMove();
 								return;
@@ -319,7 +319,7 @@ namespace engine
 						}
 
 						else if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
-							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
+								 TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 						{
 							auto worker = dynamic_cast<game::Worker*>(testPO.get());
 							if (worker->build(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::SpaceStation))
