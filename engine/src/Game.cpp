@@ -329,7 +329,7 @@ namespace engine
 							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 						{
 							auto worker = dynamic_cast<game::Worker*>(testPO.get());
-							if (worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::SpaceStation))
+							if (worker->build(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::SpaceStation))
 							{
 								endMove();
 								return;
@@ -356,7 +356,7 @@ namespace engine
 							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 						{
 							auto worker = dynamic_cast<game::Worker*>(testPO.get());
-							if (worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::MilitaryBase))
+							if (worker->build(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::MilitaryBase))
 							{
 								endMove();
 								return;
@@ -381,7 +381,7 @@ namespace engine
 							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 						{
 							auto worker = dynamic_cast<game::Worker*>(testPO.get());
-							if (worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::AirBase))
+							if (worker->build(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::AirBase))
 							{
 								endMove();
 								return;
@@ -395,7 +395,7 @@ namespace engine
 							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 						{
 							auto worker = dynamic_cast<game::Worker*>(testPO.get());
-							if (worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Mine))
+							if (worker->build(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Mine))
 							{
 								endMove();
 								return;
@@ -409,7 +409,7 @@ namespace engine
 							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
 						{
 							auto worker = dynamic_cast<game::Worker*>(testPO.get());
-							if (worker->build(GetCurrentPlayerState(), m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Tower))
+							if (worker->build(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Tower))
 							{
 								endMove();
 								return;
@@ -500,6 +500,18 @@ namespace engine
 	game::PlayerState &Game::GetCurrentPlayerState()
 	{
 		if (activePlayer == game::Ownership::Player1)
+		{
+			return player1State;
+		}
+		else
+		{
+			return player2State;
+		}
+	}
+
+	game::PlayerState& Game::GetEnemyPlayerState()
+	{
+		if (activePlayer == game::Ownership::Player2)
 		{
 			return player1State;
 		}

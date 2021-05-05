@@ -21,7 +21,7 @@ namespace game
 			   Ownership owner);
 
 		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) override;
-		virtual bool build(game::PlayerState&, engine::TilePtr, std::shared_ptr<engine::ObjectManager>, game::ObjectType) override;
+		virtual bool build(PlayerState&, PlayerState&, int*, engine::TilePtr, std::shared_ptr<engine::ObjectManager>, ObjectType) override;
 		std::string getName() override;
 	};
 }
