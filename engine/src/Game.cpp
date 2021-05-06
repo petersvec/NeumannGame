@@ -478,9 +478,17 @@ namespace engine
 		m_renderTexture.display();
 		
 		const sf::Texture& texture = m_renderTexture.getTexture();
+
 		m_frame.setTexture(texture);
 		m_window->setView(m_view);
-		m_window->draw(m_frame);
+		
+		// postprocess
+		//////////////
+		sf::RenderStates states;
+		states.shader = &m_renderMap.m_pixel_shader;
+		m_renderMap.setupShader(texture);
+		m_window->draw(m_frame, states);
+		//////////////
 		
 		m_window->draw(selectedMapTile);
 		m_window->draw(selectedMoveRange);

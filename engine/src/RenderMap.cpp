@@ -1,26 +1,26 @@
 #include "../include/RenderMap.hpp"
 #include "../../game/include/Tile.hpp"
+#include <SFML/Graphics/VertexArray.hpp>
 
 namespace engine
 {
 	RenderMap::RenderMap()
 	{
+		loadShaders();
+	}
 
+	void RenderMap::setupShader(const sf::Texture& texture)
+	{
+		m_pixel_shader.setUniform("texture", texture);
+	}
+
+	void RenderMap::loadShaders()
+	{
+		m_pixel_shader.loadFromFile("data\\shaders\\post_process.frag", sf::Shader::Fragment);
 	}
 
 	void RenderMap::initMapTextures(Map& map)
 	{
-		
-
-		if (!shader.loadFromFile("data\\shaders\\storm.vert", sf::Shader::Vertex))
-		{
-			// error...
-		}
-		if (!shader.loadFromFile("data\\shaders\\example_004.frag", sf::Shader::Fragment))
-		{
-
-		}
-
 		for (int i = 0; i < map.getHeight(); i++)
 		{
 			for (int j = 0; j < map.getWidth(); j++)
@@ -53,7 +53,7 @@ namespace engine
 		{
 			for (int j = 0; j < map.getWidth(); j++)
 			{
-				renderTexture.draw(map.getTile(i, j).get()->getSprite(), &shader);
+				renderTexture.draw(map.getTile(i, j).get()->getSprite());
 			}
 		}
 	}

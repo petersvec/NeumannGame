@@ -9,14 +9,15 @@ namespace engine
 {
 	class RenderMap
 	{
-	private:
-		
 	public:
-		sf::Shader shader;
-
+		sf::Shader m_pixel_shader;
+	private:
+		void loadShaders();
 	public:
 		RenderMap();
 		void initMapTextures(Map&);
 		void renderMap(Map&, sf::RenderTexture&);
+
+		void  setupShader(const sf::Texture& texture);
 	};
 }
