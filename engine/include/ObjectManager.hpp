@@ -1,8 +1,10 @@
 #pragma once
 
+
+#include <SFML/Graphics/RenderTexture.hpp>
 #include <vector>
-#include <SFML/Graphics/RenderWindow.hpp>
 #include "../../game/include/Ownership.hpp"
+#include <memory>
 
 namespace engine
 {

@@ -35,6 +35,12 @@ namespace engine
 		selectedMapTile.setPosition(0, 0);
 		selectedMapTile.setSize(sf::Vector2f(tileSize, tileSize));
 
+		selectedMoveRange.setFillColor(sf::Color::Transparent);
+		selectedMoveRange.setOutlineColor(sf::Color::Yellow);
+		selectedMoveRange.setOutlineThickness(3);
+		selectedMoveRange.setPosition(0, 0);
+		selectedMoveRange.setSize(sf::Vector2f(tileSize, tileSize));
+
 		auto building_1 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(1, 1), game::Ownership::Player1);
 		auto unit_1 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(1, 2), game::Ownership::Player1);
 		auto unit_3 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(2, 1), game::Ownership::Player1);
@@ -100,10 +106,14 @@ namespace engine
 			if (testPO != nullptr)
 			{
 				m_gui.LoadObject(testPO, activePlayer);
+				float sizef = testPO->getMoveSpeed();
+				selectedMoveRange.setSize(sf::Vector2f(tileSize*sizef*2+tileSize, tileSize*sizef*2+tileSize));
+				selectedMoveRange.setPosition(testPO->getPosition().x-(sizef*tileSize), testPO->getPosition().y-(sizef*tileSize));
 				unitIsSelected = true;
 			}
 			else
 			{
+				selectedMoveRange.setSize(sf::Vector2f(0, 0));
 				unitIsSelected = false;
 			}
 
@@ -114,20 +124,15 @@ namespace engine
 		}
 	}
 
+	void Game::BuildButtonPressed(sf::Event ev, TilePtr tpr) {
+		testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::MilitaryBase);
+	}
+
 	void Game::setClickedTile(int x, int y, sf::RectangleShape* rs)
 	{
 		rs->setPosition(x*tileSize, y*tileSize);
 	}
 
-  void Game::setDisplayText(sf::Text *text, sf::String str) 
-  { 
-		// set the string to display
-		text->setString(str);
-		text->setCharacterSize(20); // in pixels
-		text->setFillColor(sf::Color::White);
-		text->setPosition(0, 0);
-		text->setFont(m_gui.GetFont());
-	}
 
 	void Game::endMove()
 	{
@@ -467,15 +472,16 @@ namespace engine
 			m_renderMap.renderMap(*m_gameMap, m_renderTexture);
 			changed=0;
 		}
-		
+		testOM->drawAll(&m_renderTexture);
 		m_renderTexture.display();
 		
 		const sf::Texture& texture = m_renderTexture.getTexture();
 		m_frame.setTexture(texture);
 		m_window->setView(m_view);
 		m_window->draw(m_frame);
-		testOM->drawAll(m_window);
-
+		
+		m_window->draw(selectedMapTile);
+		m_window->draw(selectedMoveRange);
 		
 		m_window->setView(defaultView);
 		m_window->draw(m_guiRectangle);
@@ -486,7 +492,7 @@ namespace engine
 		m_window->draw(m_cursor);
 
 		m_window->setView(m_view);
-		m_window->draw(selectedMapTile);
+		
 		m_window->display();
 	}
 
