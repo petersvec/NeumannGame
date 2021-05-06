@@ -15,7 +15,7 @@ namespace engine
 	public:
 		ObjectManager();
 		
-		void drawAll(sf::RenderWindow*);
+		void drawAll(sf::RenderTexture*);
 		void addUnit(std::shared_ptr<IObject>);
 		void removeUnit(std::shared_ptr<IObject>);
 		void addLoadedUnit(std::shared_ptr<IObject>);

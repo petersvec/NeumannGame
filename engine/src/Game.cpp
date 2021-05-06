@@ -103,7 +103,7 @@ namespace engine
       
 			testPO=testOM->findUnit(x * tileSize, y * tileSize, activePlayer);
 
-			if (testPO != nullptr)
+			if (testPO != nullptr && testPO->getOwner() == activePlayer)
 			{
 				m_gui.LoadObject(testPO, activePlayer);
 				float sizef = testPO->getMoveSpeed();
@@ -125,7 +125,7 @@ namespace engine
 	}
 
 	void Game::BuildButtonPressed(sf::Event ev, TilePtr tpr) {
-		testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::MilitaryBase);
+		//testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::MilitaryBase);
 	}
 
 	void Game::setClickedTile(int x, int y, sf::RectangleShape* rs)
@@ -186,6 +186,8 @@ namespace engine
 		{
 			std::cout << "PLAYER 2 WIN!!!" << std::endl;
 		}
+		
+		selectedMoveRange.setSize(sf::Vector2f(0, 0));
 	}
 	
 	const bool Game::isRunning() const
