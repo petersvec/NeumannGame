@@ -1,8 +1,10 @@
 #pragma once
 
+
+#include <SFML/Graphics/RenderTexture.hpp>
 #include <vector>
-#include <SFML/Graphics/RenderWindow.hpp>
 #include "../../game/include/Ownership.hpp"
+#include <memory>
 
 namespace engine
 {
@@ -13,7 +15,7 @@ namespace engine
 	public:
 		ObjectManager();
 		
-		void drawAll(sf::RenderWindow* window);
+		void drawAll(sf::RenderTexture* window);
 		void addUnit(std::shared_ptr<IObject> unit);
 		void removeUnit(std::shared_ptr<IObject>);
 		std::shared_ptr<IObject> findUnit(int x, int y, game::Ownership player);

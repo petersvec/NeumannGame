@@ -20,11 +20,17 @@ namespace engine
 
 	static unsigned short TileDistance(const sf::Vector2f& position1, const sf::Vector2f& position2)
 	{
-		double x = position2.x - position1.x;
-		double y = position2.y - position1.y;
+		double x = std::abs(position2.x - position1.x);
+		double y = std::abs(position2.y - position1.y);
 		unsigned char tileSize = config->getTileSize();
-
-		return sqrt( x * x + y * y) / tileSize;
+		if (x >= y) {
+			return x / tileSize;
+		}
+		else
+		{
+			return y / tileSize;
+		}
+		
 	}
 
 	static std::pair<unsigned short, unsigned short> GetNearestFreeLocation(std::shared_ptr<game::Tile> location, std::shared_ptr<ObjectManager> objMan)

@@ -34,7 +34,7 @@ namespace engine
 
 		std::string str = object->getName() + "| HP: " + std::to_string(object->getHp());
 		str = str + player;
-		if (object->getIsBuilding() == true && object->getOwner()==activePlayer)
+		if (object->getIsBuilding() == true && object->getOwner() == activePlayer)
 		{
 			str = str + '\n' + "Press 1 to build an unit " + CreateUnitCostString(object);
 		}
@@ -47,6 +47,11 @@ namespace engine
 			str += "4: Mine" + CreateBuildingCostString("Mine") + " | ";
 			str += "5: Tower" + CreateBuildingCostString("Tower");
 		}
+		if (object->getName() == "Probe" && object->getOwner() == activePlayer) {
+			str += "\n";
+			str += "1: Duplicate | 2: Deploy ";
+		}
+	
 		text.setString(str);
 	}
 

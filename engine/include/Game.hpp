@@ -53,6 +53,7 @@ namespace engine
 		std::shared_ptr<IObject> testPO;
 		bool unitIsSelected;
 		sf::RectangleShape selectedMapTile;
+		sf::RectangleShape selectedMoveRange;
 		game::PlayerState player1State;
 		game::PlayerState player2State;
 		sf::Text ActivePlayerText;
@@ -74,6 +75,7 @@ namespace engine
 
 		void endMove();
 		void clickMap(int, int);
+		void BuildButtonPressed(sf::Event ev, TilePtr tpr);
 		void setClickedTile(int, int, sf::RectangleShape*);
 		void setDisplayText(sf::Text*, sf::String);
 		

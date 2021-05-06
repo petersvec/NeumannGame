@@ -12,7 +12,7 @@ namespace engine
 		return playerObjectVector;
 	}
 
-	void ObjectManager::drawAll(sf::RenderWindow* window)
+	void ObjectManager::drawAll(sf::RenderTexture* window)
 	{
 		for (int it = 0; it < playerObjectVector.size(); it++)
 		{

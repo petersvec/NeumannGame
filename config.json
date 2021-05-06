@@ -1,6 +1,6 @@
 {
-	"MapHeight": 50,
-	"MapWidth": 50,
+	"MapHeight": 100,
+	"MapWidth": 100,
 	"NumberOfPlanets": 5,
 	"MaxRadiusOfPlanet": 3,
   "TileSize": 50,
