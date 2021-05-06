@@ -1,7 +1,7 @@
 #include "../../include/units/Worker.hpp"
 #include "../../../engine/include/UnitFactory.hpp"
 #include "../../../engine/include/JsonParser.hpp"
-#include <iostream>
+#include "../../include/units/Probe.hpp"
 
 namespace game
 {
@@ -37,78 +37,102 @@ namespace game
 		}
 		else
 		{
+			if (object->getType() == ObjectType::Probe)
+			{
+				auto probe = dynamic_cast<Probe*>(object.get());
+
+				if (probe->isLoaded())
+				{
+					objMan->removeLoadedUnit(probe->getTroop());
+				}
+			}
 			objMan->removeUnit(object);
 		}
 	}
 
-	void Worker::build(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)
-	{
-
-	}
-
-	void Worker::workerBuild(game::PlayerState& playerState, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, game::ObjectType type)
+	bool Worker::build(PlayerState& playerState1, PlayerState& playerState2, int* changed, engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM, ObjectType type)
 	{
 		if (type == ObjectType::AirBase)
 		{
 			auto cost = engine::config->GetCost("AirBase");
 
-			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
+			if (!playerState1.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
-				return;
+				return false;
 			}
 
-			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
+			playerState1.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
-		else if(type == ObjectType::MilitaryBase)
+		else if (type == ObjectType::MilitaryBase)
 		{
 			auto cost = engine::config->GetCost("MilitaryBase");
 
-			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
+			if (!playerState1.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
-				return;
+				return false;
 			}
 
-			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
+			playerState1.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
-		else if(type == ObjectType::Tower)
+		else if (type == ObjectType::Tower)
 		{
 			auto cost = engine::config->GetCost("Tower");
 
-			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
+			if (!playerState1.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
-				return;
+				return false;
 			}
 
-			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
+			playerState1.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
 		else if (type == ObjectType::Mine)
 		{
 			auto cost = engine::config->GetCost("Mine");
 
-			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
+			if (!playerState1.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
-				return;
+				return false;
 			}
 
-			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
+			playerState1.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
 		else if (type == ObjectType::SpaceStation)
 		{
 			auto cost = engine::config->GetCost("SpaceStation");
 
-			if (!playerState.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
+			if (!playerState1.checkBalance(cost["iron"], cost["copper"], cost["silicon"]))
 			{
-				return;
+				return false;
 			}
 
-			playerState.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
+			playerState1.updatePlayerBalances(-cost["iron"], -cost["copper"], -cost["silicon"]);
 		}
 		else
 		{
-			return;
+			return false;
 		}
+
+		if (location->getTileType() != TileType::Void)
+		{
+			if (location->getOccupied() == getOwner()) {}
+			else if (location->getOccupied() == Ownership::Unoccupied)
+			{
+				playerState1.updateLand(1);
+				location->setOccupied(getOwner());
+				*changed = 1;
+			}
+			else
+			{
+				playerState1.updateLand(1);
+				playerState2.updateLand(-1);
+				location->setOccupied(getOwner());
+				*changed = 1;
+			}
+		}
+
 		auto unit = engine::unitFactory->create(type, location, getOwner());
 		OM->addUnit(unit);
+		return true;
 	}
   
 	std::string Worker::getName()

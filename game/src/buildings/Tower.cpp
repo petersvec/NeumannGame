@@ -1,4 +1,5 @@
 #include "../../include/buildings/Tower.hpp"
+#include "../../include/units/Probe.hpp"
 
 namespace game
 {
@@ -20,10 +21,9 @@ namespace game
 				 IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Tower::update(std::shared_ptr<engine::Map> map,
-					   std::shared_ptr<engine::ObjectManager> objMan,
-					   bool toUpdate,
-					   PlayerState& playerState)
+	bool Tower::update(PlayerState& playerState1, PlayerState& playerState2, int* changed, 
+					   std::shared_ptr<engine::Map> map,
+					   std::shared_ptr<engine::ObjectManager> objMan)
 	{
 		Ownership enemy = ((getOwner() == Ownership::Player1) ? Ownership::Player2 : Ownership::Player1);
 
@@ -39,6 +39,7 @@ namespace game
 				attack(i, objMan);
 			}
 		}
+		return true;
 	}
 
 	void Tower::attack(std::shared_ptr<engine::IObject> object, std::shared_ptr<engine::ObjectManager> objMan)
@@ -54,6 +55,15 @@ namespace game
 		}
 		else
 		{
+			if (object->getType() == ObjectType::Probe)
+			{
+				auto probe = dynamic_cast<Probe*>(object.get());
+
+				if (probe->isLoaded())
+				{
+					objMan->removeLoadedUnit(probe->getTroop());
+				}
+			}
 			objMan->removeUnit(object);
 		}
 	}

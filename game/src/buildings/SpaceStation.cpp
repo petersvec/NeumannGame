@@ -16,21 +16,38 @@ namespace game
 							   IObject{ hp, type, texture, location, owner }
 	{}
 
-	void SpaceStation::update(std::shared_ptr<engine::Map> map,
-							  std::shared_ptr<engine::ObjectManager> objMan,
-							  bool toUpdate,
-							  PlayerState& playerState)
+	bool SpaceStation::update(PlayerState& playerState1, PlayerState& playerState2, int* changed, 
+							  std::shared_ptr<engine::Map> map,
+							  std::shared_ptr<engine::ObjectManager> objMan)
 	{
-		if (toUpdate)
+		if (playerState1.checkBalance(getIronCost(), getCopperCost(), getSiliconCost()))
 		{
-			if (playerState.checkBalance(getIronCost(), getCopperCost(), getSiliconCost()))
+			playerState1.updatePlayerBalances(-getIronCost(), -getCopperCost(), -getSiliconCost());
+			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
+			engine::TilePtr location = map->getTile(xy.first, xy.second);
+
+			if (location->getTileType() != TileType::Void)
 			{
-				playerState.updatePlayerBalances(-getIronCost(), -getCopperCost(), -getSiliconCost());
-				auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
-				engine::TilePtr location = map->getTile(xy.first, xy.second);
-				build(location, objMan);
+				if (location->getOccupied() == getOwner()) {}
+				else if (location->getOccupied() == Ownership::Unoccupied)
+				{
+					playerState1.updateLand(1);
+					location->setOccupied(getOwner());
+					*changed = 1;
+				}
+				else
+				{
+					playerState1.updateLand(1);
+					playerState2.updateLand(-1);
+					location->setOccupied(getOwner());
+					*changed = 1;
+				}
 			}
+
+			build(location, objMan);
+			return true;
 		}
+		return false;
 	}
 
 	void SpaceStation::build(engine::TilePtr location, std::shared_ptr<engine::ObjectManager> OM)

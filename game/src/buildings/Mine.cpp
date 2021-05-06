@@ -16,18 +16,32 @@ namespace game
 			   IObject{ hp, type, texture, location, owner }
 	{}
 
-	void Mine::update(std::shared_ptr<engine::Map> map,
-					  std::shared_ptr<engine::ObjectManager> objMan,
-					  bool toUpdate,
-					  PlayerState& playerState)
+	bool Mine::update(PlayerState& playerState1, PlayerState& playerState2, int* changed, 
+					  std::shared_ptr<engine::Map> map,
+					  std::shared_ptr<engine::ObjectManager> objMan)
 	{
-		mine(playerState);
+		mine(playerState1);
+		return true;
 	}
 
 	void Mine::mine(PlayerState& playerState)
 	{
 		unsigned minerals = getLocation()->getMinerals();
-		playerState.updatePlayerBalances(minerals, minerals, minerals);
+		if (minerals == 0)
+		{
+			return;
+		}
+		
+		if (minerals >= 100)
+		{
+			playerState.updatePlayerBalances(100, 100, 100);
+			getLocation()->setMinerals(minerals - 100);
+		}
+		else
+		{
+			playerState.updatePlayerBalances(minerals, minerals, minerals);
+			getLocation()->setMinerals(0);
+		}
 	}
   
 	std::string Mine::getName()

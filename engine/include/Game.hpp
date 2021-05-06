@@ -61,7 +61,8 @@ namespace engine
 		sf::Sprite m_cursor;
 		unsigned short tempx, tempy;
 	private:
-		game::PlayerState &GetCurrentPlayerState();
+		game::PlayerState& GetCurrentPlayerState();
+		game::PlayerState& GetEnemyPlayerState();
 
 	public:
 		game::Ownership activePlayer = game::Ownership::Player1;

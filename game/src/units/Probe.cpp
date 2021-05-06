@@ -32,9 +32,9 @@ namespace game
 		return m_isLoaded;
 	}
 
-	void Probe::setLoading(bool loading)
+	void Probe::setIsLoaded(bool isLoaded)
 	{
-		m_isLoaded = loading;
+		m_isLoaded = isLoaded;
 	}
 
 	bool Probe::isDuplicating()
@@ -57,23 +57,42 @@ namespace game
 		m_troop = troop;
 	}
 
-	void Probe::duplicate(std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
+	void Probe::duplicate(PlayerState& playerState1, PlayerState& playerState2, int* changed, std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
 	{
 		if (getDuplicateTime() == 0)
 		{
 			auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 			engine::TilePtr location = map->getTile(xy.first, xy.second);
-			engine::unitFactory->create(ObjectType::Probe, location, getOwner());
+			objMan->addUnit(engine::unitFactory->create(ObjectType::Probe, location, getOwner()));
 			setDuplicateTime(5);
 			setDuplicating(false);
+
+			if (location->getTileType() != TileType::Void)
+			{
+				if (location->getOccupied() == getOwner()) {}
+				else if (location->getOccupied() == Ownership::Unoccupied)
+				{
+					playerState1.updateLand(1);
+					location->setOccupied(getOwner());
+					*changed = 1;
+				}
+				else
+				{
+					playerState1.updateLand(1);
+					playerState2.updateLand(-1);
+					location->setOccupied(getOwner());
+					*changed = 1;
+				}
+			}
 		}
-		else
+		else if (getLocation()->getMinerals() >= 80)
 		{
+			getLocation()->setMinerals(getLocation()->getMinerals() - 80);
 			setDuplicateTime(getDuplicateTime() - 1);
 		}
 	}
 
-	void Probe::load(std::shared_ptr<IObject> troop)
+	void Probe::load(std::shared_ptr<IObject> troop, std::shared_ptr<engine::ObjectManager> objMan)
 	{
 		if (isLoaded())
 		{
@@ -81,10 +100,12 @@ namespace game
 		}
 
 		m_troop = troop;
-		setLoading(true);
+		objMan->addLoadedUnit(troop);
+		objMan->removeUnit(troop);
+		setIsLoaded(true);
 	}
 
-	void Probe::deploy(std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
+	void Probe::deploy(PlayerState& playerState1, PlayerState& playerState2, int* changed, std::shared_ptr<engine::ObjectManager> objMan, std::shared_ptr<engine::Map> map)
 	{
 		if (!isLoaded())
 		{
@@ -94,9 +115,29 @@ namespace game
 		auto xy = engine::GetNearestFreeLocation(getLocation(), objMan);
 		engine::TilePtr location = map->getTile(xy.first, xy.second);
 
+		if (location->getTileType() != TileType::Void)
+		{
+			if (location->getOccupied() == getOwner()) {}
+			else if (location->getOccupied() == Ownership::Unoccupied)
+			{
+				playerState1.updateLand(1);
+				location->setOccupied(getOwner());
+				*changed = 1;
+			}
+			else
+			{
+				playerState1.updateLand(1);
+				playerState2.updateLand(-1);
+				location->setOccupied(getOwner());
+				*changed = 1;
+			}
+		}
+
 		m_troop->setLocation(location);
+		objMan->addUnit(m_troop);
+		objMan->removeLoadedUnit(m_troop);
 		setTroop(nullptr);
-		setLoading(false);
+		setIsLoaded(false);
 	}
 
 	void Probe::attack(std::shared_ptr<engine::IObject> object, std::shared_ptr<engine::ObjectManager> objMan)
@@ -107,6 +148,15 @@ namespace game
 		}
 		else
 		{
+			if (object->getType() == ObjectType::Probe)
+			{
+				auto probe = dynamic_cast<Probe*>(object.get());
+
+				if (probe->isLoaded())
+				{
+					objMan->removeLoadedUnit(probe->getTroop());
+				}
+			}
 			objMan->removeUnit(object);
 		}
 	}

@@ -27,15 +27,15 @@ namespace game
 		unsigned char getDuplicateTime();
 		void setDuplicateTime(unsigned char);
 		bool isLoaded();
-		void setLoading(bool);
+		void setIsLoaded(bool);
 		bool isDuplicating();
 		void setDuplicating(bool);
 		std::shared_ptr<engine::IObject> getTroop();
 		void setTroop(std::shared_ptr<engine::IObject>);
 		virtual void attack(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>) override;
-		void duplicate(std::shared_ptr<engine::ObjectManager>, std::shared_ptr<engine::Map>);
-		void load(std::shared_ptr<engine::IObject>);
-		void deploy(std::shared_ptr<engine::ObjectManager>, std::shared_ptr<engine::Map>);
+		void duplicate(PlayerState&, PlayerState&, int*, std::shared_ptr<engine::ObjectManager>, std::shared_ptr<engine::Map>);
+		void load(std::shared_ptr<engine::IObject>, std::shared_ptr<engine::ObjectManager>);
+		void deploy(PlayerState&, PlayerState&, int*, std::shared_ptr<engine::ObjectManager>, std::shared_ptr<engine::Map>);
 		std::string getName() override;
 	};
 }

@@ -1,4 +1,5 @@
 #include "../../include/units/Ranged.hpp"
+#include "../../include/units/Probe.hpp"
 
 namespace game
 {
@@ -29,6 +30,15 @@ namespace game
 		}
 		else
 		{
+			if (object->getType() == ObjectType::Probe)
+			{
+				auto probe = dynamic_cast<Probe*>(object.get());
+
+				if (probe->isLoaded())
+				{
+					objMan->removeLoadedUnit(probe->getTroop());
+				}
+			}
 			objMan->removeUnit(object);
 		}
 	}

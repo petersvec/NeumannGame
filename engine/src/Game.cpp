@@ -1,6 +1,8 @@
 #include "../include/Game.hpp"
 #include <SFML/Window/Mouse.hpp>
 #include "../../game/include/buildings/IBuilding.hpp"
+#include "../../game/include/units/Probe.hpp"
+#include "../../game/include/units/Worker.hpp"
 
 namespace engine
 {
@@ -38,14 +40,14 @@ namespace engine
 		selectedMoveRange.setOutlineThickness(3);
 		selectedMoveRange.setPosition(0, 0);
 		selectedMoveRange.setSize(sf::Vector2f(tileSize, tileSize));
-	
-		auto unit_1 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(1, 1), game::Ownership::Player1);
-		auto unit_2 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(10, 1), game::Ownership::Player2);
-		auto unit_3 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(1, 2), game::Ownership::Player1);
-		auto unit_4 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(10, 2), game::Ownership::Player2);
 
-		auto building_1 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(1, 3), game::Ownership::Player1);
-		auto building_2 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(10, 3), game::Ownership::Player2);
+		auto building_1 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(1, 1), game::Ownership::Player1);
+		auto unit_1 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(1, 2), game::Ownership::Player1);
+		auto unit_3 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(2, 1), game::Ownership::Player1);
+
+		auto building_2 = unitFactory->create(game::ObjectType::SpaceStation, m_gameMap->getTile(48, 48), game::Ownership::Player2);
+		auto unit_2 = unitFactory->create(game::ObjectType::Probe, m_gameMap->getTile(48, 47), game::Ownership::Player2);
+		auto unit_4 = unitFactory->create(game::ObjectType::Worker, m_gameMap->getTile(47, 48), game::Ownership::Player2);
     
 		testOM = std::make_shared<engine::ObjectManager>();
 
@@ -134,6 +136,26 @@ namespace engine
 
 	void Game::endMove()
 	{
+		// Global update po kazdom tahu:
+		// 1. Mining
+		// 2. Tower attacks
+		for (auto& obj : testOM->getPlayerObjects())
+		{
+			if (obj->getName() == "Mine" || obj->getName() == "Tower")
+			{
+				auto mine = dynamic_cast<game::IBuilding*>(obj.get());
+				mine->update(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap, testOM);
+			}
+			else if (obj->getName() == "Probe")
+			{
+				auto probe = dynamic_cast<game::Probe*>(obj.get());
+				if (probe->isDuplicating() && probe->getOwner() == activePlayer)
+				{
+					probe->duplicate(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, testOM, m_gameMap);
+				}
+			}
+		}
+
 		m_gui.text.setString("");
 		if (activePlayer == game::Ownership::Player1)
 		{
@@ -152,18 +174,6 @@ namespace engine
 			ActivePlayerText.setString("Player 1");
 			ActivePlayerText.setFillColor(sf::Color::Red);
 			m_gui.SetPlayerState(player1State);
-		}
-
-		// Global update po kazdom tahu:
-		// 1. Mining
-		// 2. Tower attacks
-		for (auto& obj : testOM->getPlayerObjects())
-		{
-			if (obj->getName() == "Mine" || obj->getName() == "Tower")
-			{
-				auto mine_obj = dynamic_cast<game::IBuilding*>(obj.get());
-				mine_obj->update(m_gameMap, testOM, true, GetCurrentPlayerState());
-			}
 		}
 
 		// WINNING CHECK
@@ -207,7 +217,8 @@ namespace engine
 					pixelPos = sf::Mouse::getPosition(*m_window);
 					worldPos = m_window->mapPixelToCoords(pixelPos);
 
-					if (pixelPos.y < 620) {
+					if (pixelPos.y < 620)
+					{
 						clickMap(worldPos.x, worldPos.y);
 					}
 					/*
@@ -221,62 +232,53 @@ namespace engine
 
 				if (m_event.mouseButton.button == sf::Mouse::Right)
 				{
-					if (pixelPos.y < 620) {
+					if (unitIsSelected && testPO->getOwner() == activePlayer)
+					{
+						pixelPos = sf::Mouse::getPosition(*m_window);
+						worldPos = m_window->mapPixelToCoords(pixelPos);
+						int x = worldPos.x / tileSize;
+						int y = worldPos.y / tileSize;
+						auto tile = m_gameMap->getTile(x, y);
 
-
-						if (unitIsSelected && testPO->getOwner() == activePlayer)
+						if (testPO->getIsBuilding() == false)
 						{
-							pixelPos = sf::Mouse::getPosition(*m_window);
-							worldPos = m_window->mapPixelToCoords(pixelPos);
-							auto click = TileToScreen(sf::Vector2u(worldPos.x / tileSize, worldPos.y / tileSize));
-
-							if (testPO->getIsBuilding() == false)
+							if (worldPos.x >= 0 && worldPos.y >= 0 && worldPos.x < tileSize * (m_gameMap->getWidth()) && worldPos.y < tileSize * m_gameMap->getHeight())
 							{
-								if (worldPos.x >= 0 && worldPos.y >= 0 && worldPos.x < tileSize * (m_gameMap->getWidth()) && worldPos.y < tileSize * m_gameMap->getHeight())
+								IObjectPtr otherTileUnit = nullptr;
+								auto enemy = activePlayer;
+								if (activePlayer == game::Ownership::Player1)
 								{
-									int x = worldPos.x / tileSize;
-									int y = worldPos.y / tileSize;
+									enemy = game::Ownership::Player2;
+									otherTileUnit = testOM->findUnit(x * tileSize, y * tileSize, game::Ownership::Player2);
+								}
+								else
+								{
+									enemy = game::Ownership::Player1;
+									otherTileUnit = testOM->findUnit(x * tileSize, y * tileSize, game::Ownership::Player1);
+								}
 
-									IObjectPtr otherTileUnit = nullptr;
-									auto enemy = activePlayer;
-									if (activePlayer == game::Ownership::Player1)
+								setClickedTile(x, y, &selectedMapTile);
+
+								if (TileDistance(testPO->getPosition(), tile->getPosition()) <= testPO->getMoveSpeed())
+								{
+									if (otherTileUnit == nullptr)
 									{
-										enemy = game::Ownership::Player2;
-										otherTileUnit = testOM->findUnit(x * tileSize, y * tileSize, game::Ownership::Player2);
+										testPO->move(tile, GetCurrentPlayerState(), GetEnemyPlayerState(), &changed);
+										endMove();
 									}
-									else
+									else if (otherTileUnit->getOwner() == enemy)
 									{
-										enemy = game::Ownership::Player1;
-										otherTileUnit = testOM->findUnit(x * tileSize, y * tileSize, game::Ownership::Player1);
-									}
-
-									auto tile = m_gameMap->getTile(x, y);
-									setClickedTile(x, y, &selectedMapTile);
-
-									if (TileDistance(testPO->getPosition(), click) <= testPO->getMoveSpeed())
-									{
-										if (otherTileUnit == nullptr)
+										if (TileDistance(testPO->getPosition(), tile->getPosition()) <= testPO->getRange())
 										{
-											if (activePlayer == game::Ownership::Player1)
-											{
-												testPO->move(tile, player1State, player2State, &changed);
-											}
-											else
-											{
-												testPO->move(tile, player2State, player1State, &changed);
-											}
+											testPO->attack(otherTileUnit, testOM);
 											endMove();
-											std::cout << "moved\n";
 										}
-										else if (otherTileUnit->getOwner() == enemy)
-										{
-											if (TileDistance(testPO->getPosition(), click) <= testPO->getRange())
-											{
-												testPO->attack(otherTileUnit, testOM);
-												endMove();
-												std::cout << "attacked\n";
-											}
-										}
+									}
+									else if (otherTileUnit->getName() == "Probe" && testPO->getName() != "Probe")
+									{
+										auto probe = dynamic_cast<game::Probe*>(otherTileUnit.get());
+										probe->load(testPO, testOM);
+										endMove();
 									}
 								}
 							}
@@ -285,77 +287,135 @@ namespace engine
 				}
 				break;
 
-				case sf::Event::KeyPressed:							//key pressed
-					
-					// REFAKTOR PLS
-					if (unitIsSelected && testPO != nullptr) {
-						tempx = testPO->getPosition().x / tileSize + 1;
-						tempy = testPO->getPosition().y / tileSize;
-						
-						if (m_event.key.code == sf::Keyboard::Num1)
-						{
-								if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
-								{
-									auto building = dynamic_cast<game::IBuilding*>(testPO.get());
-									building->update(m_gameMap, testOM, true, GetCurrentPlayerState());
-									endMove();
-									return;
-								}
-
-								if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
-								{
-									auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-									testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::SpaceStation);
-									endMove();
-									return;
-								}
-						}
-						
-						if (m_event.key.code == sf::Keyboard::Num2)
-						{
-							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
-							{
-								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::MilitaryBase);
-								endMove();
-								return;
-							}
-						}
-
-						if (m_event.key.code == sf::Keyboard::Num3)
-						{
-							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
-							{
-								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::AirBase);
-								endMove();
-								return;
-							}
-						}
-
-						if (m_event.key.code == sf::Keyboard::Num4)
-						{
-							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
-							{
-								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::Mine);
-								endMove();
-								return;
-							}
-						}
-
-						if (m_event.key.code == sf::Keyboard::Num5)
-						{
-							if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer)
-							{
-								auto pair = engine::GetNearestFreeLocation(testPO->getLocation(), testOM);
-								testPO->workerBuild(GetCurrentPlayerState(), m_gameMap->getTile(tempx, tempy), testOM, game::ObjectType::Tower);
-								endMove();
-								return;
-							}
-						}
-
+			case sf::Event::KeyPressed:							//key pressed
+				if (m_event.key.code == sf::Keyboard::Space)	//space pressed switch player
+				{
+					if (activePlayer == game::Ownership::Player1)
+					{
+						unitIsSelected = false;
+						testPO = nullptr;
+						activePlayer = game::Ownership::Player2;
+						ActivePlayerText.setString("Player 2");
 					}
+					else
+					{
+						unitIsSelected = false;
+						testPO = nullptr;
+						activePlayer = game::Ownership::Player1;
+						ActivePlayerText.setString("Player 1");
+					}
+					std::cout << (int)activePlayer;
+				}
+
+				// REFAKTOR PLS
+				if (unitIsSelected && testPO != nullptr)
+				{
+					auto xy = GetNearestFreeLandLocation(testPO->getLocation(), testOM, m_gameMap);
+					if (m_event.key.code == sf::Keyboard::Num1)
+					{
+						if (testPO->getIsBuilding() == true && testPO->getOwner() == activePlayer)
+						{
+							auto building = dynamic_cast<game::IBuilding*>(testPO.get());
+							if (building->update(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap, testOM))
+							{
+								endMove();
+								return;
+							}
+						}
+
+						else if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
+								 TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
+						{
+							auto worker = dynamic_cast<game::Worker*>(testPO.get());
+							if (worker->build(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::SpaceStation))
+							{
+								endMove();
+								return;
+							}
+						}
+
+						else if (testPO->getName() == "Probe" && testPO->getOwner() == activePlayer)
+						{
+							auto probe = dynamic_cast<game::Probe*>(testPO.get());
+							if (probe->getLocation()->getTypeString() != "Void" &&
+								!probe->isDuplicating())
+							{
+								probe->setDuplicating(true);
+								probe->duplicate(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, testOM, m_gameMap);
+								endMove();
+								return;
+							}
+						}
+					}
+						
+					if (m_event.key.code == sf::Keyboard::Num2)
+					{
+						if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
+							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
+						{
+							auto worker = dynamic_cast<game::Worker*>(testPO.get());
+							if (worker->build(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::MilitaryBase))
+							{
+								endMove();
+								return;
+							}
+						}
+
+						else if (testPO->getName() == "Probe" && testPO->getOwner() == activePlayer)
+						{
+							auto probe = dynamic_cast<game::Probe*>(testPO.get());
+							if (probe->isLoaded())
+							{
+								probe->deploy(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, testOM, m_gameMap);
+								endMove();
+								return;
+							}
+						}
+					}
+
+					if (m_event.key.code == sf::Keyboard::Num3)
+					{
+						if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
+							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
+						{
+							auto worker = dynamic_cast<game::Worker*>(testPO.get());
+							if (worker->build(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::AirBase))
+							{
+								endMove();
+								return;
+							}
+						}
+					}
+
+					if (m_event.key.code == sf::Keyboard::Num4)
+					{
+						if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
+							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
+						{
+							auto worker = dynamic_cast<game::Worker*>(testPO.get());
+							if (worker->build(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Mine))
+							{
+								endMove();
+								return;
+							}
+						}
+					}
+
+					if (m_event.key.code == sf::Keyboard::Num5)
+					{
+						if (testPO->getName() == "Worker" && testPO->getOwner() == activePlayer &&
+							TileDistance(testPO->getPosition(), m_gameMap->getTile(xy.first, xy.second)->getPosition()) <= testPO->getRange())
+						{
+							auto worker = dynamic_cast<game::Worker*>(testPO.get());
+							if (worker->build(GetCurrentPlayerState(), GetEnemyPlayerState(), &changed, m_gameMap->getTile(xy.first, xy.second), testOM, game::ObjectType::Tower))
+							{
+								endMove();
+								return;
+							}
+						}
+					}
+				}
+				break;
 			default:
 				break;
 			}
@@ -439,6 +499,18 @@ namespace engine
 	game::PlayerState &Game::GetCurrentPlayerState()
 	{
 		if (activePlayer == game::Ownership::Player1)
+		{
+			return player1State;
+		}
+		else
+		{
+			return player2State;
+		}
+	}
+
+	game::PlayerState& Game::GetEnemyPlayerState()
+	{
+		if (activePlayer == game::Ownership::Player2)
 		{
 			return player1State;
 		}
